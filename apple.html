@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Apple — Vip-simka.Крым</title>
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+
+    <!-- ШАПКА -->
+    <header>
+        <div class="logo">
+            <img src="img/logo.PNG" alt="VIP SIM">
+        </div>
+        <nav>
+            <a href="index.html">Главная</a>
+            <a href="tariffs.html">Тарифы</a>
+            <a href="service.html">Сервис</a>
+            <a href="numbers.html">Красивые номера</a>
+            <a href="apple.html">Apple</a>
+            <a href="accessories.html">Аксессуары</a>
+            <a href="reviews.html">Отзывы</a>
+            <a href="news.html">Новости</a>
+        </nav>
+        <!-- Гамбургер-меню -->
+        <div class="menu-toggle" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <!-- Мобильное меню -->
+        <div class="mobile-menu" id="mobileMenu">
+            <a href="index.html">Главная</a>
+            <a href="tariffs.html">Тарифы</a>
+            <a href="service.html">Сервис</a>
+            <a href="numbers.html">Красивые номера</a>
+            <a href="apple.html">Apple</a>
+            <a href="accessories.html">Аксессуары</a>
+            <a href="reviews.html">Отзывы</a>
+            <a href="news.html">Новости</a>
+        </div>
+    </header>
+
+    <!-- ОБЩИЙ БЕЛЫЙ КОНТЕЙНЕР -->
+    <div class="page-wrapper">
+
+        <section class="apple-section">
+            <h2 class="left-align">Техника Apple</h2>
+
+            <!-- === ЕДИНЫЙ ОБЪЕКТ ЦЕН — МЕНЯЙТЕ ТОЛЬКО ЗДЕСЬ === -->
+            <script>
+                const PRICES = {
+                    iphone13: 'от 35 000 ₽',
+                    iphone13pro: 'от 45 000 ₽',
+                    iphone13promax: 'от 55 000 ₽',
+
+                    iphone14: 'от 47 000 ₽',
+                    iphone14plus: 'от 55 000 ₽',
+                    iphone14promax: 'от 75 000 ₽',
+
+                    iphone15: 'от 55 000 ₽',
+                    iphone15plus: 'от 63 000 ₽',
+                    iphone15pro: 'от 77 000 ₽',
+                    iphone15promax: 'от 81 000 ₽',
+
+                    iphone16: 'от 67 000 ₽',
+                    iphone16plus: 'от 71 000 ₽',
+                    iphone16pro: 'от 85 000 ₽',
+                    iphone16promax: 'от 105 000 ₽',
+
+                    iphone17: 'ожидается',
+                    iphone17Air: 'ожидается',
+                    iphone17pro: 'ожидается',
+                    iphone17promax: 'ожидается',
+
+                    airpods_pro2: '18 500 ₽',
+                    airpods_4: '12 000 ₽',
+                    airpods_4_noise: '16 500 ₽',
+                    airpods_max: '45 000 ₽',
+
+                    watch_se: 'от 20 500 ₽',
+                    watch_s9: 'от 32 000 ₽',
+                    watch_ultra: 'от 65 000 ₽'
+                };
+            </script>
+
+            <!-- iPhone 13 -->
+            <div class="apple-container">
+                <div class="apple-image">
+                    <img src="img/13.jpg" alt="iPhone 13">
+                </div>
+                <div class="apple-options">
+                    <div class="tag-list">
+                        <div class="tag" onclick="openModal('iphone13')">iPhone 13</div>
+                        <div class="tag" onclick="openModal('iphone13pro')">iPhone 13 Pro</div>
+                        <div class="tag" onclick="openModal('iphone13promax')">iPhone 13 Pro Max</div>
+                    </div>
+                    <div class="price-list">
+                        <div class="price-item"><span>iPhone 13</span> <strong id="price-iphone13"></strong></div>
+                        <div class="price-item"><span>iPhone 13 Pro</span> <strong id="price-iphone13pro"></strong>
+                        </div>
+                        <div class="price-item"><span>iPhone 13 Pro Max</span> <strong
+                                id="price-iphone13promax"></strong></div>
+                    </div>
+                    <div class="request-dropdown">
+                        <button class="btn-request">Запрос цены ▼</button>
+                        <div class="dropdown-content">
+                            <a href="#" onclick="sendRequest('telegram')" class="messenger-link">📩 Telegram</a>
+                            <a href="#" onclick="sendRequest('whatsapp')" class="messenger-link">💬 WhatsApp</a>
+                            <a href="#" onclick="sendRequest('vk')" class="messenger-link">📘 ВКонтакте</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- iPhone 14 -->
+            <div class="apple-container">
+                <div class="apple-image">
+                    <img src="img/14.jpg" alt="iPhone 14">
+                </div>
+                <div class="apple-options">
+                    <div class="tag-list">
+                        <div class="tag" onclick="openModal('iphone14')">iPhone 14</div>
+                        <div class="tag" onclick="openModal('iphone14plus')">iPhone 14 Plus</div>
+                        <div class="tag" onclick="openModal('iphone14promax')">iPhone 14 Pro Max</div>
+                    </div>
+                    <div class="price-list">
+                        <div class="price-item"><span>iPhone 14</span> <strong id="price-iphone14"></strong></div>
+                        <div class="price-item"><span>iPhone 14 Plus</span> <strong id="price-iphone14plus"></strong>
+                        </div>
+                        <div class="price-item"><span>iPhone 14 Pro Max</span> <strong
+                                id="price-iphone14promax"></strong></div>
+                    </div>
+                    <div class="request-dropdown">
+                        <button class="btn-request">Запрос цены ▼</button>
+                        <div class="dropdown-content">
+                            <a href="#" onclick="sendRequest('telegram')" class="messenger-link">📩 Telegram</a>
+                            <a href="#" onclick="sendRequest('whatsapp')" class="messenger-link">💬 WhatsApp</a>
+                            <a href="#" onclick="sendRequest('vk')" class="messenger-link">📘 ВКонтакте</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- iPhone 15 -->
+            <div class="apple-container">
+                <div class="apple-image">
+                    <img src="img/15.jpg" alt="iPhone 15">
+                </div>
+                <div class="apple-options">
+                    <div class="tag-list">
+                        <div class="tag" onclick="openModal('iphone15')">iPhone 15</div>
+                        <div class="tag" onclick="openModal('iphone15plus')">iPhone 15 Plus</div>
+                        <div class="tag" onclick="openModal('iphone15pro')">iPhone 15 Pro</div>
+                        <div class="tag" onclick="openModal('iphone15promax')">iPhone 15 Pro Max</div>
+                    </div>
+                    <div class="price-list">
+                        <div class="price-item"><span>iPhone 15</span> <strong id="price-iphone15"></strong></div>
+                        <div class="price-item"><span>iPhone 15 Plus</span> <strong id="price-iphone15plus"></strong>
+                        </div>
+                        <div class="price-item"><span>iPhone 15 Pro</span> <strong id="price-iphone15pro"></strong>
+                        </div>
+                        <div class="price-item"><span>iPhone 15 Pro Max</span> <strong
+                                id="price-iphone15promax"></strong></div>
+                    </div>
+                    <div class="request-dropdown">
+                        <button class="btn-request">Запрос цены ▼</button>
+                        <div class="dropdown-content">
+                            <a href="#" onclick="sendRequest('telegram')" class="messenger-link">📩 Telegram</a>
+                            <a href="#" onclick="sendRequest('whatsapp')" class="messenger-link">💬 WhatsApp</a>
+                            <a href="#" onclick="sendRequest('vk')" class="messenger-link">📘 ВКонтакте</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- iPhone 16 -->
+            <div class="apple-container">
+                <div class="apple-image">
+                    <img src="img/16.jpg" alt="iPhone 16">
+                </div>
+                <div class="apple-options">
+                    <div class="tag-list">
+                        <div class="tag" onclick="openModal('iphone16')">iPhone 16</div>
+                        <div class="tag" onclick="openModal('iphone16plus')">iPhone 16 Plus</div>
+                        <div class="tag" onclick="openModal('iphone16pro')">iPhone 16 Pro</div>
+                        <div class="tag" onclick="openModal('iphone16promax')">iPhone 16 Pro Max</div>
+                    </div>
+                    <div class="price-list">
+                        <div class="price-item"><span>iPhone 16</span> <strong id="price-iphone16"></strong></div>
+                        <div class="price-item"><span>iPhone 16 Plus</span> <strong id="price-iphone16plus"></strong>
+                        </div>
+                        <div class="price-item"><span>iPhone 16 Pro</span> <strong id="price-iphone16pro"></strong>
+                        </div>
+                        <div class="price-item"><span>iPhone 16 Pro Max</span> <strong
+                                id="price-iphone16promax"></strong></div>
+                    </div>
+                    <div class="request-dropdown">
+                        <button class="btn-request">Запрос цены ▼</button>
+                        <div class="dropdown-content">
+                            <a href="#" onclick="sendRequest('telegram')" class="messenger-link">📩 Telegram</a>
+                            <a href="#" onclick="sendRequest('whatsapp')" class="messenger-link">💬 WhatsApp</a>
+                            <a href="#" onclick="sendRequest('vk')" class="messenger-link">📘 ВКонтакте</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- iPhone 17 (ожидается) -->
+            <div class="apple-container">
+                <div class="apple-image">
+                    <img src="img/17.jpg" alt="iPhone 17">
+                </div>
+                <div class="apple-options">
+                    <div class="tag-list">
+                        <div class="tag" onclick="openModal('iphone17')">iPhone 17</div>
+                        <div class="tag" onclick="openModal('iphone17Air')">iPhone 17 Air</div>
+                        <div class="tag" onclick="openModal('iphone17pro')">iPhone 17 Pro</div>
+                        <div class="tag" onclick="openModal('iphone17promax')">iPhone 17 Pro Max</div>
+                    </div>
+                    <div class="price-list">
+                        <div class="price-item"><span>iPhone 17</span> <strong id="price-iphone17"></strong></div>
+                        <div class="price-item"><span>iPhone 17 Air</span> <strong id="price-iphone17Air"></strong>
+                        </div>
+                        <div class="price-item"><span>iPhone 17 Pro</span> <strong id="price-iphone17pro"></strong>
+                        </div>
+                        <div class="price-item"><span>iPhone 17 Pro Max</span> <strong
+                                id="price-iphone17promax"></strong></div>
+                    </div>
+                    <div class="request-dropdown">
+                        <button class="btn-request">Запрос цены ▼</button>
+                        <div class="dropdown-content">
+                            <a href="#" onclick="sendRequest('telegram')" class="messenger-link">📩 Telegram</a>
+                            <a href="#" onclick="sendRequest('whatsapp')" class="messenger-link">💬 WhatsApp</a>
+                            <a href="#" onclick="sendRequest('vk')" class="messenger-link">📘 ВКонтакте</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AirPods -->
+            <div class="apple-container">
+                <div class="apple-image">
+                    <img src="img/airpods.webp" alt="AirPods">
+                </div>
+                <div class="apple-options">
+                    <div class="tag-list">
+                        <div class="tag">AirPods</div>
+                    </div>
+                    <div class="price-list">
+                        <div class="price-item"><span>AirPods Pro 2</span> <strong id="price-airpods_pro2"></strong>
+                        </div>
+                        <div class="price-item"><span>AirPods 4</span> <strong id="price-airpods_4"></strong></div>
+                        <div class="price-item"><span>AirPods 4 с шумодавом</span> <strong
+                                id="price-airpods_4_noise"></strong></div>
+                        <div class="price-item"><span>AirPods Max 2024</span> <strong id="price-airpods_max"></strong>
+                        </div>
+                    </div>
+                    <div class="request-dropdown">
+                        <button class="btn-request">Запрос цены ▼</button>
+                        <div class="dropdown-content">
+                            <a href="#" onclick="sendRequest('telegram')" class="messenger-link">📩 Telegram</a>
+                            <a href="#" onclick="sendRequest('whatsapp')" class="messenger-link">💬 WhatsApp</a>
+                            <a href="#" onclick="sendRequest('vk')" class="messenger-link">📘 ВКонтакте</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Apple Watch -->
+            <div class="apple-container">
+                <div class="apple-image">
+                    <img src="img/Apple Watch.png" alt="Apple Watch">
+                </div>
+                <div class="apple-options">
+                    <div class="tag-list">
+                        <div class="tag">Apple Watch</div>
+                    </div>
+                    <div class="price-list">
+                        <div class="price-item"><span>SE Gen 2</span> <strong id="price-watch_se"></strong></div>
+                        <div class="price-item"><span>Series 9</span> <strong id="price-watch_s9"></strong></div>
+                        <div class="price-item"><span>Ultra 2</span> <strong id="price-watch_ultra"></strong></div>
+                    </div>
+                    <div class="request-dropdown">
+                        <button class="btn-request">Запрос цены ▼</button>
+                        <div class="dropdown-content">
+                            <a href="#" onclick="sendRequest('telegram')" class="messenger-link">📩 Telegram</a>
+                            <a href="#" onclick="sendRequest('whatsapp')" class="messenger-link">💬 WhatsApp</a>
+                            <a href="#" onclick="sendRequest('vk')" class="messenger-link">📘 ВКонтакте</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+    </div> <!-- конец page-wrapper -->
+
+    <!-- ПОДВАЛ -->
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-col">
+                <img src="img/logo.PNG" alt="Логотип Vip-simka" style="width: 120px; margin-bottom: 15px;">
+                <div class="share-container">
+                    <button onclick="sharePage()" class="share-btn">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4nyxhOq62ylFOpeWtfM9pfbieq0slJSmlUHJQz8-1Ry-f5bkXOwbzAYgVoYnuiaayV7Y&usqp=CAU"
+                            alt="Поделиться" class="share-icon">
+                        Поделиться с друзьями
+                    </button>
+                </div>
+                
+            </div>
+            <div class="footer-col">
+                <p class="footer-text">
+                    <strong>Уважаемые клиенты!</strong>
+                    <br><br>
+                    С 1 июня 2018 г. в соответствии с поправками в Федеральном законе “О связи” 126-ФЗ, продажа и
+                    активация SIM-карт возможна только по паспорту.
+                    <br><br>
+                    <a href="https://vip-simka.jimdofree.com/%D0%B7%D0%B0%D0%BA%D0%BE%D0%BD-%D0%BE-%D1%81%D0%B2%D1%8F%D0%B7%D0%B8/"
+                        target="_blank" class="footer-link">Подробнее...</a>
+                </p>
+                <p class="footer-disclaimer">
+                    Информационные материалы и цены, размещенные на сайте, не являются публичной офертой.
+                    <br><br>
+                    <strong>⚠️ Наш ресурс и наши консультанты не несут ответственности за изменения условий обслуживания
+                        абонентов со стороны операторов связи или компаний, их представляющих.</strong>
+                </p>
+            </div>
+            <div class="footer-col">
+                <h4 class="footer-title">Наши контакты:</h4>
+                <p class="contact-number">
+                    <strong>Max / Telegram / WhatsApp</strong><br>
+                    +7 991 555 666 3 (24/7)
+                </p>
+                <p class="footer-warning">
+                    <strong>ВАЖНО!</strong><br>
+                    Другие контакты не имеют отношения к нашему сайту, и мы не несем ответственности за действия третьих
+                    лиц, ссылающихся на наш сайт.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- КНОПКА "НАВЕРХ" -->
+    <a href="#" id="scrollToTop" class="scroll-to-top">▲</a>
+
+    <!-- ПЛАВАЮЩАЯ КНОПКА "СВЯЗЬ" -->
+    <div class="contact-float">
+        <div class="contact-wrapper">
+            <div class="contact-toggle">Мы на связи</div>
+            <div class="contact-menu">
+                <a href="https://wa.me/79915556663" target="_blank" title="WhatsApp" class="contact-link">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp"
+                        class="contact-icon">
+                </a>
+                <a href="https://t.me/vipsimka82" target="_blank" title="Telegram" class="contact-link">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram"
+                        class="contact-icon">
+                </a>
+                <a href="mailto:vip.simki@vk.com" title="Email" class="contact-link">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/4/4e/Gmail_Icon.png" alt="Email"
+                        class="contact-icon">
+                </a>
+                <a href="https://instagram.com/_vipsimka" target="_blank" title="Instagram" class="contact-link">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram"
+                        class="contact-icon">
+                </a>
+                <a href="https://facebook.com/vitalij.san.658372" target="_blank" title="Facebook" class="contact-link">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_(2019).svg"
+                        alt="Facebook" class="contact-icon">
+                </a>
+                <a href="https://vk.com/vip.simki" target="_blank" title="VK" class="contact-link">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/2/21/VK.com-logo.svg" alt="VK"
+                        class="contact-icon">
+                </a>
+            </div>
+        </div>
+    </div>
+
+    
+    <!-- ЕДИНЫЙ JS -->
+    <script src="js/script.js"></script>
+
+    <!-- ПОПАП ОКНО -->
+<div id="productModal" class="tariff-page modal">
+    <div class="modal-content">
+        <!-- Кнопка закрытия -->
+        <span class="close-btn" onclick="closeModal()">&times;</span>
+
+        <!-- Левая часть: изображение -->
+        <div class="modal-left">
+            <img id="modal-img" src="" alt="Товар">
+        </div>
+
+        <!-- Правая часть: заголовок, характеристики и кнопка -->
+        <div class="modal-right">
+            <h3 id="modal-title">Товар</h3>
+            <div class="specs" id="modal-specs"></div>
+
+            <!-- Выпадающее меню для запроса -->
+            <div class="request-dropdown" style="margin-top: 20px;">
+                <button class="btn-request">Запрос цены ▼</button>
+                <div class="dropdown-content">
+                    <a href="#" onclick="sendRequestFromModal('telegram')" class="messenger-link">📩 Telegram</a>
+                    <a href="#" onclick="sendRequestFromModal('whatsapp')" class="messenger-link">💬 WhatsApp</a>
+                    <a href="#" onclick="sendRequestFromModal('vk')" class="messenger-link">📘 ВКонтакте</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- СКРИПТ ДЛЯ ПОПАПОВ И ЦЕН -->
+    <script>
+        // Автоматическая подстановка цен из PRICES
+        Object.keys(PRICES).forEach(key => {
+            const el = document.getElementById(`price-${key}`);
+            if (el) el.textContent = PRICES[key];
+        });
+
+        let currentModel = ''; // Для хранения модели в попапе
+
+        function openModal(model) {
+            currentModel = model;
+            let title, img, specs;
+
+            switch (model) {
+                case 'iphone13':
+                    title = 'iPhone 13';
+                    img = 'img/iPones/13.png';
+                    specs = `
+            <strong>Диагональ экрана:</strong> 6.1"<br>
+            <strong>Разрешение экрана:</strong> 2532 x 1170<br>
+            <strong>Операционная система:</strong> iOS 15<br>
+            <strong>Количество ядер:</strong> 6<br>
+            <strong>Разрешение основной камеры:</strong> 12 Мп<br>
+            <strong>Разрешение второй основной камеры:</strong> 12 Мп<br>
+            <strong>Стандарты сотовой связи:</strong> GSM, 2G, 3G, 4G LTE, 5G, VoLTE<br>
+            <strong>Режим просмотра видео до:</strong> 19 часов<br>
+            <strong>Количество SIM-карт:</strong> 1<br>
+            <strong>Беспроводное соединение:</strong> Bluetooth, NFC, Wi-Fi
+          `;
+                    break;
+
+                case 'iphone13pro':
+                    title = 'iPhone 13 Pro';
+                    img = 'img/iPones/iphone13pro.png';
+                    specs = `
+            <strong>Диагональ экрана:</strong> 6.1"<br>
+            <strong>Разрешение экрана:</strong> 2532 x 1170<br>
+            <strong>Операционная система:</strong> iOS 15<br>
+            <strong>Количество ядер:</strong> 6<br>
+            <strong>Разрешение основной камеры:</strong> 12 Мп<br>
+            <strong>Разрешение второй основной камеры:</strong> 12 Мп<br>
+            <strong>Стандарты сотовой связи:</strong> GSM, 2G, 3G, 4G LTE, 5G, VoLTE<br>
+            <strong>Режим просмотра видео до:</strong> 22 часов<br>
+            <strong>Количество SIM-карт:</strong> 1<br>
+            <strong>Беспроводное соединение:</strong> Bluetooth, NFC, Wi-Fi
+          `;
+                    break;
+
+                case 'iphone13promax':
+                    title = 'iPhone 13 Pro Max';
+                    img = 'img/iPones/iphone13promax.png';
+                    specs = `
+            <strong>Диагональ экрана:</strong> 6.7"<br>
+            <strong>Разрешение экрана:</strong> 2778 x 1284<br>
+            <strong>Операционная система:</strong> iOS 15<br>
+            <strong>Количество ядер:</strong> 6<br>
+            <strong>Разрешение основной камеры:</strong> 12 Мп<br>
+            <strong>Разрешение второй основной камеры:</strong> 12 Мп<br>
+            <strong>Стандарты сотовой связи:</strong> GSM, 2G, 3G, 4G LTE, 5G, VoLTE<br>
+            <strong>Режим просмотра видео до:</strong> 28 часов<br>
+            <strong>Количество SIM-карт:</strong> 1<br>
+            <strong>Беспроводное соединение:</strong> Bluetooth, NFC, Wi-Fi
+          `;
+                    break;
+
+                case 'iphone14':
+                    title = 'iPhone 14';
+                    img = 'img/iPones/iphone14.png';
+                    specs = `
+            <strong>Диагональ экрана:</strong> 6.1"<br>
+            <strong>Разрешение экрана:</strong> 2532 x 1170<br>
+            <strong>Операционная система:</strong> iOS 16<br>
+            <strong>Количество ядер:</strong> 6<br>
+            <strong>Разрешение основной камеры:</strong> 12 Мп<br>
+            <strong>Разрешение второй основной камеры:</strong> 12 Мп<br>
+            <strong>Стандарты сотовой связи:</strong> GSM, 2G, 3G, 4G LTE, 5G, VoLTE<br>
+            <strong>Режим просмотра видео до:</strong> 20 часов<br>
+            <strong>Количество SIM-карт:</strong> 1<br>
+            <strong>Беспроводное соединение:</strong> Bluetooth, NFC, Wi-Fi
+          `;
+                    break;
+
+                case 'iphone14plus':
+                    title = 'iPhone 14 Plus';
+                    img = 'img/iPones/iphone14plus.png';
+                    specs = `
+            <strong>Диагональ экрана:</strong> 6.7"<br>
+            <strong>Разрешение экрана:</strong> 2778 x 1284<br>
+            <strong>Операционная система:</strong> iOS 16<br>
+            <strong>Количество ядер:</strong> 6<br>
+            <strong>Разрешение основной камеры:</strong> 12 Мп<br>
+            <strong>Разрешение второй основной камеры:</strong> 12 Мп<br>
+            <strong>Стандарты сотовой связи:</strong> GSM, 2G, 3G, 4G LTE, 5G, VoLTE<br>
+            <strong>Режим просмотра видео до:</strong> 26 часов<br>
+            <strong>Количество SIM-карт:</strong> 1<br>
+            <strong>Беспроводное соединение:</strong> Bluetooth, NFC, Wi-Fi
+          `;
+                    break;
+
+                case 'iphone14promax':
+                    title = 'iPhone 14 Pro Max';
+                    img = 'img/iPones/iphone14promax.png';
+                    specs = `
+            <strong>Диагональ экрана:</strong> 6.7"<br>
+            <strong>Разрешение экрана:</strong> 2796 x 1290<br>
+            <strong>Операционная система:</strong> iOS 16<br>
+            <strong>Количество ядер:</strong> 6<br>
+            <strong>Разрешение основной камеры:</strong> 48 Мп<br>
+            <strong>Разрешение второй основной камеры:</strong> 12 Мп<br>
+            <strong>Стандарты сотовой связи:</strong> GSM, 2G, 3G, 4G LTE, 5G, VoLTE<br>
+            <strong>Режим просмотра видео до:</strong> 29 часов<br>
+            <strong>Количество SIM-карт:</strong> 1<br>
+            <strong>Беспроводное соединение:</strong> Bluetooth, NFC, Wi-Fi
+          `;
+                    break;
+
+                case 'iphone15':
+                    title = 'iPhone 15';
+                    img = 'img/iPones/iphone15.png';
+                    specs = `
+            <strong>Диагональ экрана:</strong> 6.1"<br>
+            <strong>Разрешение экрана:</strong> 2556 x 1179<br>
+            <strong>Операционная система:</strong> iOS 17<br>
+            <strong>Количество ядер:</strong> 6<br>
+            <strong>Разрешение основной камеры:</strong> 48 Мп<br>
+            <strong>Разрешение второй основной камеры:</strong> 12 Мп<br>
+            <strong>Стандарты сотовой связи:</strong> GSM, 2G, 3G, 4G LTE, 5G, VoLTE<br>
+            <strong>Режим просмотра видео до:</strong> 20 часов<br>
+            <strong>Количество SIM-карт:</strong> 1<br>
+            <strong>Беспроводное соединение:</strong> Bluetooth, NFC, Wi-Fi
+          `;
+                    break;
+
+                case 'iphone15plus':
+                    title = 'iPhone 15 Plus';
+                    img = 'img/iPones/iphone15plus.png';
+                    specs = `
+            <strong>Диагональ экрана:</strong> 6.7"<br>
+            <strong>Разрешение экрана:</strong> 2796 x 1290<br>
+            <strong>Операционная система:</strong> iOS 17<br>
+            <strong>Количество ядер:</strong> 6<br>
+            <strong>Разрешение основной камеры:</strong> 48 Мп<br>
+            <strong>Разрешение второй основной камеры:</strong> 12 Мп<br>
+            <strong>Стандарты сотовой связи:</strong> GSM, 2G, 3G, 4G LTE, 5G, VoLTE<br>
+            <strong>Режим просмотра видео до:</strong> 20 часов<br>
+            <strong>Количество SIM-карт:</strong> 1<br>
+            <strong>Беспроводное соединение:</strong> Bluetooth, NFC, Wi-Fi
+          `;
+                    break;
+
+                case 'iphone15pro':
+                    title = 'iPhone 15 Pro';
+                    img = 'img/iPones/iphone15pro.png';
+                    specs = `
+            <strong>Диагональ экрана:</strong> 6.1"<br>
+            <strong>Разрешение экрана:</strong> 2556 x 1179<br>
+            <strong>Операционная система:</strong> iOS 17<br>
+            <strong>Количество ядер:</strong> 6<br>
+            <strong>Разрешение основной камеры:</strong> 48 Мп<br>
+            <strong>Разрешение второй основной камеры:</strong> 12 Мп<br>
+            <strong>Стандарты сотовой связи:</strong> GSM, 2G, 3G, 4G LTE, 5G, VoLTE<br>
+             <strong>Режим просмотра видео до:</strong> 17.33 часов<br>
+            <strong>Количество SIM-карт:</strong> 1<br>
+            <strong>Беспроводное соединение:</strong> Bluetooth, NFC, Wi-Fi
+          `;
+                    break;
+
+                case 'iphone15promax':
+                    title = 'iPhone 15 Pro Max';
+                    img = 'img/iPones/iphone15promax.png';
+                    specs = `
+            <strong>Диагональ экрана:</strong> 6.7"<br>
+            <strong>Разрешение экрана:</strong> 2796 x 1290<br>
+            <strong>Операционная система:</strong> iOS 17<br>
+            <strong>Количество ядер:</strong> 6<br>
+            <strong>Разрешение основной камеры:</strong> 48 Мп<br>
+            <strong>Разрешение второй основной камеры:</strong> 12 Мп<br>
+            <strong>Стандарты сотовой связи:</strong> GSM, 2G, 3G, 4G LTE, 5G, VoLTE<br>
+            <strong>Режим просмотра видео до:</strong> 22 часa<br>
+            <strong>Количество SIM-карт:</strong> 1<br>
+            <strong>Беспроводное соединение:</strong> Bluetooth, NFC, Wi-Fi
+          `;
+                    break;
+
+                case 'iphone16':
+                    title = 'iPhone 16';
+                    img = 'img/iPones/iphone16.png';
+                    specs = `
+            <strong>Диагональ экрана:</strong> 6.1"<br>
+            <strong>Разрешение экрана:</strong> 2556 x 1179<br>
+            <strong>Количество ядер:</strong> 6<br>
+            <strong>Разрешение основной камеры:</strong> 48 Мп<br>
+            <strong>Разрешение второй основной камеры:</strong> 12 Мп<br>
+            <strong>Стандарты сотовой связи:</strong> GSM, 2G, 3G, 4G LTE, 5G, VoLTE<br>
+            <strong>Режим просмотра видео до:</strong> 22 часов<br>
+            <strong>Количество SIM-карт:</strong> 1<br>
+            <strong>Беспроводное соединение:</strong> Bluetooth, NFC, Wi-Fi
+          `;
+                    break;
+
+                case 'iphone16plus':
+                    title = 'iPhone 16 Plus';
+                    img = 'img/iPones/iphone16plus.png';
+                    specs = `
+            <strong>Диагональ экрана:</strong> 6.7"<br>
+            <strong>Разрешение экрана:</strong> 2796 x 1290<br>
+            <strong>Количество ядер:</strong> 6<br>
+            <strong>Разрешение основной камеры:</strong> 48 Мп<br>
+            <strong>Разрешение второй основной камеры:</strong> 12 Мп<br>
+            <strong>Стандарты сотовой связи:</strong> GSM, 2G, 3G, 4G LTE, 5G, VoLTE<br>
+            <strong>Режим просмотра видео до:</strong> 27 часов<br>
+            <strong>Количество SIM-карт:</strong> 1<br>
+            <strong>Беспроводное соединение:</strong> Bluetooth, NFC, Wi-Fi
+          `;
+                    break;
+
+                case 'iphone16pro':
+                    title = 'iPhone 16 Pro';
+                    img = 'img/iPones/iphone16pro.png';
+                    specs = `
+            <strong>Диагональ экрана:</strong> 6.3"<br>
+            <strong>Разрешение экрана:</strong> 2622 x 1206<br>
+            <strong>Количество ядер:</strong> 6<br>
+            <strong>Разрешение основной камеры:</strong> 48 Мп<br>
+            <strong>Разрешение второй основной камеры:</strong> 48 Мп<br>
+            <strong>Стандарты сотовой связи:</strong> GSM, 2G, 3G, 4G LTE, 5G, VoLTE<br>
+             <strong>Режим просмотра видео до:</strong> 33 часов<br>
+            <strong>Количество SIM-карт:</strong> 1<br>
+            <strong>Беспроводное соединение:</strong> Bluetooth, NFC, Wi-Fi
+          `;
+                    break;
+
+                case 'iphone16promax':
+                    title = 'iPhone 16 Pro Max';
+                    img = 'img/iPones/iphone16promax.png';
+                    specs = `
+            <strong>Диагональ экрана:</strong> 6.9"<br>
+            <strong>Разрешение экрана:</strong> 2844 x 1260<br>
+            <strong>Количество ядер:</strong> 6<br>
+            <strong>Разрешение основной камеры:</strong> 48 Мп<br>
+            <strong>Разрешение второй основной камеры:</strong> 48 Мп<br>
+            <strong>Стандарты сотовой связи:</strong> GSM, 2G, 3G, 4G LTE, 5G, VoLTE<br>
+            <strong>Режим просмотра видео до:</strong> 33 часa<br>
+            <strong>Количество SIM-карт:</strong> 1<br>
+            <strong>Беспроводное соединение:</strong> Bluetooth, NFC, Wi-Fi
+          `;
+                    break;
+
+                case 'iphone17':
+                    title = 'iPhone 17';
+                    img = 'img/iPones/iphone17.png';
+                    specs = `
+            <strong>Диагональ экрана:</strong> 6.3"<br>
+            <strong>Разрешение экрана:</strong> 2622 x 1206<br>
+            <strong>Операционная система:</strong> iOS 26<br>
+            <strong>Количество ядер:</strong> 6<br>
+            <strong>Разрешение основной камеры:</strong> 48 Мп<br>
+            <strong>Разрешение второй основной камеры:</strong> 12 Мп<br>
+            <strong>Стандарты сотовой связи:</strong> GSM, 2G, 3G, 4G LTE, 5G, VoLTE<br>
+            <strong>Режим просмотра видео до:</strong> 30 часов<br>
+            <strong>Количество SIM-карт:</strong> 1<br>
+            <strong>Беспроводное соединение:</strong> Bluetooth, NFC, Wi-Fi
+          `;
+                    break;
+
+                case 'iphone17Air':
+                    title = 'iPhone 17 Air';
+                    img = 'img/iPones/iphone17Air.png';
+                    specs = `
+            <strong>Диагональ экрана:</strong> 6.5"<br>
+            <strong>Емкость аккумулятора:</strong> 3000 mAh<br>
+            <strong>Операционная система:</strong> iOS 26<br>
+            <strong>Количество ядер:</strong> 6<br>
+            <strong>Разрешение основной камеры:</strong> 48 Мп<br>
+            <strong>Стандарты сотовой связи:</strong> GSM, 2G, 3G, 4G LTE, 5G, VoLTE<br>
+            <strong>Беспроводное соединение:</strong> Bluetooth, NFC, Wi-Fi
+          `;
+                    break;
+
+                case 'iphone17pro':
+                    title = 'iPhone 17 Pro';
+                    img = 'img/iPones/iphone17pro.png';
+                    specs = `
+            <strong>Диагональ экрана:</strong> 6.3"<br>
+            <strong>Разрешение экрана:</strong> 2622 x 1206<br>
+            <strong>Операционная система:</strong> iOS 26<br>
+            <strong>Количество ядер:</strong> 6<br>
+            <strong>Разрешение основной камеры:</strong> 48 Мп<br>
+            <strong>Разрешение второй основной камеры:</strong> 48 Мп<br>
+            <strong>Стандарты сотовой связи:</strong> GSM, 2G, 3G, 4G LTE, 5G, VoLTE<br>
+             <strong>Режим просмотра видео до:</strong> 33 часов<br>
+            <strong>Количество SIM-карт:</strong> 1<br>
+            <strong>Беспроводное соединение:</strong> Bluetooth, NFC, Wi-Fi
+          `;
+                    break;
+
+                case 'iphone17promax':
+                    title = 'iPhone 17 Pro Max';
+                    img = 'img/iPones/iphone17promax.png';
+                    specs = `
+            <strong>Диагональ экрана:</strong> 6.9"<br>
+            <strong>Разрешение экрана:</strong> 2622 x 1206<br>
+            <strong>Операционная система:</strong> iOS 26<br>
+            <strong>Количество ядер:</strong> 6<br>
+            <strong>Разрешение основной камеры:</strong> 48 Мп<br>
+            <strong>Разрешение второй основной камеры:</strong> 48 Мп<br>
+            <strong>Стандарты сотовой связи:</strong> GSM, 2G, 3G, 4G LTE, 5G, VoLTE<br>
+            <strong>Режим просмотра видео до:</strong> 39 часa<br>
+            <strong>Количество SIM-карт:</strong> 1<br>
+            <strong>Беспроводное соединение:</strong> Bluetooth, NFC, Wi-Fi
+          `;
+                    break;
+
+                case 'airpods':
+                    title = 'AirPods';
+                    img = 'img/products/airpods.jpg';
+                    specs = `
+            <strong>Тип устройства:</strong> Беспроводные наушники<br>
+            <strong>Bluetooth:</strong> Да<br>
+            <strong>Шумоподавление:</strong> Есть (Pro)<br>
+            <strong>Время работы:</strong> до 6 часов (до 30 с чехлом)<br>
+            <strong>Зарядка:</strong> Qi / Lightning / USB-C<br>
+            <strong>Совместимость:</strong> iOS, Android<br>
+            <strong>Микрофон:</strong> Встроенный<br>
+            <strong>Управление:</strong> Сенсорное / Голосовое (Siri)<br>
+            <strong>Стандарты сотовой связи:</strong> Нет<br>
+            <strong>VoLTE:</strong> Нет<br>
+            <strong>Количество SIM-карт:</strong> Нет<br>
+            <strong>Беспроводное соединение:</strong> Bluetooth, Wi-Fi
+          `;
+                    break;
+
+                case 'watch':
+                    title = 'Apple Watch';
+                    img = 'img/products/apple-watch.jpg';
+                    specs = `
+            <strong>Тип устройства:</strong> Умные часы<br>
+            <strong>Диагональ экрана:</strong> от 1.6" до 1.9"<br>
+            <strong>Операционная система:</strong> watchOS<br>
+            <strong>Количество ядер:</strong> 2 (S-серия)<br>
+            <strong>Датчики:</strong> Пульс, ЭКГ, Акселерометр, Гироскоп<br>
+            <strong>GPS:</strong> Есть (на некоторых моделях)<br>
+            <strong>Стандарты сотовой связи:</strong> GSM, 4G LTE (Cellular версии)<br>
+            <strong>VoLTE:</strong> Да (при наличии eSIM)<br>
+            <strong>Количество SIM-карт:</strong> 1 (eSIM)<br>
+            <strong>Беспроводное соединение:</strong> Bluetooth, Wi-Fi, NFC
+          `;
+                    break;
+
+                default:
+                    title = 'Товар';
+                    img = '';
+                    specs = 'Информация недоступна';
+            }
+
+            document.getElementById('modal-title').textContent = title;
+            document.getElementById('modal-img').src = img;
+            document.getElementById('modal-specs').innerHTML = specs;
+            document.getElementById('productModal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('productModal').style.display = 'none';
+        }
+
+        function sendRequest(messenger) {
+            const message = encodeURIComponent(
+                `Привет! Интересует:\n` +
+                `- Модель: ?\n` +
+                `- Объём памяти: ?\n` +
+                `- Цвет: ?\n\n` +
+                `Подскажите стоимость и наличие?`
+            );
+            let url = '';
+            if (messenger === 'telegram') url = `https://t.me/vipsimka82?text=${message}`;
+            else if (messenger === 'whatsapp') url = `https://wa.me/79915556663?text=${message}`;
+            else if (messenger === 'vk') url = `https://vk.com/vip.simki?w=write&text=${message}`;
+            window.open(url, '_blank');
+        }
+
+        function sendRequestFromModal(messenger) {
+            const model = document.getElementById('modal-title').textContent;
+            const message = encodeURIComponent(
+                `Привет! Интересует:\n` +
+                `- Модель: ${model}\n` +
+                `- Объём памяти: ?\n` +
+                `- Цвет: ?\n\n` +
+                `Подскажите стоимость и наличие?`
+            );
+            let url = '';
+            if (messenger === 'telegram') url = `https://t.me/vipsimka82?text=${message}`;
+            else if (messenger === 'whatsapp') url = `https://wa.me/79915556663?text=${message}`;
+            else if (messenger === 'vk') url = `https://vk.com/vip.simki?w=write&text=${message}`;
+            window.open(url, '_blank');
+        }
+
+        window.onclick = function (event) {
+            const modal = document.getElementById('productModal');
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        }
+    </script>
+
+</body>
+
+</html>

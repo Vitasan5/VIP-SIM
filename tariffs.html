@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Тарифы — Vip-simka.Крым</title>
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+
+    <body class="tariff-page"></body>
+    <!-- ШАПКА -->
+    <header>
+        <div class="logo">
+            <img src="img/logo.PNG" alt="VIP SIM">
+        </div>
+        <nav>
+            <a href="index.html">Главная</a>
+            <a href="tariffs.html">Тарифы</a>
+            <a href="service.html">Сервис</a>
+            <a href="numbers.html">Красивые номера</a>
+            <a href="apple.html">Apple</a>
+            <a href="accessories.html">Аксессуары</a>
+            <a href="reviews.html">Отзывы</a>
+            <a href="news.html">Новости</a>
+        </nav>
+        <!-- Гамбургер-меню -->
+        <div class="menu-toggle" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <!-- Мобильное меню -->
+        <div class="mobile-menu" id="mobileMenu">
+            <a href="index.html">Главная</a>
+            <a href="tariffs.html">Тарифы</a>
+            <a href="service.html">Сервис</a>
+            <a href="numbers.html">Красивые номера</a>
+            <a href="apple.html">Apple</a>
+            <a href="accessories.html">Аксессуары</a>
+            <a href="reviews.html">Отзывы</a>
+            <a href="news.html">Новости</a>
+        </div>
+    </header>
+
+    <!-- ОБЩИЙ БЕЛЫЙ КОНТЕЙНЕР -->
+    <div class="page-wrapper">
+
+        <!-- БЛОК 1: Тарифы МТС (2 карточки) -->
+        <section class="tariff-block">
+            <h2>Тарифы для номера МТС любого региона, кроме МТС-Крым</h2>
+            <p class="tariff-subtitle">Подключиться к любому тарифу, действующему в Крыму, можно по адресу:
+                г.Симферополь, пр.Кирова,16. Магазин Terminal.</p>
+            <div class="image-row">
+                <a href="#" onclick="openModal('Умный-L'); return false;">
+                    <img src="img/Тарифы мтс умный L.jpg" alt="МТС Умный-L">
+                </a>
+                <a href="#" onclick="openModal('Умный-XL'); return false;">
+                    <img src="img/Тарифы мтс умный XL.jpg" alt="МТС Умный-XL">
+                </a>
+            </div>
+        </section>
+
+        <!-- БЛОК 2: МТС-978 (3 карточки) -->
+        <section class="tariff-block">
+            <h2>Тарифы для крымского номера МТС-978</h2>
+            <p class="tariff-subtitle">Подключиться к любому тарифу, действующему в Крыму, можно по адресу:
+                г.Симферополь, пр.Кирова,16. Магазин Terminal.</p>
+            <div class="image-row">
+                <a href="#" onclick="openModal('БОЛЬШЕ АКЦИЯ'); return false;">
+                    <img src="img/БОЛЬШЕ АКЦИЯ.jpg" alt="МТС-978 Больше">
+                </a>
+                <a href="#" onclick="openModal('СуперКрым АКЦИЯ'); return false;">
+                    <img src="img/СуперКрым АКЦИЯ.jpg" alt="МТС-978 СуперКрым">
+                </a>
+                
+            </div>
+        </section>
+
+        <!-- БЛОК 3: Непубличные тарифы МТС (918/988) -->
+        <section class="tariff-block">
+            <h2>Непубличные тарифы МТС с новым номером (918/988)</h2>
+            <p class="tariff-subtitle">Подключиться к любому тарифу, действующему в Крыму, можно по адресу:
+                г.Симферополь, пр.Кирова,16. Магазин Terminal.</p>
+            <div class="image-row">
+                <a href="#" onclick="openModal('Выгодный S'); return false;">
+                    <img src="img/Тарифы мтс выгодный  (1).jpg" alt="918 Выгодный 1">
+                </a>
+                <a href="#" onclick="openModal('Выгодный M'); return false;">
+                    <img src="img/Тарифы мтс выгодный  (2).jpg" alt="918 Выгодный 2">
+                </a>
+                <a href="#" onclick="openModal('Выгодный L'); return false;">
+                    <img src="img/Тарифы мтс выгодный  (3).jpg" alt="918 Выгодный 3">
+                </a>
+            </div>
+        </section>
+
+        <!-- БЛОК 4: Интернет -->
+        <section class="tariff-block">
+            <h2>Тарифы для интернета на любом устройстве в Крыму и по РФ</h2>
+            <p class="tariff-subtitle">Подключиться к любому тарифу, действующему в Крыму, можно по адресу:
+                г.Симферополь, пр.Кирова,16. Магазин Terminal.</p>
+            <div class="image-row">
+                <a href="#" onclick="openModal('GO SMART'); return false;">
+                    <img src="img/GO SMARTвип-связь.рф.jpg" alt="Интернет GO SMART">
+                </a>
+                <a href="#" onclick="openModal('Интернет 300'); return false;">
+                    <img src="img/300.jpg" alt="Интернет 300">
+                </a>
+            </div>
+        </section>
+
+
+        <!-- СЛАЙДЕР ВОЛНА -->
+        <section class="tariff-block">
+            <h2>Тарифы крымского оператора Волна</h2>
+            <p class="tariff-subtitle">Подключиться к любому тарифу, действующему в Крыму, можно по адресу:
+                г.Симферополь, пр.Кирова,16. Магазин Terminal.</p>
+            <div class="slider-container">
+                <button class="slider-btn prev" onclick="moveSlide('wave', -1)">◀</button>
+                <div id="wave-slider" class="wave-slider">
+                    <div class="wave-card">
+                        <img src="https://img.ic-group.ru/vln-strapi-ic8/moya_volna_plansh_18544a9865.webp"
+                            alt="Моя Волна">
+                        <div class="wave-info">
+                            <p>● 200 минут</p>
+                            <p>● 20 ГБ</p>
+                            <p>● 150 СМС</p>
+                            <p>● Безлимит на Волну</p>
+                        </div>
+                        <div class="wave-price">290 руб./мес</div>
+                    </div>
+                    <div class="wave-card">
+                        <img src="https://img.ic-group.ru/vln-strapi-ic8/moya_strana_plansh_1_588a56a22e.webp"
+                            alt="Моя Страна">
+                        <div class="wave-info">
+                            <p>● 600 минут</p>
+                            <p>● 60 ГБ</p>
+                            <p>● 100 СМС</p>
+                            <p>● Безлимит на Волну</p>
+                        </div>
+                        <div class="wave-price">490 руб./мес</div>
+                    </div>
+                    <div class="wave-card">
+                        <img src="https://img.ic-group.ru/vln-strapi-ic8/728_h_340_e60b0cadd1.jpg" alt="Безлимит">
+                        <div class="wave-info">
+                            <p>● 1000 минут</p>
+                            <p>● Безлимитный интернет</p>
+                            <p>● 100 СМС</p>
+                            <p>● Безлимит на Волну</p>
+                        </div>
+                        <div class="wave-price">790 руб./мес</div>
+                    </div>
+                    <div class="wave-card">
+                        <img src="https://img.ic-group.ru/vln-strapi-ic8/Tarif_Sdelaj_sam_643c65c204.png"
+                            alt="Сделай сам">
+                        <div class="wave-info">
+                            <p>Тариф-конструктор</p>
+                            <p>● 200 минут</p>
+                            <p>● 20 ГБ</p>
+                            <p>● 50 СМС</p>
+                            <p>● Безлимит на Волну</p>
+                        </div>
+                        <div class="wave-price">400 руб./мес</div>
+                    </div>
+                    <div class="wave-card">
+                        <img src="https://img.ic-group.ru/vln-strapi-ic8/zagorai_tablet_67a2d42600.webp" alt="Загорай">
+                        <div class="wave-info">
+                            <p>● Безлимитные звонки</p>
+                            <p>● Безлимитный интернет</p>
+                            <p>● Безлимитные СМС</p>
+                        </div>
+                        <div class="wave-price">600 руб. / 21 день</div>
+                    </div>
+                </div>
+                <button class="slider-btn next" onclick="moveSlide('wave', 1)">▶</button>
+            </div>
+        </section>
+
+        <!-- СЛАЙДЕР ВИН -->
+        <section class="tariff-block">
+            <h2>Тарифы крымского оператора Вин</h2>
+            <p class="tariff-subtitle">Подключиться к любому тарифу, действующему в Крыму, можно по адресу:
+                г.Симферополь, пр.Кирова,16. Магазин Terminal.</p>
+            <div class="slider-container">
+                <button class="slider-btn prev" onclick="moveSlide('win', -1)">◀</button>
+                <div id="win-slider" class="win-slider">
+                    <div class="win-card">
+                        <img src="https://www.mobile-win.ru/public/upload/tariff/036b3cb6015648a2135b3fa0bc1ba554.jpg"
+                            alt="Вин 400">
+                        <div class="win-info">
+                            <p>● 600 минут</p>
+                            <p>● 15 ГБ</p>
+                            <p>● 400 СМС</p>
+                            <p>● Безлимит на Вин</p>
+                        </div>
+                        <div class="win-price">400 руб./мес</div>
+                    </div>
+                    <div class="win-card">
+                        <img src="https://www.mobile-win.ru/public/upload/tariff/a8ebb930770c7e66ce90dbe23b0dcf85.jpg"
+                            alt="Вин 500">
+                        <div class="win-info">
+                            <p>● 900 минут</p>
+                            <p>● 30 ГБ</p>
+                            <p>● 500 СМС</p>
+                            <p>● Безлимит на Вин</p>
+                        </div>
+                        <div class="win-price">500 руб./мес</div>
+                    </div>
+                    <div class="win-card">
+                        <img src="https://www.mobile-win.ru/public/upload/tariff/028579f0c1e25cbbe657d121a5bcc826.jpg"
+                            alt="Вин 1000">
+                        <div class="win-info">
+                            <p>● Безлимит звонки</p>
+                            <p>● Безлимитный интернет</p>
+                            <p>● 1000 СМС</p>
+                            <p>● Безлимит на Вин</p>
+                        </div>
+                        <div class="win-price">1000 руб./мес</div>
+                    </div>
+                    <div class="win-card">
+                        <img src="https://www.mobile-win.ru/public/upload/tariff/7f8f7034480009a89e0299d4ec72411c.jpg"
+                            alt="Интернет Вин">
+                        <div class="win-info">
+                            <p>Тариф для интернета</p>
+                            <p>● 10 ГБ</p>
+                            <p>● 25 ГБ</p>
+                            <p>● 50 ГБ</p>
+                            <p>● Безлимит</p>
+                        </div>
+                        <div class="win-price">от 250 руб./мес</div>
+                    </div>
+                </div>
+                <button class="slider-btn next" onclick="moveSlide('win', 1)">▶</button>
+            </div>
+        </section>
+
+        <!-- ОПЕРАТОРЫ -->
+        <section class="operators-block">
+            <h2>ОПЕРАТОРЫ СВЯЗИ В КРЫМУ</h2>
+            <div class="operator-cards">
+                <a href="mts.html" class="operator-card">МТС</a>
+                <a href="volna.html" class="operator-card">ВОЛНА</a>
+                <a href="win.html" class="operator-card">ВИН</a>
+            </div>
+        </section>
+
+    </div> <!-- конец page-wrapper -->
+
+    <!-- ПОДВАЛ -->
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-col">
+                <img src="img/logo.PNG" alt="Логотип Vip-simka" style="width: 120px; margin-bottom: 15px;">
+                <div class="share-container">
+                    <button onclick="sharePage()" class="share-btn">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4nyxhOq62ylFOpeWtfM9pfbieq0slJSmlUHJQz8-1Ry-f5bkXOwbzAYgVoYnuiaayV7Y&usqp=CAU"
+                            alt="Поделиться" class="share-icon">
+                        Поделиться с друзьями
+                    </button>
+                </div>
+                <p class="footer-disclaimer">
+                    Информационные материалы и цены, размещенные на сайте, не являются публичной офертой.
+                    <br><br>
+                    <strong>⚠️ Наш ресурс и наши консультанты не несут ответственности за изменения условий обслуживания
+                        абонентов со стороны операторов связи или компаний, их представляющих.</strong>
+                </p>
+            </div>
+            <div class="footer-col">
+                <p class="footer-text">
+                    <strong>Уважаемые клиенты!</strong>
+                    <br><br>
+                    С 1 июня 2018 г. в соответствии с поправками в Федеральном законе “О связи” 126-ФЗ, продажа и
+                    активация SIM-карт возможна только по паспорту.
+                    <br><br>
+                    <a href="https://vip-simka.jimdofree.com/%D0%B7%D0%B0%D0%BA%D0%BE%D0%BD-%D0%BE-%D1%81%D0%B2%D1%8F%D0%B7%D0%B8/"
+                        target="_blank" class="footer-link">Подробнее...</a>
+                </p>
+            </div>
+            <div class="footer-col">
+                <h4 class="footer-title">Наши контакты:</h4>
+                <p class="contact-number">
+                    <strong>Max / Telegram / WhatsApp</strong><br>
+                    +7 991 555 666 3 (24/7)
+                </p>
+                <p class="footer-warning">
+                    <strong>ВАЖНО!</strong><br>
+                    Другие контакты не имеют отношения к нашему сайту, и мы не несем ответственности за действия третьих
+                    лиц, ссылающихся на наш сайт.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- КНОПКА "НАВЕРХ" -->
+    <a href="#" id="scrollToTop" class="scroll-to-top">▲</a>
+
+    <!-- ПЛАВАЮЩАЯ КНОПКА "СВЯЗЬ" -->
+    <div class="contact-float">
+        <div class="contact-wrapper">
+            <div class="contact-toggle">Мы на связи</div>
+            <div class="contact-menu">
+                <a href="https://wa.me/79915556663" target="_blank" title="WhatsApp" class="contact-link">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp"
+                        class="contact-icon">
+                </a>
+                <a href="https://t.me/vipsimka82" target="_blank" title="Telegram" class="contact-link">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram"
+                        class="contact-icon">
+                </a>
+                <a href="mailto:vip.simki@vk.com" title="Email" class="contact-link">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/4/4e/Gmail_Icon.png" alt="Email"
+                        class="contact-icon">
+                </a>
+                <a href="https://instagram.com/_vipsimka" target="_blank" title="Instagram" class="contact-link">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram"
+                        class="contact-icon">
+                </a>
+                <a href="https://facebook.com/vitalij.san.658372" target="_blank" title="Facebook" class="contact-link">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_(2019).svg"
+                        alt="Facebook" class="contact-icon">
+                </a>
+                <a href="https://vk.com/vip.simki" target="_blank" title="VK" class="contact-link">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/2/21/VK.com-logo.svg" alt="VK"
+                        class="contact-icon">
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- === МОДАЛЬНОЕ ОКНО ДЛЯ ТАРИФОВ === -->
+    <div id="productModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <div class="modal-left">
+                <img src="" alt="Тариф" id="modal-img">
+            </div>
+            <div class="modal-right">
+                <h3 id="modal-title">Тариф</h3>
+                <div class="specs" id="modal-specs"></div>
+                <div class="request-dropdown">
+                    <button class="btn-request" onclick="toggleDropdown(event)">Запросить подключение ▼</button>
+                    <div class="dropdown-content" id="requestMenu">
+                        <a href="#" onclick="sendRequestFromModal('telegram'); return false;" class="messenger-link">📩
+                            Telegram</a>
+                        <a href="#" onclick="sendRequestFromModal('whatsapp'); return false;" class="messenger-link">💬
+                            WhatsApp</a>
+                        <a href="#" onclick="sendRequestFromModal('vk'); return false;" class="messenger-link">📘
+                            ВКонтакте</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            // Данные по тарифам
+            const TARIFFS = {
+                'Умный-L': {
+                    image: 'img/Тарифы мтс умный L.jpg',
+                    specs: `
+                <p><strong>Абонплата:</strong> 325 руб./мес</p>
+                <p><strong>Интернет:</strong> 30/50 ГБ</p>
+                <p><strong>Минуты:</strong> 2600/1500 на все сети России</p>
+                <p><strong>СМС:</strong> 1000 на все сети России</p>
+                <p><strong>Работает:</strong> Без роуминга в Крыму и по РФ</p>
+                <p><strong>Подключение:</strong> На действующий или новый номер МТС любого региона (НЕ +7978)</p>
+            `
+                },
+                'Умный-XL': {
+                    image: 'img/Тарифы мтс умный XL.jpg',
+                    specs: `
+                <p><strong>Абонплата:</strong> 425 руб./мес</p>
+                <p><strong>Интернет:</strong> 40/60 ГБ</p>
+                <p><strong>Минуты:</strong> 6000/5000 на все сети России</p>
+                <p><strong>СМС:</strong> 1000 на все сети России</p>
+                <p><strong>Работает:</strong> Без роуминга в Крыму и по РФ</p>
+                <p><strong>Подключение:</strong> На действующий или новый номер МТС любого региона (НЕ +7978)</p>
+            `
+                },
+                'БОЛЬШЕ АКЦИЯ': {
+                    image: 'img/БОЛЬШЕ АКЦИЯ.jpg',
+                    specs: `
+                <p><strong>Абонплата:</strong> 330 руб./мес</p>
+                (Первые 6мес, далее - 470/руб/мес)</p>
+                <p><strong>Интернет:</strong> 30+30 ГБ</p>
+                (Первые 3 месяца. Далее - 199руб/мес за двойной пакет интернета)
+                <p><strong>Минуты:</strong> 500 на все сети России</p>
+                <p><strong>СМС:</strong> 100 на все сети России</p>
+                <p><strong>Работает:</strong> Без роуминга в Крыму и по РФ</p>
+                <p><strong>Подключение:</strong> Только на номера МТС-978</p>
+            `
+                },
+                'СуперКрым АКЦИЯ': {
+                    image: 'img/СуперКрым АКЦИЯ.jpg',
+                    specs: `
+                <p><strong>Абонплата:</strong> 400 руб./мес</p>
+                (Первые 6мес, далее - 570/руб/мес)</p>
+                <p><strong>Интернет:</strong> 50+50 ГБ</p>
+                (Первые 3 месяца. Далее - 229руб/мес за двойной пакет интернета)
+                <p><strong>Минуты:</strong> 800 на все сети России</p>
+                <p><strong>СМС:</strong> 1000 на все сети России</p>
+                <p><strong>Работает:</strong> Без роуминга в Крыму и по РФ</p>
+                <p><strong>Подключение:</strong> Только на номера МТС-978</p>
+            `
+                },
+               
+                
+                'Выгодный S': {
+                    image: 'img/Тарифы мтс выгодный  (1).jpg',
+                    specs: `
+                <p><strong>Абонплата:</strong> 296 руб./мес</p>
+                <p><strong>Интернет:</strong> 15/10 ГБ</p>
+                <p><strong>Минуты:</strong> 500/600 на все сети России</p>
+                <p><strong>СМС:</strong> 300 на все сети России</p>
+                <p><strong>Работает:</strong> Без роуминга в Крыму и по РФ</p>
+                <p><strong>Подключение:</strong> На новый номер 918/988</p>
+
+                <br><p><strong>Красивый номер на выбор</strong><br>
+            `
+                },
+                'Выгодный M': {
+                    image: 'img/Тарифы мтс выгодный  (2).jpg',
+                    specs: `
+                <p><strong>Абонплата:</strong> 385 руб./мес</p>
+                <p><strong>Интернет:</strong> 20/35 ГБ</p>
+                <p><strong>Минуты:</strong> 900/1400 на все сети России</p>
+                <p><strong>СМС:</strong> 500 на все сети России</p>
+                <p><strong>Работает:</strong> Без роуминга в Крыму и по РФ</p>
+                <p><strong>Подключение:</strong> На новый номер 918/988</p>
+
+                <br><p><strong>Красивый номер на выбор</strong><br>
+            `
+                },
+                'Выгодный L': {
+                    image: 'img/Тарифы мтс выгодный  (3).jpg',
+                    specs: `
+                <p><strong>Абонплата:</strong> 770 руб./мес</p>
+                <p><strong>Интернет:</strong> 30/60 ГБ</p>
+                <p><strong>Минуты:</strong> 1600/2600 на все сети России</p>
+                <p><strong>СМС:</strong> 1000 на все сети России</p>
+                <p><strong>Работает:</strong> Без роуминга в Крыму и по РФ</p>
+                <p><strong>Подключение:</strong> На новый номер 918/988</p>
+
+                <br><p><strong>Красивый номер на выбор</strong><br>
+            `
+                },
+                'GO SMART': {
+                    image: 'img/GO SMARTвип-связь.рф.jpg',
+                    specs: `
+                <p><strong>Абонплата:</strong> 250 руб./мес</p>
+                <p><strong>Интернет:</strong> 2 ГБ</p>
+                <p><strong>Минуты:</strong> 100 на все сети России</p>
+                <p><strong>СМС:</strong> 100 на все сети России</p>
+                <p><strong>Работает:</strong> Без роуминга в Крыму и по РФ</p>
+                <p><strong>Подключение:</strong> На любой номер, кроме 978</p>
+            `
+                },
+                'Интернет 300': {
+                    image: 'img/300.jpg',
+                    specs: `
+                <p><strong>Абонплата:</strong> 950 руб./мес</p>
+                <p><strong>Интернет:</strong> 300 ГБ</p>
+                <p><strong>Минуты:</strong> Не предусмотрены</p>
+                <p><strong>СМС:</strong> Не предусмотрены</p>
+                <p><strong>Работает:</strong> Без роуминга в Крыму и по РФ</p>
+                <p><strong>Подключение:</strong> Только новый номер</p>
+            `
+                }
+            };
+
+            // Открытие модального окна
+            function openModal(tariffKey) {
+                const data = TARIFFS[tariffKey];
+                if (!data) return;
+
+                document.getElementById('modal-title').textContent = tariffKey;
+                document.getElementById('modal-img').src = data.image;
+                document.getElementById('modal-specs').innerHTML = data.specs;
+
+                const modal = document.getElementById('productModal');
+                modal.style.display = 'flex';
+                setTimeout(() => modal.classList.add('show'), 10);
+            }
+
+            // Закрытие модального окна
+            function closeModal() {
+                const modal = document.getElementById('productModal');
+                modal.classList.remove('show');
+                setTimeout(() => {
+                    modal.style.display = 'none';
+                }, 300);
+            }
+
+            // Закрытие при клике на крестик или фон
+            document.addEventListener('click', function (e) {
+                const modal = e.target.closest('.modal');
+                if (modal && e.target.classList.contains('close-btn')) {
+                    closeModal();
+                }
+            });
+
+            // Отправка запроса в мессенджер
+            function sendRequestFromModal(messenger) {
+                const model = document.getElementById('modal-title').textContent;
+                const message = encodeURIComponent(
+                    `Привет! Интересует ` +
+                    `тариф ${model}\n` +
+                    `Как подключить ?\n` +
+                    `Цена ?\n` +
+                    `Что для этого нужно?`
+                );
+                let url = '';
+                if (messenger === 'telegram') url = `https://t.me/vipsimka82?text=${message}`;
+                else if (messenger === 'whatsapp') url = `https://wa.me/79915556663?text=${message}`;
+                else if (messenger === 'vk') url = `https://vk.com/vip.simki?w=write&text=${message}`;
+                window.open(url, '_blank');
+            }
+
+            window.onclick = function (event) {
+                const modal = document.getElementById('productModal');
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                }
+            }
+        </script>
+
+
+        <!-- ЕДИНЫЙ JS -->
+        <script src="js/script.js"></script>
+
+        
+
+
+</body>
+
+</html>
