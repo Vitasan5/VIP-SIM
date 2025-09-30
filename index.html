@@ -3,6 +3,7 @@
   <head>
     <link rel="stylesheet" href="css/style.css" />
     <link rel="manifest" href="/site.webmanifest" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <!-- Для iPhone -->
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <meta name="apple-mobile-web-app-title" content="VIP SIM" />
@@ -81,27 +82,7 @@
     />
     <meta name="twitter:site" content="@vipsim" />
 
-    <style>
-      .page-wrapper {
-        width: 100vw !important;
-        max-width: none !important;
-        margin: 0 !important;
-        padding: 0 !important;
-        overflow-x: hidden !important;
-        left: 0 !important;
-        right: 0 !important;
-      }
-
-      /* Приводим внутренние блоки к единому стилю */
-      .page-wrapper > section,
-      .page-wrapper > div {
-        width: 100%;
-        max-width: 1200px;
-        margin: 40 auto;
-        padding: 0 20px;
-        box-sizing: border-box;
-      }
-    </style>
+    
   </head>
 
   <body>
@@ -1089,16 +1070,24 @@
           </div>
         </div>
       </section>
-
+<!-- МОБИЛЬНЫЕ КНОПКИ: Apple и Аксессуары -->
+<div class="mobile-products-grid">
+    <a href="apple.html" class="mobile-product-btn">
+        <i class="fas fa-apple"></i>
+        <span>Техника Apple в Симферополе</span>
+    </a>
+    <a href="accessories.html" class="mobile-product-btn">
+        <i class="fas fa-plug"></i>
+        <span>Аксессуары для смартфонов</span>
+    </a>
+</div>
       <!-- КАРТОЧКИ С ИЗОБРАЖЕНИЯМИ -->
       <section class="image-card-section">
         <div class="cards-container">
           <div class="card-large">
-            <a
-              href="https://megasimka.ru/product-category/sim-cards/podkluchit-s-sohraneniem/?ref=838"
-            >
-              <img src="img/на свой номер.jpg" alt="Большое изображение" />
-            </a>
+            <a href="https://megasimka.ru/product-category/sim-cards/podkluchit-s-sohraneniem/?ref=838" class="full-width-image-link">
+  <img src="img/на свой номер.jpg" alt="Подключить на свой номер" />
+</a>
           </div>
           <div class="cards-small">
             <div class="card-small">
@@ -1265,7 +1254,81 @@
       </div>
     </div>
 
-    <!-- ЕДИНЫЙ JS -->
+  
+
+
+
+    <!-- MOBILE NAV BAR -->
+<div class="mobile-nav-bar">
+  <a href="index.html" class="nav-item active">
+    <i class="fas fa-home"></i>
+    <span>Главная</span>
+  </a>
+  <a href="tariffs.html" class="nav-item">
+    <i class="fas fa-signal"></i>
+    <span>Тарифы</span>
+  </a>
+  <a href="service.html" class="nav-item">
+    <i class="fas fa-cog"></i>
+    <span>Сервис</span>
+  </a>
+  <a href="numbers.html" class="nav-item">
+    <i class="fas fa-hashtag"></i>
+    <span>Номера</span>
+  </a>
+  <!-- КНОПКА ПОДДЕРЖКИ — ТОЛЬКО WHATSAPP -->
+  <a href="https://t.me/vipsimka82" target="_blank" class="nav-item">
+    <i class="fab fa-telegram"></i>
+    <span>Поддержка</span>
+</a>
+</div>
+    </div>
+</div>
+
+  <!-- ЕДИНЫЙ JS -->
     <script src="js/script.js"></script>
+    
+
+    <script>
+  // Перемещаем слайдер сервисов ТОЛЬКО на мобильных устройствах
+  document.addEventListener('DOMContentLoaded', () => {
+    const header = document.querySelector('header');
+    const serviceSlider = document.querySelector('.service-slider');
+    const pageWrapper = document.querySelector('.page-wrapper');
+
+    if (!header || !serviceSlider || !pageWrapper) return;
+
+    // Сохраняем оригинальное место слайдера
+    const originalParent = pageWrapper;
+    const referenceNode = serviceSlider; // Для возвращения на место
+
+    const moveServiceSlider = () => {
+      if (window.innerWidth <= 768) {
+        // Мобильная версия — перемещаем под шапку
+        if (serviceSlider.parentElement !== document.body) {
+          serviceSlider.remove();
+          header.insertAdjacentElement('afterend', serviceSlider);
+        }
+      } else {
+        // Десктоп — возвращаем в .page-wrapper
+        if (serviceSlider.parentElement !== originalParent) {
+          // Вставляем в начало, перед первым блоком
+          const firstChild = originalParent.firstElementChild;
+          if (firstChild) {
+            originalParent.insertBefore(serviceSlider, firstChild);
+          } else {
+            originalParent.appendChild(serviceSlider);
+          }
+        }
+      }
+    };
+
+    // Запускаем при загрузке
+    moveServiceSlider();
+
+    // И при изменении размера экрана
+    window.addEventListener('resize', moveServiceSlider);
+  });
+</script>
   </body>
 </html>
