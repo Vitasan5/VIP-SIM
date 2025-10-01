@@ -149,14 +149,14 @@
             </div>
             <div class="card">
               <h3>СУПЕР</h3>
-              <p>50 ГБ, 800 мин, 100SMS</p>
-              <p class="price">570 руб/мес</p>
+              <p>100 ГБ, 800 мин, 100SMS</p>
+              <p class="price">400 руб/мес</p>
               <a href="tariffs.html" class="card-button">Подробнее</a>
             </div>
             <div class="card">
               <h3>БОЛЬШЕ</h3>
-              <p>30 ГБ, 500 мин, 100SMS</p>
-              <p class="price">470 руб/мес</p>
+              <p>60 ГБ, 500 мин, 100SMS</p>
+              <p class="price">330 руб/мес</p>
               <a href="tariffs.html" class="card-button">Подробнее</a>
             </div>
           </div>
@@ -1285,9 +1285,32 @@
     </div>
 </div>
 
+
   <!-- ЕДИНЫЙ JS -->
     <script src="js/script.js"></script>
     
+<script>
+  // Сделать карточки "Хиты продаж" кликабельными на мобильных
+  document.addEventListener('DOMContentLoaded', () => {
+    const cards = document.querySelectorAll('.hits-wrapper .card');
+
+    cards.forEach(card => {
+      // Создаём обработчик клика
+      card.style.position = 'relative'; // Убедимся, что позиционирование задано
+      card.addEventListener('click', () => {
+        window.location.href = 'tariffs.html';
+      });
+
+      // Блокируем переход при клике на другие ссылки внутри (если будут)
+      const links = card.querySelectorAll('a');
+      links.forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.stopPropagation();
+        });
+      });
+    });
+  });
+</script>
 
     <script>
   // Перемещаем слайдер сервисов ТОЛЬКО на мобильных устройствах
