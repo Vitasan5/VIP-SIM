@@ -8,15 +8,5 @@
     { "src": "/accessories$", "dest": "/accessories.html" },
     { "src": "/reviews$", "dest": "/reviews.html" },
     { "src": "/news$", "dest": "/news.html" }
-  ],
-  "redirects": [
-    { "source": "/index.html", "destination": "/" },
-    { "source": "/tariffs.html", "destination": "/tariffs" },
-    { "source": "/service.html", "destination": "/service" },
-    { "source": "/numbers.html", "destination": "/numbers" },
-    { "source": "/apple.html", "destination": "/apple" },
-    { "source": "/accessories.html", "destination": "/accessories" },
-    { "source": "/reviews.html", "destination": "/reviews" },
-    { "source": "/news.html", "destination": "/news" }
   ]
 }
