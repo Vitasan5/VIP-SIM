@@ -1,12 +1,25 @@
 {
-  "routes": [
-    { "src": "/$", "dest": "/index.html" },
-    { "src": "/tariffs$", "dest": "/tariffs.html" },
-    { "src": "/service$", "dest": "/service.html" },
-    { "src": "/numbers$", "dest": "/numbers.html" },
-    { "src": "/apple$", "dest": "/apple.html" },
-    { "src": "/accessories$", "dest": "/accessories.html" },
-    { "src": "/reviews$", "dest": "/reviews.html" },
-    { "src": "/news$", "dest": "/news.html" }
+  "rewrites": [
+    { "source": "/tariffs", "destination": "/tariffs.html" },
+    { "source": "/service", "destination": "/service.html" },
+    { "source": "/numbers", "destination": "/numbers.html" },
+    { "source": "/apple", "destination": "/apple.html" },
+    { "source": "/accessories", "destination": "/accessories.html" },
+    { "source": "/reviews", "destination": "/reviews.html" },
+    { "source": "/news", "destination": "/news.html" }
+  ],
+  "redirects": [
+    { "source": "/index.html", "destination": "/", "permanent": true },
+    { "source": "/tariffs.html", "destination": "/tariffs", "permanent": true },
+    { "source": "/service.html", "destination": "/service", "permanent": true },
+    { "source": "/numbers.html", "destination": "/numbers", "permanent": true },
+    { "source": "/apple.html", "destination": "/apple", "permanent": true },
+    {
+      "source": "/accessories.html",
+      "destination": "/accessories",
+      "permanent": true
+    },
+    { "source": "/reviews.html", "destination": "/reviews", "permanent": true },
+    { "source": "/news.html", "destination": "/news", "permanent": true }
   ]
 }
