@@ -11,6 +11,7 @@
         box-sizing: border-box;
         font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
       }
+      
       body {
         background: linear-gradient(135deg, #fdfbf6, #f5f2e6);
         color: #222;
@@ -134,6 +135,55 @@
       }
     </style>
   </head>
+  <script>
+  function generateClientId() {
+    return 'VIP-' + Math.random().toString(36).substring(2, 8).toUpperCase();
+  }
+
+  let clientId = localStorage.getItem('vipClientId');
+  if (!clientId) {
+    clientId = generateClientId();
+    localStorage.setItem('vipClientId', clientId);
+  }
+
+  async function openPremiumSupport() {
+    const PROXY_URL = 'https://vip-sim-support.vercel.app/api/support'; // ← замени на свой URL!
+
+    try {
+      const res = await fetch(PROXY_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ clientId })
+      });
+
+      const data = await res.json();
+
+      if (!data.success) {
+        if (data.is_blocked) {
+          alert('Ваш доступ к премиум-поддержке заблокирован.');
+        } else if (data.error === 'limit_exceeded') {
+          alert('Вы исчерпали лимит из 10 обращений.');
+        } else {
+          alert('Ошибка: ' + (data.error || 'сервис временно недоступен'));
+        }
+        return;
+      }
+
+      const used = 10 - data.remaining;
+      const message = `⭐ Обращение в поддержку премиум-клиентов (${used}/10). Мы ответим в ближайшее время. Задайте свой вопрос:`;
+      window.open(`https://t.me/vipsimsupport?text=${encodeURIComponent(message)}`, '_blank');
+    } catch (err) {
+      console.error(err);
+      alert('Не удалось подключиться к системе поддержки.');
+    }
+  }
+</script>
+
+<div style="text-align:center; margin:30px 0;">
+  <button onclick="openPremiumSupport()" style="padding:14px 28px; background:#e53935; color:white; border:none; border-radius:8px; font-size:18px; font-weight:bold; cursor:pointer; box-shadow:0 4px 8px rgba(0,0,0,0.2);">
+    💎 Премиум-поддержка (100 ₽ / 10 обращений)
+  </button>
+</div>
   <body>
     <div class="container">
       <!-- Экран входа -->
