@@ -1,350 +1,386 @@
 <!DOCTYPE html>
 <html lang="ru">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Премиум-клиент | VIP-SIM.RU</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-    body {
-      background: linear-gradient(135deg, #fdfbf6, #f5f2e6);
-      color: #222;
-      padding: 20px;
-      min-height: 100vh;
-    }
-    .container {
-      max-width: 600px;
-      margin: 40px auto;
-      background: white;
-      border-radius: 20px;
-      padding: 32px;
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
-      border: 1px solid #f0e6d2;
-    }
-    h1 {
-      text-align: center;
-      margin-bottom: 24px;
-      color: #b8860b;
-      font-size: 28px;
-      font-weight: 700;
-    }
-    .welcome {
-      text-align: center;
-      font-size: 18px;
-      margin-bottom: 24px;
-      color: #444;
-    }
-    .counter-box {
-      background: #fff8e1;
-      border: 1px solid #ffd54f;
-      border-radius: 12px;
-      padding: 16px;
-      text-align: center;
-      margin: 24px 0;
-      font-size: 20px;
-      font-weight: 600;
-      color: #5d4037;
-    }
-    .counter-value {
-      color: #d4af37;
-      font-weight: 800;
-    }
-    .btn {
-      display: block;
-      width: 100%;
-      padding: 16px;
-      margin: 14px 0;
-      border: none;
-      border-radius: 12px;
-      font-size: 17px;
-      font-weight: 600;
-      cursor: pointer;
-      text-align: center;
-      text-decoration: none;
-      transition: all 0.2s ease;
-    }
-    .btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    }
-    .btn-support {
-      background: linear-gradient(135deg, #d4af37, #b8860b);
-      color: white;
-      font-size: 18px;
-    }
-    .btn-offer {
-      background: #f9f7f0;
-      color: #333;
-      border: 1px solid #e8e4d9;
-    }
-    .btn-renew {
-      background: #43a047;
-      color: white;
-    }
-    .btn-logout {
-      background: #e0e0e0;
-      color: #555;
-      margin-top: 20px;
-    }
-    .login-form {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-    .login-form input {
-      padding: 14px;
-      border: 1px solid #ddd;
-      border-radius: 12px;
-      font-size: 16px;
-      outline: none;
-      transition: border 0.3s;
-    }
-    .login-form input:focus {
-      border-color: #d4af37;
-    }
-    .login-form button {
-      background: linear-gradient(135deg, #d4af37, #b8860b);
-      color: white;
-      border: none;
-      border-radius: 12px;
-      padding: 14px;
-      font-size: 17px;
-      font-weight: 600;
-      cursor: pointer;
-    }
-    .hidden {
-      display: none;
-    }
-    .note {
-      text-align: center;
-      font-size: 13px;
-      color: #888;
-      margin-top: 20px;
-    }
-    .loading {
-      text-align: center;
-      color: #666;
-      font-size: 15px;
-      margin: 10px 0;
-    }
-  </style>
-</head>
-<body>
-  <div class="container">
-   <!-- Экран входа -->
-<div id="loginScreen">
-  <h1>⭐ Премиум-доступ</h1>
-  <p style="text-align:center; margin-bottom:20px; color:#555;">
-    Введите своё имя (только буквы).<br>
-    <small>Максимум 30 символов. Имя будет отображаться в обращениях.</small>
-  </p>
-  <div class="login-form">
-    <input type="text" id="nicknameInput" placeholder="Ваше имя" maxlength="30" autocomplete="off" />
-    <button onclick="enterPremium()">Продолжить</button>
-  </div>
-  <p class="note">Мы не собираем email, телефон или другие данные. Только имя для обращений.</p>
-</div>
-
-    <!-- Личный кабинет -->
-    <div id="premiumScreen" class="hidden">
-      <h1>⭐ Премиум-клиент</h1>
-      <div class="welcome">Привет, <span id="displayName">друг</span>!</div>
-      
-      <div class="counter-box">
-        Осталось обращений: <span class="counter-value" id="counter">10</span>/10
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Премиум-клиент | VIP-SIM.RU</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+      body {
+        background: linear-gradient(135deg, #fdfbf6, #f5f2e6);
+        color: #222;
+        padding: 20px;
+        min-height: 100vh;
+      }
+      .container {
+        max-width: 600px;
+        margin: 40px auto;
+        background: white;
+        border-radius: 20px;
+        padding: 32px;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+        border: 1px solid #f0e6d2;
+      }
+      h1 {
+        text-align: center;
+        margin-bottom: 24px;
+        color: #b8860b;
+        font-size: 28px;
+        font-weight: 700;
+      }
+      .welcome {
+        text-align: center;
+        font-size: 18px;
+        margin-bottom: 24px;
+        color: #444;
+      }
+      .counter-box {
+        background: #fff8e1;
+        border: 1px solid #ffd54f;
+        border-radius: 12px;
+        padding: 16px;
+        text-align: center;
+        margin: 24px 0;
+        font-size: 20px;
+        font-weight: 600;
+        color: #5d4037;
+      }
+      .counter-value {
+        color: #d4af37;
+        font-weight: 800;
+      }
+      .btn {
+        display: block;
+        width: 100%;
+        padding: 16px;
+        margin: 14px 0;
+        border: none;
+        border-radius: 12px;
+        font-size: 17px;
+        font-weight: 600;
+        cursor: pointer;
+        text-align: center;
+        text-decoration: none;
+        transition: all 0.2s ease;
+      }
+      .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      }
+      .btn-support {
+        background: linear-gradient(135deg, #d4af37, #b8860b);
+        color: white;
+        font-size: 18px;
+      }
+      .btn-offer {
+        background: #f9f7f0;
+        color: #333;
+        border: 1px solid #e8e4d9;
+      }
+      .btn-renew {
+        background: #43a047;
+        color: white;
+      }
+      .btn-logout {
+        background: #e0e0e0;
+        color: #555;
+        margin-top: 20px;
+      }
+      .login-form {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+      .login-form input {
+        padding: 14px;
+        border: 1px solid #ddd;
+        border-radius: 12px;
+        font-size: 16px;
+        outline: none;
+        transition: border 0.3s;
+      }
+      .login-form input:focus {
+        border-color: #d4af37;
+      }
+      .login-form button {
+        background: linear-gradient(135deg, #d4af37, #b8860b);
+        color: white;
+        border: none;
+        border-radius: 12px;
+        padding: 14px;
+        font-size: 17px;
+        font-weight: 600;
+        cursor: pointer;
+      }
+      .hidden {
+        display: none;
+      }
+      .note {
+        text-align: center;
+        font-size: 13px;
+        color: #888;
+        margin-top: 20px;
+      }
+      .loading {
+        text-align: center;
+        color: #666;
+        font-size: 15px;
+        margin: 10px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Экран входа -->
+      <div id="loginScreen">
+        <h1>⭐ Премиум-доступ</h1>
+        <p style="text-align: center; margin-bottom: 20px; color: #555">
+          Введите своё имя (только буквы).<br />
+          <small
+            >Максимум 30 символов. Имя будет отображаться в обращениях.</small
+          >
+        </p>
+        <div class="login-form">
+          <input
+            type="text"
+            id="nicknameInput"
+            placeholder="Ваше имя"
+            maxlength="30"
+            autocomplete="off"
+          />
+          <button onclick="enterPremium()">Продолжить</button>
+        </div>
+        <p class="note">
+          Мы не собираем email, телефон или другие данные. Только имя для
+          обращений.
+        </p>
       </div>
 
-      <button class="btn btn-support" onclick="contactSupport()">⭐ Премиум-поддержка</button>
-      <button class="btn btn-offer">🎁 Эксклюзивные скидки</button>
-      <button class="btn btn-offer">📦 Специальные SIM-пакеты</button>
-      <button class="btn btn-renew" onclick="renewAccess()">🔁 Продлить доступ (100 ₽)</button>
-      <button class="btn btn-logout" onclick="logout()">Выйти из кабинета</button>
+      <!-- Личный кабинет -->
+      <div id="premiumScreen" class="hidden">
+        <h1>⭐ Премиум-клиент</h1>
+        <div class="welcome">Привет, <span id="displayName">друг</span>!</div>
+
+        <div class="counter-box">
+          Осталось обращений:
+          <span class="counter-value" id="counter">10</span>/10
+        </div>
+
+        <button class="btn btn-support" onclick="contactSupport()">
+          ⭐ Премиум-поддержка
+        </button>
+        <button class="btn btn-offer">🎁 Эксклюзивные скидки</button>
+        <button class="btn btn-offer">📦 Специальные SIM-пакеты</button>
+        <button class="btn btn-renew" onclick="renewAccess()">
+          🔁 Продлить доступ (100 ₽)
+        </button>
+        <button class="btn btn-logout" onclick="logout()">
+          Выйти из кабинета
+        </button>
+      </div>
+
+      <div id="loading" class="loading hidden">Проверка статуса...</div>
     </div>
 
-    <div id="loading" class="loading hidden">Проверка статуса...</div>
-  </div>
+    <script>
+      // 🔁 URL Google Apps Script — НЕ МЕНЯЙ!
+      const GOOGLE_SCRIPT_URL =
+        "https://script.google.com/macros/s/AKfycby5jTESiHf9RBa6XS_G_okAmDXjTH1szgvRrpC7tFXshHzyQSOwkX1xYMvubRVnjQvjdQ/exec";
 
-  <script>
-    // 🔁 URL Google Apps Script — НЕ МЕНЯЙ!
-    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx4q1gRjBuq15FC9eNTCRCFVeuM6H1Snf8U5PIVvjWdEBbySOzg30-VMko0ESpjzyxwXw/exec';
+      document.addEventListener("DOMContentLoaded", () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const tokenFromUrl = urlParams.get("token");
 
-    document.addEventListener('DOMContentLoaded', () => {
-      const urlParams = new URLSearchParams(window.location.search);
-      const tokenFromUrl = urlParams.get('token');
+        if (tokenFromUrl) {
+          registerNewUser(tokenFromUrl);
+        } else {
+          const data = getPremiumData();
+          if (data) {
+            loadStatusFromServer(data.token);
+          } else {
+            showLoginScreen();
+          }
+        }
+      });
 
-      if (tokenFromUrl) {
-        registerNewUser(tokenFromUrl);
-      } else {
+      function getPremiumData() {
+        const raw = localStorage.getItem("premiumData");
+        if (!raw) return null;
+        try {
+          return JSON.parse(raw);
+        } catch (e) {
+          return null;
+        }
+      }
+
+      function savePremiumData(data) {
+        localStorage.setItem("premiumData", JSON.stringify(data));
+      }
+
+      function showLoginScreen() {
+        document.getElementById("loginScreen").classList.remove("hidden");
+        document.getElementById("premiumScreen").classList.add("hidden");
+        document.getElementById("loading").classList.add("hidden");
+      }
+
+      function showPremiumScreen(data) {
+        document.getElementById("displayName").textContent = data.nickname;
+        document.getElementById("counter").textContent = data.remaining;
+        document.getElementById("loginScreen").classList.add("hidden");
+        document.getElementById("premiumScreen").classList.remove("hidden");
+        document.getElementById("loading").classList.add("hidden");
+      }
+
+      function enterPremium() {
+        let nickname = document.getElementById("nicknameInput").value.trim();
+        if (!nickname) {
+          alert("Введите имя.");
+          return;
+        }
+
+        const validName = /^[a-zA-Zа-яА-ЯёЁ0-9 _-]+$/u;
+        if (
+          !validName.test(nickname) ||
+          nickname.length < 2 ||
+          nickname.length > 30
+        ) {
+          alert("Имя должно содержать 2–30 букв/цифр.");
+          return;
+        }
+
+        // Генерируем уникальный ID
+        const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        let id = "VIP-";
+        for (let i = 0; i < 6; i++) {
+          id += chars.charAt(Math.floor(Math.random() * chars.length));
+        }
+
+        // Регистрируем в Google Таблице
+        fetch(GOOGLE_SCRIPT_URL, {
+          method: "POST",
+          body: JSON.stringify({
+            action: "register",
+            client_id: id,
+            nickname: nickname,
+          }),
+          headers: { "Content-Type": "application/json" },
+        })
+          .then((res) => res.json())
+          .then(() => {
+            const data = { token: id, nickname: nickname, remaining: 10 };
+            savePremiumData(data);
+            showPremiumScreen(data);
+          })
+          .catch((err) => {
+            alert("Ошибка подключения. Попробуйте позже.\n" + err.message);
+          });
+      }
+
+      function loadStatusFromServer(clientId) {
+        showLoading();
+        fetch(GOOGLE_SCRIPT_URL, {
+          method: "POST",
+          body: JSON.stringify({ action: "get_status", client_id: clientId }),
+          headers: { "Content-Type": "application/json" },
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.success && !data.is_blocked) {
+              const localData = getPremiumData();
+              localData.remaining = data.remaining;
+              savePremiumData(localData);
+              showPremiumScreen(localData);
+            } else {
+              alert("Доступ заблокирован или не найден.");
+              localStorage.removeItem("premiumData");
+              showLoginScreen();
+            }
+          })
+          .catch(() => {
+            const localData = getPremiumData();
+            if (localData) {
+              showPremiumScreen(localData);
+            } else {
+              showLoginScreen();
+            }
+          });
+      }
+
+      function contactSupport() {
+        const data = getPremiumData();
+        if (!data || data.remaining <= 0) {
+          alert("Обращения закончились. Пожалуйста, продлите доступ.");
+          return;
+        }
+
+        const used = 11 - data.remaining;
+        const message = `⭐ Обращение в поддержку премиум-клиентов (${used}/10).Мы ответим в ближайшее время. Задайте свой вопрос:`;
+        const encoded = encodeURIComponent(message);
+        window.open(`https://t.me/vipsimsupport?text=${encoded}`, "_blank");
+
+        // Уменьшаем счётчик на сервере
+        fetch(GOOGLE_SCRIPT_URL, {
+          method: "POST",
+          body: JSON.stringify({
+            action: "use_request",
+            client_id: data.token,
+          }),
+          headers: { "Content-Type": "application/json" },
+        })
+          .then((res) => res.json())
+          .then((result) => {
+            if (result.success) {
+              data.remaining = result.remaining;
+              savePremiumData(data);
+              document.getElementById("counter").textContent = result.remaining;
+            }
+          })
+          .catch(() => {
+            // Локальное уменьшение как fallback
+            data.remaining -= 1;
+            savePremiumData(data);
+            document.getElementById("counter").textContent = data.remaining;
+          });
+      }
+
+      function renewAccess() {
+        alert(
+          "В настоящей версии здесь будет оплата через ЮKassa.\nПока — демо-режим: доступ продлён!"
+        );
         const data = getPremiumData();
         if (data) {
-          loadStatusFromServer(data.token);
-        } else {
-          showLoginScreen();
-        }
-      }
-    });
-
-    function getPremiumData() {
-      const raw = localStorage.getItem('premiumData');
-      if (!raw) return null;
-      try {
-        return JSON.parse(raw);
-      } catch (e) {
-        return null;
-      }
-    }
-
-    function savePremiumData(data) {
-      localStorage.setItem('premiumData', JSON.stringify(data));
-    }
-
-    function showLoginScreen() {
-      document.getElementById('loginScreen').classList.remove('hidden');
-      document.getElementById('premiumScreen').classList.add('hidden');
-      document.getElementById('loading').classList.add('hidden');
-    }
-
-    function showPremiumScreen(data) {
-      document.getElementById('displayName').textContent = data.nickname;
-      document.getElementById('counter').textContent = data.remaining;
-      document.getElementById('loginScreen').classList.add('hidden');
-      document.getElementById('premiumScreen').classList.remove('hidden');
-      document.getElementById('loading').classList.add('hidden');
-    }
-
-    function enterPremium() {
-      let nickname = document.getElementById('nicknameInput').value.trim();
-      if (!nickname) {
-        alert('Введите имя.');
-        return;
-      }
-
-      const validName = /^[a-zA-Zа-яА-ЯёЁ0-9 _-]+$/u;
-      if (!validName.test(nickname) || nickname.length < 2 || nickname.length > 30) {
-        alert('Имя должно содержать 2–30 букв/цифр.');
-        return;
-      }
-
-      // Генерируем уникальный ID
-      const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-      let id = 'VIP-';
-      for (let i = 0; i < 6; i++) {
-        id += chars.charAt(Math.floor(Math.random() * chars.length));
-      }
-
-      // Регистрируем в Google Таблице
-      fetch(GOOGLE_SCRIPT_URL, {
-        method: 'POST',
-        body: JSON.stringify({ action: 'register', client_id: id, nickname: nickname }),
-        headers: { 'Content-Type': 'application/json' }
-      })
-      .then(res => res.json())
-      .then(() => {
-        const data = { token: id, nickname: nickname, remaining: 10 };
-        savePremiumData(data);
-        showPremiumScreen(data);
-      })
-      .catch(err => {
-        alert('Ошибка подключения. Попробуйте позже.\n' + err.message);
-      });
-    }
-
-    function loadStatusFromServer(clientId) {
-      showLoading();
-      fetch(GOOGLE_SCRIPT_URL, {
-        method: 'POST',
-        body: JSON.stringify({ action: 'get_status', client_id: clientId }),
-        headers: { 'Content-Type': 'application/json' }
-      })
-      .then(res => res.json())
-      .then(data => {
-        if (data.success && !data.is_blocked) {
-          const localData = getPremiumData();
-          localData.remaining = data.remaining;
-          savePremiumData(localData);
-          showPremiumScreen(localData);
-        } else {
-          alert('Доступ заблокирован или не найден.');
-          localStorage.removeItem('premiumData');
-          showLoginScreen();
-        }
-      })
-      .catch(() => {
-        const localData = getPremiumData();
-        if (localData) {
-          showPremiumScreen(localData);
-        } else {
-          showLoginScreen();
-        }
-      });
-    }
-
-    function contactSupport() {
-      const data = getPremiumData();
-      if (!data || data.remaining <= 0) {
-        alert('Обращения закончились. Пожалуйста, продлите доступ.');
-        return;
-      }
-
-      const used = 11 - data.remaining;
-      const message = `⭐ Обращение в поддержку премиум-клиентов (${used}/10).Мы ответим в ближайшее время. Задайте свой вопрос:`;
-      const encoded = encodeURIComponent(message);
-      window.open(`https://t.me/vipsimsupport?text=${encoded}`, '_blank');
-
-      // Уменьшаем счётчик на сервере
-      fetch(GOOGLE_SCRIPT_URL, {
-        method: 'POST',
-        body: JSON.stringify({ action: 'use_request', client_id: data.token }),
-        headers: { 'Content-Type': 'application/json' }
-      })
-      .then(res => res.json())
-      .then(result => {
-        if (result.success) {
-          data.remaining = result.remaining;
+          data.remaining = 10;
           savePremiumData(data);
-          document.getElementById('counter').textContent = result.remaining;
+          document.getElementById("counter").textContent = 10;
         }
-      })
-      .catch(() => {
-        // Локальное уменьшение как fallback
-        data.remaining -= 1;
-        savePremiumData(data);
-        document.getElementById('counter').textContent = data.remaining;
-      });
-    }
-
-    function renewAccess() {
-      alert('В настоящей версии здесь будет оплата через ЮKassa.\nПока — демо-режим: доступ продлён!');
-      const data = getPremiumData();
-      if (data) {
-        data.remaining = 10;
-        savePremiumData(data);
-        document.getElementById('counter').textContent = 10;
       }
-    }
 
-    function logout() {
-      if (confirm('Вы уверены, что хотите выйти? Все данные будут удалены из этого браузера.')) {
-        localStorage.removeItem('premiumData');
-        showLoginScreen();
+      function logout() {
+        if (
+          confirm(
+            "Вы уверены, что хотите выйти? Все данные будут удалены из этого браузера."
+          )
+        ) {
+          localStorage.removeItem("premiumData");
+          showLoginScreen();
+        }
       }
-    }
 
-    function showLoading() {
-      document.getElementById('loading').classList.remove('hidden');
-    }
+      function showLoading() {
+        document.getElementById("loading").classList.remove("hidden");
+      }
 
-    function registerNewUser(token) {
-      // Это временная функция — пока не подключена оплата
-      // В будущем она будет вызываться после успешной оплаты
-      alert('Новый пользователь создан!');
-      enterPremium(); // временно — можно заменить на полноценную регистрацию
-    }
-  </script>
-</body>
+      function registerNewUser(token) {
+        // Это временная функция — пока не подключена оплата
+        // В будущем она будет вызываться после успешной оплаты
+        alert("Новый пользователь создан!");
+        enterPremium(); // временно — можно заменить на полноценную регистрацию
+      }
+    </script>
+  </body>
 </html>
