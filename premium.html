@@ -74,11 +74,14 @@
         msg.innerHTML = "<div>Обработка...</div>";
 
         try {
-          const res = await fetch("https://vip-sim-premium-w7lu.vercel.app/", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ nickname }),
-          });
+          const res = await fetch(
+            "https://vip-sim-premium-w7lu.vercel.app/api/use-ticket",
+            {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ nickname }),
+            }
+          );
 
           const data = await res.json();
 
