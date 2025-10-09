@@ -238,6 +238,7 @@
           nickname: nickname,
           remaining: 10,
           createdAt: Date.now(),
+          lastRequestTime: 0
         };
         savePremiumData(data);
         showPremiumScreen(data);
@@ -262,22 +263,43 @@
           return;
         }
 
+        // Проверка частоты обращений (2 минуты)
+        const now = Date.now();
+        const lastRequestTime = data.lastRequestTime || 0;
+        if (now - lastRequestTime < 2 * 60 * 1000) {
+          const secondsLeft = Math.ceil((2 * 60 * 1000 - (now - lastRequestTime)) / 1000);
+          showError(`Слишком частые обращения. Подождите ${secondsLeft} секунд.`);
+          return;
+        }
+
         const used = 11 - data.remaining;
+        const requestId = 'req_' + now.toString(36).substr(4, 8);
         
-        // Генерируем уникальный ID для защиты
-        const requestId = 'req_' + Date.now().toString(36).substr(4, 8);
-        
-        // Твой автотекст + защитный код
-        const message = `🔐 [VIP-${requestId}] ⭐ Обращение в поддержку премиум-клиентов (${used}/10).Мы ответим в ближайшее время. Задайте свой вопрос:`;
+        // Генерируем проверочный код
+        const verificationCode = Math.random().toString(36).substr(2, 6).toUpperCase();
+        const timestamp = Math.floor(now / 1000).toString(36).substr(4, 4);
+        const fullCode = `${verificationCode}-${timestamp}`;
+
+        // Твой точный автотекст с добавлением кода подтверждения
+        const message = `🔐 [VIP-${requestId}] ⭐ Обращение в поддержку премиум-клиентов (${used}/10).Мы ответим в ближайшее время. Задайте свой вопрос:\n\n🔒 КОД ПОДТВЕРЖДЕНИЯ: ${fullCode}`;
         
         const encoded = encodeURIComponent(message);
         const telegramUrl = `https://t.me/vipsimsupport?text=${encoded}`;
 
+        // Обновляем данные
         data.remaining -= 1;
+        data.lastRequestTime = now;
+        data.lastVerificationCode = fullCode;
         savePremiumData(data);
         document.getElementById("counter").textContent = data.remaining;
 
+        // Открываем чат
         window.open(telegramUrl, "_blank", "noopener,noreferrer");
+        
+        // Показываем клиенту код для подтверждения
+        setTimeout(() => {
+          alert(`🔐 ОБРАЩЕНИЕ СОЗДАНО!\n\nПри ответе назовите этот код:\n\n${fullCode}\n\nЭто подтвердит подлинность вашего обращения.`);
+        }, 1000);
       }
 
       function renewAccess() {
