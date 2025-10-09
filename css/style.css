@@ -2837,3 +2837,23 @@ header nav a:hover {
         max-width: 160px; /* ограничение, чтобы не растягивались слишком */
     }
 }
+
+.premium-btn {
+  display: inline-block;
+  padding: 8px 16px;
+  background: linear-gradient(135deg, #d4af37, #b8860b);
+  color: white !important;
+  text-decoration: none;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 15px;
+  box-shadow: 0 2px 8px rgba(212, 175, 55, 0.3);
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  margin: 0 10px;
+}
+
+.premium-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(212, 175, 55, 0.4);
+}
