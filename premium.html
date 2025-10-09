@@ -73,14 +73,62 @@
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
       }
       .btn-support {
-        background: linear-gradient(135deg, #d4af37, #b8860b);
+        background: linear-gradient(135deg, #d4af37, #b8860b, #ffd700, #d4af37);
+        background-size: 300% 300%;
         color: white;
         font-size: 18px;
+        animation: goldShine 3s ease-in-out infinite;
+        position: relative;
+        overflow: hidden;
+      }
+      .btn-support::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+        transition: 0.5s;
+      }
+      .btn-support:hover::before {
+        left: 100%;
+      }
+      .btn-tariff {
+        background: #f8f9fa;
+        color: #333;
+        border: 1px solid #e9ecef;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: calc(50% - 10px);
+        margin: 5px;
+        padding: 15px 10px;
+        font-size: 14px;
+        line-height: 1.3;
+        text-align: center;
+        text-decoration: none;
+      }
+      .btn-tariff:hover {
+        background: #e9ecef;
+        border-color: #d4af37;
+        text-decoration: none;
+        color: #333;
       }
       .btn-offer {
-        background: #f9f7f0;
-        color: #333;
-        border: 1px solid #e8e4d9;
+        background: linear-gradient(135deg, #ff6b6b, #ff8e8e, #ff6b6b);
+        background-size: 200% 200%;
+        color: white;
+        border: none;
+        animation: pinkShine 2s ease-in-out infinite;
+      }
+      .btn-stats {
+        background: linear-gradient(135deg, #2196F3, #21CBF3, #2196F3);
+        background-size: 200% 200%;
+        color: white;
+        border: none;
+        animation: blueShine 2s ease-in-out infinite;
       }
       .btn-renew {
         background: #43a047;
@@ -135,6 +183,138 @@
         border-radius: 8px;
         display: none;
       }
+      .tariff-buttons {
+        display: flex;
+        justify-content: space-between;
+        margin: 20px 0;
+        gap: 10px;
+      }
+      .tariff-icon {
+        width: 32px;
+        height: 32px;
+        margin-bottom: 8px;
+        object-fit: contain;
+      }
+
+      /* Стили для модальных окон */
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.5);
+        animation: fadeIn 0.3s;
+      }
+      .modal-content {
+        background: white;
+        margin: 10% auto;
+        padding: 30px;
+        border-radius: 20px;
+        width: 90%;
+        max-width: 500px;
+        text-align: center;
+        box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        animation: slideIn 0.3s ease-out;
+        position: relative;
+      }
+      .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+        color: #888;
+      }
+      .close:hover {
+        color: #555;
+      }
+
+      /* Стили для статистики */
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+        margin: 20px 0;
+      }
+      .stat-item {
+        background: #f8f9fa;
+        padding: 15px;
+        border-radius: 10px;
+        text-align: center;
+        border-left: 4px solid #2196F3;
+      }
+      .stat-number {
+        font-size: 24px;
+        font-weight: 800;
+        color: #2196F3;
+        margin-bottom: 5px;
+      }
+      .stat-label {
+        font-size: 12px;
+        color: #666;
+      }
+      .client-id {
+        background: #e3f2fd;
+        padding: 10px;
+        border-radius: 8px;
+        margin: 15px 0;
+        font-family: monospace;
+        font-size: 14px;
+        color: #1976d2;
+      }
+
+      /* Стили для окна скидки */
+      .discount-title {
+        font-size: 24px;
+        font-weight: 800;
+        color: #d4af37;
+        margin-bottom: 15px;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+      }
+      .discount-amount {
+        font-size: 42px;
+        font-weight: 900;
+        color: #ff6b6b;
+        margin: 20px 0;
+        text-shadow: 2px 2px 8px rgba(255, 107, 107, 0.3);
+      }
+      .discount-text {
+        font-size: 18px;
+        color: #5d4037;
+        margin-bottom: 10px;
+        font-weight: 600;
+      }
+      .discount-note {
+        font-size: 14px;
+        color: #8d6e63;
+        margin-top: 20px;
+        font-style: italic;
+      }
+
+      @keyframes goldShine {
+        0%, 100% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+      }
+      @keyframes pinkShine {
+        0%, 100% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+      }
+      @keyframes blueShine {
+        0%, 100% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+      }
+      @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
+      @keyframes slideIn {
+        from { transform: translateY(-50px); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
+      }
     </style>
   </head>
   <body>
@@ -144,9 +324,7 @@
         <h1>⭐ Премиум-доступ</h1>
         <p style="text-align: center; margin-bottom: 20px; color: #555">
           Введите своё имя (только буквы).<br />
-          <small
-            >Максимум 30 символов. Имя будет отображаться в обращениях.</small
-          >
+          <small>Максимум 30 символов. Имя будет отображаться в обращениях.</small>
         </p>
         <div class="login-form">
           <input
@@ -159,10 +337,10 @@
           <button onclick="enterPremium()">Продолжить</button>
         </div>
         <p class="note">
-          Мы не собираем email, телефон или другие данные. Только имя для
-          обращений.
+          Мы не собираем email, телефон или другие данные. Только имя для обращений.
         </p>
       </div>
+
       <!-- Личный кабинет -->
       <div id="premiumScreen" class="hidden">
         <h1>⭐ Премиум-клиент</h1>
@@ -178,8 +356,26 @@
         <button class="btn btn-support" onclick="contactSupport()">
           ⭐ Премиум-поддержка
         </button>
-        <button class="btn btn-offer">🎁 Эксклюзивные скидки</button>
-        <button class="btn btn-offer">📦 Специальные SIM-пакеты</button>
+
+        <div class="tariff-buttons">
+          <a href="tariffs.html" class="btn btn-tariff">
+            <img src="img/золотая сим.png" alt="SIM" class="tariff-icon">
+            Для<br>МТС-Крым 978
+          </a>
+          <a href="https://megasimka.ru/product-category/sim-cards/sim-internet/?ref=838" class="btn btn-tariff" target="_blank">
+            <img src="img/золотая сим.png" alt="SIM" class="tariff-icon">
+            Для другого региона
+          </a>
+        </div>
+
+        <button class="btn btn-stats" onclick="showStats()">
+          📊 Моя статистика
+        </button>
+
+        <button class="btn btn-offer" onclick="showDiscountModal()">
+          🎁 Персональные скидки
+        </button>
+
         <button class="btn btn-renew" onclick="renewAccess()">
           🔁 Продлить доступ (100 ₽)
         </button>
@@ -190,11 +386,139 @@
       </div>
     </div>
 
+    <!-- Модальное окно статистики -->
+    <div id="statsModal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeStatsModal()">&times;</span>
+        <h3 style="color: #2196F3; margin-bottom: 15px;">📊 Ваша статистика</h3>
+        
+        <div class="client-id">
+          🆔 Ваш ID: <span id="clientIdDisplay"></span>
+        </div>
+        
+        <div class="stats-grid">
+          <div class="stat-item">
+            <div class="stat-number" id="statTotalRequests">0</div>
+            <div class="stat-label">Всего обращений</div>
+          </div>
+          
+          <div class="stat-item">
+            <div class="stat-number" id="statRemaining">10</div>
+            <div class="stat-label">Осталось обращений</div>
+          </div>
+          
+          <div class="stat-item">
+            <div class="stat-number" id="statThisMonth">0</div>
+            <div class="stat-label">В этом месяце</div>
+          </div>
+          
+          <div class="stat-item">
+            <div class="stat-number" id="statAvgWeek">0</div>
+            <div class="stat-label">В неделю</div>
+          </div>
+        </div>
+        
+        <div style="margin-top: 20px; padding: 15px; background: #f8f9fa; border-radius: 10px;">
+          <div style="font-size: 14px; color: #666; margin-bottom: 10px;">
+            📅 Дата регистрации: <span id="regDate"></span>
+          </div>
+          <div style="font-size: 14px; color: #666;">
+            ⏰ Последняя активность: <span id="lastActivity"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Модальное окно скидки -->
+    <div id="discountModal" class="modal">
+      <div class="modal-content" style="background: linear-gradient(135deg, #ffd700, #ffed4e, #ffd700);">
+        <span class="close" onclick="closeDiscountModal()">&times;</span>
+        <div class="discount-title">ПЕРСОНАЛЬНАЯ СКИДКА</div>
+        <div class="discount-amount">1000₽</div>
+        <div class="discount-text">на любой красивый номер от 5000₽</div>
+        <div class="discount-note">*Активируется при обращении в поддержку</div>
+      </div>
+    </div>
+
     <script>
+      // === СИСТЕМА КОДОВ ===
+      const CODE_RULES = {
+        getVerificationCode: function (usedCount) {
+          const now = new Date();
+          const months = ["j","f","m","a","m","j","j","a","s","o","n","d"];
+          const day = now.getDate();
+          const month = months[now.getMonth()];
+          const randomLetters = Math.random().toString(36).substr(2, 2).toUpperCase();
+          return day + month + randomLetters + usedCount;
+        },
+
+        getFormattedDate: function () {
+          const now = new Date();
+          return now.toLocaleDateString("ru-RU");
+        },
+      };
+
+      // Функции для модальных окон
+      function showStats() {
+        const data = getPremiumData();
+        if (!data) return;
+        
+        if (!data.stats) {
+          data.stats = {
+            totalRequests: 0,
+            requestsByDate: {},
+            registrationDate: new Date().toISOString(),
+            lastActivity: new Date().toISOString()
+          };
+        }
+        
+        document.getElementById('clientIdDisplay').textContent = data.clientId;
+        document.getElementById('statTotalRequests').textContent = data.stats.totalRequests;
+        document.getElementById('statRemaining').textContent = data.remaining;
+        document.getElementById('regDate').textContent = new Date(data.stats.registrationDate).toLocaleDateString('ru-RU');
+        document.getElementById('lastActivity').textContent = new Date(data.stats.lastActivity).toLocaleDateString('ru-RU');
+        
+        const thisMonth = new Date().getMonth();
+        const thisYear = new Date().getFullYear();
+        const monthRequests = Object.keys(data.stats.requestsByDate).filter(date => {
+          const requestDate = new Date(date);
+          return requestDate.getMonth() === thisMonth && requestDate.getFullYear() === thisYear;
+        }).length;
+        
+        document.getElementById('statThisMonth').textContent = monthRequests;
+        
+        const weeksSinceRegistration = Math.max(1, Math.ceil((Date.now() - new Date(data.stats.registrationDate).getTime()) / (7 * 24 * 60 * 60 * 1000)));
+        const avgPerWeek = (data.stats.totalRequests / weeksSinceRegistration).toFixed(1);
+        document.getElementById('statAvgWeek').textContent = avgPerWeek;
+        
+        document.getElementById('statsModal').style.display = 'block';
+      }
+      
+      function closeStatsModal() {
+        document.getElementById('statsModal').style.display = 'none';
+      }
+      
+      function showDiscountModal() {
+        document.getElementById('discountModal').style.display = 'block';
+      }
+
+      function closeDiscountModal() {
+        document.getElementById('discountModal').style.display = 'none';
+      }
+
+      window.onclick = function(event) {
+        const statsModal = document.getElementById('statsModal');
+        const discountModal = document.getElementById('discountModal');
+        if (event.target == statsModal) closeStatsModal();
+        if (event.target == discountModal) closeDiscountModal();
+      }
+
       document.addEventListener("DOMContentLoaded", () => {
         const data = getPremiumData();
-        if (data && data.remaining >= 0) {
+        if (data && data.remaining >= 0 && !data.blocked) {
           showPremiumScreen(data);
+        } else if (data && data.blocked) {
+          showBlockedScreen();
         } else {
           showLoginScreen();
         }
@@ -205,7 +529,6 @@
         if (!raw) return null;
         try {
           const data = JSON.parse(raw);
-          // Защита от "воскрешения" после обнуления
           if (data.remaining < 0) return null;
           return data;
         } catch (e) {
@@ -215,6 +538,7 @@
 
       function savePremiumData(data) {
         localStorage.setItem("premiumData", JSON.stringify(data));
+        updateAdminStats(data);
       }
 
       function showError(message) {
@@ -226,19 +550,44 @@
         }, 5000);
       }
 
+      function showBlockedScreen() {
+        document.getElementById('loginScreen').innerHTML = `
+          <h1>🚫 Доступ заблокирован</h1>
+          <p style="text-align: center; margin-bottom: 20px; color: #555">
+            Ваш кабинет временно заблокирован.<br>
+            Для разблокировки обратитесь в поддержку.
+          </p>
+          <button class="btn btn-support" onclick="contactSupportBlocked()">
+            📞 Написать в поддержку
+          </button>
+        `;
+        document.getElementById('loginScreen').classList.remove('hidden');
+        document.getElementById('premiumScreen').classList.add('hidden');
+      }
+
+      function contactSupportBlocked() {
+        const message = "🚫 Запрос на разблокировку кабинета. Мой кабинет заблокирован, помогите восстановить доступ.";
+        const encoded = encodeURIComponent(message);
+        const telegramUrl = `https://t.me/vipsimsupport?text=${encoded}`;
+        window.open(telegramUrl, "_blank", "noopener,noreferrer");
+      }
+
       function enterPremium() {
-        const nickname =
-          document.getElementById("nicknameInput").value.trim() || "друг";
-        const clientId =
-          "client_" +
-          Date.now().toString(36) +
-          Math.random().toString(36).substr(2, 5);
+        const nickname = document.getElementById("nicknameInput").value.trim() || "друг";
+        const clientId = "VIP" + Date.now().toString(36).toUpperCase() + Math.random().toString(36).substr(2, 3).toUpperCase();
+        
         const data = {
           clientId: clientId,
           nickname: nickname,
           remaining: 10,
           createdAt: Date.now(),
-          lastRequestTime: 0
+          blocked: false,
+          stats: {
+            totalRequests: 0,
+            requestsByDate: {},
+            registrationDate: new Date().toISOString(),
+            lastActivity: new Date().toISOString()
+          }
         };
         savePremiumData(data);
         showPremiumScreen(data);
@@ -256,50 +605,50 @@
         document.getElementById("premiumScreen").classList.remove("hidden");
       }
 
+      // ИСПРАВЛЕННАЯ ФУНКЦИЯ ПОДДЕРЖКИ
       function contactSupport() {
         const data = getPremiumData();
-        if (!data || data.remaining <= 0) {
+        if (!data) {
+          showError('Ошибка доступа. Пожалуйста, войдите снова.');
+          return;
+        }
+
+        if (data.blocked) {
+          showError('Доступ заблокирован. Обратитесь в поддержку.');
+          return;
+        }
+
+        if (data.remaining <= 0) {
           showError("Обращения закончились. Пожалуйста, продлите доступ.");
           return;
         }
 
-        // Проверка частоты обращений (2 минуты)
-        const now = Date.now();
-        const lastRequestTime = data.lastRequestTime || 0;
-        if (now - lastRequestTime < 2 * 60 * 1000) {
-          const secondsLeft = Math.ceil((2 * 60 * 1000 - (now - lastRequestTime)) / 1000);
-          showError(`Слишком частые обращения. Подождите ${secondsLeft} секунд.`);
-          return;
-        }
+        // Обновляем статистику
+        const today = new Date().toDateString();
+        data.stats.totalRequests++;
+        data.stats.requestsByDate[today] = (data.stats.requestsByDate[today] || 0) + 1;
+        data.stats.lastActivity = new Date().toISOString();
 
         const used = 11 - data.remaining;
-        const requestId = 'req_' + now.toString(36).substr(4, 8);
-        
-        // Генерируем проверочный код
-        const verificationCode = Math.random().toString(36).substr(2, 6).toUpperCase();
-        const timestamp = Math.floor(now / 1000).toString(36).substr(4, 4);
-        const fullCode = `${verificationCode}-${timestamp}`;
+        const requestId = "req_" + Date.now().toString(36).substr(4, 8);
 
-        // Твой точный автотекст с добавлением кода подтверждения
-        const message = `🔐 [VIP-${requestId}] ⭐ Обращение в поддержку премиум-клиентов (${used}/10).Мы ответим в ближайшее время. Задайте свой вопрос:\n\n🔒 КОД ПОДТВЕРЖДЕНИЯ: ${fullCode}`;
-        
-        const encoded = encodeURIComponent(message);
+        // Генерируем код по системе
+        const verificationCode = CODE_RULES.getVerificationCode(used);
+        const formattedDate = CODE_RULES.getFormattedDate();
+
+        // Сообщение для Telegram
+        const telegramMessage = `⭐ Обращение в поддержку премиум-клиентов (${used}/10).Мы ответим в ближайшее время. Задайте свой вопрос после даты и кода \n\n📅 Дата: ${formattedDate}\n🆔 Код: ${verificationCode}\n👤 Клиент ID: ${data.clientId}`;
+
+        const encoded = encodeURIComponent(telegramMessage);
         const telegramUrl = `https://t.me/vipsimsupport?text=${encoded}`;
 
         // Обновляем данные
         data.remaining -= 1;
-        data.lastRequestTime = now;
-        data.lastVerificationCode = fullCode;
         savePremiumData(data);
         document.getElementById("counter").textContent = data.remaining;
 
         // Открываем чат
         window.open(telegramUrl, "_blank", "noopener,noreferrer");
-        
-        // Показываем клиенту код для подтверждения
-        setTimeout(() => {
-          alert(`🔐 ОБРАЩЕНИЕ СОЗДАНО!\n\nПри ответе назовите этот код:\n\n${fullCode}\n\nЭто подтвердит подлинность вашего обращения.`);
-        }, 1000);
       }
 
       function renewAccess() {
@@ -315,14 +664,39 @@
       }
 
       function logout() {
-        if (
-          confirm(
-            "Вы уверены, что хотите выйти? Все данные будут удалены из этого браузера."
-          )
-        ) {
+        if (confirm("Вы уверены, что хотите выйти? Все данные будут удалены из этого браузера.")) {
           localStorage.removeItem("premiumData");
           showLoginScreen();
         }
+      }
+
+      function updateAdminStats(clientData) {
+        const adminData = JSON.parse(localStorage.getItem('vipsim_admin') || '{"clients": []}');
+        
+        const existingClientIndex = adminData.clients.findIndex(c => c.clientId === clientData.clientId);
+        if (existingClientIndex !== -1) {
+          adminData.clients[existingClientIndex] = {
+            clientId: clientData.clientId,
+            nickname: clientData.nickname,
+            registrationDate: clientData.createdAt,
+            totalRequests: clientData.stats.totalRequests,
+            lastActivity: clientData.stats.lastActivity,
+            remaining: clientData.remaining,
+            blocked: clientData.blocked || false
+          };
+        } else {
+          adminData.clients.push({
+            clientId: clientData.clientId,
+            nickname: clientData.nickname,
+            registrationDate: clientData.createdAt,
+            totalRequests: clientData.stats.totalRequests,
+            lastActivity: clientData.stats.lastActivity,
+            remaining: clientData.remaining,
+            blocked: clientData.blocked || false
+          });
+        }
+        
+        localStorage.setItem('vipsim_admin', JSON.stringify(adminData));
       }
     </script>
   </body>
