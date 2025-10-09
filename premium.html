@@ -126,6 +126,15 @@
         color: #888;
         margin-top: 20px;
       }
+      .error {
+        color: #d32f2f;
+        text-align: center;
+        margin: 10px 0;
+        padding: 10px;
+        background: #ffebee;
+        border-radius: 8px;
+        display: none;
+      }
     </style>
   </head>
   <body>
@@ -163,6 +172,8 @@
           Осталось обращений:
           <span class="counter-value" id="counter">10</span>/10
         </div>
+
+        <div id="errorMessage" class="error"></div>
 
         <button class="btn btn-support" onclick="contactSupport()">
           ⭐ Премиум-поддержка
@@ -206,15 +217,24 @@
         localStorage.setItem("premiumData", JSON.stringify(data));
       }
 
+      function showError(message) {
+        const errorEl = document.getElementById('errorMessage');
+        errorEl.textContent = message;
+        errorEl.style.display = 'block';
+        setTimeout(() => {
+          errorEl.style.display = 'none';
+        }, 5000);
+      }
+
       function enterPremium() {
         const nickname =
           document.getElementById("nicknameInput").value.trim() || "друг";
-        const token =
-          "premium_" +
+        const clientId =
+          "client_" +
           Date.now().toString(36) +
           Math.random().toString(36).substr(2, 5);
         const data = {
-          token: token,
+          clientId: clientId,
           nickname: nickname,
           remaining: 10,
           createdAt: Date.now(),
@@ -238,13 +258,18 @@
       function contactSupport() {
         const data = getPremiumData();
         if (!data || data.remaining <= 0) {
-          alert("Обращения закончились. Пожалуйста, продлите доступ.");
+          showError("Обращения закончились. Пожалуйста, продлите доступ.");
           return;
         }
 
         const used = 11 - data.remaining;
-        // Твой точный автотекст
-        const message = `⭐ Обращение в поддержку премиум-клиентов (${used}/10).Мы ответим в ближайшее время. Задайте свой вопрос:`;
+        
+        // Генерируем уникальный ID для защиты
+        const requestId = 'req_' + Date.now().toString(36).substr(4, 8);
+        
+        // Твой автотекст + защитный код
+        const message = `🔐 [VIP-${requestId}] ⭐ Обращение в поддержку премиум-клиентов (${used}/10).Мы ответим в ближайшее время. Задайте свой вопрос:`;
+        
         const encoded = encodeURIComponent(message);
         const telegramUrl = `https://t.me/vipsimsupport?text=${encoded}`;
 
