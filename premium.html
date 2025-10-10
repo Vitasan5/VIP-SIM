@@ -82,18 +82,13 @@
         overflow: hidden;
       }
       .btn-support::before {
-        content: "";
+        content: '';
         position: absolute;
         top: 0;
         left: -100%;
         width: 100%;
         height: 100%;
-        background: linear-gradient(
-          90deg,
-          transparent,
-          rgba(255, 255, 255, 0.4),
-          transparent
-        );
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
         transition: 0.5s;
       }
       .btn-support:hover::before {
@@ -129,7 +124,7 @@
         animation: pinkShine 2s ease-in-out infinite;
       }
       .btn-stats {
-        background: linear-gradient(135deg, #2196f3, #21cbf3, #2196f3);
+        background: linear-gradient(135deg, #2196F3, #21CBF3, #2196F3);
         background-size: 200% 200%;
         color: white;
         border: none;
@@ -210,7 +205,7 @@
         top: 0;
         width: 100%;
         height: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
+        background-color: rgba(0,0,0,0.5);
         animation: fadeIn 0.3s;
       }
       .modal-content {
@@ -221,7 +216,7 @@
         width: 90%;
         max-width: 500px;
         text-align: center;
-        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 10px 40px rgba(0,0,0,0.2);
         animation: slideIn 0.3s ease-out;
         position: relative;
       }
@@ -250,12 +245,12 @@
         padding: 15px;
         border-radius: 10px;
         text-align: center;
-        border-left: 4px solid #2196f3;
+        border-left: 4px solid #2196F3;
       }
       .stat-number {
         font-size: 24px;
         font-weight: 800;
-        color: #2196f3;
+        color: #2196F3;
         margin-bottom: 5px;
       }
       .stat-label {
@@ -278,7 +273,7 @@
         font-weight: 800;
         color: #d4af37;
         margin-bottom: 15px;
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
       }
       .discount-amount {
         font-size: 42px;
@@ -301,49 +296,24 @@
       }
 
       @keyframes goldShine {
-        0%,
-        100% {
-          background-position: 0% 50%;
-        }
-        50% {
-          background-position: 100% 50%;
-        }
+        0%, 100% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
       }
       @keyframes pinkShine {
-        0%,
-        100% {
-          background-position: 0% 50%;
-        }
-        50% {
-          background-position: 100% 50%;
-        }
+        0%, 100% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
       }
       @keyframes blueShine {
-        0%,
-        100% {
-          background-position: 0% 50%;
-        }
-        50% {
-          background-position: 100% 50%;
-        }
+        0%, 100% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
       }
       @keyframes fadeIn {
-        from {
-          opacity: 0;
-        }
-        to {
-          opacity: 1;
-        }
+        from { opacity: 0; }
+        to { opacity: 1; }
       }
       @keyframes slideIn {
-        from {
-          transform: translateY(-50px);
-          opacity: 0;
-        }
-        to {
-          transform: translateY(0);
-          opacity: 1;
-        }
+        from { transform: translateY(-50px); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
       }
     </style>
   </head>
@@ -354,9 +324,7 @@
         <h1>⭐ Премиум-доступ</h1>
         <p style="text-align: center; margin-bottom: 20px; color: #555">
           Введите своё имя (только буквы).<br />
-          <small
-            >Максимум 30 символов. Имя будет отображаться в обращениях.</small
-          >
+          <small>Максимум 30 символов. Имя будет отображаться в обращениях.</small>
         </p>
         <div class="login-form">
           <input
@@ -369,8 +337,7 @@
           <button onclick="enterPremium()">Продолжить</button>
         </div>
         <p class="note">
-          Мы не собираем email, телефон или другие данные. Только имя для
-          обращений.
+          Мы не собираем email, телефон или другие данные. Только имя для обращений.
         </p>
       </div>
 
@@ -392,23 +359,11 @@
 
         <div class="tariff-buttons">
           <a href="tariffs.html" class="btn btn-tariff">
-            <img
-              src="https://www.vip-sim.ru/img/золотая%20сим.png"
-              alt="SIM"
-              class="tariff-icon"
-            />
-            Для<br />МТС-Крым 978
+            <img src="img/goldsim.png" alt="SIM" class="tariff-icon">
+            Для<br>МТС-Крым 978
           </a>
-          <a
-            href="https://megasimka.ru/product-category/sim-cards/sim-internet/?ref=838"
-            class="btn btn-tariff"
-            target="_blank"
-          >
-            <img
-              src="https://www.vip-sim.ru/img/золотая%20сим.png"
-              alt="SIM"
-              class="tariff-icon"
-            />
+          <a href="https://megasimka.ru/product-category/sim-cards/sim-internet/?ref=838" class="btn btn-tariff" target="_blank">
+            <img src="img/goldsim.png" alt="SIM" class="tariff-icon">
             Для другого региона
           </a>
         </div>
@@ -435,46 +390,39 @@
     <div id="statsModal" class="modal">
       <div class="modal-content">
         <span class="close" onclick="closeStatsModal()">&times;</span>
-        <h3 style="color: #2196f3; margin-bottom: 15px">📊 Ваша статистика</h3>
-
+        <h3 style="color: #2196F3; margin-bottom: 15px;">📊 Ваша статистика</h3>
+        
         <div class="client-id">
           🆔 Ваш ID: <span id="clientIdDisplay"></span>
         </div>
-
+        
         <div class="stats-grid">
           <div class="stat-item">
             <div class="stat-number" id="statTotalRequests">0</div>
             <div class="stat-label">Всего обращений</div>
           </div>
-
+          
           <div class="stat-item">
             <div class="stat-number" id="statRemaining">10</div>
             <div class="stat-label">Осталось обращений</div>
           </div>
-
+          
           <div class="stat-item">
             <div class="stat-number" id="statThisMonth">0</div>
             <div class="stat-label">В этом месяце</div>
           </div>
-
+          
           <div class="stat-item">
             <div class="stat-number" id="statAvgWeek">0</div>
             <div class="stat-label">В неделю</div>
           </div>
         </div>
-
-        <div
-          style="
-            margin-top: 20px;
-            padding: 15px;
-            background: #f8f9fa;
-            border-radius: 10px;
-          "
-        >
-          <div style="font-size: 14px; color: #666; margin-bottom: 10px">
+        
+        <div style="margin-top: 20px; padding: 15px; background: #f8f9fa; border-radius: 10px;">
+          <div style="font-size: 14px; color: #666; margin-bottom: 10px;">
             📅 Дата регистрации: <span id="regDate"></span>
           </div>
-          <div style="font-size: 14px; color: #666">
+          <div style="font-size: 14px; color: #666;">
             ⏰ Последняя активность: <span id="lastActivity"></span>
           </div>
         </div>
@@ -483,10 +431,7 @@
 
     <!-- Модальное окно скидки -->
     <div id="discountModal" class="modal">
-      <div
-        class="modal-content"
-        style="background: linear-gradient(135deg, #ffd700, #ffed4e, #ffd700)"
-      >
+      <div class="modal-content" style="background: linear-gradient(135deg, #ffd700, #ffed4e, #ffd700);">
         <span class="close" onclick="closeDiscountModal()">&times;</span>
         <div class="discount-title">ПЕРСОНАЛЬНАЯ СКИДКА</div>
         <div class="discount-amount">1000₽</div>
@@ -500,26 +445,10 @@
       const CODE_RULES = {
         getVerificationCode: function (usedCount) {
           const now = new Date();
-          const months = [
-            "j",
-            "f",
-            "m",
-            "a",
-            "m",
-            "j",
-            "j",
-            "a",
-            "s",
-            "o",
-            "n",
-            "d",
-          ];
+          const months = ["j","f","m","a","m","j","j","a","s","o","n","d"];
           const day = now.getDate();
           const month = months[now.getMonth()];
-          const randomLetters = Math.random()
-            .toString(36)
-            .substr(2, 2)
-            .toUpperCase();
+          const randomLetters = Math.random().toString(36).substr(2, 2).toUpperCase();
           return day + month + randomLetters + usedCount;
         },
 
@@ -533,74 +462,56 @@
       function showStats() {
         const data = getPremiumData();
         if (!data) return;
-
+        
         if (!data.stats) {
           data.stats = {
             totalRequests: 0,
             requestsByDate: {},
             registrationDate: new Date().toISOString(),
-            lastActivity: new Date().toISOString(),
+            lastActivity: new Date().toISOString()
           };
         }
-
-        document.getElementById("clientIdDisplay").textContent = data.clientId;
-        document.getElementById("statTotalRequests").textContent =
-          data.stats.totalRequests;
-        document.getElementById("statRemaining").textContent = data.remaining;
-        document.getElementById("regDate").textContent = new Date(
-          data.stats.registrationDate
-        ).toLocaleDateString("ru-RU");
-        document.getElementById("lastActivity").textContent = new Date(
-          data.stats.lastActivity
-        ).toLocaleDateString("ru-RU");
-
+        
+        document.getElementById('clientIdDisplay').textContent = data.clientId;
+        document.getElementById('statTotalRequests').textContent = data.stats.totalRequests;
+        document.getElementById('statRemaining').textContent = data.remaining;
+        document.getElementById('regDate').textContent = new Date(data.stats.registrationDate).toLocaleDateString('ru-RU');
+        document.getElementById('lastActivity').textContent = new Date(data.stats.lastActivity).toLocaleDateString('ru-RU');
+        
         const thisMonth = new Date().getMonth();
         const thisYear = new Date().getFullYear();
-        const monthRequests = Object.keys(data.stats.requestsByDate).filter(
-          (date) => {
-            const requestDate = new Date(date);
-            return (
-              requestDate.getMonth() === thisMonth &&
-              requestDate.getFullYear() === thisYear
-            );
-          }
-        ).length;
-
-        document.getElementById("statThisMonth").textContent = monthRequests;
-
-        const weeksSinceRegistration = Math.max(
-          1,
-          Math.ceil(
-            (Date.now() - new Date(data.stats.registrationDate).getTime()) /
-              (7 * 24 * 60 * 60 * 1000)
-          )
-        );
-        const avgPerWeek = (
-          data.stats.totalRequests / weeksSinceRegistration
-        ).toFixed(1);
-        document.getElementById("statAvgWeek").textContent = avgPerWeek;
-
-        document.getElementById("statsModal").style.display = "block";
+        const monthRequests = Object.keys(data.stats.requestsByDate).filter(date => {
+          const requestDate = new Date(date);
+          return requestDate.getMonth() === thisMonth && requestDate.getFullYear() === thisYear;
+        }).length;
+        
+        document.getElementById('statThisMonth').textContent = monthRequests;
+        
+        const weeksSinceRegistration = Math.max(1, Math.ceil((Date.now() - new Date(data.stats.registrationDate).getTime()) / (7 * 24 * 60 * 60 * 1000)));
+        const avgPerWeek = (data.stats.totalRequests / weeksSinceRegistration).toFixed(1);
+        document.getElementById('statAvgWeek').textContent = avgPerWeek;
+        
+        document.getElementById('statsModal').style.display = 'block';
       }
-
+      
       function closeStatsModal() {
-        document.getElementById("statsModal").style.display = "none";
+        document.getElementById('statsModal').style.display = 'none';
       }
-
+      
       function showDiscountModal() {
-        document.getElementById("discountModal").style.display = "block";
+        document.getElementById('discountModal').style.display = 'block';
       }
 
       function closeDiscountModal() {
-        document.getElementById("discountModal").style.display = "none";
+        document.getElementById('discountModal').style.display = 'none';
       }
 
-      window.onclick = function (event) {
-        const statsModal = document.getElementById("statsModal");
-        const discountModal = document.getElementById("discountModal");
+      window.onclick = function(event) {
+        const statsModal = document.getElementById('statsModal');
+        const discountModal = document.getElementById('discountModal');
         if (event.target == statsModal) closeStatsModal();
         if (event.target == discountModal) closeDiscountModal();
-      };
+      }
 
       document.addEventListener("DOMContentLoaded", () => {
         const data = getPremiumData();
@@ -631,16 +542,16 @@
       }
 
       function showError(message) {
-        const errorEl = document.getElementById("errorMessage");
+        const errorEl = document.getElementById('errorMessage');
         errorEl.textContent = message;
-        errorEl.style.display = "block";
+        errorEl.style.display = 'block';
         setTimeout(() => {
-          errorEl.style.display = "none";
+          errorEl.style.display = 'none';
         }, 5000);
       }
 
       function showBlockedScreen() {
-        document.getElementById("loginScreen").innerHTML = `
+        document.getElementById('loginScreen').innerHTML = `
           <h1>🚫 Доступ заблокирован</h1>
           <p style="text-align: center; margin-bottom: 20px; color: #555">
             Ваш кабинет временно заблокирован.<br>
@@ -650,26 +561,21 @@
             📞 Написать в поддержку
           </button>
         `;
-        document.getElementById("loginScreen").classList.remove("hidden");
-        document.getElementById("premiumScreen").classList.add("hidden");
+        document.getElementById('loginScreen').classList.remove('hidden');
+        document.getElementById('premiumScreen').classList.add('hidden');
       }
 
       function contactSupportBlocked() {
-        const message =
-          "🚫 Запрос на разблокировку кабинета. Мой кабинет заблокирован, помогите восстановить доступ.";
+        const message = "🚫 Запрос на разблокировку кабинета. Мой кабинет заблокирован, помогите восстановить доступ.";
         const encoded = encodeURIComponent(message);
         const telegramUrl = `https://t.me/vipsimsupport?text=${encoded}`;
         window.open(telegramUrl, "_blank", "noopener,noreferrer");
       }
 
       function enterPremium() {
-        const nickname =
-          document.getElementById("nicknameInput").value.trim() || "друг";
-        const clientId =
-          "VIP" +
-          Date.now().toString(36).toUpperCase() +
-          Math.random().toString(36).substr(2, 3).toUpperCase();
-
+        const nickname = document.getElementById("nicknameInput").value.trim() || "друг";
+        const clientId = "VIP" + Date.now().toString(36).toUpperCase() + Math.random().toString(36).substr(2, 3).toUpperCase();
+        
         const data = {
           clientId: clientId,
           nickname: nickname,
@@ -680,8 +586,8 @@
             totalRequests: 0,
             requestsByDate: {},
             registrationDate: new Date().toISOString(),
-            lastActivity: new Date().toISOString(),
-          },
+            lastActivity: new Date().toISOString()
+          }
         };
         savePremiumData(data);
         showPremiumScreen(data);
@@ -703,12 +609,12 @@
       function contactSupport() {
         const data = getPremiumData();
         if (!data) {
-          showError("Ошибка доступа. Пожалуйста, войдите снова.");
+          showError('Ошибка доступа. Пожалуйста, войдите снова.');
           return;
         }
 
         if (data.blocked) {
-          showError("Доступ заблокирован. Обратитесь в поддержку.");
+          showError('Доступ заблокирован. Обратитесь в поддержку.');
           return;
         }
 
@@ -720,8 +626,7 @@
         // Обновляем статистику
         const today = new Date().toDateString();
         data.stats.totalRequests++;
-        data.stats.requestsByDate[today] =
-          (data.stats.requestsByDate[today] || 0) + 1;
+        data.stats.requestsByDate[today] = (data.stats.requestsByDate[today] || 0) + 1;
         data.stats.lastActivity = new Date().toISOString();
 
         const used = 11 - data.remaining;
@@ -759,24 +664,16 @@
       }
 
       function logout() {
-        if (
-          confirm(
-            "Вы уверены, что хотите выйти? Все данные будут удалены из этого браузера."
-          )
-        ) {
+        if (confirm("Вы уверены, что хотите выйти? Все данные будут удалены из этого браузера.")) {
           localStorage.removeItem("premiumData");
           showLoginScreen();
         }
       }
 
       function updateAdminStats(clientData) {
-        const adminData = JSON.parse(
-          localStorage.getItem("vipsim_admin") || '{"clients": []}'
-        );
-
-        const existingClientIndex = adminData.clients.findIndex(
-          (c) => c.clientId === clientData.clientId
-        );
+        const adminData = JSON.parse(localStorage.getItem('vipsim_admin') || '{"clients": []}');
+        
+        const existingClientIndex = adminData.clients.findIndex(c => c.clientId === clientData.clientId);
         if (existingClientIndex !== -1) {
           adminData.clients[existingClientIndex] = {
             clientId: clientData.clientId,
@@ -785,7 +682,7 @@
             totalRequests: clientData.stats.totalRequests,
             lastActivity: clientData.stats.lastActivity,
             remaining: clientData.remaining,
-            blocked: clientData.blocked || false,
+            blocked: clientData.blocked || false
           };
         } else {
           adminData.clients.push({
@@ -795,11 +692,11 @@
             totalRequests: clientData.stats.totalRequests,
             lastActivity: clientData.stats.lastActivity,
             remaining: clientData.remaining,
-            blocked: clientData.blocked || false,
+            blocked: clientData.blocked || false
           });
         }
-
-        localStorage.setItem("vipsim_admin", JSON.stringify(adminData));
+        
+        localStorage.setItem('vipsim_admin', JSON.stringify(adminData));
       }
     </script>
   </body>
