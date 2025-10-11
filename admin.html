@@ -66,25 +66,31 @@
             border-bottom: 2px solid #e9ecef;
             padding-bottom: 10px;
         }
-        .clients-grid {
+        .clients-grid, .payments-grid {
             display: grid;
             gap: 15px;
         }
-        .client-card {
+        .client-card, .payment-card {
             background: white;
             padding: 20px;
             border-radius: 10px;
             border-left: 4px solid #667eea;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
-        .client-info {
+        .payment-card {
+            border-left-color: #4caf50;
+        }
+        .payment-pending {
+            border-left-color: #ff9800;
+        }
+        .client-info, .payment-info {
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
             gap: 10px;
             align-items: center;
             margin-bottom: 10px;
         }
-        .client-actions {
+        .client-actions, .payment-actions {
             display: flex;
             gap: 10px;
             margin-top: 15px;
@@ -102,23 +108,30 @@
         .btn:hover {
             background: #764ba2;
         }
-        .btn-block {
-            background: #dc3545;
-        }
-        .btn-block:hover {
-            background: #c82333;
-        }
-        .btn-unblock {
+        .btn-success {
             background: #28a745;
         }
-        .btn-unblock:hover {
+        .btn-success:hover {
             background: #218838;
+        }
+        .btn-warning {
+            background: #ffc107;
+            color: #000;
+        }
+        .btn-warning:hover {
+            background: #e0a800;
+        }
+        .btn-danger {
+            background: #dc3545;
+        }
+        .btn-danger:hover {
+            background: #c82333;
         }
         .blocked-client {
             border-left-color: #dc3545;
             background: #ffe6e6;
         }
-        .client-id {
+        .client-id, .payment-id {
             font-family: monospace;
             background: #e3f2fd;
             padding: 4px 8px;
@@ -135,13 +148,70 @@
         }
         .search-box {
             margin-bottom: 20px;
+            position: relative;
         }
         .search-box input {
             width: 100%;
-            padding: 12px;
+            padding: 12px 40px 12px 12px;
             border: 2px solid #667eea;
             border-radius: 8px;
             font-size: 16px;
+        }
+        .clear-search {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            font-size: 18px;
+            cursor: pointer;
+            color: #666;
+        }
+        .clear-search:hover {
+            color: #dc3545;
+        }
+        .notification-badge {
+            background: #dc3545;
+            color: white;
+            border-radius: 50%;
+            padding: 2px 6px;
+            font-size: 12px;
+            margin-left: 5px;
+        }
+        .tab-buttons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .tab-btn {
+            padding: 10px 20px;
+            background: #e9ecef;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        .tab-btn.active {
+            background: #667eea;
+            color: white;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .inactive-client {
+            border-left-color: #ff9800;
+            background: #fff3cd;
+        }
+        .search-info {
+            margin: 10px 0;
+            padding: 10px;
+            background: #e3f2fd;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #1976d2;
         }
     </style>
 </head>
@@ -150,234 +220,446 @@
         <a href="index.html" class="btn back-btn">← Назад в кабинет</a>
         <h1>🔧 Админ-панель VIP-SIM</h1>
         
-        <div class="stats-overview">
-            <div class="stat-card">
-                <div class="stat-number" id="totalClients">0</div>
-                <div class="stat-label">Всего клиентов</div>
+        <div class="tab-buttons">
+            <button class="tab-btn active" onclick="showTab('overview')">📊 Обзор</button>
+            <button class="tab-btn" onclick="showTab('clients')">👥 Клиенты</button>
+            <button class="tab-btn" onclick="showTab('payments')">💰 Платежи</button>
+        </div>
+
+        <!-- Вкладка Обзор -->
+        <div id="overview" class="tab-content active">
+            <div class="stats-overview">
+                <div class="stat-card">
+                    <div class="stat-number" id="totalClients">0</div>
+                    <div class="stat-label">Всего клиентов</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="activeClients">0</div>
+                    <div class="stat-label">Активных клиентов</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="totalRevenue">0 ₽</div>
+                    <div class="stat-label">Общий доход</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="pendingActivations">0</div>
+                    <div class="stat-label">Ожидают активации</div>
+                </div>
             </div>
-            <div class="stat-card">
-                <div class="stat-number" id="totalRequests">0</div>
-                <div class="stat-label">Всего обращений</div>
+
+            <div class="section">
+                <h2>👥 Последние клиенты</h2>
+                <div id="recentClients"></div>
             </div>
-            <div class="stat-card">
-                <div class="stat-number" id="activeToday">0</div>
-                <div class="stat-label">Активных сегодня</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number" id="totalRevenue">0 ₽</div>
-                <div class="stat-label">Общий доход</div>
+
+            <div class="section">
+                <h2>💰 Последние платежи</h2>
+                <div id="recentPayments"></div>
             </div>
         </div>
 
-        <div class="section">
-            <h2>📈 Активность клиентов</h2>
-            <div class="chart-container" id="activityChart"></div>
-        </div>
-
-        <div class="section">
-            <h2>👥 Все клиенты</h2>
-            <div class="search-box">
-                <input type="text" id="searchClient" placeholder="🔍 Поиск по ID или имени клиента..." onkeyup="searchClients()">
+        <!-- Вкладка Клиенты -->
+        <div id="clients" class="tab-content">
+            <div class="section">
+                <h2>👥 Все клиенты</h2>
+                <div class="search-box">
+                    <input type="text" id="searchClient" placeholder="🔍 Поиск по ID или имени клиента..." onkeyup="searchClients()">
+                    <button class="clear-search" id="clearSearchClient" onclick="clearClientSearch()" style="display: none;">✕</button>
+                </div>
+                <div id="searchInfo" class="search-info" style="display: none;"></div>
+                <div class="clients-grid" id="clientsList"></div>
             </div>
-            <div class="clients-grid" id="clientsList"></div>
         </div>
 
-        <div class="section">
-            <h2>🛠️ Управление</h2>
-            <button class="btn" onclick="exportData()">📤 Экспорт данных</button>
-            <button class="btn" onclick="clearAllData()" style="background: #dc3545;">🗑️ Очистить все данные</button>
-            <button class="btn" onclick="refreshData()">🔄 Обновить</button>
+        <!-- Вкладка Платежи -->
+        <div id="payments" class="tab-content">
+            <div class="section">
+                <h2>💰 Все платежи</h2>
+                <div class="search-box">
+                    <input type="text" id="searchPayment" placeholder="🔍 Поиск по ID клиента..." onkeyup="searchPayments()">
+                    <button class="clear-search" id="clearSearchPayment" onclick="clearPaymentSearch()" style="display: none;">✕</button>
+                </div>
+                <div class="payments-grid" id="paymentsList"></div>
+            </div>
         </div>
     </div>
 
     <script>
-        function loadAdminData() {
-            const adminData = JSON.parse(localStorage.getItem('vipsim_admin') || '{"clients": [], "requests": []}');
-            const today = new Date().toDateString();
-            
-            document.getElementById('totalClients').textContent = adminData.clients.length;
-            document.getElementById('totalRequests').textContent = adminData.requests.length;
-            document.getElementById('activeToday').textContent = adminData.requests.filter(req => 
-                new Date(req.timestamp).toDateString() === today
-            ).length;
-            document.getElementById('totalRevenue').textContent = (adminData.clients.reduce((sum, client) => 
-                sum + (10 - client.remaining), 0
-            ) * 100) + ' ₽';
-
-            renderAdminChart(adminData.requests);
-            displayClients(adminData.clients);
-        }
-
-        function displayClients(clients) {
-            const clientsList = document.getElementById('clientsList');
-            clientsList.innerHTML = '';
-            
-            clients.forEach(client => {
-                const clientCard = document.createElement('div');
-                clientCard.className = `client-card ${client.blocked ? 'blocked-client' : ''}`;
-                clientCard.innerHTML = `
-                    <div class="client-info">
-                        <div><strong>${client.nickname}</strong></div>
-                        <div class="client-id">${client.clientId}</div>
-                        <div>${client.blocked ? '🚫 Заблокирован' : '✅ Активен'}</div>
-                    </div>
-                    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; font-size: 12px;">
-                        <div>📞 ${client.totalRequests} обращений</div>
-                        <div>💰 ${client.remaining} осталось</div>
-                        <div>📅 ${new Date(client.registrationDate).toLocaleDateString('ru-RU')}</div>
-                    </div>
-                    <div class="client-actions">
-                        ${client.blocked ? 
-                            `<button class="btn btn-unblock" onclick="unblockClient('${client.clientId}')">✅ Разблокировать</button>` :
-                            `<button class="btn btn-block" onclick="blockClient('${client.clientId}')">🚫 Заблокировать</button>`
-                        }
-                        <button class="btn" onclick="viewClientDetails('${client.clientId}')">👁️ Подробнее</button>
-                    </div>
-                `;
-                clientsList.appendChild(clientCard);
+        let currentTab = 'overview';
+        let currentSearchTerm = '';
+        
+        function showTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
             });
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+            currentTab = tabName;
+            
+            if (tabName === 'clients') loadClientsData();
+            if (tabName === 'payments') loadPaymentsData();
         }
 
-        function searchClients() {
-            const searchTerm = document.getElementById('searchClient').value.toLowerCase();
-            const adminData = JSON.parse(localStorage.getItem('vipsim_admin') || '{"clients": []}');
-            
-            if (searchTerm) {
-                const filteredClients = adminData.clients.filter(client => 
-                    client.clientId.toLowerCase().includes(searchTerm) || 
-                    client.nickname.toLowerCase().includes(searchTerm)
-                );
-                displayClients(filteredClients);
-            } else {
-                displayClients(adminData.clients);
+        // Загрузка данных админки
+        function loadAdminData() {
+            try {
+                const adminData = JSON.parse(localStorage.getItem('vipsim_admin') || '{"clients": [], "payments": []}');
+                
+                // Сортируем клиентов - новые сверху
+                adminData.clients.sort((a, b) => new Date(b.registrationDate) - new Date(a.registrationDate));
+                
+                // Основная статистика
+                document.getElementById('totalClients').textContent = adminData.clients.length;
+                document.getElementById('activeClients').textContent = adminData.clients.filter(c => c.accessActive).length;
+                document.getElementById('pendingActivations').textContent = adminData.clients.filter(c => !c.accessActive && c.paid).length;
+                
+                // Расчет дохода
+                const totalRevenue = adminData.payments
+                    .filter(p => p.status === 'paid')
+                    .reduce((sum, payment) => sum + payment.amount, 0);
+                document.getElementById('totalRevenue').textContent = totalRevenue + ' ₽';
+
+                // Загружаем данные для активной вкладки
+                if (currentTab === 'overview') {
+                    loadOverviewData(adminData);
+                } else if (currentTab === 'clients') {
+                    // Если есть активный поиск, показываем результаты поиска
+                    if (currentSearchTerm) {
+                        searchClients();
+                    } else {
+                        displayClients(adminData.clients);
+                    }
+                } else if (currentTab === 'payments') {
+                    loadPaymentsData();
+                }
+            } catch (error) {
+                console.error('Ошибка загрузки данных:', error);
             }
         }
 
+        // Загрузка данных для вкладки Обзор
+        function loadOverviewData(adminData) {
+            // Последние клиенты (уже отсортированы по дате)
+            const recentClients = adminData.clients.slice(0, 5);
+            const recentClientsHTML = recentClients.map(client => `
+                <div class="client-card ${client.accessActive ? '' : 'inactive-client'} ${client.blocked ? 'blocked-client' : ''}">
+                    <div class="client-info">
+                        <div><strong>${client.nickname}</strong></div>
+                        <div class="client-id">${client.clientId}</div>
+                        <div>
+                            ${client.blocked ? '🚫 Заблокирован' : 
+                              client.accessActive ? '✅ Активен' : '⏳ Ожидает активации'}
+                        </div>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-size: 12px;">
+                        <div>📞 ${client.totalRequests || 0} обращений</div>
+                        <div>💰 ${client.remaining || 0} осталось</div>
+                    </div>
+                    <div class="client-actions">
+                        ${!client.accessActive && client.paid ? 
+                            `<button class="btn btn-success" onclick="activateClientAccess('${client.clientId}')">✅ Активировать</button>` :
+                            ''
+                        }
+                        ${client.blocked ? 
+                            `<button class="btn btn-success" onclick="unblockClient('${client.clientId}')">✅ Разблокировать</button>` :
+                            `<button class="btn btn-danger" onclick="blockClient('${client.clientId}')">🚫 Заблокировать</button>`
+                        }
+                    </div>
+                </div>
+            `).join('');
+            
+            document.getElementById('recentClients').innerHTML = recentClientsHTML || '<p style="text-align: center; color: #666;">Нет клиентов</p>';
+            
+            // Последние платежи
+            const recentPayments = adminData.payments.slice(-5).reverse();
+            const recentPaymentsHTML = recentPayments.map(payment => `
+                <div class="payment-card ${payment.status === 'paid' ? '' : 'payment-pending'}">
+                    <div class="payment-info">
+                        <div><strong>${payment.nickname}</strong></div>
+                        <div class="payment-id">${payment.clientId}</div>
+                        <div>${payment.amount} ₽</div>
+                    </div>
+                    <div style="font-size: 12px;">
+                        Статус: ${payment.status === 'paid' ? '✅ Оплачено' : '🔄 В процессе'}
+                    </div>
+                    <div style="font-size: 11px; color: #666; margin-top: 5px;">
+                        📅 ${new Date(payment.date).toLocaleDateString('ru-RU')}
+                    </div>
+                </div>
+            `).join('');
+            
+            document.getElementById('recentPayments').innerHTML = recentPaymentsHTML || '<p style="text-align: center; color: #666;">Нет платежей</p>';
+        }
+
+        // Загрузка данных клиентов
+        function loadClientsData() {
+            const adminData = JSON.parse(localStorage.getItem('vipsim_admin') || '{"clients": []}');
+            // Сортируем клиентов - новые сверху
+            adminData.clients.sort((a, b) => new Date(b.registrationDate) - new Date(a.registrationDate));
+            displayClients(adminData.clients);
+        }
+
+        // Отображение клиентов
+        function displayClients(clients) {
+            const clientsList = document.getElementById('clientsList');
+            
+            if (clients.length === 0) {
+                clientsList.innerHTML = '<p style="text-align: center; color: #666;">Нет клиентов</p>';
+                return;
+            }
+            
+            clientsList.innerHTML = clients.map(client => `
+                <div class="client-card ${client.accessActive ? '' : 'inactive-client'} ${client.blocked ? 'blocked-client' : ''}">
+                    <div class="client-info">
+                        <div><strong>${client.nickname}</strong></div>
+                        <div class="client-id">${client.clientId}</div>
+                        <div>
+                            ${client.blocked ? '🚫 Заблокирован' : 
+                              client.accessActive ? '✅ Доступ открыт' : 
+                              client.paid ? '⏳ Ожидает активации' : '❌ Не оплачено'}
+                        </div>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; font-size: 12px;">
+                        <div>📞 ${client.totalRequests || 0} обращений</div>
+                        <div>💰 ${client.remaining || 0} осталось</div>
+                        <div>${client.paid ? '✅ Оплачено' : '❌ Не оплачено'}</div>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-size: 11px; margin-top: 10px;">
+                        <div>📅 Рег.: ${new Date(client.registrationDate).toLocaleDateString('ru-RU')}</div>
+                        <div>⏰ Актив.: ${new Date(client.lastActivity).toLocaleDateString('ru-RU')}</div>
+                    </div>
+                    <div class="client-actions">
+                        ${!client.accessActive && client.paid ? 
+                            `<button class="btn btn-success" onclick="activateClientAccess('${client.clientId}')">✅ Активировать доступ</button>` :
+                            client.accessActive ?
+                            `<button class="btn btn-warning" onclick="deactivateClientAccess('${client.clientId}')">🚫 Деактивировать</button>` :
+                            ''
+                        }
+                        ${client.blocked ? 
+                            `<button class="btn btn-success" onclick="unblockClient('${client.clientId}')">✅ Разблокировать</button>` :
+                            `<button class="btn btn-danger" onclick="blockClient('${client.clientId}')">🚫 Заблокировать</button>`
+                        }
+                        <button class="btn" onclick="resetClientRequests('${client.clientId}')">🔄 Сбросить обращения</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Поиск клиентов
+        function searchClients() {
+            const searchTerm = document.getElementById('searchClient').value.toLowerCase();
+            currentSearchTerm = searchTerm;
+            
+            if (searchTerm) {
+                document.getElementById('clearSearchClient').style.display = 'block';
+            } else {
+                document.getElementById('clearSearchClient').style.display = 'none';
+                document.getElementById('searchInfo').style.display = 'none';
+                loadClientsData();
+                return;
+            }
+            
+            const adminData = JSON.parse(localStorage.getItem('vipsim_admin') || '{"clients": []}');
+            
+            const filteredClients = adminData.clients.filter(client => 
+                client.clientId.toLowerCase().includes(searchTerm) || 
+                client.nickname.toLowerCase().includes(searchTerm)
+            );
+            
+            // Показываем информацию о поиске
+            const searchInfo = document.getElementById('searchInfo');
+            if (filteredClients.length === 0) {
+                searchInfo.innerHTML = `🔍 По запросу "<strong>${searchTerm}</strong>" ничего не найдено`;
+                searchInfo.style.display = 'block';
+            } else {
+                searchInfo.innerHTML = `🔍 Найдено клиентов: <strong>${filteredClients.length}</strong> по запросу "<strong>${searchTerm}</strong>"`;
+                searchInfo.style.display = 'block';
+            }
+            
+            displayClients(filteredClients);
+        }
+
+        // Очистка поиска клиентов
+        function clearClientSearch() {
+            document.getElementById('searchClient').value = '';
+            document.getElementById('clearSearchClient').style.display = 'none';
+            document.getElementById('searchInfo').style.display = 'none';
+            currentSearchTerm = '';
+            loadClientsData();
+        }
+
+        // Активация доступа клиента
+        function activateClientAccess(clientId) {
+            if (confirm(`Активировать доступ для клиента ${clientId}?`)) {
+                const adminData = JSON.parse(localStorage.getItem('vipsim_admin'));
+                const client = adminData.clients.find(c => c.clientId === clientId);
+                
+                if (client) {
+                    client.accessActive = true;
+                    client.remaining = 10; // Даем 10 обращений
+                    client.activatedAt = new Date().toISOString();
+                    
+                    localStorage.setItem('vipsim_admin', JSON.stringify(adminData));
+                    
+                    // Помечаем платеж как обработанный
+                    const payment = adminData.payments.find(p => p.clientId === clientId && p.status === 'paid');
+                    if (payment) {
+                        payment.processed = true;
+                    }
+                    
+                    loadAdminData();
+                    alert('✅ Доступ активирован! Клиент может войти по своему ID.');
+                }
+            }
+        }
+
+        // Деактивация доступа клиента
+        function deactivateClientAccess(clientId) {
+            if (confirm(`Деактивировать доступ для клиента ${clientId}?`)) {
+                const adminData = JSON.parse(localStorage.getItem('vipsim_admin'));
+                const client = adminData.clients.find(c => c.clientId === clientId);
+                
+                if (client) {
+                    client.accessActive = false;
+                    localStorage.setItem('vipsim_admin', JSON.stringify(adminData));
+                    loadAdminData();
+                    alert('🚫 Доступ деактивирован!');
+                }
+            }
+        }
+
+        // Блокировка клиента
         function blockClient(clientId) {
             if (confirm(`Заблокировать клиента ${clientId}?`)) {
-                const adminData = JSON.parse(localStorage.getItem('vipsim_admin') || '{"clients": []}');
+                const adminData = JSON.parse(localStorage.getItem('vipsim_admin'));
                 const client = adminData.clients.find(c => c.clientId === clientId);
                 if (client) {
                     client.blocked = true;
                     localStorage.setItem('vipsim_admin', JSON.stringify(adminData));
+                    loadAdminData();
+                    alert('Клиент заблокирован!');
                 }
-                
-                const allKeys = Object.keys(localStorage);
-                allKeys.forEach(key => {
-                    if (key.startsWith('premiumData')) {
-                        try {
-                            const clientData = JSON.parse(localStorage.getItem(key));
-                            if (clientData.clientId === clientId) {
-                                clientData.blocked = true;
-                                localStorage.setItem(key, JSON.stringify(clientData));
-                            }
-                        } catch (e) {}
-                    }
-                });
-                
-                alert('Клиент заблокирован!');
-                loadAdminData();
             }
         }
 
+        // Разблокировка клиента
         function unblockClient(clientId) {
             if (confirm(`Разблокировать клиента ${clientId}?`)) {
-                const adminData = JSON.parse(localStorage.getItem('vipsim_admin') || '{"clients": []}');
+                const adminData = JSON.parse(localStorage.getItem('vipsim_admin'));
                 const client = adminData.clients.find(c => c.clientId === clientId);
                 if (client) {
                     client.blocked = false;
                     localStorage.setItem('vipsim_admin', JSON.stringify(adminData));
+                    loadAdminData();
+                    alert('Клиент разблокирован!');
                 }
-                
-                const allKeys = Object.keys(localStorage);
-                allKeys.forEach(key => {
-                    if (key.startsWith('premiumData')) {
-                        try {
-                            const clientData = JSON.parse(localStorage.getItem(key));
-                            if (clientData.clientId === clientId) {
-                                clientData.blocked = false;
-                                localStorage.setItem(key, JSON.stringify(clientData));
-                            }
-                        } catch (e) {}
-                    }
-                });
-                
-                alert('Клиент разблокирован!');
-                loadAdminData();
             }
         }
 
-        function viewClientDetails(clientId) {
-            const adminData = JSON.parse(localStorage.getItem('vipsim_admin') || '{"clients": []}');
-            const client = adminData.clients.find(c => c.clientId === clientId);
-            if (client) {
-                alert(`Детали клиента:\n\n👤 Имя: ${client.nickname}\n🆔 ID: ${client.clientId}\n📞 Обращений: ${client.totalRequests}\n💰 Осталось: ${client.remaining}\n📅 Регистрация: ${new Date(client.registrationDate).toLocaleDateString('ru-RU')}\n⏰ Активность: ${new Date(client.lastActivity).toLocaleDateString('ru-RU')}\n🚫 Статус: ${client.blocked ? 'Заблокирован' : 'Активен'}`);
+        // Сброс обращений клиента
+        function resetClientRequests(clientId) {
+            if (confirm(`Сбросить обращения для клиента ${clientId}?`)) {
+                const adminData = JSON.parse(localStorage.getItem('vipsim_admin'));
+                const client = adminData.clients.find(c => c.clientId === clientId);
+                if (client) {
+                    client.remaining = 10;
+                    client.totalRequests = 0;
+                    localStorage.setItem('vipsim_admin', JSON.stringify(adminData));
+                    loadAdminData();
+                    alert('Обращения сброшены!');
+                }
             }
         }
 
-        function renderAdminChart(requests) {
-            const chartContainer = document.getElementById('activityChart');
-            chartContainer.innerHTML = '<h3>Обращения по дням (последние 7 дней)</h3>';
+        // Загрузка данных платежей
+        function loadPaymentsData() {
+            const adminData = JSON.parse(localStorage.getItem('vipsim_admin') || '{"payments": []}');
+            displayPayments(adminData.payments);
+        }
+
+        // Отображение платежей
+        function displayPayments(payments) {
+            const paymentsList = document.getElementById('paymentsList');
             
-            const last7Days = [];
-            for (let i = 6; i >= 0; i--) {
-                const date = new Date();
-                date.setDate(date.getDate() - i);
-                last7Days.push(date.toDateString());
+            if (payments.length === 0) {
+                paymentsList.innerHTML = '<p style="text-align: center; color: #666;">Нет платежей</p>';
+                return;
             }
             
-            const dailyCounts = {};
-            last7Days.forEach(day => {
-                dailyCounts[day] = requests.filter(req => 
-                    new Date(req.timestamp).toDateString() === day
-                ).length;
-            });
-            
-            const maxCount = Math.max(...Object.values(dailyCounts), 1);
-            
-            last7Days.forEach(day => {
-                const count = dailyCounts[day];
-                const percentage = (count / maxCount) * 100;
-                
-                const chartBar = document.createElement('div');
-                chartBar.className = 'chart-bar';
-                chartBar.innerHTML = `
-                    <div class="chart-label">${new Date(day).toLocaleDateString('ru-RU', {weekday: 'short', day: '2-digit', month: '2-digit'})}</div>
-                    <div class="chart-bar-outer">
-                        <div class="chart-bar-fill" style="width: ${percentage}%"></div>
+            paymentsList.innerHTML = payments.map(payment => `
+                <div class="payment-card ${payment.status === 'paid' ? '' : 'payment-pending'}">
+                    <div class="payment-info">
+                        <div><strong>${payment.nickname}</strong></div>
+                        <div class="payment-id">${payment.clientId}</div>
+                        <div>${payment.amount} ₽</div>
                     </div>
-                    <div style="width: 40px; text-align: center; font-weight: bold;">${count}</div>
-                `;
-                chartContainer.appendChild(chartBar);
-            });
+                    <div style="font-size: 12px;">
+                        Статус: ${payment.status === 'paid' ? '✅ Оплачено' : '🔄 В процессе'}
+                    </div>
+                    <div style="font-size: 11px; color: #666; margin-top: 5px;">
+                        📅 ${new Date(payment.date).toLocaleDateString('ru-RU')}
+                    </div>
+                    <div class="payment-actions">
+                        ${payment.status === 'paid' && !payment.processed ? 
+                            `<button class="btn btn-success" onclick="markPaymentProcessed('${payment.id}')">✅ Отметить обработанным</button>` :
+                            payment.status === 'paid' ?
+                            `<span style="color: #28a745; font-weight: bold;">✅ Обработан</span>` :
+                            ''
+                        }
+                    </div>
+                </div>
+            `).join('');
         }
 
-        function exportData() {
-            const adminData = localStorage.getItem('vipsim_admin');
-            const blob = new Blob([adminData], { type: 'application/json' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `vipsim_data_${new Date().toISOString().split('T')[0]}.json`;
-            a.click();
-            URL.revokeObjectURL(url);
+        // Поиск платежей
+        function searchPayments() {
+            const searchTerm = document.getElementById('searchPayment').value.toLowerCase();
+            
+            if (searchTerm) {
+                document.getElementById('clearSearchPayment').style.display = 'block';
+            } else {
+                document.getElementById('clearSearchPayment').style.display = 'none';
+                loadPaymentsData();
+                return;
+            }
+            
+            const adminData = JSON.parse(localStorage.getItem('vipsim_admin') || '{"payments": []}');
+            
+            const filteredPayments = adminData.payments.filter(payment => 
+                payment.clientId.toLowerCase().includes(searchTerm) || 
+                payment.nickname.toLowerCase().includes(searchTerm)
+            );
+            
+            displayPayments(filteredPayments);
         }
 
-        function clearAllData() {
-            if (confirm('ВНИМАНИЕ! Это удалит ВСЕ данные статистики. Продолжить?')) {
-                localStorage.removeItem('vipsim_admin');
+        // Очистка поиска платежей
+        function clearPaymentSearch() {
+            document.getElementById('searchPayment').value = '';
+            document.getElementById('clearSearchPayment').style.display = 'none';
+            loadPaymentsData();
+        }
+
+        // Отметка платежа как обработанного
+        function markPaymentProcessed(paymentId) {
+            const adminData = JSON.parse(localStorage.getItem('vipsim_admin'));
+            const payment = adminData.payments.find(p => p.id === paymentId);
+            if (payment) {
+                payment.processed = true;
+                localStorage.setItem('vipsim_admin', JSON.stringify(adminData));
                 loadAdminData();
-                alert('Данные очищены');
+                alert('Платеж отмечен как обработанный');
             }
         }
 
-        function refreshData() {
-            loadAdminData();
-            alert('Данные обновлены');
-        }
+        // Авто-обновление данных каждые 3 секунды
+        setInterval(loadAdminData, 3000);
 
         document.addEventListener('DOMContentLoaded', loadAdminData);
-        setInterval(loadAdminData, 30000);
     </script>
 </body>
 </html>

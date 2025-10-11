@@ -295,6 +295,271 @@
         font-style: italic;
       }
 
+      /* Новые стили для экрана входа */
+      .client-id-display {
+        background: #e8f5e8;
+        padding: 20px;
+        border-radius: 12px;
+        border: 2px solid #4caf50;
+        margin: 20px 0;
+        text-align: center;
+      }
+      .client-id-value {
+        font-family: monospace;
+        font-size: 20px;
+        font-weight: bold;
+        color: #1976d2;
+        margin: 10px 0;
+      }
+      .copy-btn {
+        background: #4caf50;
+        color: white;
+        border: none;
+        padding: 8px 15px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: bold;
+        margin-top: 10px;
+      }
+      .copy-btn:hover {
+        background: #2e7d32;
+      }
+      .benefits-box {
+        text-align: center;
+        margin: 25px 0;
+        padding: 20px;
+        background: #fff8e1;
+        border-radius: 12px;
+        border: 2px solid #ffd54f;
+      }
+      .login-by-id {
+        text-align: center;
+        margin-top: 30px;
+        padding: 25px;
+        background: #e3f2fd;
+        border-radius: 12px;
+        border: 2px solid #2196F3;
+      }
+
+      /* Стили для слайдера услуг */
+      .services-slider-section {
+        margin: 20px 0;
+        padding: 10px 0;
+      }
+      
+      .services-slider-container {
+        position: relative;
+        display: flex;
+        align-items: center;
+        max-width: 100%;
+        margin: 0 auto;
+      }
+      
+      .services-slider-track {
+        display: flex;
+        gap: 15px;
+        padding: 10px 15px;
+        overflow-x: auto;
+        scroll-behavior: smooth;
+        scrollbar-width: thin;
+        scrollbar-color: #d4af37 transparent;
+        flex: 1;
+      }
+      
+      .services-slider-track::-webkit-scrollbar {
+        height: 4px;
+      }
+      
+      .services-slider-track::-webkit-scrollbar-track {
+        background: transparent;
+        border-radius: 10px;
+      }
+      
+      .services-slider-track::-webkit-scrollbar-thumb {
+        background: #d4af37;
+        border-radius: 10px;
+      }
+      
+      .services-slider-track::-webkit-scrollbar-thumb:hover {
+        background: #b8860b;
+      }
+      
+      .service-slide {
+        flex: 0 0 auto;
+        width: 150px;
+        background: white;
+        border-radius: 12px;
+        padding: 12px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border: 1px solid #f0f0f0;
+        position: relative;
+      }
+      
+      .service-slide:hover {
+        transform: translateY(-2px);
+        border-color: #d4af37;
+        box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2);
+      }
+      
+      .service-image {
+        position: relative;
+        width: 100%;
+        border-radius: 8px;
+        overflow: visible;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      
+      .service-image img {
+        width: 100%;
+        height: auto;
+        max-height: 120px;
+        object-fit: contain;
+        border-radius: 6px;
+      }
+      
+      .discount-badge {
+        position: absolute;
+        top: -8px;
+        right: -8px;
+        background: linear-gradient(135deg, #d4af37, #b8860b);
+        color: white;
+        padding: 4px 8px;
+        border-radius: 10px;
+        font-size: 11px;
+        font-weight: bold;
+        box-shadow: 0 2px 8px rgba(212, 175, 55, 0.4);
+        border: 2px solid white;
+        z-index: 2;
+        min-width: 35px;
+        text-align: center;
+      }
+      
+      /* Стрелки слайдера */
+      .slider-arrow {
+        background: #d4af37;
+        color: white;
+        border: none;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 6px rgba(212, 175, 55, 0.3);
+        z-index: 2;
+      }
+      
+      .slider-arrow:hover {
+        background: #b8860b;
+        transform: scale(1.05);
+      }
+      
+      .slider-arrow-left {
+        margin-right: 8px;
+      }
+      
+      .slider-arrow-right {
+        margin-left: 8px;
+      }
+
+      /* Стили для слайдера операторов */
+      .operators-call-section {
+        margin: 20px 0;
+        padding: 0 10px;
+      }
+      
+      .operators-slider-container {
+        position: relative;
+        display: flex;
+        align-items: center;
+        max-width: 100%;
+        margin: 0 auto;
+      }
+      
+      .operators-slider-track {
+        display: flex;
+        gap: 8px;
+        padding: 5px 10px;
+        overflow-x: auto;
+        scroll-behavior: smooth;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+        flex: 1;
+      }
+      
+      .operators-slider-track::-webkit-scrollbar {
+        display: none;
+      }
+      
+      .operator-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 14px;
+        color: white;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+        flex: 0 0 auto;
+        width: 80px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+      
+      .operator-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      }
+      
+      /* Цвета операторов */
+      .operator-btn.mts {
+        background: linear-gradient(135deg, #e30613, #ff0019);
+      }
+      
+      .operator-btn.volna {
+        background: linear-gradient(135deg, #00a2ff, #0077cc);
+      }
+      
+      .operator-btn.win {
+        background: linear-gradient(135deg, #ff6b00, #ff8c00);
+      }
+      
+      .operator-btn.miranda {
+        background: linear-gradient(135deg, #8a2be2, #6a0dad);
+      }
+      
+      .operator-btn.megafon {
+        background: linear-gradient(135deg, #56b929, #3d941c);
+      }
+      
+      .operator-btn.beeline {
+        background: linear-gradient(135deg, #ffd100, #ffaa00);
+      }
+      
+      .operator-btn.t2 {
+        background: #000;
+        color: white;
+      }
+      
+      .operator-btn.yota {
+        background: linear-gradient(135deg, #00a2ff, #0077cc);
+        color: white;
+      }
+
       @keyframes goldShine {
         0%, 100% { background-position: 0% 50%; }
         50% { background-position: 100% 50%; }
@@ -319,27 +584,252 @@
   </head>
   <body>
     <div class="container">
-      <!-- Экран входа -->
+      <!-- ОБНОВЛЕННЫЙ ЭКРАН ВХОДА -->
       <div id="loginScreen">
         <h1>⭐ Премиум-доступ</h1>
-        <p style="text-align: center; margin-bottom: 20px; color: #555">
-          Введите своё имя (только буквы).<br />
-          <small>Максимум 30 символов. Имя будет отображаться в обращениях.</small>
-        </p>
-        <div class="login-form">
-          <input
-            type="text"
-            id="nicknameInput"
-            placeholder="Ваше имя"
-            maxlength="30"
-            autocomplete="off"
-          />
-          <button onclick="enterPremium()">Продолжить</button>
+        
+        <!-- БЛОК РЕГИСТРАЦИИ -->
+        <div id="registrationBlock">
+          <p style="text-align: center; margin-bottom: 20px; color: #555">
+            Для доступа к премиум-функциям необходимо оплатить 100 ₽
+          </p>
+          
+          <div class="benefits-box">
+            <div style="font-size: 24px; font-weight: bold; color: #b8860b; margin-bottom: 15px;">
+              💎 Что вы получаете:
+            </div>
+            <div style="text-align: left; display: inline-block;">
+              <div style="margin: 8px 0;">✅ 10 обращений в премиум-поддержку</div>
+              <div style="margin: 8px 0;">🎁 Персональные скидки на услуги</div>
+              <div style="margin: 8px 0;">⭐ Приоритетное обслуживание</div>
+            </div>
+          </div>
+          
+          <div class="login-form">
+            <input
+              type="text"
+              id="nicknameInput"
+              placeholder="Ваше имя (для обращений)"
+              maxlength="30"
+              autocomplete="off"
+            />
+            
+            <!-- БЛОК С ID КЛИЕНТА -->
+            <div id="clientIdBlock" style="display: none;">
+              <div class="client-id-display">
+                <div style="font-weight: bold; color: #2e7d32; margin-bottom: 15px; font-size: 18px;">
+                  🆔 ВАШ УНИКАЛЬНЫЙ ID
+                </div>
+                <div class="client-id-value" id="clientIdDisplay"></div>
+                <button class="copy-btn" onclick="copyClientId()">
+                  📋 Копировать ID
+                </button>
+              </div>
+              <p style="text-align: center; color: #d32f2f; font-weight: bold;">
+                ⚠️ Сохраните этот ID! Введите его в комментарии к платежу
+              </p>
+            </div>
+            
+            <!-- ТЕСТОВАЯ КНОПКА ОПЛАТЫ -->
+            <button 
+              id="paymentButton"
+              class="btn"
+              style="display: none; background: linear-gradient(135deg, #d4af37, #b8860b); color: white;"
+              onclick="processTestPayment()">
+              🧪 ТЕСТ: Оплатить 100 ₽
+            </button>
+          </div>
         </div>
-        <p class="note">
-          Мы не собираем email, телефон или другие данные. Только имя для обращений.
-        </p>
-      </div>
+
+        
+       <!-- БЛОК ВХОДА ПО ID -->
+<div class="login-by-id">
+  <div class="login-by-id-title">
+    🔑 Вход в кабинет по ID
+  </div>
+  <p class="login-by-id-description">
+    Уже зарегистрированы? Войдите в кабинет после активации доступа
+  </p>
+  
+  <div class="login-input-container">
+    <input
+      type="text"
+      id="accessCodeInput"
+      placeholder="Введите ваш VIP ID"
+      maxlength="20"
+      autocomplete="off"
+      class="access-code-input"
+    />
+    <button onclick="checkAccessCode()" class="access-code-button">
+      🚀 Войти в кабинет
+    </button>
+  </div>
+  
+  <div class="login-by-id-note">
+    ID выдается после регистрации (формат: VIPABC123DEF)
+  </div>
+</div>
+
+<style>
+  .login-by-id {
+    text-align: center;
+    margin-top: 30px;
+    padding: 25px 20px;
+    background: #e3f2fd;
+    border-radius: 12px;
+    border: 2px solid #2196F3;
+  }
+  
+  .login-by-id-title {
+    font-size: 20px;
+    font-weight: bold;
+    color: #1976d2;
+    margin-bottom: 15px;
+  }
+  
+  .login-by-id-description {
+    color: #555;
+    margin-bottom: 20px;
+    line-height: 1.4;
+  }
+  
+  .login-input-container {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  .access-code-input {
+    flex: 1;
+    min-width: 200px;
+    max-width: 300px;
+    padding: 12px 15px;
+    border: 2px solid #2196F3;
+    border-radius: 8px;
+    font-family: monospace;
+    text-align: center;
+    font-weight: bold;
+    font-size: 16px;
+    background: white;
+    transition: all 0.3s ease;
+  }
+  
+  .access-code-input:focus {
+    outline: none;
+    border-color: #1565c0;
+    box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.1);
+  }
+  
+  .access-code-button {
+    background: #2196F3;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 20px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    min-width: 140px;
+  }
+  
+  .access-code-button:hover {
+    background: #1976d2;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(33, 150, 243, 0.3);
+  }
+  
+  .login-by-id-note {
+    margin-top: 15px;
+    font-size: 12px;
+    color: #666;
+    line-height: 1.4;
+  }
+  
+  /* Мобильная адаптация */
+  @media (max-width: 768px) {
+    .login-by-id {
+      padding: 20px 15px;
+      margin-top: 25px;
+    }
+    
+    .login-by-id-title {
+      font-size: 18px;
+      margin-bottom: 12px;
+    }
+    
+    .login-input-container {
+      flex-direction: column;
+      gap: 12px;
+    }
+    
+    .access-code-input {
+      min-width: 100%;
+      max-width: 100%;
+      font-size: 16px;
+      padding: 14px 12px;
+    }
+    
+    .access-code-button {
+      width: 100%;
+      max-width: 280px;
+      padding: 14px 20px;
+      font-size: 16px;
+    }
+    
+    .login-by-id-description {
+      font-size: 14px;
+      margin-bottom: 18px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .login-by-id {
+      padding: 18px 12px;
+      margin-top: 20px;
+    }
+    
+    .login-by-id-title {
+      font-size: 17px;
+    }
+    
+    .access-code-input {
+      font-size: 15px;
+      padding: 13px 10px;
+    }
+    
+    .access-code-button {
+      font-size: 15px;
+      padding: 13px 18px;
+    }
+    
+    .login-by-id-note {
+      font-size: 11px;
+    }
+  }
+  
+  /* Для очень маленьких экранов */
+  @media (max-width: 360px) {
+    .login-by-id {
+      padding: 15px 10px;
+    }
+    
+    .login-by-id-title {
+      font-size: 16px;
+    }
+    
+    .access-code-input {
+      font-size: 14px;
+    }
+    
+    .access-code-button {
+      font-size: 14px;
+    }
+  }
+</style>
 
       <!-- Личный кабинет -->
       <div id="premiumScreen" class="hidden">
@@ -357,23 +847,740 @@
           ⭐ Премиум-поддержка
         </button>
 
+        <button class="btn btn-offer" onclick="showDiscountModal()">
+          🎁 Скидка на красивый номер
+        </button>
+        
+     <!-- Слайдер услуг со скидками -->
+<section class="services-slider-section">
+  <div class="services-slider-container">
+    <button class="slider-arrow slider-arrow-left" onclick="scrollSlider(-1)">‹</button>
+    <div class="services-slider-track" id="servicesSliderTrack">
+      <!-- Услуга 1 -->
+      <div class="service-slide" onclick="showServiceDiscount('Восстановление номера')">
+        <div class="service-image">
+          <img src="img/Восстановление.jpg" alt="Восстановление номера" />
+          
+        </div>
+      </div>
+      
+      <!-- Услуга 2 -->
+      <div class="service-slide" onclick="showServiceDiscount('Смена владельца')">
+        <div class="service-image">
+          <img src="img/смена владельца.jpg" alt="Смена владельца" />
+          <div class="discount-badge">-10%</div>
+        </div>
+      </div>
+      
+      <!-- Услуга 3 -->
+      <div class="service-slide" onclick="showServiceDiscount('Перенос номера')">
+        <div class="service-image">
+          <img src="img/Смена оператора.jpg" alt="Перенос номера" />
+          <div class="discount-badge">-10%</div>
+        </div>
+      </div>
+      
+      <!-- Услуга 4 -->
+      <div class="service-slide" onclick="showServiceDiscount('Корректировка данных')">
+        <div class="service-image">
+          <img src="img/Корректируем личные данные в МТС.jpeg" alt="Корректировка данных" />
+          <div class="discount-badge">-10%</div>
+        </div>
+      </div>
+      
+      <!-- Услуга 5 -->
+      <div class="service-slide" onclick="showServiceDiscount('Красивые номера')">
+        <div class="service-image">
+          <img src="img/Красивые номера МТС, Волна, Win.jpg" alt="Красивые номера" />
+          <div class="discount-badge">-10%</div>
+        </div>
+      </div>
+      
+      <!-- Услуга 6 -->
+      <div class="service-slide" onclick="showServiceDiscount('Поиск старого номера')">
+        <div class="service-image">
+          <img src="img/Найдём и подключим ваш старый номер МТС-978.jpg" alt="Поиск старого номера" />
+          <div class="discount-badge">-10%</div>
+        </div>
+      </div>
+      
+      <!-- Услуга 7 -->
+      <div class="service-slide" onclick="showServiceDiscount('Возврат в МТС')">
+        <div class="service-image">
+          <img src="img/Обратно в МТС.jpg" alt="Возврат в МТС" />
+          <div class="discount-badge">-10%</div>
+        </div>
+      </div>
+      
+      <!-- Услуга 8 -->
+      <div class="service-slide" onclick="showServiceDiscount('Безлимитный интернет')">
+        <div class="service-image">
+          <img src="img/БЕЗЛИМИТНЫЙ ИНТЕРНЕТ 4G В Крыму для смартфона и модема.jpg" alt="Безлимитный интернет" />
+          
+        </div>
+      </div>
+    </div>
+    <button class="slider-arrow slider-arrow-right" onclick="scrollSlider(1)">›</button>
+  </div>
+</section>
+
+<!-- Модальное окно для услуг -->
+<div id="serviceDiscountModal" class="modal">
+  <div class="modal-content" style="background: linear-gradient(135deg, #ffd700, #ffed4e, #ffd700);">
+    <span class="close" onclick="closeServiceDiscountModal()">&times;</span>
+    <div class="discount-title" id="serviceDiscountTitle">СКИДКА НА УСЛУГУ</div>
+    <div class="discount-amount">-10%</div>
+    <div class="discount-text" id="serviceDiscountText">на услугу</div>
+    <div class="discount-note">
+      *Активируется при обращении в 
+      <a href="javascript:void(0);" onclick="activateServiceSupport()" style="color: #b8860b; text-decoration: underline; font-weight: bold;">поддержку</a>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Стили для слайдера услуг */
+  .services-slider-section {
+    margin: 20px 0;
+    padding: 10px 0;
+  }
+  
+  .services-slider-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    max-width: 100%;
+    margin: 0 auto;
+  }
+  
+  .services-slider-track {
+    display: flex;
+    gap: 15px;
+    padding: 10px 15px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scrollbar-width: thin;
+    scrollbar-color: #d4af37 transparent;
+    flex: 1;
+  }
+  
+  .services-slider-track::-webkit-scrollbar {
+    height: 4px;
+  }
+  
+  .services-slider-track::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 10px;
+  }
+  
+  .services-slider-track::-webkit-scrollbar-thumb {
+    background: #d4af37;
+    border-radius: 10px;
+  }
+  
+  .services-slider-track::-webkit-scrollbar-thumb:hover {
+    background: #b8860b;
+  }
+  
+  .service-slide {
+    flex: 0 0 auto;
+    width: 150px;
+    background: white;
+    border-radius: 12px;
+    padding: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid #f0f0f0;
+    position: relative;
+  }
+  
+  .service-slide:hover {
+    transform: translateY(-2px);
+    border-color: #d4af37;
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2);
+  }
+  
+  .service-image {
+    position: relative;
+    width: 100%;
+    border-radius: 8px;
+    overflow: visible;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .service-image img {
+    width: 100%;
+    height: auto;
+    max-height: 120px;
+    object-fit: contain;
+    border-radius: 6px;
+  }
+  
+  .discount-badge {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: linear-gradient(135deg, #d4af37, #b8860b);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 10px;
+    font-size: 11px;
+    font-weight: bold;
+    box-shadow: 0 2px 8px rgba(212, 175, 55, 0.4);
+    border: 2px solid white;
+    z-index: 2;
+    min-width: 35px;
+    text-align: center;
+  }
+  
+  /* Стрелки слайдера */
+  .slider-arrow {
+    background: #d4af37;
+    color: white;
+    border: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 6px rgba(212, 175, 55, 0.3);
+    z-index: 2;
+  }
+  
+  .slider-arrow:hover {
+    background: #b8860b;
+    transform: scale(1.05);
+  }
+  
+  .slider-arrow-left {
+    margin-right: 8px;
+  }
+  
+  .slider-arrow-right {
+    margin-left: 8px;
+  }
+  
+  /* Адаптивность */
+  @media (max-width: 768px) {
+    .services-slider-section {
+      margin: 15px 0;
+      padding: 5px 0;
+    }
+    
+    .services-slider-container {
+      padding: 0 8px;
+    }
+    
+    .slider-arrow {
+      display: none;
+    }
+    
+    .services-slider-track {
+      padding: 8px 10px;
+      gap: 12px;
+    }
+    
+    .service-slide {
+      width: 130px;
+      padding: 10px;
+    }
+    
+    .service-image img {
+      max-height: 110px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .service-slide {
+      width: 120px;
+      padding: 8px;
+    }
+    
+    .service-image img {
+      max-height: 100px;
+    }
+    
+    .discount-badge {
+      top: -6px;
+      right: -6px;
+      padding: 3px 6px;
+      font-size: 10px;
+      min-width: 32px;
+    }
+  }
+  
+  /* Для очень широких экранов */
+  @media (min-width: 1200px) {
+    .services-slider-container {
+      max-width: 1000px;
+    }
+  }
+</style>
+
+<script>
+  // Функции для слайдера услуг
+  let currentService = '';
+  
+  function showServiceDiscount(serviceName) {
+    currentService = serviceName;
+    document.getElementById('serviceDiscountTitle').textContent = `СКИДКА НА ${serviceName.toUpperCase()}`;
+    document.getElementById('serviceDiscountText').textContent = `на услугу "${serviceName}"`;
+    document.getElementById('serviceDiscountModal').style.display = 'block';
+  }
+  
+  function closeServiceDiscountModal() {
+    document.getElementById('serviceDiscountModal').style.display = 'none';
+    currentService = '';
+  }
+  
+  function activateServiceSupport() {
+    closeServiceDiscountModal();
+    contactSupport();
+  }
+  
+  // Функции для управления слайдером
+  function scrollSlider(direction) {
+    const slider = document.getElementById('servicesSliderTrack');
+    const scrollAmount = 250;
+    
+    slider.scrollBy({
+      left: direction * scrollAmount,
+      behavior: 'smooth'
+    });
+  }
+  
+  // Инициализация свайпа для мобильных и скролла для десктопа
+  document.addEventListener('DOMContentLoaded', function() {
+    const sliderTrack = document.getElementById('servicesSliderTrack');
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+    
+    // Мышь для десктопа
+    sliderTrack.addEventListener('mousedown', (e) => {
+      isDown = true;
+      sliderTrack.style.cursor = 'grabbing';
+      startX = e.pageX - sliderTrack.offsetLeft;
+      scrollLeft = sliderTrack.scrollLeft;
+    });
+    
+    sliderTrack.addEventListener('mouseleave', () => {
+      isDown = false;
+      sliderTrack.style.cursor = 'grab';
+    });
+    
+    sliderTrack.addEventListener('mouseup', () => {
+      isDown = false;
+      sliderTrack.style.cursor = 'grab';
+    });
+    
+    sliderTrack.addEventListener('mousemove', (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - sliderTrack.offsetLeft;
+      const walk = (x - startX) * 2;
+      sliderTrack.scrollLeft = scrollLeft - walk;
+    });
+    
+    // Touch events для мобильных
+    sliderTrack.addEventListener('touchstart', (e) => {
+      isDown = true;
+      startX = e.touches[0].pageX - sliderTrack.offsetLeft;
+      scrollLeft = sliderTrack.scrollLeft;
+    });
+    
+    sliderTrack.addEventListener('touchend', () => {
+      isDown = false;
+    });
+    
+    sliderTrack.addEventListener('touchmove', (e) => {
+      if (!isDown) return;
+      const x = e.touches[0].pageX - sliderTrack.offsetLeft;
+      const walk = (x - startX) * 2;
+      sliderTrack.scrollLeft = scrollLeft - walk;
+    });
+    
+    // Обновляем курсор
+    sliderTrack.style.cursor = 'grab';
+  });
+  
+  // Закрытие модального окна при клике вне его
+  window.addEventListener('click', function(event) {
+    const modal = document.getElementById('serviceDiscountModal');
+    if (event.target === modal) {
+      closeServiceDiscountModal();
+    }
+  });
+</script>
+
+
+
+
         <div class="tariff-buttons">
           <a href="tariffs.html" class="btn btn-tariff">
             <img src="img/goldsim.png" alt="SIM" class="tariff-icon">
-            Для<br>МТС-Крым 978
+            Тарифы для Крыма 
           </a>
           <a href="https://megasimka.ru/product-category/sim-cards/sim-internet/?ref=838" class="btn btn-tariff" target="_blank">
             <img src="img/goldsim.png" alt="SIM" class="tariff-icon">
-            Для другого региона
+            Тарифы для РФ
           </a>
         </div>
+        
+        <!-- Блок звонка операторам -->
+<section class="operators-call-section">
+  <h3 style="text-align: center; margin: 25px 0 15px 0; color: #333; font-size: 18px;">📞 Позвонить оператору</h3>
+  
+  <div class="operators-slider-container">
+    <button class="slider-arrow slider-arrow-left" onclick="scrollOperators(-1)">‹</button>
+    
+    <div class="operators-slider-track" id="operatorsSliderTrack">
+      <!-- МТС -->
+      <a href="tel:+74957660166" class="operator-btn mts">
+        <span class="operator-name">МТС</span>
+      </a>
+      
+      <!-- Волна -->
+      <a href="tel:+79785550555" class="operator-btn volna">
+        <span class="operator-name">Волна</span>
+      </a>
+      
+      <!-- Вин -->
+      <a href="tel:+79789090545" class="operator-btn win">
+        <span class="operator-name">Вин</span>
+      </a>
+      
+      <!-- Миранда -->
+      <a href="tel:+79790003330" class="operator-btn miranda">
+        <span class="operator-name">Миранда</span>
+      </a>
+      
+      <!-- МегаФон -->
+      <a href="tel:+79261110999" class="operator-btn megafon">
+        <span class="operator-name">МегаФон</span>
+      </a>
+      
+      <!-- Билайн -->
+      <a href="tel:+74957972727" class="operator-btn beeline">
+        <span class="operator-name">Билайн</span>
+      </a>
+      
+      <!-- Т2 -->
+      <a href="tel:+79515200611" class="operator-btn t2">
+        <span class="operator-name">Т2</span>
+      </a>
+      
+      <!-- Yota -->
+      <a href="tel:88005500007" class="operator-btn yota">
+        <span class="operator-name">Yota</span>
+      </a>
+    </div>
+    
+    <button class="slider-arrow slider-arrow-right" onclick="scrollOperators(1)">›</button>
+  </div>
+</section>
+
+<style>
+  .operators-call-section {
+    margin: 20px 0;
+    padding: 0 10px;
+  }
+  
+  .operators-slider-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    max-width: 100%;
+    margin: 0 auto;
+  }
+  
+  .operators-slider-track {
+    display: flex;
+    gap: 8px;
+    padding: 5px 10px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    flex: 1;
+  }
+  
+  .operators-slider-track::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .operator-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    color: white;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    flex: 0 0 auto;
+    width: 80px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .operator-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  }
+  
+  /* Цвета операторов с фирменными деталями */
+  .operator-btn.mts {
+    background: linear-gradient(135deg, #e30613, #ff0019);
+  }
+  
+  .operator-btn.volna {
+    background: linear-gradient(135deg, #00a2ff, #0077cc);
+    position: relative;
+  }
+  
+  .operator-btn.volna::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 15px;
+    height: 15px;
+    background: #ff69b4;
+    border-bottom-left-radius: 8px;
+  }
+  
+  .operator-btn.win {
+    background: linear-gradient(135deg, #ff6b00, #ff8c00);
+  }
+  
+  .operator-btn.miranda {
+    background: linear-gradient(135deg, #8a2be2, #6a0dad);
+  }
+  
+  .operator-btn.megafon {
+    background: linear-gradient(135deg, #56b929, #3d941c);
+    position: relative;
+  }
+  
+  .operator-btn.megafon::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 15px;
+    height: 15px;
+    background: #8a2be2;
+    border-bottom-left-radius: 8px;
+  }
+  
+  .operator-btn.beeline {
+    background: linear-gradient(135deg, #ffd100, #ffaa00);
+    position: relative;
+  }
+  
+  .operator-btn.beeline::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: repeating-linear-gradient(
+      90deg,
+      #000 0px,
+      #000 3px,
+      transparent 3px,
+      transparent 6px
+    );
+  }
+  
+  .operator-btn.t2 {
+    background: #000;
+    color: white;
+    position: relative;
+  }
+  
+  .operator-btn.t2::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 15px;
+    height: 15px;
+    background: #ff69b4;
+    border-bottom-left-radius: 8px;
+  }
+  
+  .operator-btn.yota {
+    background: linear-gradient(135deg, #00a2ff, #0077cc);
+    color: white;
+  }
+  
+  /* Стрелки слайдера */
+  .slider-arrow {
+    background: #d4af37;
+    color: white;
+    border: none;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 6px rgba(212, 175, 55, 0.3);
+    z-index: 2;
+  }
+  
+  .slider-arrow:hover {
+    background: #b8860b;
+    transform: scale(1.05);
+  }
+  
+  .slider-arrow-left {
+    margin-right: 5px;
+  }
+  
+  .slider-arrow-right {
+    margin-left: 5px;
+  }
+  
+  /* Адаптивность */
+  @media (max-width: 768px) {
+    .operators-slider-container {
+      padding: 0 5px;
+    }
+    
+    .slider-arrow {
+      display: none;
+    }
+    
+    .operators-slider-track {
+      padding: 5px 8px;
+      gap: 6px;
+    }
+    
+    .operator-btn {
+      width: 70px;
+      padding: 8px 12px;
+      font-size: 13px;
+    }
+    
+    .operator-btn.volna::after,
+    .operator-btn.megafon::after,
+    .operator-btn.t2::after {
+      width: 12px;
+      height: 12px;
+    }
+    
+    .operator-btn.beeline::before {
+      height: 3px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .operator-btn {
+      width: 65px;
+      padding: 7px 10px;
+      font-size: 12px;
+    }
+    
+    .operator-btn.volna::after,
+    .operator-btn.megafon::after,
+    .operator-btn.t2::after {
+      width: 10px;
+      height: 10px;
+    }
+  }
+</style>
+
+<script>
+  // Функции для слайдера операторов
+  function scrollOperators(direction) {
+    const slider = document.getElementById('operatorsSliderTrack');
+    const scrollAmount = 150;
+    
+    slider.scrollBy({
+      left: direction * scrollAmount,
+      behavior: 'smooth'
+    });
+  }
+  
+  // Инициализация свайпа для слайдера операторов
+  document.addEventListener('DOMContentLoaded', function() {
+    const sliderTrack = document.getElementById('operatorsSliderTrack');
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+    
+    // Мышь для десктопа
+    sliderTrack.addEventListener('mousedown', (e) => {
+      isDown = true;
+      sliderTrack.style.cursor = 'grabbing';
+      startX = e.pageX - sliderTrack.offsetLeft;
+      scrollLeft = sliderTrack.scrollLeft;
+    });
+    
+    sliderTrack.addEventListener('mouseleave', () => {
+      isDown = false;
+      sliderTrack.style.cursor = 'grab';
+    });
+    
+    sliderTrack.addEventListener('mouseup', () => {
+      isDown = false;
+      sliderTrack.style.cursor = 'grab';
+    });
+    
+    sliderTrack.addEventListener('mousemove', (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - sliderTrack.offsetLeft;
+      const walk = (x - startX) * 2;
+      sliderTrack.scrollLeft = scrollLeft - walk;
+    });
+    
+    // Touch events для мобильных
+    sliderTrack.addEventListener('touchstart', (e) => {
+      isDown = true;
+      startX = e.touches[0].pageX - sliderTrack.offsetLeft;
+      scrollLeft = sliderTrack.scrollLeft;
+    });
+    
+    sliderTrack.addEventListener('touchend', () => {
+      isDown = false;
+    });
+    
+    sliderTrack.addEventListener('touchmove', (e) => {
+      if (!isDown) return;
+      const x = e.touches[0].pageX - sliderTrack.offsetLeft;
+      const walk = (x - startX) * 2;
+      sliderTrack.scrollLeft = scrollLeft - walk;
+    });
+    
+    // Обновляем курсор
+    sliderTrack.style.cursor = 'grab';
+  });
+</script>
 
         <button class="btn btn-stats" onclick="showStats()">
           📊 Моя статистика
-        </button>
-
-        <button class="btn btn-offer" onclick="showDiscountModal()">
-          🎁 Персональные скидки
         </button>
 
         <button class="btn btn-renew" onclick="renewAccess()">
@@ -393,7 +1600,7 @@
         <h3 style="color: #2196F3; margin-bottom: 15px;">📊 Ваша статистика</h3>
         
         <div class="client-id">
-          🆔 Ваш ID: <span id="clientIdDisplay"></span>
+          🆔 Ваш ID: <span id="statsClientIdDisplay"></span>
         </div>
         
         <div class="stats-grid">
@@ -440,7 +1647,265 @@
       </div>
     </div>
 
+    <!-- Модальное окно для услуг -->
+    <div id="serviceDiscountModal" class="modal">
+      <div class="modal-content" style="background: linear-gradient(135deg, #ffd700, #ffed4e, #ffd700);">
+        <span class="close" onclick="closeServiceDiscountModal()">&times;</span>
+        <div class="discount-title" id="serviceDiscountTitle">СКИДКА НА УСЛУГУ</div>
+        <div class="discount-amount">-10%</div>
+        <div class="discount-text" id="serviceDiscountText">на услугу</div>
+        <div class="discount-note">
+          *Активируется при обращении в 
+          <a href="javascript:void(0);" onclick="activateServiceSupport()" style="color: #b8860b; text-decoration: underline; font-weight: bold;">поддержку</a>
+        </div>
+      </div>
+    </div>
+
     <script>
+      // === ОСНОВНЫЕ ФУНКЦИИ СИСТЕМЫ ===
+      
+      // Генерация ID при вводе имени
+      document.getElementById('nicknameInput').addEventListener('input', generateClientId);
+      
+      function generateClientId() {
+        const nickname = document.getElementById('nicknameInput').value.trim();
+        
+        if (nickname) {
+          // Генерируем уникальный ID клиента
+          const clientId = "VIP" + Date.now().toString(36).toUpperCase() + Math.random().toString(36).substr(2, 3).toUpperCase();
+          
+          // Показываем ID клиенту
+          document.getElementById('clientIdDisplay').textContent = clientId;
+          document.getElementById('clientIdBlock').style.display = 'block';
+          document.getElementById('paymentButton').style.display = 'block';
+          
+          // Сохраняем данные для использования при оплате
+          localStorage.setItem('pendingClient', JSON.stringify({
+            clientId: clientId,
+            nickname: nickname,
+            generatedAt: new Date().toISOString()
+          }));
+        } else {
+          document.getElementById('clientIdBlock').style.display = 'none';
+          document.getElementById('paymentButton').style.display = 'none';
+        }
+      }
+      
+      // Копирование ID в буфер обмена
+      function copyClientId() {
+        const clientId = document.getElementById('clientIdDisplay').textContent;
+        navigator.clipboard.writeText(clientId).then(() => {
+          const button = event.target;
+          const originalText = button.textContent;
+          button.textContent = '✅ Скопировано!';
+          button.style.background = '#2e7d32';
+          setTimeout(() => {
+            button.textContent = originalText;
+            button.style.background = '#4caf50';
+          }, 2000);
+        }).catch(() => {
+          alert('✅ ID скопирован! Вставьте его в комментарий к платежу');
+        });
+      }
+      
+      // ТЕСТОВАЯ ФУНКЦИЯ ОПЛАТЫ
+      function processTestPayment() {
+        const pendingClient = JSON.parse(localStorage.getItem('pendingClient'));
+        
+        if (!pendingClient) {
+          alert('⚠️ Пожалуйста, введите данные для генерации ID');
+          return;
+        }
+        
+        // Симулируем успешную оплату
+        if (confirm(`🧪 ТЕСТОВЫЙ РЕЖИМ\n\nСумма: 100 ₽\nКлиент: ${pendingClient.nickname}\nID: ${pendingClient.clientId}\n\nИмитировать оплату?`)) {
+          
+          // Регистрируем клиента в админке как ожидающего активации
+          const adminData = JSON.parse(localStorage.getItem('vipsim_admin') || '{"clients": [], "payments": []}');
+          
+          // Добавляем клиента
+          const clientIndex = adminData.clients.findIndex(c => c.clientId === pendingClient.clientId);
+          if (clientIndex === -1) {
+            adminData.clients.push({
+              clientId: pendingClient.clientId,
+              nickname: pendingClient.nickname,
+              registrationDate: new Date().toISOString(),
+              totalRequests: 0,
+              lastActivity: new Date().toISOString(),
+              remaining: 0, // Пока 0 - доступ не активирован
+              paid: true,
+              accessActive: false, // Доступ не активен
+              blocked: false
+            });
+          }
+          
+          // Добавляем платеж
+          const paymentData = {
+            id: 'pay_' + Date.now(),
+            clientId: pendingClient.clientId,
+            nickname: pendingClient.nickname,
+            amount: 100,
+            date: new Date().toISOString(),
+            status: 'paid',
+            description: 'Премиум-доступ к поддержке VIP-SIM (ТЕСТ)'
+          };
+          
+          adminData.payments = adminData.payments || [];
+          adminData.payments.push(paymentData);
+          
+          localStorage.setItem('vipsim_admin', JSON.stringify(adminData));
+          
+          alert(`✅ Тестовая оплата завершена!\n\n🆔 Ваш ID: ${pendingClient.clientId}\n\n💡 Сохраните этот ID! После активации доступа администратором вы сможете войти в кабинет.`);
+          
+          // Очищаем временные данные
+          localStorage.removeItem('pendingClient');
+          
+          // Сбрасываем форму
+          document.getElementById('nicknameInput').value = '';
+          document.getElementById('clientIdBlock').style.display = 'none';
+          document.getElementById('paymentButton').style.display = 'none';
+        }
+      }
+      
+      // Проверка доступа по ID
+      function checkAccessCode() {
+        const accessCode = document.getElementById('accessCodeInput').value.trim().toUpperCase();
+        
+        if (!accessCode) {
+          alert('⚠️ Пожалуйста, введите ваш VIP ID');
+          return;
+        }
+        
+        const adminData = JSON.parse(localStorage.getItem('vipsim_admin') || '{"clients": []}');
+        const client = adminData.clients.find(c => c.clientId === accessCode);
+        
+        if (!client) {
+          alert('❌ ID не найден. Проверьте правильность ввода или дождитесь активации доступа.');
+          return;
+        }
+        
+        if (client.blocked) {
+          alert('🚫 Доступ заблокирован. Обратитесь в поддержку.');
+          return;
+        }
+        
+        if (!client.accessActive) {
+          alert('⏳ Доступ еще не активирован. Дождитесь подтверждения оплаты администратором.');
+          return;
+        }
+        
+        // Входим в кабинет
+        const clientData = {
+          clientId: client.clientId,
+          nickname: client.nickname,
+          remaining: client.remaining,
+          createdAt: new Date(client.registrationDate).getTime(),
+          paid: client.paid,
+          blocked: client.blocked,
+          stats: {
+            totalRequests: client.totalRequests,
+            requestsByDate: {},
+            registrationDate: client.registrationDate,
+            lastActivity: client.lastActivity
+          }
+        };
+        
+        savePremiumData(clientData);
+        showPremiumScreen(clientData);
+      }
+
+      
+      
+    
+      
+      // Функции для управления слайдером операторов
+      function scrollOperators(direction) {
+        const slider = document.getElementById('operatorsSliderTrack');
+        const scrollAmount = 150;
+        
+        slider.scrollBy({
+          left: direction * scrollAmount,
+          behavior: 'smooth'
+        });
+      }
+      
+      // Инициализация свайпа для слайдеров
+      document.addEventListener('DOMContentLoaded', function() {
+        // Слайдер услуг
+        const servicesSlider = document.getElementById('servicesSliderTrack');
+        initSliderSwipe(servicesSlider);
+        
+        // Слайдер операторов
+        const operatorsSlider = document.getElementById('operatorsSliderTrack');
+        initSliderSwipe(operatorsSlider);
+      });
+      
+      function initSliderSwipe(sliderTrack) {
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+        
+        // Мышь для десктопа
+        sliderTrack.addEventListener('mousedown', (e) => {
+          isDown = true;
+          sliderTrack.style.cursor = 'grabbing';
+          startX = e.pageX - sliderTrack.offsetLeft;
+          scrollLeft = sliderTrack.scrollLeft;
+        });
+        
+        sliderTrack.addEventListener('mouseleave', () => {
+          isDown = false;
+          sliderTrack.style.cursor = 'grab';
+        });
+        
+        sliderTrack.addEventListener('mouseup', () => {
+          isDown = false;
+          sliderTrack.style.cursor = 'grab';
+        });
+        
+        sliderTrack.addEventListener('mousemove', (e) => {
+          if (!isDown) return;
+          e.preventDefault();
+          const x = e.pageX - sliderTrack.offsetLeft;
+          const walk = (x - startX) * 2;
+          sliderTrack.scrollLeft = scrollLeft - walk;
+        });
+        
+        // Touch events для мобильных
+        sliderTrack.addEventListener('touchstart', (e) => {
+          isDown = true;
+          startX = e.touches[0].pageX - sliderTrack.offsetLeft;
+          scrollLeft = sliderTrack.scrollLeft;
+        });
+        
+        sliderTrack.addEventListener('touchend', () => {
+          isDown = false;
+        });
+        
+        sliderTrack.addEventListener('touchmove', (e) => {
+          if (!isDown) return;
+          const x = e.touches[0].pageX - sliderTrack.offsetLeft;
+          const walk = (x - startX) * 2;
+          sliderTrack.scrollLeft = scrollLeft - walk;
+        });
+        
+        // Обновляем курсор
+        sliderTrack.style.cursor = 'grab';
+      }
+      
+      // Закрытие модальных окон при клике вне их
+      window.addEventListener('click', function(event) {
+        const modals = ['serviceDiscountModal', 'discountModal', 'statsModal'];
+        modals.forEach(modalId => {
+          const modal = document.getElementById(modalId);
+          if (event.target === modal) {
+            if (modalId === 'serviceDiscountModal') closeServiceDiscountModal();
+            if (modalId === 'discountModal') closeDiscountModal();
+            if (modalId === 'statsModal') closeStatsModal();
+          }
+        });
+      });
+
       // === СИСТЕМА КОДОВ ===
       const CODE_RULES = {
         getVerificationCode: function (usedCount) {
@@ -472,7 +1937,7 @@
           };
         }
         
-        document.getElementById('clientIdDisplay').textContent = data.clientId;
+        document.getElementById('statsClientIdDisplay').textContent = data.clientId;
         document.getElementById('statTotalRequests').textContent = data.stats.totalRequests;
         document.getElementById('statRemaining').textContent = data.remaining;
         document.getElementById('regDate').textContent = new Date(data.stats.registrationDate).toLocaleDateString('ru-RU');
@@ -504,13 +1969,6 @@
 
       function closeDiscountModal() {
         document.getElementById('discountModal').style.display = 'none';
-      }
-
-      window.onclick = function(event) {
-        const statsModal = document.getElementById('statsModal');
-        const discountModal = document.getElementById('discountModal');
-        if (event.target == statsModal) closeStatsModal();
-        if (event.target == discountModal) closeDiscountModal();
       }
 
       document.addEventListener("DOMContentLoaded", () => {
@@ -572,27 +2030,6 @@
         window.open(telegramUrl, "_blank", "noopener,noreferrer");
       }
 
-      function enterPremium() {
-        const nickname = document.getElementById("nicknameInput").value.trim() || "друг";
-        const clientId = "VIP" + Date.now().toString(36).toUpperCase() + Math.random().toString(36).substr(2, 3).toUpperCase();
-        
-        const data = {
-          clientId: clientId,
-          nickname: nickname,
-          remaining: 10,
-          createdAt: Date.now(),
-          blocked: false,
-          stats: {
-            totalRequests: 0,
-            requestsByDate: {},
-            registrationDate: new Date().toISOString(),
-            lastActivity: new Date().toISOString()
-          }
-        };
-        savePremiumData(data);
-        showPremiumScreen(data);
-      }
-
       function showLoginScreen() {
         document.getElementById("loginScreen").classList.remove("hidden");
         document.getElementById("premiumScreen").classList.add("hidden");
@@ -605,7 +2042,7 @@
         document.getElementById("premiumScreen").classList.remove("hidden");
       }
 
-      // ИСПРАВЛЕННАЯ ФУНКЦИЯ ПОДДЕРЖКИ
+      // ФУНКЦИЯ ПОДДЕРЖКИ
       function contactSupport() {
         const data = getPremiumData();
         if (!data) {
@@ -637,7 +2074,7 @@
         const formattedDate = CODE_RULES.getFormattedDate();
 
         // Сообщение для Telegram
-        const telegramMessage = `⭐ Обращение в поддержку премиум-клиентов (${used}/10).Мы ответим в ближайшее время. Задайте свой вопрос после даты и кода \n\n📅 Дата: ${formattedDate}\n🆔 Код: ${verificationCode}\n👤 Клиент ID: ${data.clientId}`;
+        const telegramMessage = `⭐ Обращение в поддержку премиум-клиентов (${used}/10).Мы ответим Вам в первую очередь. Задайте свой вопрос после Клиент ID \n\n📅 Дата: ${formattedDate}\n🆔 Код: ${verificationCode}\n👤 Клиент ID: ${data.clientId}`;
 
         const encoded = encodeURIComponent(telegramMessage);
         const telegramUrl = `https://t.me/vipsimsupport?text=${encoded}`;
@@ -664,7 +2101,7 @@
       }
 
       function logout() {
-        if (confirm("Вы уверены, что хотите выйти? Все данные будут удалены из этого браузера.")) {
+        if (confirm("Вы уверены, что хотите выйти?")) {
           localStorage.removeItem("premiumData");
           showLoginScreen();
         }
@@ -678,22 +2115,14 @@
           adminData.clients[existingClientIndex] = {
             clientId: clientData.clientId,
             nickname: clientData.nickname,
-            registrationDate: clientData.createdAt,
+            registrationDate: new Date(clientData.createdAt).toISOString(),
             totalRequests: clientData.stats.totalRequests,
             lastActivity: clientData.stats.lastActivity,
             remaining: clientData.remaining,
+            paid: clientData.paid,
+            accessActive: true,
             blocked: clientData.blocked || false
           };
-        } else {
-          adminData.clients.push({
-            clientId: clientData.clientId,
-            nickname: clientData.nickname,
-            registrationDate: clientData.createdAt,
-            totalRequests: clientData.stats.totalRequests,
-            lastActivity: clientData.stats.lastActivity,
-            remaining: clientData.remaining,
-            blocked: clientData.blocked || false
-          });
         }
         
         localStorage.setItem('vipsim_admin', JSON.stringify(adminData));
