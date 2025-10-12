@@ -642,194 +642,81 @@
         </div>
 
         
-       <!-- БЛОК ВХОДА ПО ID -->
-<div class="login-by-id">
-  <div class="login-by-id-title">
-    🔑 Вход в кабинет по ID
-  </div>
-  <p class="login-by-id-description">
-    Уже зарегистрированы? Войдите в кабинет после активации доступа
-  </p>
-  
-  <div class="login-input-container">
+        <!-- БЛОК ВХОДА ПО ID -->
+        <div class="login-by-id">
+          <div style="font-size: 20px; font-weight: bold; color: #1976d2; margin-bottom: 15px;">
+            🔑 Вход в кабинет по ID
+          </div>
+          <p style="color: #555; margin-bottom: 20px;">
+            Уже зарегистрированы? Войдите в кабинет после активации доступа
+          </p>
+          
+       <!-- Десктопная версия (рядом) -->
+<div class="desktop-login">
+  <div style="display: flex; gap: 10px; align-items: center; justify-content: center;">
     <input
       type="text"
       id="accessCodeInput"
       placeholder="Введите ваш VIP ID"
       maxlength="20"
       autocomplete="off"
-      class="access-code-input"
+      style="flex: 1; max-width: 300px; padding: 12px; border: 2px solid #2196F3; border-radius: 8px; font-family: monospace; text-align: center; font-weight: bold; font-size: 16px;"
     />
-    <button onclick="checkAccessCode()" class="access-code-button">
+    <button onclick="checkAccessCode()" class="btn" style="background: #2196F3; color: white; padding: 12px 24px; font-size: 16px; white-space: nowrap;">
       🚀 Войти в кабинет
     </button>
   </div>
-  
-  <div class="login-by-id-note">
-    ID выдается после регистрации (формат: VIPABC123DEF)
-  </div>
+</div>
+
+<!-- Мобильная версия (столбик) -->
+<div class="mobile-login">
+  <input
+    type="text"
+    id="mobileAccessCodeInput"
+    placeholder="Введите ваш VIP ID"
+    maxlength="20"
+    autocomplete="off"
+    style="width: 100%; max-width: 300px; padding: 12px; border: 2px solid #2196F3; border-radius: 8px; font-family: monospace; text-align: center; font-weight: bold; font-size: 16px; margin-bottom: 10px; display: block; margin-left: auto; margin-right: auto;"
+  />
+  <button onclick="checkMobileAccessCode()" class="btn" style="width: 100%; max-width: 300px; background: #2196F3; color: white; padding: 12px 24px; font-size: 16px; white-space: nowrap; display: block; margin-left: auto; margin-right: auto; margin-bottom: 10px;">
+    🚀 Войти в кабинет
+  </button>
+</div>
+
+<div style="margin-top: 15px; font-size: 12px; color: #666; text-align: center;">
+  ID выдается после регистрации (формат: VIPABC123DEF)
 </div>
 
 <style>
-  .login-by-id {
-    text-align: center;
-    margin-top: 30px;
-    padding: 25px 20px;
-    background: #e3f2fd;
-    border-radius: 12px;
-    border: 2px solid #2196F3;
-  }
-  
-  .login-by-id-title {
-    font-size: 20px;
-    font-weight: bold;
-    color: #1976d2;
-    margin-bottom: 15px;
-  }
-  
-  .login-by-id-description {
-    color: #555;
-    margin-bottom: 20px;
-    line-height: 1.4;
-  }
-  
-  .login-input-container {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-  
-  .access-code-input {
-    flex: 1;
-    min-width: 200px;
-    max-width: 300px;
-    padding: 12px 15px;
-    border: 2px solid #2196F3;
-    border-radius: 8px;
-    font-family: monospace;
-    text-align: center;
-    font-weight: bold;
-    font-size: 16px;
-    background: white;
-    transition: all 0.3s ease;
-  }
-  
-  .access-code-input:focus {
-    outline: none;
-    border-color: #1565c0;
-    box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.1);
-  }
-  
-  .access-code-button {
-    background: #2196F3;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    padding: 12px 20px;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    white-space: nowrap;
-    min-width: 140px;
-  }
-  
-  .access-code-button:hover {
-    background: #1976d2;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(33, 150, 243, 0.3);
-  }
-  
-  .login-by-id-note {
-    margin-top: 15px;
-    font-size: 12px;
-    color: #666;
-    line-height: 1.4;
-  }
-  
-  /* Мобильная адаптация */
-  @media (max-width: 768px) {
-    .login-by-id {
-      padding: 20px 15px;
-      margin-top: 25px;
-    }
-    
-    .login-by-id-title {
-      font-size: 18px;
-      margin-bottom: 12px;
-    }
-    
-    .login-input-container {
-      flex-direction: column;
-      gap: 12px;
-    }
-    
-    .access-code-input {
-      min-width: 100%;
-      max-width: 100%;
-      font-size: 16px;
-      padding: 14px 12px;
-    }
-    
-    .access-code-button {
-      width: 100%;
-      max-width: 280px;
-      padding: 14px 20px;
-      font-size: 16px;
-    }
-    
-    .login-by-id-description {
-      font-size: 14px;
-      margin-bottom: 18px;
-    }
-  }
-  
-  @media (max-width: 480px) {
-    .login-by-id {
-      padding: 18px 12px;
-      margin-top: 20px;
-    }
-    
-    .login-by-id-title {
-      font-size: 17px;
-    }
-    
-    .access-code-input {
-      font-size: 15px;
-      padding: 13px 10px;
-    }
-    
-    .access-code-button {
-      font-size: 15px;
-      padding: 13px 18px;
-    }
-    
-    .login-by-id-note {
-      font-size: 11px;
-    }
-  }
-  
-  /* Для очень маленьких экранов */
-  @media (max-width: 360px) {
-    .login-by-id {
-      padding: 15px 10px;
-    }
-    
-    .login-by-id-title {
-      font-size: 16px;
-    }
-    
-    .access-code-input {
-      font-size: 14px;
-    }
-    
-    .access-code-button {
-      font-size: 14px;
-    }
-  }
+/* Показываем мобильную версию только на маленьких экранах */
+@media (max-width: 768px) {
+  .mobile-login { display: block; }
+  .desktop-login { display: none; }
+}
+
+/* Показываем десктопную версию на больших экранах */
+@media (min-width: 769px) {
+  .mobile-login { display: none; }
+  .desktop-login { display: block; }
+}
 </style>
+
+<script>
+function checkMobileAccessCode() {
+  const accessCode = document.getElementById('mobileAccessCodeInput').value.trim().toUpperCase();
+  if (!accessCode) {
+    alert('⚠️ Введите ваш ID');
+    return;
+  }
+  // Установим значение и вызовем основную функцию
+  document.getElementById('accessCodeInput').value = accessCode;
+  checkAccessCode();
+}
+</script>
+        </div>
+      </div>
+
+      
 
       <!-- Личный кабинет -->
       <div id="premiumScreen" class="hidden">
@@ -1692,21 +1579,57 @@
       }
       
       // Копирование ID в буфер обмена
-      function copyClientId() {
-        const clientId = document.getElementById('clientIdDisplay').textContent;
-        navigator.clipboard.writeText(clientId).then(() => {
-          const button = event.target;
-          const originalText = button.textContent;
-          button.textContent = '✅ Скопировано!';
-          button.style.background = '#2e7d32';
-          setTimeout(() => {
-            button.textContent = originalText;
-            button.style.background = '#4caf50';
-          }, 2000);
-        }).catch(() => {
-          alert('✅ ID скопирован! Вставьте его в комментарий к платежу');
-        });
-      }
+  function copyClientId() {
+  const clientId = document.getElementById('clientIdDisplay').textContent;
+  
+  // Сначала пробуем современный способ
+  if (navigator.clipboard && window.isSecureContext) {
+    navigator.clipboard.writeText(clientId).then(() => {
+      showCopyFeedback('✅ Скопировано!');
+    }).catch(err => {
+      console.error('Ошибка копирования:', err);
+      fallbackCopyText(clientId);
+    });
+  } else {
+    // Если не работает — используем резервный метод
+    fallbackCopyText(clientId);
+  }
+}
+
+// Резервный метод: создаём временный input, выделяем и копируем
+function fallbackCopyText(text) {
+  const textArea = document.createElement('textarea');
+  textArea.value = text;
+  textArea.style.position = 'fixed';
+  textArea.style.top = '0';
+  textArea.style.left = '0';
+  textArea.style.width = '1px';
+  textArea.style.height = '1px';
+  textArea.style.opacity = '0';
+  document.body.appendChild(textArea);
+  textArea.focus();
+  textArea.select();
+  try {
+    document.execCommand('copy');
+    showCopyFeedback('✅ Скопировано!');
+  } catch (err) {
+    alert('📋 ID: ' + text + '\n\n(Скопируйте вручную)');
+  }
+  document.body.removeChild(textArea);
+}
+
+// Функция для отображения обратной связи
+function showCopyFeedback(message) {
+  const button = event.target;
+  const originalText = button.textContent;
+  const originalBg = button.style.background;
+  button.textContent = message;
+  button.style.background = '#2e7d32';
+  setTimeout(() => {
+    button.textContent = originalText;
+    button.style.background = originalBg;
+  }, 2000);
+}
       
       // ТЕСТОВАЯ ФУНКЦИЯ ОПЛАТЫ
       function processTestPayment() {
@@ -1768,52 +1691,52 @@
       }
       
       // Проверка доступа по ID
-      function checkAccessCode() {
-        const accessCode = document.getElementById('accessCodeInput').value.trim().toUpperCase();
-        
-        if (!accessCode) {
-          alert('⚠️ Пожалуйста, введите ваш VIP ID');
-          return;
-        }
-        
-        const adminData = JSON.parse(localStorage.getItem('vipsim_admin') || '{"clients": []}');
-        const client = adminData.clients.find(c => c.clientId === accessCode);
-        
-        if (!client) {
-          alert('❌ ID не найден. Проверьте правильность ввода или дождитесь активации доступа.');
-          return;
-        }
-        
-        if (client.blocked) {
-          alert('🚫 Доступ заблокирован. Обратитесь в поддержку.');
-          return;
-        }
-        
-        if (!client.accessActive) {
-          alert('⏳ Доступ еще не активирован. Дождитесь подтверждения оплаты администратором.');
-          return;
-        }
-        
-        // Входим в кабинет
-        const clientData = {
-          clientId: client.clientId,
-          nickname: client.nickname,
-          remaining: client.remaining,
-          createdAt: new Date(client.registrationDate).getTime(),
-          paid: client.paid,
-          blocked: client.blocked,
-          stats: {
-            totalRequests: client.totalRequests,
-            requestsByDate: {},
-            registrationDate: client.registrationDate,
-            lastActivity: client.lastActivity
-          }
-        };
-        
-        savePremiumData(clientData);
-        showPremiumScreen(clientData);
-      }
+     function checkAccessCode() {
+  const input = document.getElementById('accessCodeInput');
+  const accessCode = input.value.trim().toUpperCase();
 
+  if (!accessCode) {
+    alert('⚠️ Пожалуйста, введите ваш VIP ID');
+    return;
+  }
+
+  const adminData = JSON.parse(localStorage.getItem('vipsim_admin') || '{"clients": []}');
+  const client = adminData.clients.find(c => c.clientId === accessCode);
+
+  if (!client) {
+    alert('❌ ID не найден. Проверьте правильность ввода или дождитесь активации.');
+    return;
+  }
+
+  if (client.blocked) {
+    alert('🚫 Доступ заблокирован. Обратитесь в поддержку.');
+    return;
+  }
+
+  if (!client.accessActive) {
+    alert('⏳ Доступ ещё не активирован. Дождитесь подтверждения оплаты.');
+    return;
+  }
+
+  // ✅ Всё хорошо — сохраняем и заходим
+  const clientData = {
+    clientId: client.clientId,
+    nickname: client.nickname,
+    remaining: client.remaining,
+    createdAt: new Date(client.registrationDate).getTime(),
+    paid: client.paid,
+    blocked: client.blocked,
+    stats: {
+      totalRequests: client.totalRequests,
+      requestsByDate: client.requestsByDate || {},
+      registrationDate: client.registrationDate,
+      lastActivity: client.lastActivity
+    }
+  };
+
+  savePremiumData(clientData);
+  showPremiumScreen(clientData);
+}
       
       
     
