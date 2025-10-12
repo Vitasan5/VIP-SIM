@@ -589,57 +589,112 @@
         <h1>⭐ Премиум-доступ</h1>
         
         <!-- БЛОК РЕГИСТРАЦИИ -->
-        <div id="registrationBlock">
-          <p style="text-align: center; margin-bottom: 20px; color: #555">
-            Для доступа к премиум-функциям необходимо оплатить 100 ₽
-          </p>
-          
-          <div class="benefits-box">
-            <div style="font-size: 24px; font-weight: bold; color: #b8860b; margin-bottom: 15px;">
-              💎 Что вы получаете:
-            </div>
-            <div style="text-align: left; display: inline-block;">
-              <div style="margin: 8px 0;">✅ 10 обращений в премиум-поддержку</div>
-              <div style="margin: 8px 0;">🎁 Персональные скидки на услуги</div>
-              <div style="margin: 8px 0;">⭐ Приоритетное обслуживание</div>
-            </div>
-          </div>
-          
-          <div class="login-form">
-            <input
-              type="text"
-              id="nicknameInput"
-              placeholder="Ваше имя (для обращений)"
-              maxlength="30"
-              autocomplete="off"
-            />
-            
-            <!-- БЛОК С ID КЛИЕНТА -->
-            <div id="clientIdBlock" style="display: none;">
-              <div class="client-id-display">
-                <div style="font-weight: bold; color: #2e7d32; margin-bottom: 15px; font-size: 18px;">
-                  🆔 ВАШ УНИКАЛЬНЫЙ ID
-                </div>
-                <div class="client-id-value" id="clientIdDisplay"></div>
-                <button class="copy-btn" onclick="copyClientId()">
-                  📋 Копировать ID
-                </button>
-              </div>
-              <p style="text-align: center; color: #d32f2f; font-weight: bold;">
-                ⚠️ Сохраните этот ID! Введите его в комментарии к платежу
-              </p>
-            </div>
-            
-            <!-- ТЕСТОВАЯ КНОПКА ОПЛАТЫ -->
-            <button 
-              id="paymentButton"
-              class="btn"
-              style="display: none; background: linear-gradient(135deg, #d4af37, #b8860b); color: white;"
-              onclick="processTestPayment()">
-              🧪 ТЕСТ: Оплатить 100 ₽
-            </button>
-          </div>
+<div id="registrationBlock">
+  <p style="text-align: center; margin-bottom: 20px; color: #555">
+    Для доступа к премиум-функциям необходимо оплатить 100 ₽
+  </p>
+  
+  <div class="benefits-box">
+    <div style="font-size: 24px; font-weight: bold; color: #b8860b; margin-bottom: 15px;">
+      💎 Что вы получаете:
+    </div>
+    <div style="text-align: left; display: inline-block;">
+      <div style="margin: 8px 0;">✅ 10 обращений в премиум-поддержку</div>
+      <div style="margin: 8px 0;">🎁 Персональные скидки на услуги</div>
+      <div style="margin: 8px 0;">⭐ Приоритетное обслуживание</div>
+    </div>
+  </div>
+  
+  <div class="login-form">
+    <input
+      type="text"
+      id="nicknameInput"
+      placeholder="Ваше имя (для обращений)"
+      maxlength="30"
+      autocomplete="off"
+    />
+    
+    <!-- БЛОК С ID КЛИЕНТА -->
+    <div id="clientIdBlock" style="display: none;">
+      <div class="client-id-display">
+        <div style="font-weight: bold; color: #2e7d32; margin-bottom: 15px; font-size: 18px;">
+          🆔 ВАШ УНИКАЛЬНЫЙ ID
         </div>
+        <div class="client-id-value" id="clientIdDisplay"></div>
+        <button class="copy-btn" onclick="copyClientId()">
+          📋 Копировать ID
+        </button>
+      </div>
+      <p style="text-align: center; color: #d32f2f; font-weight: bold;">
+        ⚠️ Сохраните этот ID! Введите его в комментарии к платежу
+      </p>
+    </div>
+    
+    <!-- КНОПКА ОПЛАТЫ -->
+    <a href="https://www.tinkoff.ru/rm/r_bXnjdeVBDP.xNMVwxAZqR/eZEaH42986" 
+       target="_blank" 
+       id="paymentButton"
+       class="btn"
+       style="display: none; background: linear-gradient(135deg, #d4af37, #b8860b); color: white; text-decoration: none;"
+       onclick="processPayment()">
+      💳 Перейти к оплате 100 ₽
+    </a>
+  </div>
+</div>
+
+<script>
+// Обработка перехода к оплате
+function processPayment() {
+  const pendingClient = JSON.parse(localStorage.getItem('pendingClient'));
+  
+  if (!pendingClient) {
+    alert('⚠️ Пожалуйста, введите данные для генерации ID');
+    return false;
+  }
+  
+  // Регистрируем начало оплаты в админке
+  const paymentData = {
+    id: 'pay_' + Date.now(),
+    clientId: pendingClient.clientId,
+    nickname: pendingClient.nickname,
+    amount: 100,
+    date: new Date().toISOString(),
+    status: 'pending',
+    description: 'Премиум-доступ к поддержке VIP-SIM'
+  };
+  
+  registerPendingPayment(paymentData);
+  
+  console.log('🔄 Клиент перешел к оплате с ID:', pendingClient.clientId);
+  return true;
+}
+
+// Регистрация ожидающего платежа
+function registerPendingPayment(paymentData) {
+  const adminData = JSON.parse(localStorage.getItem('vipsim_admin') || '{"clients": [], "payments": []}');
+  
+  // Добавляем клиента в ожидании оплаты
+  const existingClientIndex = adminData.clients.findIndex(c => c.clientId === paymentData.clientId);
+  if (existingClientIndex === -1) {
+    adminData.clients.push({
+      clientId: paymentData.clientId,
+      nickname: paymentData.nickname,
+      registrationDate: new Date().toISOString(),
+      totalRequests: 0,
+      lastActivity: new Date().toISOString(),
+      remaining: 0,
+      paid: false,
+      accessActive: false,
+      blocked: false
+    });
+  }
+  
+  // Добавляем платеж
+  adminData.payments.push(paymentData);
+  
+  localStorage.setItem('vipsim_admin', JSON.stringify(adminData));
+}
+</script>
 
         
         <!-- БЛОК ВХОДА ПО ID -->
@@ -1613,7 +1668,7 @@ function fallbackCopyText(text) {
     document.execCommand('copy');
     showCopyFeedback('✅ Скопировано!');
   } catch (err) {
-    alert('📋 ID: ' + text + '\n\n(Скопируйте вручную)');
+    alert('📋 ID: ' + text + '\n\n(Скопируйте)');
   }
   document.body.removeChild(textArea);
 }
@@ -2050,6 +2105,9 @@ function showCopyFeedback(message) {
         
         localStorage.setItem('vipsim_admin', JSON.stringify(adminData));
       }
+      
     </script>
+    
   </body>
 </html>
+
