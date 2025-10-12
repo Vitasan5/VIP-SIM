@@ -660,6 +660,31 @@
         setInterval(loadAdminData, 3000);
 
         document.addEventListener('DOMContentLoaded', loadAdminData);
+        // В админке показываем откуда пришел клиент
+function displayClientSource() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const source = urlParams.get('source');
+    const device = urlParams.get('device');
+    
+    if (source === 'mobile_site') {
+        console.log('Клиент зашел с мобильной версии сайта');
+        // Показываем мобильную иконку или пометку
+    }
+}
     </script>
+  
+  <button class="btn btn-danger" onclick="clearEverythingNow()" style="background: #dc3545; color: white; margin: 10px;">
+    🗑️ ОЧИСТИТЬ ВСЕ ДАННЫЕ СЕЙЧАС
+</button>
+
+<script>
+function clearEverythingNow() {
+    if (confirm('❌ УДАЛИТЬ ВСЕ ДАННЫЕ?\n\nВсе клиенты и платежи будут удалены!')) {
+        localStorage.setItem('vipsim_admin', JSON.stringify({"clients": [], "payments": []}));
+        location.reload();
+    }
+}
+</script>
+
 </body>
 </html>
