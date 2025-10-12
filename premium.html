@@ -659,7 +659,7 @@ function processPayment() {
     nickname: pendingClient.nickname,
     amount: 100,
     date: new Date().toISOString(),
-    status: 'pending',
+    status: 'paid', // Меняем на 'paid' чтобы сразу было видно в админке
     description: 'Премиум-доступ к поддержке VIP-SIM'
   };
   
@@ -683,10 +683,13 @@ function registerPendingPayment(paymentData) {
       totalRequests: 0,
       lastActivity: new Date().toISOString(),
       remaining: 0,
-      paid: false,
+      paid: true, // Меняем на true чтобы клиент считался оплатившим
       accessActive: false,
       blocked: false
     });
+  } else {
+    // Если клиент уже есть, обновляем его статус
+    adminData.clients[existingClientIndex].paid = true;
   }
   
   // Добавляем платеж
@@ -1668,7 +1671,7 @@ function fallbackCopyText(text) {
     document.execCommand('copy');
     showCopyFeedback('✅ Скопировано!');
   } catch (err) {
-    alert('📋 ID: ' + text + '\n\n(Скопируйте)');
+    alert('📋 ID: ' + text + '\n\n(Скопируйте вручную)');
   }
   document.body.removeChild(textArea);
 }
