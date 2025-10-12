@@ -1528,9 +1528,9 @@ function checkMobileAccessCode() {
           📊 Моя статистика
         </button>
 
-        <!--<button class="btn btn-renew" onclick="renewAccess()">
+        <button class="btn btn-renew" onclick="renewAccess()">
           🔁 Продлить доступ (100 ₽)
-        </button>-->
+        </button>
 
         <button class="btn btn-logout" onclick="logout()">
           Выйти из кабинета
@@ -1671,7 +1671,7 @@ function fallbackCopyText(text) {
     document.execCommand('copy');
     showCopyFeedback('✅ Скопировано!');
   } catch (err) {
-    alert('📋 ID: ' + text + '\n\n(Скопируйте вручную)');
+    alert('📋 ID: ' + text + '\n\n(Скопируйте)');
   }
   document.body.removeChild(textArea);
 }
@@ -2071,7 +2071,7 @@ function showCopyFeedback(message) {
 
       function renewAccess() {
         alert(
-          "В настоящей версии здесь будет оплата через ЮKassa.\nПока — демо-режим: доступ продлён!"
+          "Для продления доступа необходимо выйти из кабинета и снова войти с оплатой и новым ID"
         );
         const data = getPremiumData();
         if (data) {
