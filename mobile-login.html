@@ -1,0 +1,1387 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Премиум-клиент | VIP-SIM.RU</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+      body {
+        background: linear-gradient(135deg, #fdfbf6, #f5f2e6);
+        color: #222;
+        padding: 15px;
+        min-height: 100vh;
+      }
+      .container {
+        max-width: 100%;
+        margin: 20px auto;
+        background: white;
+        border-radius: 15px;
+        padding: 20px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+        border: 1px solid #f0e6d2;
+      }
+      h1 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #b8860b;
+        font-size: 24px;
+        font-weight: 700;
+      }
+      .welcome {
+        text-align: center;
+        font-size: 16px;
+        margin-bottom: 20px;
+        color: #444;
+      }
+      .counter-box {
+        background: #fff8e1;
+        border: 1px solid #ffd54f;
+        border-radius: 10px;
+        padding: 15px;
+        text-align: center;
+        margin: 20px 0;
+        font-size: 18px;
+        font-weight: 600;
+        color: #5d4037;
+      }
+      .counter-value {
+        color: #d4af37;
+        font-weight: 800;
+      }
+      .btn {
+        display: block;
+        width: 100%;
+        padding: 14px;
+        margin: 12px 0;
+        border: none;
+        border-radius: 10px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        text-align: center;
+        text-decoration: none;
+        transition: all 0.2s ease;
+      }
+      .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      }
+      .btn-support {
+        background: linear-gradient(135deg, #d4af37, #b8860b, #ffd700, #d4af37);
+        background-size: 300% 300%;
+        color: white;
+        font-size: 17px;
+        animation: goldShine 3s ease-in-out infinite;
+        position: relative;
+        overflow: hidden;
+      }
+      .btn-support::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+        transition: 0.5s;
+      }
+      .btn-support:hover::before {
+        left: 100%;
+      }
+      .btn-tariff {
+        background: #f8f9fa;
+        color: #333;
+        border: 1px solid #e9ecef;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        margin: 8px 0;
+        padding: 12px 10px;
+        font-size: 14px;
+        line-height: 1.3;
+        text-align: center;
+        text-decoration: none;
+      }
+      .btn-tariff:hover {
+        background: #e9ecef;
+        border-color: #d4af37;
+        text-decoration: none;
+        color: #333;
+      }
+      .btn-offer {
+        background: linear-gradient(135deg, #ff6b6b, #ff8e8e, #ff6b6b);
+        background-size: 200% 200%;
+        color: white;
+        border: none;
+        animation: pinkShine 2s ease-in-out infinite;
+      }
+      .btn-stats {
+        background: linear-gradient(135deg, #2196F3, #21CBF3, #2196F3);
+        background-size: 200% 200%;
+        color: white;
+        border: none;
+        animation: blueShine 2s ease-in-out infinite;
+      }
+      .btn-renew {
+        background: #43a047;
+        color: white;
+      }
+      .btn-logout {
+        background: #e0e0e0;
+        color: #555;
+        margin-top: 20px;
+      }
+      .login-form {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+      }
+      .login-form input {
+        padding: 12px;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        font-size: 16px;
+        outline: none;
+        transition: border 0.3s;
+      }
+      .login-form input:focus {
+        border-color: #d4af37;
+      }
+      .login-form button {
+        background: linear-gradient(135deg, #d4af37, #b8860b);
+        color: white;
+        border: none;
+        border-radius: 10px;
+        padding: 12px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+      }
+      .hidden {
+        display: none;
+      }
+      .note {
+        text-align: center;
+        font-size: 12px;
+        color: #888;
+        margin-top: 15px;
+      }
+      .error {
+        color: #d32f2f;
+        text-align: center;
+        margin: 8px 0;
+        padding: 8px;
+        background: #ffebee;
+        border-radius: 6px;
+        display: none;
+      }
+      .tariff-buttons {
+        display: flex;
+        flex-direction: column;
+        margin: 15px 0;
+        gap: 8px;
+      }
+      .tariff-icon {
+        width: 28px;
+        height: 28px;
+        margin-bottom: 6px;
+        object-fit: contain;
+      }
+
+      /* Стили для модальных окон */
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.5);
+        animation: fadeIn 0.3s;
+      }
+      .modal-content {
+        background: white;
+        margin: 15% auto;
+        padding: 20px;
+        border-radius: 15px;
+        width: 90%;
+        max-width: 400px;
+        text-align: center;
+        box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+        animation: slideIn 0.3s ease-out;
+        position: relative;
+      }
+      .close {
+        position: absolute;
+        right: 12px;
+        top: 12px;
+        font-size: 24px;
+        font-weight: bold;
+        cursor: pointer;
+        color: #888;
+      }
+      .close:hover {
+        color: #555;
+      }
+
+      /* Стили для статистики */
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+        margin: 15px 0;
+      }
+      .stat-item {
+        background: #f8f9fa;
+        padding: 12px;
+        border-radius: 8px;
+        text-align: center;
+        border-left: 4px solid #2196F3;
+      }
+      .stat-number {
+        font-size: 20px;
+        font-weight: 800;
+        color: #2196F3;
+        margin-bottom: 5px;
+      }
+      .stat-label {
+        font-size: 11px;
+        color: #666;
+      }
+      .client-id {
+        background: #e3f2fd;
+        padding: 8px;
+        border-radius: 6px;
+        margin: 12px 0;
+        font-family: monospace;
+        font-size: 13px;
+        color: #1976d2;
+      }
+
+      /* Стили для окна скидки */
+      .discount-title {
+        font-size: 20px;
+        font-weight: 800;
+        color: #d4af37;
+        margin-bottom: 12px;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+      }
+      .discount-amount {
+        font-size: 36px;
+        font-weight: 900;
+        color: #ff6b6b;
+        margin: 15px 0;
+        text-shadow: 2px 2px 8px rgba(255, 107, 107, 0.3);
+      }
+      .discount-text {
+        font-size: 16px;
+        color: #5d4037;
+        margin-bottom: 8px;
+        font-weight: 600;
+      }
+      .discount-note {
+        font-size: 13px;
+        color: #8d6e63;
+        margin-top: 15px;
+        font-style: italic;
+      }
+
+      /* Новые стили для экрана входа */
+      .client-id-display {
+        background: #e8f5e8;
+        padding: 15px;
+        border-radius: 10px;
+        border: 2px solid #4caf50;
+        margin: 15px 0;
+        text-align: center;
+      }
+      .client-id-value {
+        font-family: monospace;
+        font-size: 18px;
+        font-weight: bold;
+        color: #1976d2;
+        margin: 8px 0;
+      }
+      .copy-btn {
+        background: #4caf50;
+        color: white;
+        border: none;
+        padding: 8px 15px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: bold;
+        margin-top: 8px;
+      }
+      .copy-btn:hover {
+        background: #2e7d32;
+      }
+      .benefits-box {
+        text-align: center;
+        margin: 20px 0;
+        padding: 15px;
+        background: #fff8e1;
+        border-radius: 10px;
+        border: 2px solid #ffd54f;
+      }
+      .login-by-id {
+        text-align: center;
+        margin-top: 25px;
+        padding: 20px;
+        background: #e3f2fd;
+        border-radius: 10px;
+        border: 2px solid #2196F3;
+      }
+
+      /* Стили для слайдера услуг */
+      .services-slider-section {
+        margin: 15px 0;
+        padding: 5px 0;
+      }
+      
+      .services-slider-container {
+        position: relative;
+        display: flex;
+        align-items: center;
+        max-width: 100%;
+        margin: 0 auto;
+      }
+      
+      .services-slider-track {
+        display: flex;
+        gap: 12px;
+        padding: 8px 10px;
+        overflow-x: auto;
+        scroll-behavior: smooth;
+        scrollbar-width: thin;
+        scrollbar-color: #d4af37 transparent;
+        flex: 1;
+      }
+      
+      .services-slider-track::-webkit-scrollbar {
+        height: 4px;
+      }
+      
+      .services-slider-track::-webkit-scrollbar-track {
+        background: transparent;
+        border-radius: 10px;
+      }
+      
+      .services-slider-track::-webkit-scrollbar-thumb {
+        background: #d4af37;
+        border-radius: 10px;
+      }
+      
+      .services-slider-track::-webkit-scrollbar-thumb:hover {
+        background: #b8860b;
+      }
+      
+      .service-slide {
+        flex: 0 0 auto;
+        width: 130px;
+        background: white;
+        border-radius: 10px;
+        padding: 10px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border: 1px solid #f0f0f0;
+        position: relative;
+      }
+      
+      .service-slide:hover {
+        transform: translateY(-2px);
+        border-color: #d4af37;
+        box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2);
+      }
+      
+      .service-image {
+        position: relative;
+        width: 100%;
+        border-radius: 6px;
+        overflow: visible;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      
+      .service-image img {
+        width: 100%;
+        height: auto;
+        max-height: 100px;
+        object-fit: contain;
+        border-radius: 4px;
+      }
+      
+      .discount-badge {
+        position: absolute;
+        top: -6px;
+        right: -6px;
+        background: linear-gradient(135deg, #d4af37, #b8860b);
+        color: white;
+        padding: 3px 6px;
+        border-radius: 8px;
+        font-size: 10px;
+        font-weight: bold;
+        box-shadow: 0 2px 8px rgba(212, 175, 55, 0.4);
+        border: 2px solid white;
+        z-index: 2;
+        min-width: 32px;
+        text-align: center;
+      }
+      
+      /* Стрелки слайдера */
+      .slider-arrow {
+        background: #d4af37;
+        color: white;
+        border: none;
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        font-size: 14px;
+        font-weight: bold;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 6px rgba(212, 175, 55, 0.3);
+        z-index: 2;
+      }
+      
+      .slider-arrow:hover {
+        background: #b8860b;
+        transform: scale(1.05);
+      }
+      
+      .slider-arrow-left {
+        margin-right: 5px;
+      }
+      
+      .slider-arrow-right {
+        margin-left: 5px;
+      }
+
+      /* Стили для слайдера операторов */
+      .operators-call-section {
+        margin: 15px 0;
+        padding: 0 5px;
+      }
+      
+      .operators-slider-container {
+        position: relative;
+        display: flex;
+        align-items: center;
+        max-width: 100%;
+        margin: 0 auto;
+      }
+      
+      .operators-slider-track {
+        display: flex;
+        gap: 6px;
+        padding: 5px 8px;
+        overflow-x: auto;
+        scroll-behavior: smooth;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+        flex: 1;
+      }
+      
+      .operators-slider-track::-webkit-scrollbar {
+        display: none;
+      }
+      
+      .operator-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px 12px;
+        border: none;
+        border-radius: 6px;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 13px;
+        color: white;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+        flex: 0 0 auto;
+        width: 70px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+      
+      .operator-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      }
+      
+      /* Цвета операторов */
+      .operator-btn.mts {
+        background: linear-gradient(135deg, #e30613, #ff0019);
+      }
+      
+      .operator-btn.volna {
+        background: linear-gradient(135deg, #00a2ff, #0077cc);
+      }
+      
+      .operator-btn.win {
+        background: linear-gradient(135deg, #ff6b00, #ff8c00);
+      }
+      
+      .operator-btn.miranda {
+        background: linear-gradient(135deg, #8a2be2, #6a0dad);
+      }
+      
+      .operator-btn.megafon {
+        background: linear-gradient(135deg, #56b929, #3d941c);
+      }
+      
+      .operator-btn.beeline {
+        background: linear-gradient(135deg, #ffd100, #ffaa00);
+      }
+      
+      .operator-btn.t2 {
+        background: #000;
+        color: white;
+      }
+      
+      .operator-btn.yota {
+        background: linear-gradient(135deg, #00a2ff, #0077cc);
+        color: white;
+      }
+
+      @keyframes goldShine {
+        0%, 100% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+      }
+      @keyframes pinkShine {
+        0%, 100% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+      }
+      @keyframes blueShine {
+        0%, 100% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+      }
+      @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
+      @keyframes slideIn {
+        from { transform: translateY(-50px); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- ОБНОВЛЕННЫЙ ЭКРАН ВХОДА -->
+      <div id="loginScreen">
+        <h1>⭐ Премиум-доступ</h1>
+        
+        <!-- БЛОК РЕГИСТРАЦИИ -->
+        <div id="registrationBlock">
+          <p style="text-align: center; margin-bottom: 15px; color: #555">
+            Для доступа к премиум-функциям необходимо оплатить 100 ₽
+          </p>
+          
+          <div class="benefits-box">
+            <div style="font-size: 20px; font-weight: bold; color: #b8860b; margin-bottom: 12px;">
+              💎 Что вы получаете:
+            </div>
+            <div style="text-align: left; display: inline-block;">
+              <div style="margin: 6px 0;">✅ 10 обращений в премиум-поддержку</div>
+              <div style="margin: 6px 0;">🎁 Персональные скидки на услуги</div>
+              <div style="margin: 6px 0;">⭐ Приоритетное обслуживание</div>
+            </div>
+          </div>
+          
+          <div class="login-form">
+            <input
+              type="text"
+              id="nicknameInput"
+              placeholder="Ваше имя (для обращений)"
+              maxlength="30"
+              autocomplete="off"
+            />
+            
+            <!-- БЛОК С ID КЛИЕНТА -->
+            <div id="clientIdBlock" style="display: none;">
+              <div class="client-id-display">
+                <div style="font-weight: bold; color: #2e7d32; margin-bottom: 12px; font-size: 16px;">
+                  🆔 ВАШ УНИКАЛЬНЫЙ ID
+                </div>
+                <div class="client-id-value" id="clientIdDisplay"></div>
+                <button class="copy-btn" onclick="copyClientId()">
+                  📋 Копировать ID
+                </button>
+              </div>
+              <p style="text-align: center; color: #d32f2f; font-weight: bold;">
+                ⚠️ Сохраните этот ID! Введите его в комментарии к платежу
+              </p>
+            </div>
+            
+            <!-- ТЕСТОВАЯ КНОПКА ОПЛАТЫ -->
+            <button 
+              id="paymentButton"
+              class="btn"
+              style="display: none; background: linear-gradient(135deg, #d4af37, #b8860b); color: white;"
+              onclick="processTestPayment()">
+              🧪 ТЕСТ: Оплатить 100 ₽
+            </button>
+          </div>
+        </div>
+
+        
+        <!-- БЛОК ВХОДА ПО ID -->
+        <div class="login-by-id">
+          <div style="font-size: 18px; font-weight: bold; color: #1976d2; margin-bottom: 12px;">
+            🔑 Вход в кабинет по ID
+          </div>
+          <p style="color: #555; margin-bottom: 15px;">
+            Уже зарегистрированы? Войдите в кабинет после активации доступа
+          </p>
+          
+          <!-- Мобильная версия (столбик) -->
+          <div class="mobile-login">
+            <input
+              type="text"
+              id="mobileAccessCodeInput"
+              placeholder="Введите ваш VIP ID"
+              maxlength="20"
+              autocomplete="off"
+              style="width: 100%; padding: 12px; border: 2px solid #2196F3; border-radius: 8px; font-family: monospace; text-align: center; font-weight: bold; font-size: 16px; margin-bottom: 10px;"
+            />
+            <button onclick="checkMobileAccessCode()" class="btn" style="background: #2196F3; color: white; padding: 12px 24px; font-size: 16px; white-space: nowrap;">
+              🚀 Войти в кабинет
+            </button>
+          </div>
+
+          <div style="margin-top: 12px; font-size: 11px; color: #666; text-align: center;">
+            ID выдается после регистрации (формат: VIPABC123DEF)
+          </div>
+        </div>
+      </div>
+
+      <!-- Личный кабинет -->
+      <div id="premiumScreen" class="hidden">
+        <h1>⭐ Премиум-клиент</h1>
+        <div class="welcome">Привет, <span id="displayName">друг</span>!</div>
+
+        <div class="counter-box">
+          Осталось обращений:
+          <span class="counter-value" id="counter">10</span>/10
+        </div>
+
+        <div id="errorMessage" class="error"></div>
+
+        <button class="btn btn-support" onclick="contactSupport()">
+          ⭐ Премиум-поддержка
+        </button>
+
+        <button class="btn btn-offer" onclick="showDiscountModal()">
+          🎁 Скидка на красивый номер
+        </button>
+        
+        <!-- Слайдер услуг со скидками -->
+        <section class="services-slider-section">
+          <div class="services-slider-container">
+            <div class="services-slider-track" id="servicesSliderTrack">
+              <!-- Услуга 1 -->
+              <div class="service-slide" onclick="showServiceDiscount('Восстановление номера')">
+                <div class="service-image">
+                  <img src="img/Восстановление.jpg" alt="Восстановление номера" />
+                </div>
+              </div>
+              
+              <!-- Услуга 2 -->
+              <div class="service-slide" onclick="showServiceDiscount('Смена владельца')">
+                <div class="service-image">
+                  <img src="img/смена владельца.jpg" alt="Смена владельца" />
+                  <div class="discount-badge">-10%</div>
+                </div>
+              </div>
+              
+              <!-- Услуга 3 -->
+              <div class="service-slide" onclick="showServiceDiscount('Перенос номера')">
+                <div class="service-image">
+                  <img src="img/Смена оператора.jpg" alt="Перенос номера" />
+                  <div class="discount-badge">-10%</div>
+                </div>
+              </div>
+              
+              <!-- Услуга 4 -->
+              <div class="service-slide" onclick="showServiceDiscount('Корректировка данных')">
+                <div class="service-image">
+                  <img src="img/Корректируем личные данные в МТС.jpeg" alt="Корректировка данных" />
+                  <div class="discount-badge">-10%</div>
+                </div>
+              </div>
+              
+              <!-- Услуга 5 -->
+              <div class="service-slide" onclick="showServiceDiscount('Красивые номера')">
+                <div class="service-image">
+                  <img src="img/Красивые номера МТС, Волна, Win.jpg" alt="Красивые номера" />
+                  <div class="discount-badge">-10%</div>
+                </div>
+              </div>
+              
+              <!-- Услуга 6 -->
+              <div class="service-slide" onclick="showServiceDiscount('Поиск старого номера')">
+                <div class="service-image">
+                  <img src="img/Найдём и подключим ваш старый номер МТС-978.jpg" alt="Поиск старого номера" />
+                  <div class="discount-badge">-10%</div>
+                </div>
+              </div>
+              
+              <!-- Услуга 7 -->
+              <div class="service-slide" onclick="showServiceDiscount('Возврат в МТС')">
+                <div class="service-image">
+                  <img src="img/Обратно в МТС.jpg" alt="Возврат в МТС" />
+                  <div class="discount-badge">-10%</div>
+                </div>
+              </div>
+              
+              <!-- Услуга 8 -->
+              <div class="service-slide" onclick="showServiceDiscount('Безлимитный интернет')">
+                <div class="service-image">
+                  <img src="img/БЕЗЛИМИТНЫЙ ИНТЕРНЕТ 4G В Крыму для смартфона и модема.jpg" alt="Безлимитный интернет" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <div class="tariff-buttons">
+          <a href="tariffs.html" class="btn btn-tariff">
+            <img src="img/goldsim.png" alt="SIM" class="tariff-icon">
+            Тарифы для Крыма 
+          </a>
+          <a href="https://megasimka.ru/product-category/sim-cards/sim-internet/?ref=838" class="btn btn-tariff" target="_blank">
+            <img src="img/goldsim.png" alt="SIM" class="tariff-icon">
+            Тарифы для РФ
+          </a>
+        </div>
+        
+        <!-- Блок звонка операторам -->
+        <section class="operators-call-section">
+          <h3 style="text-align: center; margin: 20px 0 12px 0; color: #333; font-size: 16px;">📞 Позвонить оператору</h3>
+          
+          <div class="operators-slider-container">
+            <div class="operators-slider-track" id="operatorsSliderTrack">
+              <!-- МТС -->
+              <a href="tel:+74957660166" class="operator-btn mts">
+                <span class="operator-name">МТС</span>
+              </a>
+              
+              <!-- Волна -->
+              <a href="tel:+79785550555" class="operator-btn volna">
+                <span class="operator-name">Волна</span>
+              </a>
+              
+              <!-- Вин -->
+              <a href="tel:+79789090545" class="operator-btn win">
+                <span class="operator-name">Вин</span>
+              </a>
+              
+              <!-- Миранда -->
+              <a href="tel:+79790003330" class="operator-btn miranda">
+                <span class="operator-name">Миранда</span>
+              </a>
+              
+              <!-- МегаФон -->
+              <a href="tel:+79261110999" class="operator-btn megafon">
+                <span class="operator-name">МегаФон</span>
+              </a>
+              
+              <!-- Билайн -->
+              <a href="tel:+74957972727" class="operator-btn beeline">
+                <span class="operator-name">Билайн</span>
+              </a>
+              
+              <!-- Т2 -->
+              <a href="tel:+79515200611" class="operator-btn t2">
+                <span class="operator-name">Т2</span>
+              </a>
+              
+              <!-- Yota -->
+              <a href="tel:88005500007" class="operator-btn yota">
+                <span class="operator-name">Yota</span>
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <button class="btn btn-stats" onclick="showStats()">
+          📊 Моя статистика
+        </button>
+
+        <button class="btn btn-renew" onclick="renewAccess()">
+          🔁 Продлить доступ (100 ₽)
+        </button>
+
+        <button class="btn btn-logout" onclick="logout()">
+          Выйти из кабинета
+        </button>
+      </div>
+    </div>
+
+    <!-- Модальное окно статистики -->
+    <div id="statsModal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeStatsModal()">&times;</span>
+        <h3 style="color: #2196F3; margin-bottom: 12px;">📊 Ваша статистика</h3>
+        
+        <div class="client-id">
+          🆔 Ваш ID: <span id="statsClientIdDisplay"></span>
+        </div>
+        
+        <div class="stats-grid">
+          <div class="stat-item">
+            <div class="stat-number" id="statTotalRequests">0</div>
+            <div class="stat-label">Всего обращений</div>
+          </div>
+          
+          <div class="stat-item">
+            <div class="stat-number" id="statRemaining">10</div>
+            <div class="stat-label">Осталось обращений</div>
+          </div>
+          
+          <div class="stat-item">
+            <div class="stat-number" id="statThisMonth">0</div>
+            <div class="stat-label">В этом месяце</div>
+          </div>
+          
+          <div class="stat-item">
+            <div class="stat-number" id="statAvgWeek">0</div>
+            <div class="stat-label">В неделю</div>
+          </div>
+        </div>
+        
+        <div style="margin-top: 15px; padding: 12px; background: #f8f9fa; border-radius: 8px;">
+          <div style="font-size: 13px; color: #666; margin-bottom: 8px;">
+            📅 Дата регистрации: <span id="regDate"></span>
+          </div>
+          <div style="font-size: 13px; color: #666;">
+            ⏰ Последняя активность: <span id="lastActivity"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Модальное окно скидки -->
+    <div id="discountModal" class="modal">
+      <div class="modal-content" style="background: linear-gradient(135deg, #ffd700, #ffed4e, #ffd700);">
+        <span class="close" onclick="closeDiscountModal()">&times;</span>
+        <div class="discount-title">ПЕРСОНАЛЬНАЯ СКИДКА</div>
+        <div class="discount-amount">1000₽</div>
+        <div class="discount-text">на любой красивый номер от 5000₽</div>
+        <div class="discount-note">*Активируется при обращении в поддержку</div>
+      </div>
+    </div>
+
+    <!-- Модальное окно для услуг -->
+    <div id="serviceDiscountModal" class="modal">
+      <div class="modal-content" style="background: linear-gradient(135deg, #ffd700, #ffed4e, #ffd700);">
+        <span class="close" onclick="closeServiceDiscountModal()">&times;</span>
+        <div class="discount-title" id="serviceDiscountTitle">СКИДКА НА УСЛУГУ</div>
+        <div class="discount-amount">-10%</div>
+        <div class="discount-text" id="serviceDiscountText">на услугу</div>
+        <div class="discount-note">
+          *Активируется при обращении в 
+          <a href="javascript:void(0);" onclick="activateServiceSupport()" style="color: #b8860b; text-decoration: underline; font-weight: bold;">поддержку</a>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // === ОСНОВНЫЕ ФУНКЦИИ СИСТЕМЫ ===
+      
+      // Генерация ID при вводе имени
+      document.getElementById('nicknameInput').addEventListener('input', generateClientId);
+      
+      function generateClientId() {
+        const nickname = document.getElementById('nicknameInput').value.trim();
+        
+        if (nickname) {
+          // Генерируем уникальный ID клиента
+          const clientId = "VIP" + Date.now().toString(36).toUpperCase() + Math.random().toString(36).substr(2, 3).toUpperCase();
+          
+          // Показываем ID клиенту
+          document.getElementById('clientIdDisplay').textContent = clientId;
+          document.getElementById('clientIdBlock').style.display = 'block';
+          document.getElementById('paymentButton').style.display = 'block';
+          
+          // Сохраняем данные для использования при оплате
+          localStorage.setItem('pendingClient', JSON.stringify({
+            clientId: clientId,
+            nickname: nickname,
+            generatedAt: new Date().toISOString()
+          }));
+        } else {
+          document.getElementById('clientIdBlock').style.display = 'none';
+          document.getElementById('paymentButton').style.display = 'none';
+        }
+      }
+      
+      // Копирование ID в буфер обмена
+      function copyClientId() {
+        const clientId = document.getElementById('clientIdDisplay').textContent;
+        
+        // Сначала пробуем современный способ
+        if (navigator.clipboard && window.isSecureContext) {
+          navigator.clipboard.writeText(clientId).then(() => {
+            showCopyFeedback('✅ Скопировано!');
+          }).catch(err => {
+            console.error('Ошибка копирования:', err);
+            fallbackCopyText(clientId);
+          });
+        } else {
+          // Если не работает — используем резервный метод
+          fallbackCopyText(clientId);
+        }
+      }
+
+      // Резервный метод: создаём временный input, выделяем и копируем
+      function fallbackCopyText(text) {
+        const textArea = document.createElement('textarea');
+        textArea.value = text;
+        textArea.style.position = 'fixed';
+        textArea.style.top = '0';
+        textArea.style.left = '0';
+        textArea.style.width = '1px';
+        textArea.style.height = '1px';
+        textArea.style.opacity = '0';
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+        try {
+          document.execCommand('copy');
+          showCopyFeedback('✅ Скопировано!');
+        } catch (err) {
+          alert('📋 ID: ' + text + '\n\n(Скопируйте вручную)');
+        }
+        document.body.removeChild(textArea);
+      }
+
+      // Функция для отображения обратной связи
+      function showCopyFeedback(message) {
+        const button = event.target;
+        const originalText = button.textContent;
+        const originalBg = button.style.background;
+        button.textContent = message;
+        button.style.background = '#2e7d32';
+        setTimeout(() => {
+          button.textContent = originalText;
+          button.style.background = originalBg;
+        }, 2000);
+      }
+      
+      // ТЕСТОВАЯ ФУНКЦИЯ ОПЛАТЫ
+      function processTestPayment() {
+        const pendingClient = JSON.parse(localStorage.getItem('pendingClient'));
+        
+        if (!pendingClient) {
+          alert('⚠️ Пожалуйста, введите данные для генерации ID');
+          return;
+        }
+        
+        // Симулируем успешную оплату
+        if (confirm(`🧪 ТЕСТОВЫЙ РЕЖИМ\n\nСумма: 100 ₽\nКлиент: ${pendingClient.nickname}\nID: ${pendingClient.clientId}\n\nИмитировать оплату?`)) {
+          
+          // Регистрируем клиента в админке как ожидающего активации
+          const adminData = JSON.parse(localStorage.getItem('vipsim_admin') || '{"clients": [], "payments": []}');
+          
+          // Добавляем клиента
+          const clientIndex = adminData.clients.findIndex(c => c.clientId === pendingClient.clientId);
+          if (clientIndex === -1) {
+            adminData.clients.push({
+              clientId: pendingClient.clientId,
+              nickname: pendingClient.nickname,
+              registrationDate: new Date().toISOString(),
+              totalRequests: 0,
+              lastActivity: new Date().toISOString(),
+              remaining: 0, // Пока 0 - доступ не активирован
+              paid: true,
+              accessActive: false, // Доступ не активен
+              blocked: false
+            });
+          }
+          
+          // Добавляем платеж
+          const paymentData = {
+            id: 'pay_' + Date.now(),
+            clientId: pendingClient.clientId,
+            nickname: pendingClient.nickname,
+            amount: 100,
+            date: new Date().toISOString(),
+            status: 'paid',
+            description: 'Премиум-доступ к поддержке VIP-SIM (ТЕСТ)'
+          };
+          
+          adminData.payments = adminData.payments || [];
+          adminData.payments.push(paymentData);
+          
+          localStorage.setItem('vipsim_admin', JSON.stringify(adminData));
+          
+          alert(`✅ Тестовая оплата завершена!\n\n🆔 Ваш ID: ${pendingClient.clientId}\n\n💡 Сохраните этот ID! После активации доступа администратором вы сможете войти в кабинет.`);
+          
+          // Очищаем временные данные
+          localStorage.removeItem('pendingClient');
+          
+          // Сбрасываем форму
+          document.getElementById('nicknameInput').value = '';
+          document.getElementById('clientIdBlock').style.display = 'none';
+          document.getElementById('paymentButton').style.display = 'none';
+        }
+      }
+      
+      // Проверка доступа по ID
+      function checkMobileAccessCode() {
+        const accessCode = document.getElementById('mobileAccessCodeInput').value.trim().toUpperCase();
+
+        if (!accessCode) {
+          alert('⚠️ Пожалуйста, введите ваш VIP ID');
+          return;
+        }
+
+        const adminData = JSON.parse(localStorage.getItem('vipsim_admin') || '{"clients": []}');
+        const client = adminData.clients.find(c => c.clientId === accessCode);
+
+        if (!client) {
+          alert('❌ ID не найден. Проверьте правильность ввода или дождитесь активации.');
+          return;
+        }
+
+        if (client.blocked) {
+          alert('🚫 Доступ заблокирован. Обратитесь в поддержку.');
+          return;
+        }
+
+        if (!client.accessActive) {
+          alert('⏳ Доступ ещё не активирован. Дождитесь подтверждения оплаты.');
+          return;
+        }
+
+        // ✅ Всё хорошо — сохраняем и заходим
+        const clientData = {
+          clientId: client.clientId,
+          nickname: client.nickname,
+          remaining: client.remaining,
+          createdAt: new Date(client.registrationDate).getTime(),
+          paid: client.paid,
+          blocked: client.blocked,
+          stats: {
+            totalRequests: client.totalRequests,
+            requestsByDate: client.requestsByDate || {},
+            registrationDate: client.registrationDate,
+            lastActivity: client.lastActivity
+          }
+        };
+
+        savePremiumData(clientData);
+        showPremiumScreen(clientData);
+      }
+      
+      // Функции для слайдера услуг
+      let currentService = '';
+      
+      function showServiceDiscount(serviceName) {
+        currentService = serviceName;
+        document.getElementById('serviceDiscountTitle').textContent = `СКИДКА НА ${serviceName.toUpperCase()}`;
+        document.getElementById('serviceDiscountText').textContent = `на услугу "${serviceName}"`;
+        document.getElementById('serviceDiscountModal').style.display = 'block';
+      }
+      
+      function closeServiceDiscountModal() {
+        document.getElementById('serviceDiscountModal').style.display = 'none';
+        currentService = '';
+      }
+      
+      function activateServiceSupport() {
+        closeServiceDiscountModal();
+        contactSupport();
+      }
+
+      // Инициализация свайпа для слайдеров
+      document.addEventListener('DOMContentLoaded', function() {
+        // Слайдер услуг
+        const servicesSlider = document.getElementById('servicesSliderTrack');
+        initSliderSwipe(servicesSlider);
+        
+        // Слайдер операторов
+        const operatorsSlider = document.getElementById('operatorsSliderTrack');
+        initSliderSwipe(operatorsSlider);
+      });
+      
+      function initSliderSwipe(sliderTrack) {
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+        
+        // Touch events для мобильных
+        sliderTrack.addEventListener('touchstart', (e) => {
+          isDown = true;
+          startX = e.touches[0].pageX - sliderTrack.offsetLeft;
+          scrollLeft = sliderTrack.scrollLeft;
+        });
+        
+        sliderTrack.addEventListener('touchend', () => {
+          isDown = false;
+        });
+        
+        sliderTrack.addEventListener('touchmove', (e) => {
+          if (!isDown) return;
+          const x = e.touches[0].pageX - sliderTrack.offsetLeft;
+          const walk = (x - startX) * 2;
+          sliderTrack.scrollLeft = scrollLeft - walk;
+        });
+      }
+      
+      // Закрытие модальных окон при клике вне их
+      window.addEventListener('click', function(event) {
+        const modals = ['serviceDiscountModal', 'discountModal', 'statsModal'];
+        modals.forEach(modalId => {
+          const modal = document.getElementById(modalId);
+          if (event.target === modal) {
+            if (modalId === 'serviceDiscountModal') closeServiceDiscountModal();
+            if (modalId === 'discountModal') closeDiscountModal();
+            if (modalId === 'statsModal') closeStatsModal();
+          }
+        });
+      });
+
+      // === СИСТЕМА КОДОВ ===
+      const CODE_RULES = {
+        getVerificationCode: function (usedCount) {
+          const now = new Date();
+          const months = ["j","f","m","a","m","j","j","a","s","o","n","d"];
+          const day = now.getDate();
+          const month = months[now.getMonth()];
+          const randomLetters = Math.random().toString(36).substr(2, 2).toUpperCase();
+          return day + month + randomLetters + usedCount;
+        },
+
+        getFormattedDate: function () {
+          const now = new Date();
+          return now.toLocaleDateString("ru-RU");
+        },
+      };
+
+      // Функции для модальных окон
+      function showStats() {
+        const data = getPremiumData();
+        if (!data) return;
+        
+        if (!data.stats) {
+          data.stats = {
+            totalRequests: 0,
+            requestsByDate: {},
+            registrationDate: new Date().toISOString(),
+            lastActivity: new Date().toISOString()
+          };
+        }
+        
+        document.getElementById('statsClientIdDisplay').textContent = data.clientId;
+        document.getElementById('statTotalRequests').textContent = data.stats.totalRequests;
+        document.getElementById('statRemaining').textContent = data.remaining;
+        document.getElementById('regDate').textContent = new Date(data.stats.registrationDate).toLocaleDateString('ru-RU');
+        document.getElementById('lastActivity').textContent = new Date(data.stats.lastActivity).toLocaleDateString('ru-RU');
+        
+        const thisMonth = new Date().getMonth();
+        const thisYear = new Date().getFullYear();
+        const monthRequests = Object.keys(data.stats.requestsByDate).filter(date => {
+          const requestDate = new Date(date);
+          return requestDate.getMonth() === thisMonth && requestDate.getFullYear() === thisYear;
+        }).length;
+        
+        document.getElementById('statThisMonth').textContent = monthRequests;
+        
+        const weeksSinceRegistration = Math.max(1, Math.ceil((Date.now() - new Date(data.stats.registrationDate).getTime()) / (7 * 24 * 60 * 60 * 1000)));
+        const avgPerWeek = (data.stats.totalRequests / weeksSinceRegistration).toFixed(1);
+        document.getElementById('statAvgWeek').textContent = avgPerWeek;
+        
+        document.getElementById('statsModal').style.display = 'block';
+      }
+      
+      function closeStatsModal() {
+        document.getElementById('statsModal').style.display = 'none';
+      }
+      
+      function showDiscountModal() {
+        document.getElementById('discountModal').style.display = 'block';
+      }
+
+      function closeDiscountModal() {
+        document.getElementById('discountModal').style.display = 'none';
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const data = getPremiumData();
+        if (data && data.remaining >= 0 && !data.blocked) {
+          showPremiumScreen(data);
+        } else if (data && data.blocked) {
+          showBlockedScreen();
+        } else {
+          showLoginScreen();
+        }
+      });
+
+      function getPremiumData() {
+        const raw = localStorage.getItem("premiumData");
+        if (!raw) return null;
+        try {
+          const data = JSON.parse(raw);
+          if (data.remaining < 0) return null;
+          return data;
+        } catch (e) {
+          return null;
+        }
+      }
+
+      function savePremiumData(data) {
+        localStorage.setItem("premiumData", JSON.stringify(data));
+        updateAdminStats(data);
+      }
+
+      function showError(message) {
+        const errorEl = document.getElementById('errorMessage');
+        errorEl.textContent = message;
+        errorEl.style.display = 'block';
+        setTimeout(() => {
+          errorEl.style.display = 'none';
+        }, 5000);
+      }
+
+      function showBlockedScreen() {
+        document.getElementById('loginScreen').innerHTML = `
+          <h1>🚫 Доступ заблокирован</h1>
+          <p style="text-align: center; margin-bottom: 20px; color: #555">
+            Ваш кабинет временно заблокирован.<br>
+            Для разблокировки обратитесь в поддержку.
+          </p>
+          <button class="btn btn-support" onclick="contactSupportBlocked()">
+            📞 Написать в поддержку
+          </button>
+        `;
+        document.getElementById('loginScreen').classList.remove('hidden');
+        document.getElementById('premiumScreen').classList.add('hidden');
+      }
+
+      function contactSupportBlocked() {
+        const message = "🚫 Запрос на разблокировку кабинета. Мой кабинет заблокирован, помогите восстановить доступ.";
+        const encoded = encodeURIComponent(message);
+        const telegramUrl = `https://t.me/vipsimsupport?text=${encoded}`;
+        window.open(telegramUrl, "_blank", "noopener,noreferrer");
+      }
+
+      function showLoginScreen() {
+        document.getElementById("loginScreen").classList.remove("hidden");
+        document.getElementById("premiumScreen").classList.add("hidden");
+      }
+
+      function showPremiumScreen(data) {
+        document.getElementById("displayName").textContent = data.nickname;
+        document.getElementById("counter").textContent = data.remaining;
+        document.getElementById("loginScreen").classList.add("hidden");
+        document.getElementById("premiumScreen").classList.remove("hidden");
+      }
+
+      // ФУНКЦИЯ ПОДДЕРЖКИ
+      function contactSupport() {
+        const data = getPremiumData();
+        if (!data) {
+          showError('Ошибка доступа. Пожалуйста, войдите снова.');
+          return;
+        }
+
+        if (data.blocked) {
+          showError('Доступ заблокирован. Обратитесь в поддержку.');
+          return;
+        }
+
+        if (data.remaining <= 0) {
+          showError("Обращения закончились. Пожалуйста, продлите доступ.");
+          return;
+        }
+
+        // Обновляем статистику
+        const today = new Date().toDateString();
+        data.stats.totalRequests++;
+        data.stats.requestsByDate[today] = (data.stats.requestsByDate[today] || 0) + 1;
+        data.stats.lastActivity = new Date().toISOString();
+
+        const used = 11 - data.remaining;
+        const requestId = "req_" + Date.now().toString(36).substr(4, 8);
+
+        // Генерируем код по системе
+        const verificationCode = CODE_RULES.getVerificationCode(used);
+        const formattedDate = CODE_RULES.getFormattedDate();
+
+        // Сообщение для Telegram
+        const telegramMessage = `⭐ Обращение в поддержку премиум-клиентов (${used}/10).Мы ответим Вам в первую очередь. Задайте свой вопрос после Клиент ID \n\n📅 Дата: ${formattedDate}\n🆔 Код: ${verificationCode}\n👤 Клиент ID: ${data.clientId}`;
+
+        const encoded = encodeURIComponent(telegramMessage);
+        const telegramUrl = `https://t.me/vipsimsupport?text=${encoded}`;
+
+        // Обновляем данные
+        data.remaining -= 1;
+        savePremiumData(data);
+        document.getElementById("counter").textContent = data.remaining;
+
+        // Открываем чат
+        window.open(telegramUrl, "_blank", "noopener,noreferrer");
+      }
+
+      function renewAccess() {
+        alert(
+          "В настоящей версии здесь будет оплата через ЮKassa.\nПока — демо-режим: доступ продлён!"
+        );
+        const data = getPremiumData();
+        if (data) {
+          data.remaining = 10;
+          savePremiumData(data);
+          document.getElementById("counter").textContent = 10;
+        }
+      }
+
+      function logout() {
+        if (confirm("Вы уверены, что хотите выйти?")) {
+          localStorage.removeItem("premiumData");
+          showLoginScreen();
+        }
+      }
+
+      function updateAdminStats(clientData) {
+        const adminData = JSON.parse(localStorage.getItem('vipsim_admin') || '{"clients": []}');
+        
+        const existingClientIndex = adminData.clients.findIndex(c => c.clientId === clientData.clientId);
+        if (existingClientIndex !== -1) {
+          adminData.clients[existingClientIndex] = {
+            clientId: clientData.clientId,
+            nickname: clientData.nickname,
+            registrationDate: new Date(clientData.createdAt).toISOString(),
+            totalRequests: clientData.stats.totalRequests,
+            lastActivity: clientData.stats.lastActivity,
+            remaining: clientData.remaining,
+            paid: clientData.paid,
+            accessActive: true,
+            blocked: clientData.blocked || false
+          };
+        }
+        
+        localStorage.setItem('vipsim_admin', JSON.stringify(adminData));
+      }
+      
+    </script>
+  </body>
+</html>
