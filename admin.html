@@ -684,6 +684,63 @@ function clearEverythingNow() {
         location.reload();
     }
 }
+
+</script>
+<!-- В админке добавьте этот блок -->
+<div class="section">
+    <h2>👥 Добавить клиента вручную</h2>
+    <div style="display: grid; gap: 10px; max-width: 400px;">
+        <input type="text" id="manualClientId" placeholder="VIP ID клиента" class="access-code-input">
+        <input type="text" id="manualClientName" placeholder="Имя клиента" class="access-code-input">
+        <button class="btn btn-success" onclick="addManualClient()">✅ Добавить клиента</button>
+    </div>
+</div>
+
+<script>
+function addManualClient() {
+    const clientId = document.getElementById('manualClientId').value.trim().toUpperCase();
+    const clientName = document.getElementById('manualClientName').value.trim();
+    
+    if (!clientId || !clientName) {
+        alert('Заполните все поля');
+        return;
+    }
+    
+    const adminData = JSON.parse(localStorage.getItem('vipsim_admin') || '{"clients": [], "payments": []}');
+    
+    // Добавляем клиента
+    adminData.clients.push({
+        clientId: clientId,
+        nickname: clientName,
+        registrationDate: new Date().toISOString(),
+        totalRequests: 0,
+        lastActivity: new Date().toISOString(),
+        remaining: 0,
+        paid: true,
+        accessActive: false,
+        blocked: false,
+        device: 'manual'
+    });
+    
+    // Добавляем платеж
+    adminData.payments.push({
+        id: 'pay_' + Date.now(),
+        clientId: clientId,
+        nickname: clientName,
+        amount: 100,
+        date: new Date().toISOString(),
+        status: 'paid',
+        description: 'Ручная регистрация'
+    });
+    
+    localStorage.setItem('vipsim_admin', JSON.stringify(adminData));
+    loadAdminData();
+    
+    document.getElementById('manualClientId').value = '';
+    document.getElementById('manualClientName').value = '';
+    
+    alert('✅ Клиент добавлен!');
+}
 </script>
 
 </body>
