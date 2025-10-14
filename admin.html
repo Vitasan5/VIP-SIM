@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Админ-панель | VIP-SIM.RU</title>
+    
     <style>
         * {
             margin: 0;
@@ -220,6 +221,86 @@
         <a href="index.html" class="btn back-btn">← Назад в кабинет</a>
         <h1>🔧 Админ-панель VIP-SIM</h1>
         
+        <!-- Разместите этот блок в верхней части админки, после заголовка -->
+<div class="section" style="margin-top: 20px;">
+    <h2>👥 Быстрое добавление клиента</h2>
+    <div style="display: flex; gap: 10px; align-items: end; flex-wrap: wrap;">
+        <div style="flex: 1; min-width: 200px;">
+            <label style="display: block; font-size: 12px; color: #666; margin-bottom: 5px;">VIP ID клиента</label>
+            <input type="text" id="manualClientId" placeholder="Например: VIPABC123DEF" class="access-code-input" style="width: 100%;">
+        </div>
+        <div style="flex: 1; min-width: 200px;">
+            <label style="display: block; font-size: 12px; color: #666; margin-bottom: 5px;">Имя клиента</label>
+            <input type="text" id="manualClientName" placeholder="Имя для обращений" class="access-code-input" style="width: 100%;">
+        </div>
+        <div>
+            <button class="btn btn-success" onclick="addManualClient()" style="min-width: 150px; height: 42px;">
+                ✅ Добавить клиента
+            </button>
+        </div>
+    </div>
+</div>
+
+<script>
+function addManualClient() {
+    const clientId = document.getElementById('manualClientId').value.trim().toUpperCase();
+    const clientName = document.getElementById('manualClientName').value.trim();
+    
+    if (!clientId || !clientName) {
+        alert('Заполните все поля');
+        return;
+    }
+    
+    if (!clientId.startsWith('VIP')) {
+        alert('ID должен начинаться с VIP');
+        return;
+    }
+    
+    const adminData = JSON.parse(localStorage.getItem('vipsim_admin') || '{"clients": [], "payments": []}');
+    
+    // Проверяем, нет ли уже такого клиента
+    const existingClient = adminData.clients.find(c => c.clientId === clientId);
+    if (existingClient) {
+        alert('❌ Клиент с таким ID уже существует');
+        return;
+    }
+    
+    // Добавляем клиента
+    adminData.clients.push({
+        clientId: clientId,
+        nickname: clientName,
+        registrationDate: new Date().toISOString(),
+        totalRequests: 0,
+        lastActivity: new Date().toISOString(),
+        remaining: 0,
+        paid: true,
+        accessActive: false,
+        blocked: false,
+        source: 'manual'
+    });
+    
+    // Добавляем платеж
+    adminData.payments.push({
+        id: 'pay_' + Date.now(),
+        clientId: clientId,
+        nickname: clientName,
+        amount: 100,
+        date: new Date().toISOString(),
+        status: 'paid',
+        description: 'Ручная регистрация'
+    });
+    
+    localStorage.setItem('vipsim_admin', JSON.stringify(adminData));
+    loadAdminData();
+    
+    // Очищаем поля
+    document.getElementById('manualClientId').value = '';
+    document.getElementById('manualClientName').value = '';
+    
+    alert('✅ Клиент добавлен! Теперь активируйте ему доступ.');
+}
+</script>
+
         <div class="tab-buttons">
             <button class="tab-btn active" onclick="showTab('overview')">📊 Обзор</button>
             <button class="tab-btn" onclick="showTab('clients')">👥 Клиенты</button>
@@ -285,6 +366,7 @@
     </div>
 
     <script>
+        
         let currentTab = 'overview';
         let currentSearchTerm = '';
         
@@ -532,19 +614,41 @@
             }
         }
 
-        // Блокировка клиента
         function blockClient(clientId) {
-            if (confirm(`Заблокировать клиента ${clientId}?`)) {
-                const adminData = JSON.parse(localStorage.getItem('vipsim_admin'));
-                const client = adminData.clients.find(c => c.clientId === clientId);
-                if (client) {
-                    client.blocked = true;
-                    localStorage.setItem('vipsim_admin', JSON.stringify(adminData));
-                    loadAdminData();
-                    alert('Клиент заблокирован!');
+    if (confirm(`Заблокировать клиента ${clientId}?\n\nЕго немедленно выбросит из кабинета.`)) {
+        const adminData = JSON.parse(localStorage.getItem('vipsim_admin'));
+        const client = adminData.clients.find(c => c.clientId === clientId);
+        
+        if (client) {
+            // 1. Блокируем в админке
+            client.blocked = true;
+            client.accessActive = false;
+            
+            // 2. ОЧИЩАЕМ ЕГО ДАННЫЕ В КАБИНЕТЕ
+            // Это выбросит его из системы
+            const allKeys = Object.keys(localStorage);
+            allKeys.forEach(key => {
+                if (key === 'premiumData') {
+                    // Проверяем, что это данные нужного клиента
+                    try {
+                        const premiumData = JSON.parse(localStorage.getItem(key));
+                        if (premiumData && premiumData.clientId === clientId) {
+                            localStorage.removeItem(key);
+                            console.log('✅ Удалены данные кабинета для:', clientId);
+                        }
+                    } catch (e) {
+                        console.log('Ошибка при удалении данных');
+                    }
                 }
-            }
+            });
+            
+            localStorage.setItem('vipsim_admin', JSON.stringify(adminData));
+            loadAdminData();
+            
+            alert('✅ Клиент заблокирован! Сессия завершена.');
         }
+    }
+}
 
         // Разблокировка клиента
         function unblockClient(clientId) {
@@ -685,62 +789,7 @@ function clearEverythingNow() {
     }
 }
 
-</script>
-<!-- В админке добавьте этот блок -->
-<div class="section">
-    <h2>👥 Добавить клиента вручную</h2>
-    <div style="display: grid; gap: 10px; max-width: 400px;">
-        <input type="text" id="manualClientId" placeholder="VIP ID клиента" class="access-code-input">
-        <input type="text" id="manualClientName" placeholder="Имя клиента" class="access-code-input">
-        <button class="btn btn-success" onclick="addManualClient()">✅ Добавить клиента</button>
-    </div>
-</div>
 
-<script>
-function addManualClient() {
-    const clientId = document.getElementById('manualClientId').value.trim().toUpperCase();
-    const clientName = document.getElementById('manualClientName').value.trim();
-    
-    if (!clientId || !clientName) {
-        alert('Заполните все поля');
-        return;
-    }
-    
-    const adminData = JSON.parse(localStorage.getItem('vipsim_admin') || '{"clients": [], "payments": []}');
-    
-    // Добавляем клиента
-    adminData.clients.push({
-        clientId: clientId,
-        nickname: clientName,
-        registrationDate: new Date().toISOString(),
-        totalRequests: 0,
-        lastActivity: new Date().toISOString(),
-        remaining: 0,
-        paid: true,
-        accessActive: false,
-        blocked: false,
-        device: 'manual'
-    });
-    
-    // Добавляем платеж
-    adminData.payments.push({
-        id: 'pay_' + Date.now(),
-        clientId: clientId,
-        nickname: clientName,
-        amount: 100,
-        date: new Date().toISOString(),
-        status: 'paid',
-        description: 'Ручная регистрация'
-    });
-    
-    localStorage.setItem('vipsim_admin', JSON.stringify(adminData));
-    loadAdminData();
-    
-    document.getElementById('manualClientId').value = '';
-    document.getElementById('manualClientName').value = '';
-    
-    alert('✅ Клиент добавлен!');
-}
 </script>
 
 </body>

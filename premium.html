@@ -631,14 +631,14 @@
     </div>
     
     <!-- КНОПКА ОПЛАТЫ -->
-   <a href="https://pro.selfwork.ru/kassa/10consultation" 
-   target="_blank" 
-   id="paymentButton"
-   class="btn"
-   style="display: none; background: linear-gradient(135deg, #d4af37, #b8860b); color: white; text-decoration: none;"
-   onclick="processPayment()">
-  💳 Перейти к оплате 100 ₽
-</a>
+    <a href="https://www.tinkoff.ru/rm/r_bXnjdeVBDP.xNMVwxAZqR/eZEaH42986" 
+       target="_blank" 
+       id="paymentButton"
+       class="btn"
+       style="display: none; background: linear-gradient(135deg, #d4af37, #b8860b); color: white; text-decoration: none;"
+       onclick="processPayment()">
+      💳 Перейти к оплате 100 ₽
+    </a>
   </div>
 </div>
 
@@ -1750,31 +1750,52 @@ function showCopyFeedback(message) {
       
       // Проверка доступа по ID
      function checkAccessCode() {
-    const accessCode = document.getElementById('accessCodeInput').value.trim().toUpperCase();
-    
-    if (!accessCode) {
-        alert('⚠️ Введите ваш VIP ID');
-        return;
+  const input = document.getElementById('accessCodeInput');
+  const accessCode = input.value.trim().toUpperCase();
+
+  if (!accessCode) {
+    alert('⚠️ Пожалуйста, введите ваш VIP ID');
+    return;
+  }
+
+  const adminData = JSON.parse(localStorage.getItem('vipsim_admin') || '{"clients": []}');
+  const client = adminData.clients.find(c => c.clientId === accessCode);
+
+  if (!client) {
+    alert('❌ ID не найден. Проверьте правильность ввода или дождитесь активации.');
+    return;
+  }
+
+  if (client.blocked) {
+    alert('🚫 Доступ заблокирован. Обратитесь в поддержку.');
+    return;
+  }
+
+  if (!client.accessActive) {
+    alert('⏳ Доступ ещё не активирован. Дождитесь подтверждения оплаты.');
+    return;
+  }
+
+  // ✅ Всё хорошо — сохраняем и заходим
+  const clientData = {
+    clientId: client.clientId,
+    nickname: client.nickname,
+    remaining: client.remaining,
+    createdAt: new Date(client.registrationDate).getTime(),
+    paid: client.paid,
+    blocked: client.blocked,
+    stats: {
+      totalRequests: client.totalRequests,
+      requestsByDate: client.requestsByDate || {},
+      registrationDate: client.registrationDate,
+      lastActivity: client.lastActivity
     }
-    
-    // Просто создаем клиента с любым VIP ID
-    const clientData = {
-        clientId: accessCode,
-        nickname: 'Клиент ' + accessCode,
-        remaining: 10,
-        createdAt: Date.now(),
-        paid: true,
-        blocked: false,
-        stats: {
-            totalRequests: 0,
-            registrationDate: new Date().toISOString(),
-            lastActivity: new Date().toISOString()
-        }
-    };
-    
-    savePremiumData(clientData);
-    showPremiumScreen(clientData);
+  };
+
+  savePremiumData(clientData);
+  showPremiumScreen(clientData);
 }
+      
       
     
       
