@@ -1,503 +1,503 @@
-!DOCTYPE html
-html lang=ru
-head
-    meta charset=UTF-8 
-    meta name=viewport content=width=device-width, initial-scale=1.0 
-    titleПремиум-клиент  VIP-SIM.RUtitle
-    style
-         {
-            margin 0;
-            padding 0;
-            box-sizing border-box;
-            font-family Segoe UI, Tahoma, Geneva, Verdana, sans-serif;
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Премиум-клиент | VIP-SIM.RU</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
         }
         body {
-            background linear-gradient(135deg, #fdfbf6, #f5f2e6);
-            color #222;
-            padding 20px;
-            min-height 100vh;
+            background: linear-gradient(135deg, #fdfbf6, #f5f2e6);
+            color: #222;
+            padding: 20px;
+            min-height: 100vh;
         }
         .container {
-            max-width 600px;
-            margin 40px auto;
-            background white;
-            border-radius 20px;
-            padding 32px;
-            box-shadow 0 8px 30px rgba(0, 0, 0, 0.08);
-            border 1px solid #f0e6d2;
+            max-width: 600px;
+            margin: 40px auto;
+            background: white;
+            border-radius: 20px;
+            padding: 32px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            border: 1px solid #f0e6d2;
         }
         h1 {
-            text-align center;
-            margin-bottom 24px;
-            color #b8860b;
-            font-size 28px;
-            font-weight 700;
+            text-align: center;
+            margin-bottom: 24px;
+            color: #b8860b;
+            font-size: 28px;
+            font-weight: 700;
         }
         .welcome {
-            text-align center;
-            font-size 18px;
-            margin-bottom 24px;
-            color #444;
+            text-align: center;
+            font-size: 18px;
+            margin-bottom: 24px;
+            color: #444;
         }
         .counter-box {
-            background #fff8e1;
-            border 1px solid #ffd54f;
-            border-radius 12px;
-            padding 16px;
-            text-align center;
-            margin 24px 0;
-            font-size 20px;
-            font-weight 600;
-            color #5d4037;
+            background: #fff8e1;
+            border: 1px solid #ffd54f;
+            border-radius: 12px;
+            padding: 16px;
+            text-align: center;
+            margin: 24px 0;
+            font-size: 20px;
+            font-weight: 600;
+            color: #5d4037;
         }
         .counter-value {
-            color #d4af37;
-            font-weight 800;
+            color: #d4af37;
+            font-weight: 800;
         }
         .btn {
-            display block;
-            width 100%;
-            padding 16px;
-            margin 14px 0;
-            border none;
-            border-radius 12px;
-            font-size 17px;
-            font-weight 600;
-            cursor pointer;
-            text-align center;
-            text-decoration none;
-            transition all 0.2s ease;
+            display: block;
+            width: 100%;
+            padding: 16px;
+            margin: 14px 0;
+            border: none;
+            border-radius: 12px;
+            font-size: 17px;
+            font-weight: 600;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            transition: all 0.2s ease;
         }
-        .btnhover {
-            transform translateY(-2px);
-            box-shadow 0 4px 12px rgba(0, 0, 0, 0.1);
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
         .btn-support {
-            background linear-gradient(135deg, #d4af37, #b8860b, #ffd700, #d4af37);
-            background-size 300% 300%;
-            color white;
-            font-size 18px;
-            animation goldShine 3s ease-in-out infinite;
+            background: linear-gradient(135deg, #d4af37, #b8860b, #ffd700, #d4af37);
+            background-size: 300% 300%;
+            color: white;
+            font-size: 18px;
+            animation: goldShine 3s ease-in-out infinite;
         }
         .btn-tariff {
-            background #f8f9fa;
-            color #333;
-            border 1px solid #e9ecef;
-            display flex;
-            flex-direction column;
-            align-items center;
-            justify-content center;
-            width calc(50% - 10px);
-            margin 5px;
-            padding 15px 10px;
-            font-size 14px;
+            background: #f8f9fa;
+            color: #333;
+            border: 1px solid #e9ecef;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: calc(50% - 10px);
+            margin: 5px;
+            padding: 15px 10px;
+            font-size: 14px;
         }
         .hidden {
-            display none;
+            display: none;
         }
         .loading {
-            opacity 0.7;
-            pointer-events none;
+            opacity: 0.7;
+            pointer-events: none;
         }
         .login-form {
-            display flex;
-            flex-direction column;
-            gap 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
         }
         .login-form input {
-            padding 14px;
-            border 1px solid #ddd;
-            border-radius 12px;
-            font-size 16px;
-            outline none;
-            transition border 0.3s;
+            padding: 14px;
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            font-size: 16px;
+            outline: none;
+            transition: border 0.3s;
         }
-        .login-form inputfocus {
-            border-color #d4af37;
+        .login-form input:focus {
+            border-color: #d4af37;
         }
         .client-id-display {
-            background #e8f5e8;
-            padding 20px;
-            border-radius 12px;
-            border 2px solid #4caf50;
-            margin 20px 0;
-            text-align center;
+            background: #e8f5e8;
+            padding: 20px;
+            border-radius: 12px;
+            border: 2px solid #4caf50;
+            margin: 20px 0;
+            text-align: center;
         }
         .client-id-value {
-            font-family monospace;
-            font-size 20px;
-            font-weight bold;
-            color #1976d2;
-            margin 10px 0;
+            font-family: monospace;
+            font-size: 20px;
+            font-weight: bold;
+            color: #1976d2;
+            margin: 10px 0;
         }
         .copy-btn {
-            background #4caf50;
-            color white;
-            border none;
-            padding 8px 15px;
-            border-radius 6px;
-            cursor pointer;
-            font-size 14px;
-            font-weight bold;
-            margin-top 10px;
+            background: #4caf50;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            margin-top: 10px;
         }
         .benefits-box {
-            text-align center;
-            margin 25px 0;
-            padding 20px;
-            background #fff8e1;
-            border-radius 12px;
-            border 2px solid #ffd54f;
+            text-align: center;
+            margin: 25px 0;
+            padding: 20px;
+            background: #fff8e1;
+            border-radius: 12px;
+            border: 2px solid #ffd54f;
         }
         .login-by-id {
-            text-align center;
-            margin-top 30px;
-            padding 25px;
-            background #e3f2fd;
-            border-radius 12px;
-            border 2px solid #2196F3;
+            text-align: center;
+            margin-top: 30px;
+            padding: 25px;
+            background: #e3f2fd;
+            border-radius: 12px;
+            border: 2px solid #2196F3;
         }
         .tariff-buttons {
-            display flex;
-            justify-content space-between;
-            margin 20px 0;
-            gap 10px;
+            display: flex;
+            justify-content: space-between;
+            margin: 20px 0;
+            gap: 10px;
         }
         .tariff-icon {
-            width 32px;
-            height 32px;
-            margin-bottom 8px;
-            object-fit contain;
+            width: 32px;
+            height: 32px;
+            margin-bottom: 8px;
+            object-fit: contain;
         }
 
         @keyframes goldShine {
-            0%, 100% { background-position 0% 50%; }
-            50% { background-position 100% 50%; }
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
         }
 
-         Стили для слайдеров 
+        /* Стили для слайдеров */
         .services-slider-section {
-            margin 20px 0;
-            padding 10px 0;
+            margin: 20px 0;
+            padding: 10px 0;
         }
         .services-slider-container {
-            position relative;
-            display flex;
-            align-items center;
-            max-width 100%;
-            margin 0 auto;
+            position: relative;
+            display: flex;
+            align-items: center;
+            max-width: 100%;
+            margin: 0 auto;
         }
         .services-slider-track {
-            display flex;
-            gap 15px;
-            padding 10px 15px;
-            overflow-x auto;
-            scroll-behavior smooth;
-            flex 1;
+            display: flex;
+            gap: 15px;
+            padding: 10px 15px;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            flex: 1;
         }
         .service-slide {
-            flex 0 0 auto;
-            width 150px;
-            background white;
-            border-radius 12px;
-            padding 12px;
-            box-shadow 0 2px 8px rgba(0,0,0,0.1);
-            cursor pointer;
-            transition all 0.3s ease;
-            border 1px solid #f0f0f0;
-            position relative;
+            flex: 0 0 auto;
+            width: 150px;
+            background: white;
+            border-radius: 12px;
+            padding: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid #f0f0f0;
+            position: relative;
         }
-        .service-slidehover {
-            transform translateY(-2px);
-            border-color #d4af37;
-            box-shadow 0 4px 15px rgba(212, 175, 55, 0.2);
+        .service-slide:hover {
+            transform: translateY(-2px);
+            border-color: #d4af37;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2);
         }
         .service-image {
-            position relative;
-            width 100%;
-            border-radius 8px;
-            overflow visible;
-            display flex;
-            justify-content center;
-            align-items center;
+            position: relative;
+            width: 100%;
+            border-radius: 8px;
+            overflow: visible;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
         .service-image img {
-            width 100%;
-            height auto;
-            max-height 120px;
-            object-fit contain;
-            border-radius 6px;
+            width: 100%;
+            height: auto;
+            max-height: 120px;
+            object-fit: contain;
+            border-radius: 6px;
         }
         .discount-badge {
-            position absolute;
-            top -8px;
-            right -8px;
-            background linear-gradient(135deg, #d4af37, #b8860b);
-            color white;
-            padding 4px 8px;
-            border-radius 10px;
-            font-size 11px;
-            font-weight bold;
-            box-shadow 0 2px 8px rgba(212, 175, 55, 0.4);
-            border 2px solid white;
-            z-index 2;
-            min-width 35px;
-            text-align center;
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: linear-gradient(135deg, #d4af37, #b8860b);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 10px;
+            font-size: 11px;
+            font-weight: bold;
+            box-shadow: 0 2px 8px rgba(212, 175, 55, 0.4);
+            border: 2px solid white;
+            z-index: 2;
+            min-width: 35px;
+            text-align: center;
         }
         .slider-arrow {
-            background #d4af37;
-            color white;
-            border none;
-            width 32px;
-            height 32px;
-            border-radius 50%;
-            font-size 16px;
-            font-weight bold;
-            cursor pointer;
-            display flex;
-            align-items center;
-            justify-content center;
-            transition all 0.3s ease;
-            box-shadow 0 2px 6px rgba(212, 175, 55, 0.3);
+            background: #d4af37;
+            color: white;
+            border: none;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 6px rgba(212, 175, 55, 0.3);
         }
-        .slider-arrowhover {
-            background #b8860b;
-            transform scale(1.05);
+        .slider-arrow:hover {
+            background: #b8860b;
+            transform: scale(1.05);
         }
         .slider-arrow-left {
-            margin-right 8px;
+            margin-right: 8px;
         }
         .slider-arrow-right {
-            margin-left 8px;
+            margin-left: 8px;
         }
 
-         Операторы 
+        /* Операторы */
         .operators-call-section {
-            margin 20px 0;
-            padding 0 10px;
+            margin: 20px 0;
+            padding: 0 10px;
         }
         .operators-slider-container {
-            position relative;
-            display flex;
-            align-items center;
-            max-width 100%;
-            margin 0 auto;
+            position: relative;
+            display: flex;
+            align-items: center;
+            max-width: 100%;
+            margin: 0 auto;
         }
         .operators-slider-track {
-            display flex;
-            gap 8px;
-            padding 5px 10px;
-            overflow-x auto;
-            scroll-behavior smooth;
-            flex 1;
+            display: flex;
+            gap: 8px;
+            padding: 5px 10px;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            flex: 1;
         }
         .operator-btn {
-            display flex;
-            align-items center;
-            justify-content center;
-            padding 10px 15px;
-            border none;
-            border-radius 8px;
-            text-decoration none;
-            font-weight 600;
-            font-size 14px;
-            color white;
-            transition all 0.3s ease;
-            box-shadow 0 2px 6px rgba(0,0,0,0.2);
-            flex 0 0 auto;
-            width 80px;
-            text-align center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            color: white;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+            flex: 0 0 auto;
+            width: 80px;
+            text-align: center;
         }
-        .operator-btnhover {
-            transform translateY(-2px);
-            box-shadow 0 4px 12px rgba(0,0,0,0.3);
+        .operator-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
         }
-        .operator-btn.mts { background linear-gradient(135deg, #e30613, #ff0019); }
-        .operator-btn.volna { background linear-gradient(135deg, #00a2ff, #0077cc); }
-        .operator-btn.win { background linear-gradient(135deg, #ff6b00, #ff8c00); }
-        .operator-btn.miranda { background linear-gradient(135deg, #8a2be2, #6a0dad); }
-        .operator-btn.megafon { background linear-gradient(135deg, #56b929, #3d941c); }
-        .operator-btn.beeline { background linear-gradient(135deg, #ffd100, #ffaa00); }
-        .operator-btn.t2 { background #000; color white; }
-        .operator-btn.yota { background linear-gradient(135deg, #00a2ff, #0077cc); color white; }
-    style
-head
-body
-    div class=container
-        div id=loginScreen
-            h1⭐ Премиум-доступh1
+        .operator-btn.mts { background: linear-gradient(135deg, #e30613, #ff0019); }
+        .operator-btn.volna { background: linear-gradient(135deg, #00a2ff, #0077cc); }
+        .operator-btn.win { background: linear-gradient(135deg, #ff6b00, #ff8c00); }
+        .operator-btn.miranda { background: linear-gradient(135deg, #8a2be2, #6a0dad); }
+        .operator-btn.megafon { background: linear-gradient(135deg, #56b929, #3d941c); }
+        .operator-btn.beeline { background: linear-gradient(135deg, #ffd100, #ffaa00); }
+        .operator-btn.t2 { background: #000; color: white; }
+        .operator-btn.yota { background: linear-gradient(135deg, #00a2ff, #0077cc); color: white; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="loginScreen">
+            <h1>⭐ Премиум-доступ</h1>
             
-            div id=registrationBlock
-                p style=text-align center; margin-bottom 20px; color #555
+            <div id="registrationBlock">
+                <p style="text-align: center; margin-bottom: 20px; color: #555">
                     Для доступа к премиум-функциям необходимо оплатить 100 ₽
-                p
+                </p>
                 
-                div class=benefits-box
-                    div style=font-size 24px; font-weight bold; color #b8860b; margin-bottom 15px;
-                        💎 Что вы получаете
-                    div
-                    div style=text-align left; display inline-block;
-                        div style=margin 8px 0;✅ 10 обращений в премиум-поддержкуdiv
-                        div style=margin 8px 0;🎁 Персональные скидки на услугиdiv
-                        div style=margin 8px 0;⭐ Приоритетное обслуживаниеdiv
-                    div
-                div
+                <div class="benefits-box">
+                    <div style="font-size: 24px; font-weight: bold; color: #b8860b; margin-bottom: 15px;">
+                        💎 Что вы получаете:
+                    </div>
+                    <div style="text-align: left; display: inline-block;">
+                        <div style="margin: 8px 0;">✅ 10 обращений в премиум-поддержку</div>
+                        <div style="margin: 8px 0;">🎁 Персональные скидки на услуги</div>
+                        <div style="margin: 8px 0;">⭐ Приоритетное обслуживание</div>
+                    </div>
+                </div>
                 
-                div class=login-form
-                    input type=text id=nicknameInput placeholder=Ваше имя (для обращений) maxlength=30 
+                <div class="login-form">
+                    <input type="text" id="nicknameInput" placeholder="Ваше имя (для обращений)" maxlength="30" />
                     
-                    div id=clientIdBlock style=display none;
-                        div class=client-id-display
-                            div style=font-weight bold; color #2e7d32; margin-bottom 15px; font-size 18px;
+                    <div id="clientIdBlock" style="display: none;">
+                        <div class="client-id-display">
+                            <div style="font-weight: bold; color: #2e7d32; margin-bottom: 15px; font-size: 18px;">
                                 🆔 ВАШ УНИКАЛЬНЫЙ ID
-                            div
-                            div class=client-id-value id=clientIdDisplaydiv
-                            button class=copy-btn onclick=copyClientId()📋 Копировать IDbutton
-                        div
-                        p style=text-align center; color #d32f2f; font-weight bold;
+                            </div>
+                            <div class="client-id-value" id="clientIdDisplay"></div>
+                            <button class="copy-btn" onclick="copyClientId()">📋 Копировать ID</button>
+                        </div>
+                        <p style="text-align: center; color: #d32f2f; font-weight: bold;">
                             ⚠️ Сохраните этот ID! Введите его в комментарии к платежу
-                        p
-                    div
+                        </p>
+                    </div>
                     
-                    button class=btn onclick=registerClient() style=background linear-gradient(135deg, #d4af37, #b8860b); color white;
+                    <button class="btn" onclick="registerClient()" style="background: linear-gradient(135deg, #d4af37, #b8860b); color: white;">
                         💳 Зарегистрироваться и оплатить 100 ₽
-                    button
-                div
-            div
+                    </button>
+                </div>
+            </div>
 
-            div class=login-by-id
-                div style=font-size 20px; font-weight bold; color #1976d2; margin-bottom 15px;
+            <div class="login-by-id">
+                <div style="font-size: 20px; font-weight: bold; color: #1976d2; margin-bottom: 15px;">
                     🔑 Вход в кабинет по ID
-                div
-                input type=text id=clientIdInput placeholder=Введите ваш VIP ID style=width 100%; padding 12px; margin 10px 0; border 2px solid #2196F3; border-radius 8px; text-align center; font-weight bold; 
-                button class=btn onclick=loginClient() style=background #2196F3; color white;🚀 Войти в кабинетbutton
-            div
-        div
+                </div>
+                <input type="text" id="clientIdInput" placeholder="Введите ваш VIP ID" style="width: 100%; padding: 12px; margin: 10px 0; border: 2px solid #2196F3; border-radius: 8px; text-align: center; font-weight: bold;" />
+                <button class="btn" onclick="loginClient()" style="background: #2196F3; color: white;">🚀 Войти в кабинет</button>
+            </div>
+        </div>
 
-        div id=premiumScreen class=hidden
-            h1⭐ Премиум-клиентh1
-            div class=welcomeПривет, span id=displayNameдругspan!div
+        <div id="premiumScreen" class="hidden">
+            <h1>⭐ Премиум-клиент</h1>
+            <div class="welcome">Привет, <span id="displayName">друг</span>!</div>
 
-            div class=counter-box
-                Осталось обращений span class=counter-value id=counter10span10
-            div
+            <div class="counter-box">
+                Осталось обращений: <span class="counter-value" id="counter">10</span>/10
+            </div>
 
-            button class=btn btn-support onclick=contactSupport()⭐ Премиум-поддержкаbutton
+            <button class="btn btn-support" onclick="contactSupport()">⭐ Премиум-поддержка</button>
 
-            !-- Слайдер услуг --
-            section class=services-slider-section
-                h3 style=text-align center; margin 25px 0 15px 0; color #333; font-size 18px;🎁 Услуги со скидкойh3
-                div class=services-slider-container
-                    button class=slider-arrow slider-arrow-left onclick=scrollSlider('services', -1)‹button
-                    div class=services-slider-track id=servicesSliderTrack
-                        div class=service-slide onclick=showServiceDiscount('Восстановление номера')
-                            div class=service-image
-                                div style=width 100%; height 80px; background #f0f0f0; border-radius 8px; display flex; align-items center; justify-content center; color #666; font-size 12px;📱 Восстановлениеdiv
-                            div
-                        div
-                        div class=service-slide onclick=showServiceDiscount('Смена владельца')
-                            div class=service-image
-                                div style=width 100%; height 80px; background #f0f0f0; border-radius 8px; display flex; align-items center; justify-content center; color #666; font-size 12px;👤 Смена владельцаdiv
-                                div class=discount-badge-10%div
-                            div
-                        div
-                        div class=service-slide onclick=showServiceDiscount('Перенос номера')
-                            div class=service-image
-                                div style=width 100%; height 80px; background #f0f0f0; border-radius 8px; display flex; align-items center; justify-content center; color #666; font-size 12px;🔄 Перенос номераdiv
-                                div class=discount-badge-10%div
-                            div
-                        div
-                    div
-                    button class=slider-arrow slider-arrow-right onclick=scrollSlider('services', 1)›button
-                div
-            section
+            <!-- Слайдер услуг -->
+            <section class="services-slider-section">
+                <h3 style="text-align: center; margin: 25px 0 15px 0; color: #333; font-size: 18px;">🎁 Услуги со скидкой</h3>
+                <div class="services-slider-container">
+                    <button class="slider-arrow slider-arrow-left" onclick="scrollSlider('services', -1)">‹</button>
+                    <div class="services-slider-track" id="servicesSliderTrack">
+                        <div class="service-slide" onclick="showServiceDiscount('Восстановление номера')">
+                            <div class="service-image">
+                                <div style="width: 100%; height: 80px; background: #f0f0f0; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #666; font-size: 12px;">📱 Восстановление</div>
+                            </div>
+                        </div>
+                        <div class="service-slide" onclick="showServiceDiscount('Смена владельца')">
+                            <div class="service-image">
+                                <div style="width: 100%; height: 80px; background: #f0f0f0; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #666; font-size: 12px;">👤 Смена владельца</div>
+                                <div class="discount-badge">-10%</div>
+                            </div>
+                        </div>
+                        <div class="service-slide" onclick="showServiceDiscount('Перенос номера')">
+                            <div class="service-image">
+                                <div style="width: 100%; height: 80px; background: #f0f0f0; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #666; font-size: 12px;">🔄 Перенос номера</div>
+                                <div class="discount-badge">-10%</div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="slider-arrow slider-arrow-right" onclick="scrollSlider('services', 1)">›</button>
+                </div>
+            </section>
 
-            !-- Тарифы --
-            div class=tariff-buttons
-                a href=tariffs.html class=btn btn-tariff
-                    div style=width 32px; height 32px; background #d4af37; border-radius 50%; display flex; align-items center; justify-content center; margin-bottom 8px; color white;📱div
+            <!-- Тарифы -->
+            <div class="tariff-buttons">
+                <a href="tariffs.html" class="btn btn-tariff">
+                    <div style="width: 32px; height: 32px; background: #d4af37; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 8px; color: white;">📱</div>
                     Тарифы для Крыма 
-                a
-                a href=httpsmegasimka.ru class=btn btn-tariff target=_blank
-                    div style=width 32px; height 32px; background #d4af37; border-radius 50%; display flex; align-items center; justify-content center; margin-bottom 8px; color white;📶div
+                </a>
+                <a href="https://megasimka.ru" class="btn btn-tariff" target="_blank">
+                    <div style="width: 32px; height: 32px; background: #d4af37; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 8px; color: white;">📶</div>
                     Тарифы для РФ
-                a
-            div
+                </a>
+            </div>
 
-            !-- Операторы --
-            section class=operators-call-section
-                h3 style=text-align center; margin 25px 0 15px 0; color #333; font-size 18px;📞 Позвонить операторуh3
-                div class=operators-slider-container
-                    button class=slider-arrow slider-arrow-left onclick=scrollSlider('operators', -1)‹button
-                    div class=operators-slider-track id=operatorsSliderTrack
-                        a href=tel+74957660166 class=operator-btn mtsМТСa
-                        a href=tel+79785550555 class=operator-btn volnaВолнаa
-                        a href=tel+79789090545 class=operator-btn winВинa
-                        a href=tel+79790003330 class=operator-btn mirandaМирандаa
-                        a href=tel+79261110999 class=operator-btn megafonМегаФонa
-                        a href=tel+74957972727 class=operator-btn beelineБилайнa
-                    div
-                    button class=slider-arrow slider-arrow-right onclick=scrollSlider('operators', 1)›button
-                div
-            section
+            <!-- Операторы -->
+            <section class="operators-call-section">
+                <h3 style="text-align: center; margin: 25px 0 15px 0; color: #333; font-size: 18px;">📞 Позвонить оператору</h3>
+                <div class="operators-slider-container">
+                    <button class="slider-arrow slider-arrow-left" onclick="scrollSlider('operators', -1)">‹</button>
+                    <div class="operators-slider-track" id="operatorsSliderTrack">
+                        <a href="tel:+74957660166" class="operator-btn mts">МТС</a>
+                        <a href="tel:+79785550555" class="operator-btn volna">Волна</a>
+                        <a href="tel:+79789090545" class="operator-btn win">Вин</a>
+                        <a href="tel:+79790003330" class="operator-btn miranda">Миранда</a>
+                        <a href="tel:+79261110999" class="operator-btn megafon">МегаФон</a>
+                        <a href="tel:+74957972727" class="operator-btn beeline">Билайн</a>
+                    </div>
+                    <button class="slider-arrow slider-arrow-right" onclick="scrollSlider('operators', 1)">›</button>
+                </div>
+            </section>
 
-            button class=btn onclick=showStats() style=background #2196F3; color white;📊 Моя статистикаbutton
-            button class=btn onclick=renewAccess() style=background #43a047; color white;🔁 Продлить доступ (100 ₽)button
-            button class=btn btn-logout onclick=logout() style=background #e0e0e0; color #555; margin-top 20px;Выйти из кабинетаbutton
-        div
-    div
+            <button class="btn" onclick="showStats()" style="background: #2196F3; color: white;">📊 Моя статистика</button>
+            <button class="btn" onclick="renewAccess()" style="background: #43a047; color: white;">🔁 Продлить доступ (100 ₽)</button>
+            <button class="btn btn-logout" onclick="logout()" style="background: #e0e0e0; color: #555; margin-top: 20px;">Выйти из кабинета</button>
+        </div>
+    </div>
 
-    script
-         === КОНФИГУРАЦИЯ JSONBIN ===
+    <script>
+        // === КОНФИГУРАЦИЯ JSONBIN ===
         const JSONBIN_CONFIG = {
-            BIN_ID '68f0ad25d0ea881f40a5d3b5',  Твой BIN ID
-            MASTER_KEY '$2a$10$h2nqVPwwIv04XRDJNXhHJuedTYrRgG9tIX5HbvnfiWoBE3sWbxxW',  Твой Master Key
-            BASE_URL 'httpsapi.jsonbin.iov3b'
+            BIN_ID: '68f0ad25d0ea881f40a5d3b5', // Твой BIN ID
+            MASTER_KEY: '$2a$10$h2nqVPwwIv04XRDJNXhHJuedTYrRgG9tIX5HbvnfiWo/BE3sWbxxW', // Твой Master Key
+            BASE_URL: 'https://api.jsonbin.io/v3/b'
         };
 
-         === ОСНОВНЫЕ ФУНКЦИИ РАБОТЫ С БАЗОЙ ===
+        // === ОСНОВНЫЕ ФУНКЦИИ РАБОТЫ С БАЗОЙ ===
         
         async function getDatabase() {
             try {
-                const response = await fetch(`${JSONBIN_CONFIG.BASE_URL}${JSONBIN_CONFIG.BIN_ID}latest`, {
-                    headers {
-                        'X-Master-Key' JSONBIN_CONFIG.MASTER_KEY
+                const response = await fetch(`${JSONBIN_CONFIG.BASE_URL}/${JSONBIN_CONFIG.BIN_ID}/latest`, {
+                    headers: {
+                        'X-Master-Key': JSONBIN_CONFIG.MASTER_KEY
                     }
                 });
                 
                 if (!response.ok) throw new Error('Ошибка загрузки базы');
                 
                 const data = await response.json();
-                return data.record  { clients [], payments [] };
+                return data.record || { clients: [], payments: [] };
             } catch (error) {
-                console.error('Ошибка', error);
-                return { clients [], payments [] };
+                console.error('Ошибка:', error);
+                return { clients: [], payments: [] };
             }
         }
 
         async function updateDatabase(newData) {
             try {
-                const response = await fetch(`${JSONBIN_CONFIG.BASE_URL}${JSONBIN_CONFIG.BIN_ID}`, {
-                    method 'PUT',
-                    headers {
-                        'Content-Type' 'applicationjson',
-                        'X-Master-Key' JSONBIN_CONFIG.MASTER_KEY
+                const response = await fetch(`${JSONBIN_CONFIG.BASE_URL}/${JSONBIN_CONFIG.BIN_ID}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-Master-Key': JSONBIN_CONFIG.MASTER_KEY
                     },
-                    body JSON.stringify(newData)
+                    body: JSON.stringify(newData)
                 });
                 
                 if (!response.ok) throw new Error('Ошибка обновления базы');
                 return true;
             } catch (error) {
-                console.error('Ошибка', error);
+                console.error('Ошибка:', error);
                 return false;
             }
         }
 
-         === ФУНКЦИИ КЛИЕНТА ===
+        // === ФУНКЦИИ КЛИЕНТА ===
         
         function generateClientId() {
-            return VIP + Date.now().toString(36).toUpperCase() + Math.random().toString(36).substr(2, 3).toUpperCase();
+            return "VIP" + Date.now().toString(36).toUpperCase() + Math.random().toString(36).substr(2, 3).toUpperCase();
         }
 
         async function registerClient() {
@@ -515,27 +515,27 @@ body
                 const db = await getDatabase();
                 
                 const newClient = {
-                    clientId clientId,
-                    nickname nickname,
-                    registrationDate new Date().toISOString(),
-                    totalRequests 0,
-                    lastActivity new Date().toISOString(),
-                    remaining 0,
-                    paid true,
-                    accessActive false,
-                    blocked false
+                    clientId: clientId,
+                    nickname: nickname,
+                    registrationDate: new Date().toISOString(),
+                    totalRequests: 0,
+                    lastActivity: new Date().toISOString(),
+                    remaining: 0,
+                    paid: true,
+                    accessActive: false,
+                    blocked: false
                 };
                 
                 db.clients.push(newClient);
                 
                 const payment = {
-                    id 'pay_' + Date.now(),
-                    clientId clientId,
-                    nickname nickname,
-                    amount 100,
-                    date new Date().toISOString(),
-                    status 'paid',
-                    description 'Премиум-доступ к поддержке VIP-SIM'
+                    id: 'pay_' + Date.now(),
+                    clientId: clientId,
+                    nickname: nickname,
+                    amount: 100,
+                    date: new Date().toISOString(),
+                    status: 'paid',
+                    description: 'Премиум-доступ к поддержке VIP-SIM'
                 };
                 
                 db.payments.push(payment);
@@ -546,7 +546,7 @@ body
                     document.getElementById('clientIdDisplay').textContent = clientId;
                     document.getElementById('clientIdBlock').style.display = 'block';
                     
-                    alert(`✅ Регистрация успешна!nn🆔 Ваш ID ${clientId}nn💡 Сохраните этот ID! После активации доступа администратором вы сможете войти в кабинет с любого устройства.`);
+                    alert(`✅ Регистрация успешна!\n\n🆔 Ваш ID: ${clientId}\n\n💡 Сохраните этот ID! После активации доступа администратором вы сможете войти в кабинет с любого устройства.`);
                     
                     document.getElementById('nicknameInput').value = '';
                 } else {
@@ -572,7 +572,7 @@ body
 
             try {
                 const db = await getDatabase();
-                const client = db.clients.find(c = c.clientId === clientId);
+                const client = db.clients.find(c => c.clientId === clientId);
 
                 if (!client) {
                     alert('❌ ID не найден. Проверьте правильность ввода.');
@@ -622,7 +622,7 @@ body
 
             try {
                 const db = await getDatabase();
-                const client = db.clients.find(c = c.clientId === clientId);
+                const client = db.clients.find(c => c.clientId === clientId);
 
                 if (!client) {
                     alert('❌ Клиент не найден.');
@@ -630,7 +630,7 @@ body
                     return;
                 }
 
-                if (client.remaining = 0) {
+                if (client.remaining <= 0) {
                     alert('❌ Обращения закончились. Обратитесь к администратору для продления.');
                     return;
                 }
@@ -645,9 +645,9 @@ body
                 const used = 10 - client.remaining;
                 const verificationCode = generateVerificationCode(used);
                 
-                const message = `⭐ Обращение в поддержку премиум-клиентов (${used}10)nn📅 Дата ${new Date().toLocaleDateString('ru-RU')}n🆔 Код ${verificationCode}n👤 Клиент ID ${clientId}`;
+                const message = `⭐ Обращение в поддержку премиум-клиентов (${used}/10)\n\n📅 Дата: ${new Date().toLocaleDateString('ru-RU')}\n🆔 Код: ${verificationCode}\n👤 Клиент ID: ${clientId}`;
                 
-                const telegramUrl = `httpst.mevipsimsupporttext=${encodeURIComponent(message)}`;
+                const telegramUrl = `https://t.me/vipsimsupport?text=${encodeURIComponent(message)}`;
                 window.open(telegramUrl, '_blank');
 
             } catch (error) {
@@ -659,7 +659,7 @@ body
 
         function generateVerificationCode(usedCount) {
             const now = new Date();
-            const months = [j,f,m,a,m,j,j,a,s,o,n,d];
+            const months = ["j","f","m","a","m","j","j","a","s","o","n","d"];
             const day = now.getDate();
             const month = months[now.getMonth()];
             const randomLetters = Math.random().toString(36).substr(2, 2).toUpperCase();
@@ -680,7 +680,7 @@ body
                 
                 try {
                     const db = await getDatabase();
-                    const client = db.clients.find(c = c.clientId === clientId);
+                    const client = db.clients.find(c => c.clientId === clientId);
                     
                     if (client && client.accessActive && !client.blocked) {
                         showPremiumScreen(client);
@@ -697,20 +697,20 @@ body
 
         function copyClientId() {
             const clientId = document.getElementById('clientIdDisplay').textContent;
-            navigator.clipboard.writeText(clientId).then(() = {
+            navigator.clipboard.writeText(clientId).then(() => {
                 alert('✅ ID скопирован в буфер обмена');
             });
         }
 
-         Функции для слайдеров
+        // Функции для слайдеров
         function scrollSlider(type, direction) {
             const slider = document.getElementById(type + 'SliderTrack');
-            const scrollAmount = type === 'services'  250  150;
-            slider.scrollBy({ left direction  scrollAmount, behavior 'smooth' });
+            const scrollAmount = type === 'services' ? 250 : 150;
+            slider.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
         }
 
         function showServiceDiscount(serviceName) {
-            alert(`🎁 Скидка 10% на услугу ${serviceName}nnАктивируется при обращении в поддержку.`);
+            alert(`🎁 Скидка 10% на услугу: ${serviceName}\n\nАктивируется при обращении в поддержку.`);
         }
 
         function showStats() {
@@ -721,63 +721,63 @@ body
             alert('🔁 Для продления доступа обратитесь к администратору');
         }
 
-         Инициализация слайдеров
+        // Инициализация слайдеров
         function initSliders() {
             const sliders = ['servicesSliderTrack', 'operatorsSliderTrack'];
             
-            sliders.forEach(sliderId = {
+            sliders.forEach(sliderId => {
                 const slider = document.getElementById(sliderId);
                 let isDown = false;
                 let startX;
                 let scrollLeft;
 
-                slider.addEventListener('mousedown', (e) = {
+                slider.addEventListener('mousedown', (e) => {
                     isDown = true;
                     startX = e.pageX - slider.offsetLeft;
                     scrollLeft = slider.scrollLeft;
                 });
 
-                slider.addEventListener('mouseleave', () = {
+                slider.addEventListener('mouseleave', () => {
                     isDown = false;
                 });
 
-                slider.addEventListener('mouseup', () = {
+                slider.addEventListener('mouseup', () => {
                     isDown = false;
                 });
 
-                slider.addEventListener('mousemove', (e) = {
+                slider.addEventListener('mousemove', (e) => {
                     if (!isDown) return;
                     e.preventDefault();
                     const x = e.pageX - slider.offsetLeft;
-                    const walk = (x - startX)  2;
+                    const walk = (x - startX) * 2;
                     slider.scrollLeft = scrollLeft - walk;
                 });
 
-                 Touch events
-                slider.addEventListener('touchstart', (e) = {
+                // Touch events
+                slider.addEventListener('touchstart', (e) => {
                     isDown = true;
                     startX = e.touches[0].pageX - slider.offsetLeft;
                     scrollLeft = slider.scrollLeft;
                 });
 
-                slider.addEventListener('touchend', () = {
+                slider.addEventListener('touchend', () => {
                     isDown = false;
                 });
 
-                slider.addEventListener('touchmove', (e) = {
+                slider.addEventListener('touchmove', (e) => {
                     if (!isDown) return;
                     const x = e.touches[0].pageX - slider.offsetLeft;
-                    const walk = (x - startX)  2;
+                    const walk = (x - startX) * 2;
                     slider.scrollLeft = scrollLeft - walk;
                 });
             });
         }
 
-         Запуск при загрузке
+        // Запуск при загрузке
         document.addEventListener('DOMContentLoaded', function() {
             checkSession();
             initSliders();
         });
-    script
-body
-html
+    </script>
+</body>
+</html>
