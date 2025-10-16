@@ -730,8 +730,6 @@ function registerPendingPayment(paymentData) {
         </div>
       </div>
 
-      
-
       <!-- Личный кабинет -->
       <div id="premiumScreen" class="hidden">
         <h1>⭐ Премиум-клиент</h1>
@@ -839,292 +837,6 @@ function registerPendingPayment(paymentData) {
   </div>
 </div>
 
-<style>
-  /* Стили для слайдера услуг */
-  .services-slider-section {
-    margin: 20px 0;
-    padding: 10px 0;
-  }
-  
-  .services-slider-container {
-    position: relative;
-    display: flex;
-    align-items: center;
-    max-width: 100%;
-    margin: 0 auto;
-  }
-  
-  .services-slider-track {
-    display: flex;
-    gap: 15px;
-    padding: 10px 15px;
-    overflow-x: auto;
-    scroll-behavior: smooth;
-    scrollbar-width: thin;
-    scrollbar-color: #d4af37 transparent;
-    flex: 1;
-  }
-  
-  .services-slider-track::-webkit-scrollbar {
-    height: 4px;
-  }
-  
-  .services-slider-track::-webkit-scrollbar-track {
-    background: transparent;
-    border-radius: 10px;
-  }
-  
-  .services-slider-track::-webkit-scrollbar-thumb {
-    background: #d4af37;
-    border-radius: 10px;
-  }
-  
-  .services-slider-track::-webkit-scrollbar-thumb:hover {
-    background: #b8860b;
-  }
-  
-  .service-slide {
-    flex: 0 0 auto;
-    width: 150px;
-    background: white;
-    border-radius: 12px;
-    padding: 12px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    cursor: pointer;
-    transition: all 0.3s ease;
-    border: 1px solid #f0f0f0;
-    position: relative;
-  }
-  
-  .service-slide:hover {
-    transform: translateY(-2px);
-    border-color: #d4af37;
-    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2);
-  }
-  
-  .service-image {
-    position: relative;
-    width: 100%;
-    border-radius: 8px;
-    overflow: visible;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .service-image img {
-    width: 100%;
-    height: auto;
-    max-height: 120px;
-    object-fit: contain;
-    border-radius: 6px;
-  }
-  
-  .discount-badge {
-    position: absolute;
-    top: -8px;
-    right: -8px;
-    background: linear-gradient(135deg, #d4af37, #b8860b);
-    color: white;
-    padding: 4px 8px;
-    border-radius: 10px;
-    font-size: 11px;
-    font-weight: bold;
-    box-shadow: 0 2px 8px rgba(212, 175, 55, 0.4);
-    border: 2px solid white;
-    z-index: 2;
-    min-width: 35px;
-    text-align: center;
-  }
-  
-  /* Стрелки слайдера */
-  .slider-arrow {
-    background: #d4af37;
-    color: white;
-    border: none;
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 6px rgba(212, 175, 55, 0.3);
-    z-index: 2;
-  }
-  
-  .slider-arrow:hover {
-    background: #b8860b;
-    transform: scale(1.05);
-  }
-  
-  .slider-arrow-left {
-    margin-right: 8px;
-  }
-  
-  .slider-arrow-right {
-    margin-left: 8px;
-  }
-  
-  /* Адаптивность */
-  @media (max-width: 768px) {
-    .services-slider-section {
-      margin: 15px 0;
-      padding: 5px 0;
-    }
-    
-    .services-slider-container {
-      padding: 0 8px;
-    }
-    
-    .slider-arrow {
-      display: none;
-    }
-    
-    .services-slider-track {
-      padding: 8px 10px;
-      gap: 12px;
-    }
-    
-    .service-slide {
-      width: 130px;
-      padding: 10px;
-    }
-    
-    .service-image img {
-      max-height: 110px;
-    }
-  }
-  
-  @media (max-width: 480px) {
-    .service-slide {
-      width: 120px;
-      padding: 8px;
-    }
-    
-    .service-image img {
-      max-height: 100px;
-    }
-    
-    .discount-badge {
-      top: -6px;
-      right: -6px;
-      padding: 3px 6px;
-      font-size: 10px;
-      min-width: 32px;
-    }
-  }
-  
-  /* Для очень широких экранов */
-  @media (min-width: 1200px) {
-    .services-slider-container {
-      max-width: 1000px;
-    }
-  }
-</style>
-
-<script>
-  // Функции для слайдера услуг
-  let currentService = '';
-  
-  function showServiceDiscount(serviceName) {
-    currentService = serviceName;
-    document.getElementById('serviceDiscountTitle').textContent = `СКИДКА НА ${serviceName.toUpperCase()}`;
-    document.getElementById('serviceDiscountText').textContent = `на услугу "${serviceName}"`;
-    document.getElementById('serviceDiscountModal').style.display = 'block';
-  }
-  
-  function closeServiceDiscountModal() {
-    document.getElementById('serviceDiscountModal').style.display = 'none';
-    currentService = '';
-  }
-  
-  function activateServiceSupport() {
-    closeServiceDiscountModal();
-    contactSupport();
-  }
-  
-  // Функции для управления слайдером
-  function scrollSlider(direction) {
-    const slider = document.getElementById('servicesSliderTrack');
-    const scrollAmount = 250;
-    
-    slider.scrollBy({
-      left: direction * scrollAmount,
-      behavior: 'smooth'
-    });
-  }
-  
-  // Инициализация свайпа для мобильных и скролла для десктопа
-  document.addEventListener('DOMContentLoaded', function() {
-    const sliderTrack = document.getElementById('servicesSliderTrack');
-    let isDown = false;
-    let startX;
-    let scrollLeft;
-    
-    // Мышь для десктопа
-    sliderTrack.addEventListener('mousedown', (e) => {
-      isDown = true;
-      sliderTrack.style.cursor = 'grabbing';
-      startX = e.pageX - sliderTrack.offsetLeft;
-      scrollLeft = sliderTrack.scrollLeft;
-    });
-    
-    sliderTrack.addEventListener('mouseleave', () => {
-      isDown = false;
-      sliderTrack.style.cursor = 'grab';
-    });
-    
-    sliderTrack.addEventListener('mouseup', () => {
-      isDown = false;
-      sliderTrack.style.cursor = 'grab';
-    });
-    
-    sliderTrack.addEventListener('mousemove', (e) => {
-      if (!isDown) return;
-      e.preventDefault();
-      const x = e.pageX - sliderTrack.offsetLeft;
-      const walk = (x - startX) * 2;
-      sliderTrack.scrollLeft = scrollLeft - walk;
-    });
-    
-    // Touch events для мобильных
-    sliderTrack.addEventListener('touchstart', (e) => {
-      isDown = true;
-      startX = e.touches[0].pageX - sliderTrack.offsetLeft;
-      scrollLeft = sliderTrack.scrollLeft;
-    });
-    
-    sliderTrack.addEventListener('touchend', () => {
-      isDown = false;
-    });
-    
-    sliderTrack.addEventListener('touchmove', (e) => {
-      if (!isDown) return;
-      const x = e.touches[0].pageX - sliderTrack.offsetLeft;
-      const walk = (x - startX) * 2;
-      sliderTrack.scrollLeft = scrollLeft - walk;
-    });
-    
-    // Обновляем курсор
-    sliderTrack.style.cursor = 'grab';
-  });
-  
-  // Закрытие модального окна при клике вне его
-  window.addEventListener('click', function(event) {
-    const modal = document.getElementById('serviceDiscountModal');
-    if (event.target === modal) {
-      closeServiceDiscountModal();
-    }
-  });
-</script>
-
-
-
-
         <div class="tariff-buttons">
           <a href="tariffs.html" class="btn btn-tariff">
             <img src="img/goldsim.png" alt="SIM" class="tariff-icon">
@@ -1188,297 +900,6 @@ function registerPendingPayment(paymentData) {
     <button class="slider-arrow slider-arrow-right" onclick="scrollOperators(1)">›</button>
   </div>
 </section>
-
-<style>
-  .operators-call-section {
-    margin: 20px 0;
-    padding: 0 10px;
-  }
-  
-  .operators-slider-container {
-    position: relative;
-    display: flex;
-    align-items: center;
-    max-width: 100%;
-    margin: 0 auto;
-  }
-  
-  .operators-slider-track {
-    display: flex;
-    gap: 8px;
-    padding: 5px 10px;
-    overflow-x: auto;
-    scroll-behavior: smooth;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-    flex: 1;
-  }
-  
-  .operators-slider-track::-webkit-scrollbar {
-    display: none;
-  }
-  
-  .operator-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 10px 15px;
-    border: none;
-        border-radius: 8px;
-        text-decoration: none;
-        font-weight: 600;
-        font-size: 14px;
-        color: white;
-        transition: all 0.3s ease;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-        flex: 0 0 auto;
-        width: 80px;
-        text-align: center;
-        position: relative;
-        overflow: hidden;
-      }
-      
-      .operator-btn:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-      }
-      
-      /* Цвета операторов с фирменными деталями */
-      .operator-btn.mts {
-        background: linear-gradient(135deg, #e30613, #ff0019);
-      }
-      
-      .operator-btn.volna {
-        background: linear-gradient(135deg, #00a2ff, #0077cc);
-        position: relative;
-      }
-      
-      .operator-btn.volna::after {
-        content: '';
-        position: absolute;
-        top: 0;
-        right: 0;
-        width: 15px;
-        height: 15px;
-        background: #ff69b4;
-        border-bottom-left-radius: 8px;
-      }
-      
-      .operator-btn.win {
-        background: linear-gradient(135deg, #ff6b00, #ff8c00);
-      }
-      
-      .operator-btn.miranda {
-        background: linear-gradient(135deg, #8a2be2, #6a0dad);
-      }
-      
-      .operator-btn.megafon {
-        background: linear-gradient(135deg, #56b929, #3d941c);
-        position: relative;
-      }
-      
-      .operator-btn.megafon::after {
-        content: '';
-        position: absolute;
-        top: 0;
-        right: 0;
-        width: 15px;
-        height: 15px;
-        background: #8a2be2;
-        border-bottom-left-radius: 8px;
-      }
-      
-      .operator-btn.beeline {
-        background: linear-gradient(135deg, #ffd100, #ffaa00);
-        position: relative;
-      }
-      
-      .operator-btn.beeline::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 4px;
-        background: repeating-linear-gradient(
-          90deg,
-          #000 0px,
-          #000 3px,
-          transparent 3px,
-          transparent 6px
-        );
-      }
-      
-      .operator-btn.t2 {
-        background: #000;
-        color: white;
-        position: relative;
-      }
-      
-      .operator-btn.t2::after {
-        content: '';
-        position: absolute;
-        top: 0;
-        right: 0;
-        width: 15px;
-        height: 15px;
-        background: #ff69b4;
-        border-bottom-left-radius: 8px;
-      }
-      
-      .operator-btn.yota {
-        background: linear-gradient(135deg, #00a2ff, #0077cc);
-        color: white;
-      }
-      
-      /* Стрелки слайдера */
-      .slider-arrow {
-        background: #d4af37;
-        color: white;
-        border: none;
-        width: 28px;
-        height: 28px;
-        border-radius: 50%;
-        font-size: 14px;
-        font-weight: bold;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: all 0.3s ease;
-        box-shadow: 0 2px 6px rgba(212, 175, 55, 0.3);
-        z-index: 2;
-      }
-      
-      .slider-arrow:hover {
-        background: #b8860b;
-        transform: scale(1.05);
-      }
-      
-      .slider-arrow-left {
-        margin-right: 5px;
-      }
-      
-      .slider-arrow-right {
-        margin-left: 5px;
-      }
-      
-      /* Адаптивность */
-      @media (max-width: 768px) {
-        .operators-slider-container {
-          padding: 0 5px;
-        }
-        
-        .slider-arrow {
-          display: none;
-        }
-        
-        .operators-slider-track {
-          padding: 5px 8px;
-          gap: 6px;
-        }
-        
-        .operator-btn {
-          width: 70px;
-          padding: 8px 12px;
-          font-size: 13px;
-        }
-        
-        .operator-btn.volna::after,
-        .operator-btn.megafon::after,
-        .operator-btn.t2::after {
-          width: 12px;
-          height: 12px;
-        }
-        
-        .operator-btn.beeline::before {
-          height: 3px;
-        }
-      }
-      
-      @media (max-width: 480px) {
-        .operator-btn {
-          width: 65px;
-          padding: 7px 10px;
-          font-size: 12px;
-        }
-        
-        .operator-btn.volna::after,
-        .operator-btn.megafon::after,
-        .operator-btn.t2::after {
-          width: 10px;
-          height: 10px;
-        }
-      }
-    </style>
-
-    <script>
-      // Функции для слайдера операторов
-      function scrollOperators(direction) {
-        const slider = document.getElementById('operatorsSliderTrack');
-        const scrollAmount = 150;
-        
-        slider.scrollBy({
-          left: direction * scrollAmount,
-          behavior: 'smooth'
-        });
-      }
-      
-      // Инициализация свайпа для слайдера операторов
-      document.addEventListener('DOMContentLoaded', function() {
-        const sliderTrack = document.getElementById('operatorsSliderTrack');
-        let isDown = false;
-        let startX;
-        let scrollLeft;
-        
-        // Мышь для десктопа
-        sliderTrack.addEventListener('mousedown', (e) => {
-          isDown = true;
-          sliderTrack.style.cursor = 'grabbing';
-          startX = e.pageX - sliderTrack.offsetLeft;
-          scrollLeft = sliderTrack.scrollLeft;
-        });
-        
-        sliderTrack.addEventListener('mouseleave', () => {
-          isDown = false;
-          sliderTrack.style.cursor = 'grab';
-        });
-        
-        sliderTrack.addEventListener('mouseup', () => {
-          isDown = false;
-          sliderTrack.style.cursor = 'grab';
-        });
-        
-        sliderTrack.addEventListener('mousemove', (e) => {
-          if (!isDown) return;
-          e.preventDefault();
-          const x = e.pageX - sliderTrack.offsetLeft;
-          const walk = (x - startX) * 2;
-          sliderTrack.scrollLeft = scrollLeft - walk;
-        });
-        
-        // Touch events для мобильных
-        sliderTrack.addEventListener('touchstart', (e) => {
-          isDown = true;
-          startX = e.touches[0].pageX - sliderTrack.offsetLeft;
-          scrollLeft = sliderTrack.scrollLeft;
-        });
-        
-        sliderTrack.addEventListener('touchend', () => {
-          isDown = false;
-        });
-        
-        sliderTrack.addEventListener('touchmove', (e) => {
-          if (!isDown) return;
-          const x = e.touches[0].pageX - sliderTrack.offsetLeft;
-          const walk = (x - startX) * 2;
-          sliderTrack.scrollLeft = scrollLeft - walk;
-        });
-        
-        // Обновляем курсор
-        sliderTrack.style.cursor = 'grab';
-      });
-    </script>
 
         <button class="btn btn-stats" onclick="showStats()">
           📊 Моя статистика
@@ -1548,20 +969,6 @@ function registerPendingPayment(paymentData) {
       </div>
     </div>
 
-    <!-- Модальное окно для услуг -->
-    <div id="serviceDiscountModal" class="modal">
-      <div class="modal-content" style="background: linear-gradient(135deg, #ffd700, #ffed4e, #ffd700);">
-        <span class="close" onclick="closeServiceDiscountModal()">&times;</span>
-        <div class="discount-title" id="serviceDiscountTitle">СКИДКА НА УСЛУГУ</div>
-        <div class="discount-amount">-10%</div>
-        <div class="discount-text" id="serviceDiscountText">на услугу</div>
-        <div class="discount-note">
-          *Активируется при обращении в 
-          <a href="javascript:void(0);" onclick="activateServiceSupport()" style="color: #b8860b; text-decoration: underline; font-weight: bold;">поддержку</a>
-        </div>
-      </div>
-    </div>
-
     <script>
       // === ОСНОВНЫЕ ФУНКЦИИ СИСТЕМЫ ===
       
@@ -1593,118 +1000,51 @@ function registerPendingPayment(paymentData) {
       }
       
       // Копирование ID в буфер обмена
-  function copyClientId() {
-  const clientId = document.getElementById('clientIdDisplay').textContent;
-  
-  // Сначала пробуем современный способ
-  if (navigator.clipboard && window.isSecureContext) {
-    navigator.clipboard.writeText(clientId).then(() => {
-      showCopyFeedback('✅ Скопировано!');
-    }).catch(err => {
-      console.error('Ошибка копирования:', err);
-      fallbackCopyText(clientId);
-    });
-  } else {
-    // Если не работает — используем резервный метод
-    fallbackCopyText(clientId);
-  }
-}
-
-// Резервный метод: создаём временный input, выделяем и копируем
-function fallbackCopyText(text) {
-  const textArea = document.createElement('textarea');
-  textArea.value = text;
-  textArea.style.position = 'fixed';
-  textArea.style.top = '0';
-  textArea.style.left = '0';
-  textArea.style.width = '1px';
-  textArea.style.height = '1px';
-  textArea.style.opacity = '0';
-  document.body.appendChild(textArea);
-  textArea.focus();
-  textArea.select();
-  try {
-    document.execCommand('copy');
-    showCopyFeedback('✅ Скопировано!');
-  } catch (err) {
-    alert('📋 ID: ' + text + '\n\n(Скопируйте)');
-  }
-  document.body.removeChild(textArea);
-}
-
-// Функция для отображения обратной связи
-function showCopyFeedback(message) {
-  const button = event.target;
-  const originalText = button.textContent;
-  const originalBg = button.style.background;
-  button.textContent = message;
-  button.style.background = '#2e7d32';
-  setTimeout(() => {
-    button.textContent = originalText;
-    button.style.background = originalBg;
-  }, 2000);
-}
-      
-      // ТЕСТОВАЯ ФУНКЦИЯ ОПЛАТЫ
-      function processTestPayment() {
-        const pendingClient = JSON.parse(localStorage.getItem('pendingClient'));
+      function copyClientId() {
+        const clientId = document.getElementById('clientIdDisplay').textContent;
         
-        if (!pendingClient) {
-          alert('⚠️ Пожалуйста, введите данные для генерации ID');
-          return;
-        }
-        
-        // Симулируем успешную оплату
-        if (confirm(`🧪 ТЕСТОВЫЙ РЕЖИМ\n\nСумма: 100 ₽\nКлиент: ${pendingClient.nickname}\nID: ${pendingClient.clientId}\n\nИмитировать оплату?`)) {
-          
-          // Регистрируем клиента в админке как ожидающего активации
-          const adminData = JSON.parse(localStorage.getItem('vipsim_admin') || '{"clients": [], "payments": []}');
-          
-          // Добавляем клиента
-          const clientIndex = adminData.clients.findIndex(c => c.clientId === pendingClient.clientId);
-          if (clientIndex === -1) {
-            adminData.clients.push({
-              clientId: pendingClient.clientId,
-              nickname: pendingClient.nickname,
-              registrationDate: new Date().toISOString(),
-              totalRequests: 0,
-              lastActivity: new Date().toISOString(),
-              remaining: 0, // Пока 0 - доступ не активирован
-              paid: true,
-              accessActive: false, // Доступ не активен
-              blocked: false
-            });
-          }
-          
-          // Добавляем платеж
-          const paymentData = {
-            id: 'pay_' + Date.now(),
-            clientId: pendingClient.clientId,
-            nickname: pendingClient.nickname,
-            amount: 100,
-            date: new Date().toISOString(),
-            status: 'paid',
-            description: 'Премиум-доступ к поддержке VIP-SIM (ТЕСТ)'
-          };
-          
-          adminData.payments = adminData.payments || [];
-          adminData.payments.push(paymentData);
-          
-          localStorage.setItem('vipsim_admin', JSON.stringify(adminData));
-          
-          alert(`✅ Тестовая оплата завершена!\n\n🆔 Ваш ID: ${pendingClient.clientId}\n\n💡 Сохраните этот ID! После активации доступа администратором вы сможете войти в кабинет.`);
-          
-          // Очищаем временные данные
-          localStorage.removeItem('pendingClient');
-          
-          // Сбрасываем форму
-          document.getElementById('nicknameInput').value = '';
-          document.getElementById('clientIdBlock').style.display = 'none';
-          document.getElementById('paymentButton').style.display = 'none';
+        if (navigator.clipboard && window.isSecureContext) {
+          navigator.clipboard.writeText(clientId).then(() => {
+            showCopyFeedback('✅ Скопировано!');
+          }).catch(err => {
+            fallbackCopyText(clientId);
+          });
+        } else {
+          fallbackCopyText(clientId);
         }
       }
+
+      function fallbackCopyText(text) {
+        const textArea = document.createElement('textarea');
+        textArea.value = text;
+        textArea.style.position = 'fixed';
+        textArea.style.top = '0';
+        textArea.style.left = '0';
+        textArea.style.width = '1px';
+        textArea.style.height = '1px';
+        textArea.style.opacity = '0';
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+        try {
+          document.execCommand('copy');
+          showCopyFeedback('✅ Скопировано!');
+        } catch (err) {
+          alert('📋 ID: ' + text + '\n\n(Скопируйте)');
+        }
+        document.body.removeChild(textArea);
+      }
+
+      function showCopyFeedback(message) {
+        const button = event.target;
+        const originalText = button.textContent;
+        button.textContent = message;
+        setTimeout(() => {
+          button.textContent = originalText;
+        }, 2000);
+      }
       
-      // УНИВЕРСАЛЬНАЯ ФУНКЦИЯ ВХОДА ДЛЯ ВСЕХ УСТРОЙСТВ - ИСПРАВЛЕННАЯ
+      // УНИВЕРСАЛЬНАЯ ФУНКЦИЯ ВХОДА - ПОЛНОСТЬЮ ПЕРЕДЕЛАНА
       function checkUniversalAccessCode() {
         const input = document.getElementById('universalAccessCodeInput');
         const accessCode = input.value.trim().toUpperCase();
@@ -1714,13 +1054,9 @@ function showCopyFeedback(message) {
           return;
         }
 
-        console.log('🔍 Проверяем доступ для ID:', accessCode);
-
         // Проверяем доступ в админской базе
         const adminData = JSON.parse(localStorage.getItem('vipsim_admin') || '{"clients": []}');
         const client = adminData.clients.find(c => c.clientId === accessCode);
-
-        console.log('📋 Найден клиент:', client);
 
         if (!client) {
           alert('❌ ID не найден. Проверьте правильность ввода или дождитесь активации.');
@@ -1747,119 +1083,78 @@ function showCopyFeedback(message) {
         client.lastLoginTime = new Date().toISOString();
         client.lastActivity = new Date().toISOString();
         
-        // ВАЖНО: Обновляем данные в админке
+        // Сохраняем обновленные данные
         localStorage.setItem('vipsim_admin', JSON.stringify(adminData));
 
-        // ✅ Всё хорошо — сохраняем данные клиента в его локальное хранилище
-        const clientData = {
+        // Сохраняем ТОЛЬКО ID клиента для текущей сессии
+        const sessionData = {
           clientId: client.clientId,
-          nickname: client.nickname,
-          remaining: client.remaining || 10, // Берем из админки или по умолчанию 10
-          createdAt: new Date(client.registrationDate).getTime(),
-          paid: client.paid,
-          blocked: client.blocked,
-          stats: {
-            totalRequests: client.totalRequests || 0,
-            requestsByDate: client.requestsByDate || {},
-            registrationDate: client.registrationDate,
-            lastActivity: client.lastActivity
-          }
+          // Не сохраняем остальные данные - они будут браться из админки при каждом обращении
+          sessionStart: new Date().toISOString()
         };
-
-        savePremiumData(clientData);
-        showPremiumScreen(clientData);
         
-        console.log('✅ Успешный вход с устройства:', deviceType);
-        console.log('📊 Данные клиента:', clientData);
+        localStorage.setItem('currentSession', JSON.stringify(sessionData));
+        
+        // Показываем кабинет
+        loadClientData();
       }
-      
-      // Функции для управления слайдером операторов
+
+      // ЗАГРУЗКА ДАННЫХ КЛИЕНТА ИЗ АДМИНКИ
+      function loadClientData() {
+        const sessionData = JSON.parse(localStorage.getItem('currentSession'));
+        
+        if (!sessionData || !sessionData.clientId) {
+          showLoginScreen();
+          return;
+        }
+
+        const adminData = JSON.parse(localStorage.getItem('vipsim_admin') || '{"clients": []}');
+        const client = adminData.clients.find(c => c.clientId === sessionData.clientId);
+
+        if (!client || !client.accessActive || client.blocked) {
+          localStorage.removeItem('currentSession');
+          showLoginScreen();
+          return;
+        }
+
+        // Обновляем интерфейс данными из админки
+        document.getElementById("displayName").textContent = client.nickname;
+        document.getElementById("counter").textContent = client.remaining;
+        
+        showPremiumScreen();
+      }
+
+      // Функции для слайдеров
+      function scrollSlider(direction) {
+        const slider = document.getElementById('servicesSliderTrack');
+        const scrollAmount = 250;
+        slider.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
+      }
+
       function scrollOperators(direction) {
         const slider = document.getElementById('operatorsSliderTrack');
         const scrollAmount = 150;
-        
-        slider.scrollBy({
-          left: direction * scrollAmount,
-          behavior: 'smooth'
-        });
+        slider.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
+      }
+
+      let currentService = '';
+      
+      function showServiceDiscount(serviceName) {
+        currentService = serviceName;
+        document.getElementById('serviceDiscountTitle').textContent = `СКИДКА НА ${serviceName.toUpperCase()}`;
+        document.getElementById('serviceDiscountText').textContent = `на услугу "${serviceName}"`;
+        document.getElementById('serviceDiscountModal').style.display = 'block';
       }
       
-      // Инициализация свайпа для слайдеров
-      document.addEventListener('DOMContentLoaded', function() {
-        // Слайдер услуг
-        const servicesSlider = document.getElementById('servicesSliderTrack');
-        initSliderSwipe(servicesSlider);
-        
-        // Слайдер операторов
-        const operatorsSlider = document.getElementById('operatorsSliderTrack');
-        initSliderSwipe(operatorsSlider);
-      });
-      
-      function initSliderSwipe(sliderTrack) {
-        let isDown = false;
-        let startX;
-        let scrollLeft;
-        
-        // Мышь для десктопа
-        sliderTrack.addEventListener('mousedown', (e) => {
-          isDown = true;
-          sliderTrack.style.cursor = 'grabbing';
-          startX = e.pageX - sliderTrack.offsetLeft;
-          scrollLeft = sliderTrack.scrollLeft;
-        });
-        
-        sliderTrack.addEventListener('mouseleave', () => {
-          isDown = false;
-          sliderTrack.style.cursor = 'grab';
-        });
-        
-        sliderTrack.addEventListener('mouseup', () => {
-          isDown = false;
-          sliderTrack.style.cursor = 'grab';
-        });
-        
-        sliderTrack.addEventListener('mousemove', (e) => {
-          if (!isDown) return;
-          e.preventDefault();
-          const x = e.pageX - sliderTrack.offsetLeft;
-          const walk = (x - startX) * 2;
-          sliderTrack.scrollLeft = scrollLeft - walk;
-        });
-        
-        // Touch events для мобильных
-        sliderTrack.addEventListener('touchstart', (e) => {
-          isDown = true;
-          startX = e.touches[0].pageX - sliderTrack.offsetLeft;
-          scrollLeft = sliderTrack.scrollLeft;
-        });
-        
-        sliderTrack.addEventListener('touchend', () => {
-          isDown = false;
-        });
-        
-        sliderTrack.addEventListener('touchmove', (e) => {
-          if (!isDown) return;
-          const x = e.touches[0].pageX - sliderTrack.offsetLeft;
-          const walk = (x - startX) * 2;
-          sliderTrack.scrollLeft = scrollLeft - walk;
-        });
-        
-        // Обновляем курсор
-        sliderTrack.style.cursor = 'grab';
+      function closeServiceDiscountModal() {
+        document.getElementById('serviceDiscountModal').style.display = 'none';
+        currentService = '';
       }
       
-      // Закрытие модальных окон при клике вне их
-      window.addEventListener('click', function(event) {
-        const modals = ['serviceDiscountModal', 'discountModal', 'statsModal'];
-        modals.forEach(modalId => {
-          const modal = document.getElementById(modalId);
-          if (event.target === modal) {
-            if (modalId === 'serviceDiscountModal') closeServiceDiscountModal();
-            if (modalId === 'discountModal') closeDiscountModal();
-            if (modalId === 'statsModal') closeStatsModal();
-          }
-        });
-      });
+      function activateServiceSupport() {
+        closeServiceDiscountModal();
+        contactSupport();
+      }
 
       // === СИСТЕМА КОДОВ ===
       const CODE_RULES = {
@@ -1880,35 +1175,31 @@ function showCopyFeedback(message) {
 
       // Функции для модальных окон
       function showStats() {
-        const data = getPremiumData();
-        if (!data) return;
+        const sessionData = JSON.parse(localStorage.getItem('currentSession'));
+        if (!sessionData) return;
         
-        if (!data.stats) {
-          data.stats = {
-            totalRequests: 0,
-            requestsByDate: {},
-            registrationDate: new Date().toISOString(),
-            lastActivity: new Date().toISOString()
-          };
-        }
+        const adminData = JSON.parse(localStorage.getItem('vipsim_admin') || '{"clients": []}');
+        const client = adminData.clients.find(c => c.clientId === sessionData.clientId);
         
-        document.getElementById('statsClientIdDisplay').textContent = data.clientId;
-        document.getElementById('statTotalRequests').textContent = data.stats.totalRequests;
-        document.getElementById('statRemaining').textContent = data.remaining;
-        document.getElementById('regDate').textContent = new Date(data.stats.registrationDate).toLocaleDateString('ru-RU');
-        document.getElementById('lastActivity').textContent = new Date(data.stats.lastActivity).toLocaleDateString('ru-RU');
+        if (!client) return;
+        
+        document.getElementById('statsClientIdDisplay').textContent = client.clientId;
+        document.getElementById('statTotalRequests').textContent = client.totalRequests || 0;
+        document.getElementById('statRemaining').textContent = client.remaining;
+        document.getElementById('regDate').textContent = new Date(client.registrationDate).toLocaleDateString('ru-RU');
+        document.getElementById('lastActivity').textContent = new Date(client.lastActivity).toLocaleDateString('ru-RU');
         
         const thisMonth = new Date().getMonth();
         const thisYear = new Date().getFullYear();
-        const monthRequests = Object.keys(data.stats.requestsByDate).filter(date => {
+        const monthRequests = Object.keys(client.requestsByDate || {}).filter(date => {
           const requestDate = new Date(date);
           return requestDate.getMonth() === thisMonth && requestDate.getFullYear() === thisYear;
         }).length;
         
         document.getElementById('statThisMonth').textContent = monthRequests;
         
-        const weeksSinceRegistration = Math.max(1, Math.ceil((Date.now() - new Date(data.stats.registrationDate).getTime()) / (7 * 24 * 60 * 60 * 1000)));
-        const avgPerWeek = (data.stats.totalRequests / weeksSinceRegistration).toFixed(1);
+        const weeksSinceRegistration = Math.max(1, Math.ceil((Date.now() - new Date(client.registrationDate).getTime()) / (7 * 24 * 60 * 60 * 1000)));
+        const avgPerWeek = ((client.totalRequests || 0) / weeksSinceRegistration).toFixed(1);
         document.getElementById('statAvgWeek').textContent = avgPerWeek;
         
         document.getElementById('statsModal').style.display = 'block';
@@ -1926,33 +1217,16 @@ function showCopyFeedback(message) {
         document.getElementById('discountModal').style.display = 'none';
       }
 
+      // Проверка сессии при загрузке
       document.addEventListener("DOMContentLoaded", () => {
-        const data = getPremiumData();
-        if (data && data.remaining >= 0 && !data.blocked) {
-          showPremiumScreen(data);
-        } else if (data && data.blocked) {
-          showBlockedScreen();
+        const sessionData = JSON.parse(localStorage.getItem('currentSession'));
+        
+        if (sessionData && sessionData.clientId) {
+          loadClientData();
         } else {
           showLoginScreen();
         }
       });
-
-      function getPremiumData() {
-        const raw = localStorage.getItem("premiumData");
-        if (!raw) return null;
-        try {
-          const data = JSON.parse(raw);
-          if (data.remaining < 0) return null;
-          return data;
-        } catch (e) {
-          return null;
-        }
-      }
-
-      function savePremiumData(data) {
-        localStorage.setItem("premiumData", JSON.stringify(data));
-        updateAdminStats(data);
-      }
 
       function showError(message) {
         const errorEl = document.getElementById('errorMessage');
@@ -1990,97 +1264,131 @@ function showCopyFeedback(message) {
         document.getElementById("premiumScreen").classList.add("hidden");
       }
 
-      function showPremiumScreen(data) {
-        document.getElementById("displayName").textContent = data.nickname;
-        document.getElementById("counter").textContent = data.remaining;
+      function showPremiumScreen() {
         document.getElementById("loginScreen").classList.add("hidden");
         document.getElementById("premiumScreen").classList.remove("hidden");
       }
 
-      // ФУНКЦИЯ ПОДДЕРЖКИ
+      // ФУНКЦИЯ ПОДДЕРЖКИ - ИСПРАВЛЕННАЯ
       function contactSupport() {
-        const data = getPremiumData();
-        if (!data) {
+        const sessionData = JSON.parse(localStorage.getItem('currentSession'));
+        
+        if (!sessionData) {
           showError('Ошибка доступа. Пожалуйста, войдите снова.');
           return;
         }
 
-        if (data.blocked) {
+        const adminData = JSON.parse(localStorage.getItem('vipsim_admin') || '{"clients": []}');
+        const client = adminData.clients.find(c => c.clientId === sessionData.clientId);
+
+        if (!client) {
+          showError('Клиент не найден. Пожалуйста, войдите снова.');
+          return;
+        }
+
+        if (client.blocked) {
           showError('Доступ заблокирован. Обратитесь в поддержку.');
           return;
         }
 
-        if (data.remaining <= 0) {
+        if (client.remaining <= 0) {
           showError("Обращения закончились. Пожалуйста, продлите доступ.");
           return;
         }
 
-        // Обновляем статистику
+        // Обновляем статистику в админке
         const today = new Date().toDateString();
-        data.stats.totalRequests++;
-        data.stats.requestsByDate[today] = (data.stats.requestsByDate[today] || 0) + 1;
-        data.stats.lastActivity = new Date().toISOString();
+        client.totalRequests = (client.totalRequests || 0) + 1;
+        client.requestsByDate = client.requestsByDate || {};
+        client.requestsByDate[today] = (client.requestsByDate[today] || 0) + 1;
+        client.lastActivity = new Date().toISOString();
+        client.remaining -= 1;
 
-        const used = 11 - data.remaining;
-        const requestId = "req_" + Date.now().toString(36).substr(4, 8);
+        // Сохраняем обновленные данные
+        localStorage.setItem('vipsim_admin', JSON.stringify(adminData));
 
-        // Генерируем код по системе
+        // Обновляем счетчик на экране
+        document.getElementById("counter").textContent = client.remaining;
+
+        const used = 11 - client.remaining;
         const verificationCode = CODE_RULES.getVerificationCode(used);
         const formattedDate = CODE_RULES.getFormattedDate();
 
-        // Сообщение для Telegram
-        const telegramMessage = `⭐ Обращение в поддержку премиум-клиентов (${used}/10).Мы ответим Вам в первую очередь. Задайте свой вопрос после Клиент ID \n\n📅 Дата: ${formattedDate}\n🆔 Код: ${verificationCode}\n👤 Клиент ID: ${data.clientId}`;
+        const telegramMessage = `⭐ Обращение в поддержку премиум-клиентов (${used}/10). Мы ответим Вам в первую очередь. Задайте свой вопрос после Клиент ID \n\n📅 Дата: ${formattedDate}\n🆔 Код: ${verificationCode}\n👤 Клиент ID: ${client.clientId}`;
 
         const encoded = encodeURIComponent(telegramMessage);
         const telegramUrl = `https://t.me/vipsimsupport?text=${encoded}`;
 
-        // Обновляем данные
-        data.remaining -= 1;
-        savePremiumData(data);
-        document.getElementById("counter").textContent = data.remaining;
-
-        // Открываем чат
         window.open(telegramUrl, "_blank", "noopener,noreferrer");
       }
 
       function renewAccess() {
-        alert(
-          "Для продления доступа необходимо выйти из кабинета и снова войти с оплатой и новым ID"
-        );
-        const data = getPremiumData();
-        if (data) {
-          data.remaining = 10;
-          savePremiumData(data);
-          document.getElementById("counter").textContent = 10;
-        }
+        alert("Для продления доступа необходимо выйти из кабинета и снова войти с оплатой и новым ID");
       }
 
       function logout() {
         if (confirm("Вы уверены, что хотите выйти?")) {
-          localStorage.removeItem("premiumData");
+          localStorage.removeItem("currentSession");
           showLoginScreen();
         }
       }
 
-      function updateAdminStats(clientData) {
-        const adminData = JSON.parse(localStorage.getItem('vipsim_admin') || '{"clients": []}');
+      // Инициализация свайпов для слайдеров
+      document.addEventListener('DOMContentLoaded', function() {
+        initSliderSwipe('servicesSliderTrack');
+        initSliderSwipe('operatorsSliderTrack');
+      });
+      
+      function initSliderSwipe(sliderId) {
+        const sliderTrack = document.getElementById(sliderId);
+        let isDown = false;
+        let startX;
+        let scrollLeft;
         
-        const existingClientIndex = adminData.clients.findIndex(c => c.clientId === clientData.clientId);
-        if (existingClientIndex !== -1) {
-          adminData.clients[existingClientIndex] = {
-            clientId: clientData.clientId,
-            nickname: clientData.nickname,
-            registrationDate: new Date(clientData.createdAt).toISOString(),
-            totalRequests: clientData.stats.totalRequests,
-            lastActivity: clientData.stats.lastActivity,
-            remaining: clientData.remaining,
-            paid: clientData.paid,
-            accessActive: true,
-            blocked: clientData.blocked || false
-          };
-        }
+        sliderTrack.addEventListener('mousedown', (e) => {
+          isDown = true;
+          sliderTrack.style.cursor = 'grabbing';
+          startX = e.pageX - sliderTrack.offsetLeft;
+          scrollLeft = sliderTrack.scrollLeft;
+        });
         
-        localStorage.setItem('vipsim_admin', JSON.stringify(adminData));
+        sliderTrack.addEventListener('mouseleave', () => {
+          isDown = false;
+          sliderTrack.style.cursor = 'grab';
+        });
+        
+        sliderTrack.addEventListener('mouseup', () => {
+          isDown = false;
+          sliderTrack.style.cursor = 'grab';
+        });
+        
+        sliderTrack.addEventListener('mousemove', (e) => {
+          if (!isDown) return;
+          e.preventDefault();
+          const x = e.pageX - sliderTrack.offsetLeft;
+          const walk = (x - startX) * 2;
+          sliderTrack.scrollLeft = scrollLeft - walk;
+        });
+        
+        // Touch events
+        sliderTrack.addEventListener('touchstart', (e) => {
+          isDown = true;
+          startX = e.touches[0].pageX - sliderTrack.offsetLeft;
+          scrollLeft = sliderTrack.scrollLeft;
+        });
+        
+        sliderTrack.addEventListener('touchend', () => {
+          isDown = false;
+        });
+        
+        sliderTrack.addEventListener('touchmove', (e) => {
+          if (!isDown) return;
+          const x = e.touches[0].pageX - sliderTrack.offsetLeft;
+          const walk = (x - startX) * 2;
+          sliderTrack.scrollLeft = scrollLeft - walk;
+        });
+        
+        sliderTrack.style.cursor = 'grab';
       }
       
     </script>
