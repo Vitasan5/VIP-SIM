@@ -272,9 +272,9 @@ function addManualClient() {
         registrationDate: new Date().toISOString(),
         totalRequests: 0,
         lastActivity: new Date().toISOString(),
-        remaining: 0,
+        remaining: 0, // НАЧАЛЬНОЕ ЗНАЧЕНИЕ - 0
         paid: true,
-        accessActive: false,
+        accessActive: false, // ПОКА НЕ АКТИВИРОВАН
         blocked: false,
         source: 'manual'
     });
@@ -574,15 +574,15 @@ function addManualClient() {
             loadClientsData();
         }
 
-        // Активация доступа клиента
+        // Активация доступа клиента - ИСПРАВЛЕННАЯ ВЕРСИЯ
         function activateClientAccess(clientId) {
-            if (confirm(`Активировать доступ для клиента ${clientId}?`)) {
+            if (confirm(`Активировать доступ для клиента ${clientId}?\n\nКлиент получит 10 обращений в поддержку.`)) {
                 const adminData = JSON.parse(localStorage.getItem('vipsim_admin'));
                 const client = adminData.clients.find(c => c.clientId === clientId);
                 
                 if (client) {
                     client.accessActive = true;
-                    client.remaining = 10; // Даем 10 обращений
+                    client.remaining = 10; // ВАЖНО: УСТАНАВЛИВАЕМ 10 ОБРАЩЕНИЙ
                     client.activatedAt = new Date().toISOString();
                     
                     localStorage.setItem('vipsim_admin', JSON.stringify(adminData));
@@ -594,7 +594,7 @@ function addManualClient() {
                     }
                     
                     loadAdminData();
-                    alert('✅ Доступ активирован! Клиент может войти по своему ID.');
+                    alert('✅ Доступ активирован! Клиент может войти по своему ID.\n\nКлиент получил 10 обращений в поддержку.');
                 }
             }
         }
@@ -666,15 +666,15 @@ function addManualClient() {
 
         // Сброс обращений клиента
         function resetClientRequests(clientId) {
-            if (confirm(`Сбросить обращения для клиента ${clientId}?`)) {
+            if (confirm(`Сбросить обращения для клиента ${clientId}?\n\nКлиент получит 10 новых обращений.`)) {
                 const adminData = JSON.parse(localStorage.getItem('vipsim_admin'));
                 const client = adminData.clients.find(c => c.clientId === clientId);
                 if (client) {
-                    client.remaining = 10;
+                    client.remaining = 10; // ВАЖНО: СБРАСЫВАЕМ НА 10
                     client.totalRequests = 0;
                     localStorage.setItem('vipsim_admin', JSON.stringify(adminData));
                     loadAdminData();
-                    alert('Обращения сброшены!');
+                    alert('Обращения сброшены! Клиент получил 10 новых обращений.');
                 }
             }
         }
@@ -764,17 +764,6 @@ function addManualClient() {
         setInterval(loadAdminData, 3000);
 
         document.addEventListener('DOMContentLoaded', loadAdminData);
-        // В админке показываем откуда пришел клиент
-function displayClientSource() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const source = urlParams.get('source');
-    const device = urlParams.get('device');
-    
-    if (source === 'mobile_site') {
-        console.log('Клиент зашел с мобильной версии сайта');
-        // Показываем мобильную иконку или пометку
-    }
-}
     </script>
   
   <button class="btn btn-danger" onclick="clearEverythingNow()" style="background: #dc3545; color: white; margin: 10px;">
@@ -788,8 +777,6 @@ function clearEverythingNow() {
         location.reload();
     }
 }
-
-
 </script>
 
 </body>
