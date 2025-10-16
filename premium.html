@@ -730,6 +730,8 @@ function registerPendingPayment(paymentData) {
         </div>
       </div>
 
+      
+
       <!-- Личный кабинет -->
       <div id="premiumScreen" class="hidden">
         <h1>⭐ Премиум-клиент</h1>
@@ -1222,261 +1224,261 @@ function registerPendingPayment(paymentData) {
     justify-content: center;
     padding: 10px 15px;
     border: none;
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 14px;
-    color: white;
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-    flex: 0 0 auto;
-    width: 80px;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-  }
-  
-  .operator-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-  }
-  
-  /* Цвета операторов с фирменными деталями */
-  .operator-btn.mts {
-    background: linear-gradient(135deg, #e30613, #ff0019);
-  }
-  
-  .operator-btn.volna {
-    background: linear-gradient(135deg, #00a2ff, #0077cc);
-    position: relative;
-  }
-  
-  .operator-btn.volna::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 15px;
-    height: 15px;
-    background: #ff69b4;
-    border-bottom-left-radius: 8px;
-  }
-  
-  .operator-btn.win {
-    background: linear-gradient(135deg, #ff6b00, #ff8c00);
-  }
-  
-  .operator-btn.miranda {
-    background: linear-gradient(135deg, #8a2be2, #6a0dad);
-  }
-  
-  .operator-btn.megafon {
-    background: linear-gradient(135deg, #56b929, #3d941c);
-    position: relative;
-  }
-  
-  .operator-btn.megafon::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 15px;
-    height: 15px;
-    background: #8a2be2;
-    border-bottom-left-radius: 8px;
-  }
-  
-  .operator-btn.beeline {
-    background: linear-gradient(135deg, #ffd100, #ffaa00);
-    position: relative;
-  }
-  
-  .operator-btn.beeline::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 4px;
-    background: repeating-linear-gradient(
-      90deg,
-      #000 0px,
-      #000 3px,
-      transparent 3px,
-      transparent 6px
-    );
-  }
-  
-  .operator-btn.t2 {
-    background: #000;
-    color: white;
-    position: relative;
-  }
-  
-  .operator-btn.t2::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 15px;
-    height: 15px;
-    background: #ff69b4;
-    border-bottom-left-radius: 8px;
-  }
-  
-  .operator-btn.yota {
-    background: linear-gradient(135deg, #00a2ff, #0077cc);
-    color: white;
-  }
-  
-  /* Стрелки слайдера */
-  .slider-arrow {
-    background: #d4af37;
-    color: white;
-    border: none;
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    font-size: 14px;
-    font-weight: bold;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 6px rgba(212, 175, 55, 0.3);
-    z-index: 2;
-  }
-  
-  .slider-arrow:hover {
-    background: #b8860b;
-    transform: scale(1.05);
-  }
-  
-  .slider-arrow-left {
-    margin-right: 5px;
-  }
-  
-  .slider-arrow-right {
-    margin-left: 5px;
-  }
-  
-  /* Адаптивность */
-  @media (max-width: 768px) {
-    .operators-slider-container {
-      padding: 0 5px;
-    }
-    
-    .slider-arrow {
-      display: none;
-    }
-    
-    .operators-slider-track {
-      padding: 5px 8px;
-      gap: 6px;
-    }
-    
-    .operator-btn {
-      width: 70px;
-      padding: 8px 12px;
-      font-size: 13px;
-    }
-    
-    .operator-btn.volna::after,
-    .operator-btn.megafon::after,
-    .operator-btn.t2::after {
-      width: 12px;
-      height: 12px;
-    }
-    
-    .operator-btn.beeline::before {
-      height: 3px;
-    }
-  }
-  
-  @media (max-width: 480px) {
-    .operator-btn {
-      width: 65px;
-      padding: 7px 10px;
-      font-size: 12px;
-    }
-    
-    .operator-btn.volna::after,
-    .operator-btn.megafon::after,
-    .operator-btn.t2::after {
-      width: 10px;
-      height: 10px;
-    }
-  }
-</style>
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 14px;
+        color: white;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+        flex: 0 0 auto;
+        width: 80px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+      
+      .operator-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      }
+      
+      /* Цвета операторов с фирменными деталями */
+      .operator-btn.mts {
+        background: linear-gradient(135deg, #e30613, #ff0019);
+      }
+      
+      .operator-btn.volna {
+        background: linear-gradient(135deg, #00a2ff, #0077cc);
+        position: relative;
+      }
+      
+      .operator-btn.volna::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 15px;
+        height: 15px;
+        background: #ff69b4;
+        border-bottom-left-radius: 8px;
+      }
+      
+      .operator-btn.win {
+        background: linear-gradient(135deg, #ff6b00, #ff8c00);
+      }
+      
+      .operator-btn.miranda {
+        background: linear-gradient(135deg, #8a2be2, #6a0dad);
+      }
+      
+      .operator-btn.megafon {
+        background: linear-gradient(135deg, #56b929, #3d941c);
+        position: relative;
+      }
+      
+      .operator-btn.megafon::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 15px;
+        height: 15px;
+        background: #8a2be2;
+        border-bottom-left-radius: 8px;
+      }
+      
+      .operator-btn.beeline {
+        background: linear-gradient(135deg, #ffd100, #ffaa00);
+        position: relative;
+      }
+      
+      .operator-btn.beeline::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        background: repeating-linear-gradient(
+          90deg,
+          #000 0px,
+          #000 3px,
+          transparent 3px,
+          transparent 6px
+        );
+      }
+      
+      .operator-btn.t2 {
+        background: #000;
+        color: white;
+        position: relative;
+      }
+      
+      .operator-btn.t2::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 15px;
+        height: 15px;
+        background: #ff69b4;
+        border-bottom-left-radius: 8px;
+      }
+      
+      .operator-btn.yota {
+        background: linear-gradient(135deg, #00a2ff, #0077cc);
+        color: white;
+      }
+      
+      /* Стрелки слайдера */
+      .slider-arrow {
+        background: #d4af37;
+        color: white;
+        border: none;
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        font-size: 14px;
+        font-weight: bold;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 6px rgba(212, 175, 55, 0.3);
+        z-index: 2;
+      }
+      
+      .slider-arrow:hover {
+        background: #b8860b;
+        transform: scale(1.05);
+      }
+      
+      .slider-arrow-left {
+        margin-right: 5px;
+      }
+      
+      .slider-arrow-right {
+        margin-left: 5px;
+      }
+      
+      /* Адаптивность */
+      @media (max-width: 768px) {
+        .operators-slider-container {
+          padding: 0 5px;
+        }
+        
+        .slider-arrow {
+          display: none;
+        }
+        
+        .operators-slider-track {
+          padding: 5px 8px;
+          gap: 6px;
+        }
+        
+        .operator-btn {
+          width: 70px;
+          padding: 8px 12px;
+          font-size: 13px;
+        }
+        
+        .operator-btn.volna::after,
+        .operator-btn.megafon::after,
+        .operator-btn.t2::after {
+          width: 12px;
+          height: 12px;
+        }
+        
+        .operator-btn.beeline::before {
+          height: 3px;
+        }
+      }
+      
+      @media (max-width: 480px) {
+        .operator-btn {
+          width: 65px;
+          padding: 7px 10px;
+          font-size: 12px;
+        }
+        
+        .operator-btn.volna::after,
+        .operator-btn.megafon::after,
+        .operator-btn.t2::after {
+          width: 10px;
+          height: 10px;
+        }
+      }
+    </style>
 
-<script>
-  // Функции для слайдера операторов
-  function scrollOperators(direction) {
-    const slider = document.getElementById('operatorsSliderTrack');
-    const scrollAmount = 150;
-    
-    slider.scrollBy({
-      left: direction * scrollAmount,
-      behavior: 'smooth'
-    });
-  }
-  
-  // Инициализация свайпа для слайдера операторов
-  document.addEventListener('DOMContentLoaded', function() {
-    const sliderTrack = document.getElementById('operatorsSliderTrack');
-    let isDown = false;
-    let startX;
-    let scrollLeft;
-    
-    // Мышь для десктопа
-    sliderTrack.addEventListener('mousedown', (e) => {
-      isDown = true;
-      sliderTrack.style.cursor = 'grabbing';
-      startX = e.pageX - sliderTrack.offsetLeft;
-      scrollLeft = sliderTrack.scrollLeft;
-    });
-    
-    sliderTrack.addEventListener('mouseleave', () => {
-      isDown = false;
-      sliderTrack.style.cursor = 'grab';
-    });
-    
-    sliderTrack.addEventListener('mouseup', () => {
-      isDown = false;
-      sliderTrack.style.cursor = 'grab';
-    });
-    
-    sliderTrack.addEventListener('mousemove', (e) => {
-      if (!isDown) return;
-      e.preventDefault();
-      const x = e.pageX - sliderTrack.offsetLeft;
-      const walk = (x - startX) * 2;
-      sliderTrack.scrollLeft = scrollLeft - walk;
-    });
-    
-    // Touch events для мобильных
-    sliderTrack.addEventListener('touchstart', (e) => {
-      isDown = true;
-      startX = e.touches[0].pageX - sliderTrack.offsetLeft;
-      scrollLeft = sliderTrack.scrollLeft;
-    });
-    
-    sliderTrack.addEventListener('touchend', () => {
-      isDown = false;
-    });
-    
-    sliderTrack.addEventListener('touchmove', (e) => {
-      if (!isDown) return;
-      const x = e.touches[0].pageX - sliderTrack.offsetLeft;
-      const walk = (x - startX) * 2;
-      sliderTrack.scrollLeft = scrollLeft - walk;
-    });
-    
-    // Обновляем курсор
-    sliderTrack.style.cursor = 'grab';
-  });
-</script>
+    <script>
+      // Функции для слайдера операторов
+      function scrollOperators(direction) {
+        const slider = document.getElementById('operatorsSliderTrack');
+        const scrollAmount = 150;
+        
+        slider.scrollBy({
+          left: direction * scrollAmount,
+          behavior: 'smooth'
+        });
+      }
+      
+      // Инициализация свайпа для слайдера операторов
+      document.addEventListener('DOMContentLoaded', function() {
+        const sliderTrack = document.getElementById('operatorsSliderTrack');
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+        
+        // Мышь для десктопа
+        sliderTrack.addEventListener('mousedown', (e) => {
+          isDown = true;
+          sliderTrack.style.cursor = 'grabbing';
+          startX = e.pageX - sliderTrack.offsetLeft;
+          scrollLeft = sliderTrack.scrollLeft;
+        });
+        
+        sliderTrack.addEventListener('mouseleave', () => {
+          isDown = false;
+          sliderTrack.style.cursor = 'grab';
+        });
+        
+        sliderTrack.addEventListener('mouseup', () => {
+          isDown = false;
+          sliderTrack.style.cursor = 'grab';
+        });
+        
+        sliderTrack.addEventListener('mousemove', (e) => {
+          if (!isDown) return;
+          e.preventDefault();
+          const x = e.pageX - sliderTrack.offsetLeft;
+          const walk = (x - startX) * 2;
+          sliderTrack.scrollLeft = scrollLeft - walk;
+        });
+        
+        // Touch events для мобильных
+        sliderTrack.addEventListener('touchstart', (e) => {
+          isDown = true;
+          startX = e.touches[0].pageX - sliderTrack.offsetLeft;
+          scrollLeft = sliderTrack.scrollLeft;
+        });
+        
+        sliderTrack.addEventListener('touchend', () => {
+          isDown = false;
+        });
+        
+        sliderTrack.addEventListener('touchmove', (e) => {
+          if (!isDown) return;
+          const x = e.touches[0].pageX - sliderTrack.offsetLeft;
+          const walk = (x - startX) * 2;
+          sliderTrack.scrollLeft = scrollLeft - walk;
+        });
+        
+        // Обновляем курсор
+        sliderTrack.style.cursor = 'grab';
+      });
+    </script>
 
         <button class="btn btn-stats" onclick="showStats()">
           📊 Моя статистика
@@ -1702,7 +1704,7 @@ function showCopyFeedback(message) {
         }
       }
       
-      // УНИВЕРСАЛЬНАЯ ФУНКЦИЯ ВХОДА ДЛЯ ВСЕХ УСТРОЙСТВ
+      // УНИВЕРСАЛЬНАЯ ФУНКЦИЯ ВХОДА ДЛЯ ВСЕХ УСТРОЙСТВ - ИСПРАВЛЕННАЯ
       function checkUniversalAccessCode() {
         const input = document.getElementById('universalAccessCodeInput');
         const accessCode = input.value.trim().toUpperCase();
@@ -1712,9 +1714,13 @@ function showCopyFeedback(message) {
           return;
         }
 
-        // Проверяем доступ
+        console.log('🔍 Проверяем доступ для ID:', accessCode);
+
+        // Проверяем доступ в админской базе
         const adminData = JSON.parse(localStorage.getItem('vipsim_admin') || '{"clients": []}');
         const client = adminData.clients.find(c => c.clientId === accessCode);
+
+        console.log('📋 Найден клиент:', client);
 
         if (!client) {
           alert('❌ ID не найден. Проверьте правильность ввода или дождитесь активации.');
@@ -1727,7 +1733,7 @@ function showCopyFeedback(message) {
         }
 
         if (!client.accessActive) {
-          alert('⏳ Доступ ещё не активирован. Дождитесь подтверждения оплаты.');
+          alert('⏳ Доступ ещё не активирован. Дождитесь подтверждения оплаты администратором.');
           return;
         }
 
@@ -1739,18 +1745,21 @@ function showCopyFeedback(message) {
         client.deviceType = deviceType;
         client.lastLoginDevice = deviceType;
         client.lastLoginTime = new Date().toISOString();
+        client.lastActivity = new Date().toISOString();
+        
+        // ВАЖНО: Обновляем данные в админке
         localStorage.setItem('vipsim_admin', JSON.stringify(adminData));
 
-        // ✅ Всё хорошо — сохраняем и заходим
+        // ✅ Всё хорошо — сохраняем данные клиента в его локальное хранилище
         const clientData = {
           clientId: client.clientId,
           nickname: client.nickname,
-          remaining: client.remaining,
+          remaining: client.remaining || 10, // Берем из админки или по умолчанию 10
           createdAt: new Date(client.registrationDate).getTime(),
           paid: client.paid,
           blocked: client.blocked,
           stats: {
-            totalRequests: client.totalRequests,
+            totalRequests: client.totalRequests || 0,
             requestsByDate: client.requestsByDate || {},
             registrationDate: client.registrationDate,
             lastActivity: client.lastActivity
@@ -1761,6 +1770,7 @@ function showCopyFeedback(message) {
         showPremiumScreen(clientData);
         
         console.log('✅ Успешный вход с устройства:', deviceType);
+        console.log('📊 Данные клиента:', clientData);
       }
       
       // Функции для управления слайдером операторов
