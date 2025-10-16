@@ -1172,12 +1172,65 @@
       }
 
       // Остальные функции
-      function showStats() {
-        alert('📊 Статистика будет доступна в следующем обновлении');
-      }
+      async function showStats() {
+    const client = await checkClientStatus();
+    if (!client) return;
+
+    try {
+        const db = await getDatabase();
+        const currentClient = db.clients.find(c => c.clientId === client.clientId);
+        
+        if (!currentClient) {
+            alert('❌ Данные клиента не найдены');
+            return;
+        }
+
+        // Заполняем данные статистики
+        document.getElementById('clientIdDisplay').textContent = currentClient.clientId;
+        document.getElementById('statTotalRequests').textContent = currentClient.totalRequests || 0;
+        document.getElementById('statRemaining').textContent = currentClient.remaining || 0;
+        document.getElementById('statThisMonth').textContent = getRequestsThisMonth(currentClient);
+        document.getElementById('statAvgWeek').textContent = getAveragePerWeek(currentClient);
+        document.getElementById('regDate').textContent = new Date(currentClient.registrationDate).toLocaleDateString('ru-RU');
+        document.getElementById('lastActivity').textContent = new Date(currentClient.lastActivity).toLocaleDateString('ru-RU');
+
+        // Показываем модальное окно
+        document.getElementById('statsModal').style.display = 'block';
+        
+    } catch (error) {
+        alert('❌ Ошибка загрузки статистики');
+    }
+}
+
+// Добавьте вспомогательные функции для статистики
+function getRequestsThisMonth(client) {
+    if (!client.requestsByDate) return 0;
+    
+    const now = new Date();
+    const currentMonth = now.getMonth();
+    const currentYear = now.getFullYear();
+    
+    return Object.entries(client.requestsByDate).reduce((total, [date, count]) => {
+        const requestDate = new Date(date);
+        if (requestDate.getMonth() === currentMonth && requestDate.getFullYear() === currentYear) {
+            return total + count;
+        }
+        return total;
+    }, 0);
+}
+
+function getAveragePerWeek(client) {
+    if (!client.registrationDate || !client.totalRequests) return 0;
+    
+    const regDate = new Date(client.registrationDate);
+    const now = new Date();
+    const weeksDiff = Math.max(1, Math.ceil((now - regDate) / (7 * 24 * 60 * 60 * 1000)));
+    
+    return Math.round((client.totalRequests || 0) / weeksDiff);
+}
 
       function renewAccess() {
-        alert('🔁 Для продления доступа обратитесь к администратору');
+        alert('🔁 Для продления доступа необходимо выйти из кабинета и снова войти, как при первой регистрации');
       }
 
       function showDiscountModal() {
@@ -1267,10 +1320,10 @@
         checkSession();
         initSliders();
       });
+      
     </script>
   </body>
 </html>
-
 
 
 
