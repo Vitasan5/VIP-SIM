@@ -709,72 +709,26 @@ function registerPendingPayment(paymentData) {
             Уже зарегистрированы? Войдите в кабинет после активации доступа
           </p>
           
-       <!-- Десктопная версия (рядом) -->
-<div class="desktop-login">
-  <div style="display: flex; gap: 10px; align-items: center; justify-content: center;">
-    <input
-      type="text"
-      id="accessCodeInput"
-      placeholder="Введите ваш VIP ID"
-      maxlength="20"
-      autocomplete="off"
-      style="flex: 1; max-width: 300px; padding: 12px; border: 2px solid #2196F3; border-radius: 8px; font-family: monospace; text-align: center; font-weight: bold; font-size: 16px;"
-    />
-    <button onclick="checkAccessCode()" class="btn" style="background: #2196F3; color: white; padding: 12px 24px; font-size: 16px; white-space: nowrap;">
-      🚀 Войти в кабинет
-    </button>
-  </div>
-</div>
+          <!-- УНИВЕРСАЛЬНАЯ ФОРМА ВХОДА ДЛЯ ВСЕХ УСТРОЙСТВ -->
+          <div class="universal-login">
+            <input
+              type="text"
+              id="universalAccessCodeInput"
+              placeholder="Введите ваш VIP ID"
+              maxlength="20"
+              autocomplete="off"
+              style="width: 100%; max-width: 300px; padding: 12px; border: 2px solid #2196F3; border-radius: 8px; font-family: monospace; text-align: center; font-weight: bold; font-size: 16px; margin-bottom: 10px; display: block; margin-left: auto; margin-right: auto;"
+            />
+            <button onclick="checkUniversalAccessCode()" class="btn" style="width: 100%; max-width: 300px; background: #2196F3; color: white; padding: 12px 24px; font-size: 16px; white-space: nowrap; display: block; margin-left: auto; margin-right: auto;">
+              🚀 Войти в кабинет
+            </button>
+          </div>
 
-<!-- Мобильная версия (столбик) -->
-<div class="mobile-login">
-  <input
-    type="text"
-    id="mobileAccessCodeInput"
-    placeholder="Введите ваш VIP ID"
-    maxlength="20"
-    autocomplete="off"
-    style="width: 100%; max-width: 300px; padding: 12px; border: 2px solid #2196F3; border-radius: 8px; font-family: monospace; text-align: center; font-weight: bold; font-size: 16px; margin-bottom: 10px; display: block; margin-left: auto; margin-right: auto;"
-  />
-  <button onclick="checkMobileAccessCode()" class="btn" style="width: 100%; max-width: 300px; background: #2196F3; color: white; padding: 12px 24px; font-size: 16px; white-space: nowrap; display: block; margin-left: auto; margin-right: auto; margin-bottom: 10px;">
-    🚀 Войти в кабинет
-  </button>
-</div>
-
-<div style="margin-top: 15px; font-size: 12px; color: #666; text-align: center;">
-  ID выдается после регистрации (формат: VIPABC123DEF)
-</div>
-
-<style>
-/* Показываем мобильную версию только на маленьких экранах */
-@media (max-width: 768px) {
-  .mobile-login { display: block; }
-  .desktop-login { display: none; }
-}
-
-/* Показываем десктопную версию на больших экранах */
-@media (min-width: 769px) {
-  .mobile-login { display: none; }
-  .desktop-login { display: block; }
-}
-</style>
-
-<script>
-function checkMobileAccessCode() {
-  const accessCode = document.getElementById('mobileAccessCodeInput').value.trim().toUpperCase();
-  if (!accessCode) {
-    alert('⚠️ Введите ваш ID');
-    return;
-  }
-  // Установим значение и вызовем основную функцию
-  document.getElementById('accessCodeInput').value = accessCode;
-  checkAccessCode();
-}
-</script>
+          <div style="margin-top: 15px; font-size: 12px; color: #666; text-align: center;">
+            ID выдается после регистрации (формат: VIPABC123DEF)
+          </div>
         </div>
       </div>
-
-      
 
       <!-- Личный кабинет -->
       <div id="premiumScreen" class="hidden">
@@ -1748,56 +1702,66 @@ function showCopyFeedback(message) {
         }
       }
       
-      // Проверка доступа по ID
-     function checkAccessCode() {
-  const input = document.getElementById('accessCodeInput');
-  const accessCode = input.value.trim().toUpperCase();
+      // УНИВЕРСАЛЬНАЯ ФУНКЦИЯ ВХОДА ДЛЯ ВСЕХ УСТРОЙСТВ
+      function checkUniversalAccessCode() {
+        const input = document.getElementById('universalAccessCodeInput');
+        const accessCode = input.value.trim().toUpperCase();
 
-  if (!accessCode) {
-    alert('⚠️ Пожалуйста, введите ваш VIP ID');
-    return;
-  }
+        if (!accessCode) {
+          alert('⚠️ Пожалуйста, введите ваш VIP ID');
+          return;
+        }
 
-  const adminData = JSON.parse(localStorage.getItem('vipsim_admin') || '{"clients": []}');
-  const client = adminData.clients.find(c => c.clientId === accessCode);
+        // Проверяем доступ
+        const adminData = JSON.parse(localStorage.getItem('vipsim_admin') || '{"clients": []}');
+        const client = adminData.clients.find(c => c.clientId === accessCode);
 
-  if (!client) {
-    alert('❌ ID не найден. Проверьте правильность ввода или дождитесь активации.');
-    return;
-  }
+        if (!client) {
+          alert('❌ ID не найден. Проверьте правильность ввода или дождитесь активации.');
+          return;
+        }
 
-  if (client.blocked) {
-    alert('🚫 Доступ заблокирован. Обратитесь в поддержку.');
-    return;
-  }
+        if (client.blocked) {
+          alert('🚫 Доступ заблокирован. Обратитесь в поддержку.');
+          return;
+        }
 
-  if (!client.accessActive) {
-    alert('⏳ Доступ ещё не активирован. Дождитесь подтверждения оплаты.');
-    return;
-  }
+        if (!client.accessActive) {
+          alert('⏳ Доступ ещё не активирован. Дождитесь подтверждения оплаты.');
+          return;
+        }
 
-  // ✅ Всё хорошо — сохраняем и заходим
-  const clientData = {
-    clientId: client.clientId,
-    nickname: client.nickname,
-    remaining: client.remaining,
-    createdAt: new Date(client.registrationDate).getTime(),
-    paid: client.paid,
-    blocked: client.blocked,
-    stats: {
-      totalRequests: client.totalRequests,
-      requestsByDate: client.requestsByDate || {},
-      registrationDate: client.registrationDate,
-      lastActivity: client.lastActivity
-    }
-  };
+        // Определяем устройство
+        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        const deviceType = isMobile ? 'mobile' : 'desktop';
+        
+        // Обновляем информацию об устройстве в админке
+        client.deviceType = deviceType;
+        client.lastLoginDevice = deviceType;
+        client.lastLoginTime = new Date().toISOString();
+        localStorage.setItem('vipsim_admin', JSON.stringify(adminData));
 
-  savePremiumData(clientData);
-  showPremiumScreen(clientData);
-}
-      
-      
-    
+        // ✅ Всё хорошо — сохраняем и заходим
+        const clientData = {
+          clientId: client.clientId,
+          nickname: client.nickname,
+          remaining: client.remaining,
+          createdAt: new Date(client.registrationDate).getTime(),
+          paid: client.paid,
+          blocked: client.blocked,
+          stats: {
+            totalRequests: client.totalRequests,
+            requestsByDate: client.requestsByDate || {},
+            registrationDate: client.registrationDate,
+            lastActivity: client.lastActivity
+          }
+        };
+
+        savePremiumData(clientData);
+        showPremiumScreen(clientData);
+        
+        console.log('✅ Успешный вход с устройства:', deviceType);
+      }
       
       // Функции для управления слайдером операторов
       function scrollOperators(direction) {
@@ -2113,4 +2077,3 @@ function showCopyFeedback(message) {
     
   </body>
 </html>
-
