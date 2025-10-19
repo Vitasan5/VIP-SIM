@@ -736,12 +736,12 @@
         <div class="tariff-buttons">
           <a href="tariffs.html" class="btn btn-tariff">
             <img src="img/goldsim.png" alt="SIM" class="tariff-icon" onerror="this.style.display='none'">
-            <div style="width: 32px; height: 32px; background: #d4af37; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 8px; color: white;">📱</div>
+            
             Тарифы для Крыма 
           </a>
           <a href="https://megasimka.ru/product-category/sim-cards/sim-internet/?ref=838" class="btn btn-tariff" target="_blank">
             <img src="img/goldsim.png" alt="SIM" class="tariff-icon" onerror="this.style.display='none'">
-            <div style="width: 32px; height: 32px; background: #d4af37; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 8px; color: white;">📶</div>
+            
             Тарифы для РФ
           </a>
         </div>
@@ -856,16 +856,57 @@
       </div>
     </div>
 
-    <!-- Модальное окно скидки -->
-    <div id="discountModal" class="modal">
-      <div class="modal-content" style="background: linear-gradient(135deg, #ffd700, #ffed4e, #ffd700);">
-        <span class="close" onclick="closeDiscountModal()">&times;</span>
-        <div class="discount-title">ПЕРСОНАЛЬНАЯ СКИДКА</div>
-        <div class="discount-amount">1000₽</div>
-        <div class="discount-text">на любой красивый номер от 5000₽</div>
-        <div class="discount-note">*Активируется при обращении в поддержку</div>
-      </div>
+<!-- Модальное окно скидки -->
+<div id="discountModal" class="modal">
+  <div class="modal-content" style="background: linear-gradient(135deg, #ffd700, #ffed4e, #ffd700); border-radius: 20px; padding: 30px; position: relative;">
+    <span class="close" onclick="closeDiscountModal()" style="position: absolute; top: 15px; right: 20px; font-size: 28px; cursor: pointer; color: #666;">&times;</span>
+    
+    <div class="discount-title" style="font-size: 24px; font-weight: 800; color: #b8860b; margin-bottom: 15px; text-align: center;">
+      ПЕРСОНАЛЬНАЯ СКИДКА
     </div>
+    
+    <div class="discount-amount" style="font-size: 42px; font-weight: 900; color: #e30613; margin: 20px 0; text-align: center; text-shadow: 2px 2px 4px rgba(0,0,0,0.1);">
+      1000₽
+    </div>
+    
+    <div class="discount-text" style="font-size: 18px; color: #5d4037; margin-bottom: 10px; text-align: center; font-weight: 600;">
+      на любой красивый номер от 5000₽
+    </div>
+    
+    <!-- КНОПКА ВЫБОРА НОМЕРА -->
+    <div style="margin: 25px 0;">
+      <a href="https://www.vip-sim.ru/numbers" 
+         target="_blank" 
+         class="btn-select-number"
+         style="display: block; width: 80%; margin: 0 auto; padding: 14px 24px; 
+                background: linear-gradient(135deg, #e30613, #ff0019); 
+                color: white; text-decoration: none; border-radius: 12px; 
+                font-weight: bold; font-size: 17px; text-align: center;
+                box-shadow: 0 4px 15px rgba(227, 6, 19, 0.4);
+                transition: all 0.3s ease;
+                border: 2px solid white;">
+        🎯 Выбрать номер
+      </a>
+    </div>
+    
+    <div class="discount-note" style="font-size: 14px; color: #8d6e63; margin-top: 15px; text-align: center; font-style: italic;">
+      *Скидка активируется при обращении в премиум-поддержку
+    </div>
+  </div>
+</div>
+
+<style>
+.btn-select-number:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(227, 6, 19, 0.5);
+    text-decoration: none;
+    color: white;
+}
+
+.btn-select-number:active {
+    transform: translateY(-1px);
+}
+</style>
 
     <!-- Модальное окно для услуг -->
     <div id="serviceDiscountModal" class="modal">
