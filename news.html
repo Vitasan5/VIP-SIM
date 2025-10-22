@@ -15,8 +15,6 @@
         <div class="logo">
             <img src="img/logo.PNG" alt="VIP SIM">
         </div>
-        <!-- Кнопка премиум-доступа-->
-  <a href="premium.html" class="premium-btn">⭐ Премиум-опции</a>
         <nav>
             <a href="index.html">Главная</a>
             <a href="tariffs.html">Тарифы</a>
@@ -52,18 +50,439 @@
         <!-- БЛОК НОВОСТЕЙ -->
         <section class="news-section">
             <h2 class="left-align">Новости и статьи</h2>
+            
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Новости операторов связи — Крым</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+      padding: 40px 20px;
+      min-height: 100vh;
+    }
+
+    .operators-news-section {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 40px;
+      color: #333;
+      font-size: 32px;
+      font-weight: 700;
+    }
+
+    .operators-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
+      margin-bottom: 30px;
+    }
+
+    .news-block {
+      background: white;
+      border-radius: 16px;
+      padding: 25px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      display: flex;
+      flex-direction: column;
+      transition: all 0.3s ease;
+      border-top: 4px solid;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .news-block::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+    }
+
+    .news-block.mts {
+      border-top-color: #e30613;
+    }
+
+    .news-block.volna {
+      border-top-color: #00a2ff;
+    }
+
+    .news-block.win {
+      border-top-color: #ff6b00;
+    }
+
+    .news-block:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+    }
+
+    .news-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+      padding-bottom: 15px;
+      border-bottom: 2px solid #f0f0f0;
+    }
+
+    .operator-logo {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 12px;
+      font-weight: bold;
+      font-size: 18px;
+      color: white;
+    }
+
+    .mts .operator-logo { background: #e30613; }
+    .volna .operator-logo { background: #00a2ff; }
+    .win .operator-logo { background: #ff6b00; }
+
+    .news-header h2 {
+      margin: 0;
+      color: #333;
+      font-size: 20px;
+    }
+
+    .news-header h2 a {
+      color: inherit;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .news-header h2 a:hover {
+      color: inherit;
+      text-decoration: underline;
+    }
+
+    .news-list {
+      flex-grow: 1;
+      margin-bottom: 15px;
+    }
+
+    .news-item {
+      padding: 12px 0;
+      border-bottom: 1px solid #f0f0f0;
+      display: flex;
+      align-items: flex-start;
+      transition: background-color 0.2s ease;
+    }
+
+    .news-item:last-child {
+      border-bottom: none;
+    }
+
+    .news-item:hover {
+      background-color: #f8f9fa;
+      border-radius: 6px;
+      margin: 0 -10px;
+      padding: 12px 10px;
+    }
+
+    .news-bullet {
+      min-width: 20px;
+      margin-right: 10px;
+      margin-top: 2px;
+    }
+
+    .bullet-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+    }
+
+    .mts .bullet-dot { background: #e30613; }
+    .volna .bullet-dot { background: #00a2ff; }
+    .win .bullet-dot { background: #ff6b00; }
+
+    .news-content {
+      flex: 1;
+    }
+
+    .news-item a {
+      color: #333;
+      text-decoration: none;
+      font-size: 14px;
+      line-height: 1.4;
+      display: block;
+      transition: color 0.3s ease;
+    }
+
+    .mts .news-item a:hover { color: #e30613; }
+    .volna .news-item a:hover { color: #00a2ff; }
+    .win .news-item a:hover { color: #ff6b00; }
+
+    .news-meta {
+      font-size: 11px;
+      color: #666;
+      margin-top: 4px;
+      font-weight: 500;
+    }
+
+    .news-footer {
+      margin-top: 20px;
+      padding-top: 15px;
+      border-top: 1px solid #f0f0f0;
+    }
+
+    .update-note {
+      font-size: 12px;
+      color: #666;
+      text-align: center;
+      font-weight: 500;
+    }
+
+    .new-badge {
+      background: #ff4444;
+      color: white;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 10px;
+      font-weight: bold;
+      margin-left: 8px;
+      animation: pulse 2s infinite;
+    }
+
+    .recent-badge {
+      background: #00a2ff;
+      color: white;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 10px;
+      font-weight: bold;
+      margin-left: 8px;
+    }
+
+    .refresh-section {
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    .refresh-btn {
+      padding: 12px 24px;
+      background: #333;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: all 0.3s ease;
+      font-weight: 600;
+    }
+
+    .refresh-btn:hover {
+      background: #555;
+      transform: translateY(-2px);
+    }
+
+    /* Мобильная адаптация */
+    @media (max-width: 1024px) {
+      .operators-row {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      body {
+        padding: 30px 15px;
+      }
+      
+      .section-title {
+        font-size: 24px;
+        margin-bottom: 30px;
+      }
+      
+      .operators-row {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+      
+      .news-block {
+        padding: 20px;
+      }
+      
+      .news-header h2 {
+        font-size: 18px;
+      }
+    }
+
+    /* Анимации */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes pulse {
+      0% { opacity: 1; }
+      50% { opacity: 0.7; }
+      100% { opacity: 1; }
+    }
+
+    .news-block {
+      animation: fadeIn 0.6s ease-out;
+    }
+
+    .news-block:nth-child(1) { animation-delay: 0.1s; }
+    .news-block:nth-child(2) { animation-delay: 0.2s; }
+    .news-block:nth-child(3) { animation-delay: 0.3s; }
+  </style>
+</head>
+<body>
+
+  <section class="operators-news-section">
+    <!--<h1 class="section-title">Новости операторов связи — Крым</h1>-->
+    
+    <div class="operators-row" id="newsContainer">
+      <!-- Новости будут загружены автоматически из JSONBin -->
+    </div>
+
+    <!-- <div class="refresh-section">
+      <button class="refresh-btn" onclick="loadNews()">
+        🔄 Обновить новости
+      </button>
+    </div>-->
+  </section>
+
+  <script>
+    // Конфигурация JSONBin
+    const NEWS_CONFIG = {
+      BIN_ID: '68f7d602ae596e708f224741',
+      MASTER_KEY: '$2a$10$h2nqVPwwIv04XRDJNXhHJuedTYrRgG9tIX5HbvnfiWo/BE3sWbxxW',
+      BASE_URL: 'https://api.jsonbin.io/v3/b'
+    };
+
+    // Загрузка новостей из JSONBin
+    async function loadNews() {
+      try {
+        const response = await fetch(`${NEWS_CONFIG.BASE_URL}/${NEWS_CONFIG.BIN_ID}/latest`, {
+          headers: {
+            'X-Master-Key': NEWS_CONFIG.MASTER_KEY
+          }
+        });
+        
+        if (!response.ok) throw new Error('Ошибка загрузки новостей');
+        
+        const data = await response.json();
+        const newsData = data.record || getDefaultNews();
+        
+        // Отображаем новости
+        displayNews(newsData);
+        
+      } catch (error) {
+        console.error('Ошибка загрузки новостей:', error);
+        // Используем тестовые данные при ошибке
+        const defaultNews = getDefaultNews();
+        displayNews(defaultNews);
+      }
+    }
+
+    // Функция для получения новостей по умолчанию
+    function getDefaultNews() {
+      return {
+        mts: [
+          { title: "🔥 НОВИНКА: Тариф 'УМНЫЙ XL' с 60 ГБ всего за 425₽", date: "Сегодня", category: "Акция", link: "#" },
+          { title: "📱 Поддержка eSIM для iPhone 15 и Samsung", date: "2 дня назад", category: "Технологии", link: "#" },
+          { title: "🚚 Бесплатная доставка SIM-карт по всему Крыму", date: "Неделю назад", category: "Услуга", link: "#" }
+        ],
+        volna: [
+          { title: "Обновляем условия стоимости сверх пакета услуг", date: "Октябрь 2025", badge: "НОВОЕ", link: "https://volnamobile.ru/news" },
+          { title: "📱 Турбо-тарифы Волны стали ещё лучше!", date: "Октябрь 2025", category: "Технологии", badge: "ОБНОВЛЕНИЕ", link: "https://volnamobile.ru/news" },
+          { title: "Обновляем условия подписки START", date: "Сентябрь 2025", category: "Тарифы", link: "https://volnamobile.ru/news" }
+        ],
+        win: [
+          { title: "⚠️ ВНИМАНИЕ: Мошенники в Telegram", date: "Сейчас", category: "Безопасность", badge: "ВАЖНО", link: "https://www.mobile-win.ru/news" },
+          { title: "💰 ОБНОВЛЯЕМ условия стоимости сверх пакета услуг", date: "21 октября 2025", category: "Тарифы", link: "https://www.mobile-win.ru/news" },
+          { title: "📞 Новые правила маркировки звонков для бизнеса", date: "1 сентября 2025", category: "Для бизнеса", link: "https://www.mobile-win.ru/news" }
+        ]
+      };
+    }
+
+    // Отображение новостей на странице
+    function displayNews(newsData) {
+      const container = document.getElementById('newsContainer');
+      
+      const operators = [
+        { id: 'mts', name: 'МТС — Крым', logo: 'М', color: '#e30613' },
+        { id: 'volna', name: 'Волна Mobile', logo: 'В', color: '#00a2ff', link: 'https://volnamobile.ru/news' },
+        { id: 'win', name: 'Win Mobile', logo: 'W', color: '#ff6b00', link: 'https://www.mobile-win.ru/news' }
+      ];
+
+      container.innerHTML = operators.map(operator => {
+        const operatorNews = newsData[operator.id] || [];
+        
+        return `
+          <div class="news-block ${operator.id}">
+            <div class="news-header">
+              <div class="operator-logo">${operator.logo}</div>
+              <h2>${operator.link ? `<a href="${operator.link}" target="_blank" rel="noopener">${operator.name}</a>` : operator.name}</h2>
+            </div>
+            
+            <div class="news-list">
+              ${operatorNews.map((news, index) => `
+                <div class="news-item">
+                  <div class="news-bullet">
+                    <div class="bullet-dot"></div>
+                  </div>
+                  <div class="news-content">
+                    <a href="${news.link || '#'}" ${news.link ? 'target="_blank" rel="noopener"' : ''}>
+                      ${news.title}
+                      ${news.badge ? `<span class="new-badge">${news.badge}</span>` : ''}
+                    </a>
+                    <div class="news-meta">${news.date}${news.category ? ' • ' + news.category : ''}</div>
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+            
+            <div class="news-footer">
+              <div class="update-note">🔄 Автообновление</div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // Инициализация при загрузке страницы
+    document.addEventListener('DOMContentLoaded', function() {
+      loadNews();
+      
+      // Автообновление каждые 5 минут
+      setInterval(loadNews, 300000);
+      
+      // Анимации при загрузке
+      setTimeout(() => {
+        const blocks = document.querySelectorAll('.news-block');
+        blocks.forEach((block, index) => {
+          block.style.animationDelay = `${index * 0.1}s`;
+        });
+      }, 100);
+    });
+  </script>
+
+</body>
+</html>
+            
            
             <!-- Первая строка новостей -->
-
-            <div class="news-grid">
-                <div class="news-card">
-                    <img src="https://avatars.dzeninfra.ru/get-zen_brief/271828/pub_68e35d1968a1e25e368c0836_68e35d2aa3d63762dbfc927a/scale_1200"
-                        alt="Заголовок новости 1" class="news-img">
-                    <p class="news-title">📱 Почему скорость мобильного интернета не всегда максимальна? 🚀
-Оператор пишет «неограниченно», но на деле скорость бывает разной. Всё дело в нескольких ключевых факторах</p>
-                    <a href="https://dzen.ru/b/aONdGWih4l42jAg2" target="_blank" class="btn-read">Читать</a>
-                </div>
-                
             <div class="news-grid">
                 <div class="news-card">
                     <img src="https://avatars.dzeninfra.ru/get-zen_brief/271828/pub_6897438fc5c2eb6bd4bdd8a3_689743ac526ad674d2cd9bd5/scale_1200"
@@ -330,6 +749,4 @@
     <script src="js/script.js"></script>
 </body>
 
-
 </html>
-

@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Админка Мобильных Клиентов | VIP-SIM.RU</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        .admin-container {
+            max-width: 1200px;
+            margin: 20px auto;
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #764ba2;
+            font-size: 32px;
+        }
+        .stats-overview {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .stat-card {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        .stat-number {
+            font-size: 36px;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+        .stat-label {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        .section {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+        }
+        .section h2 {
+            color: #764ba2;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #e9ecef;
+            padding-bottom: 10px;
+        }
+        .clients-grid {
+            display: grid;
+            gap: 15px;
+        }
+        .client-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .client-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 10px;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .client-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+        .btn {
+            padding: 8px 16px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 12px;
+        }
+        .btn:hover {
+            background: #764ba2;
+        }
+        .btn-success {
+            background: #28a745;
+        }
+        .btn-success:hover {
+            background: #218838;
+        }
+        .btn-warning {
+            background: #ffc107;
+            color: #000;
+        }
+        .btn-warning:hover {
+            background: #e0a800;
+        }
+        .btn-danger {
+            background: #dc3545;
+        }
+        .btn-danger:hover {
+            background: #c82333;
+        }
+        .blocked-client {
+            border-left-color: #dc3545;
+            background: #ffe6e6;
+        }
+        .client-id {
+            font-family: monospace;
+            background: #e3f2fd;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            color: #1976d2;
+        }
+        .back-btn {
+            background: #6c757d;
+            margin-bottom: 20px;
+        }
+        .back-btn:hover {
+            background: #5a6268;
+        }
+        .search-box {
+            margin-bottom: 20px;
+            position: relative;
+        }
+        .search-box input {
+            width: 100%;
+            padding: 12px 40px 12px 12px;
+            border: 2px solid #667eea;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+        .clear-search {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            font-size: 18px;
+            cursor: pointer;
+            color: #666;
+        }
+        .clear-search:hover {
+            color: #dc3545;
+        }
+        .inactive-client {
+            border-left-color: #ff9800;
+            background: #fff3cd;
+        }
+        .mobile-indicator {
+            background: #4CAF50;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 10px;
+            margin-left: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <a href="index.html" class="btn back-btn">← Назад в кабинет</a>
+        <a href="admin.html" class="btn back-btn" style="margin-left: 10px;">📊 Основная админка</a>
+        
+        <h1>📱 Админка Мобильных Клиентов</h1>
+        
+        <div class="stats-overview">
+            <div class="stat-card">
+                <div class="stat-number" id="totalMobileClients">0</div>
+                <div class="stat-label">Мобильных клиентов</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="activeMobileClients">0</div>
+                <div class="stat-label">Активных</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="pendingMobileActivations">0</div>
+                <div class="stat-label">Ожидают активации</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="mobileRevenue">0 ₽</div>
+                <div class="stat-label">Доход с мобильных</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>👥 Все мобильные клиенты</h2>
+            <div class="search-box">
+                <input type="text" id="searchMobileClient" placeholder="🔍 Поиск по ID или имени..." onkeyup="searchMobileClients()">
+                <button class="clear-search" id="clearSearchMobile" onclick="clearMobileSearch()" style="display: none;">✕</button>
+            </div>
+            <div class="clients-grid" id="mobileClientsList"></div>
+        </div>
+
+        <div class="section">
+            <h2>🛠️ Управление</h2>
+            <button class="btn btn-success" onclick="activateAllPending()">✅ Активировать всех ожидающих</button>
+            <button class="btn btn-danger" onclick="clearAllMobileClients()">🗑️ Удалить всех клиентов</button>
+            <button class="btn" onclick="refreshMobileData()">🔄 Обновить данные</button>
+        </div>
+    </div>
+
+    <script>
+        // Загрузка данных мобильных клиентов
+        function loadMobileAdminData() {
+            try {
+                const adminData = JSON.parse(localStorage.getItem('vipsim_admin') || '{"clients": [], "payments": []}');
+                
+                // Сортируем клиентов - новые сверху
+                adminData.clients.sort((a, b) => new Date(b.registrationDate) - new Date(a.registrationDate));
+                
+                // Статистика только по мобильным клиентам
+                const mobileClients = adminData.clients;
+                document.getElementById('totalMobileClients').textContent = mobileClients.length;
+                document.getElementById('activeMobileClients').textContent = mobileClients.filter(c => c.accessActive).length;
+                document.getElementById('pendingMobileActivations').textContent = mobileClients.filter(c => !c.accessActive && c.paid).length;
+                
+                // Доход с мобильных
+                const mobileRevenue = adminData.payments
+                    .filter(p => p.status === 'paid')
+                    .reduce((sum, payment) => sum + payment.amount, 0);
+                document.getElementById('mobileRevenue').textContent = mobileRevenue + ' ₽';
+
+                displayMobileClients(mobileClients);
+            } catch (error) {
+                console.error('Ошибка загрузки данных:', error);
+            }
+        }
+
+        // Отображение мобильных клиентов
+        function displayMobileClients(clients) {
+            const clientsList = document.getElementById('mobileClientsList');
+            
+            if (clients.length === 0) {
+                clientsList.innerHTML = '<p style="text-align: center; color: #666;">Нет мобильных клиентов</p>';
+                return;
+            }
+            
+            clientsList.innerHTML = clients.map(client => `
+                <div class="client-card ${client.accessActive ? '' : 'inactive-client'} ${client.blocked ? 'blocked-client' : ''}">
+                    <div class="client-info">
+                        <div>
+                            <strong>${client.nickname}</strong>
+                            <span class="mobile-indicator">📱</span>
+                        </div>
+                        <div class="client-id">${client.clientId}</div>
+                        <div>
+                            ${client.blocked ? '🚫 Заблокирован' : 
+                              client.accessActive ? '✅ Доступ открыт' : 
+                              client.paid ? '⏳ Ожидает активации' : '❌ Не оплачено'}
+                        </div>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; font-size: 12px;">
+                        <div>📞 ${client.totalRequests || 0} обращений</div>
+                        <div>💰 ${client.remaining || 0} осталось</div>
+                        <div>${client.paid ? '✅ Оплачено' : '❌ Не оплачено'}</div>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-size: 11px; margin-top: 10px;">
+                        <div>📅 Рег.: ${new Date(client.registrationDate).toLocaleDateString('ru-RU')}</div>
+                        <div>⏰ Актив.: ${new Date(client.lastActivity).toLocaleDateString('ru-RU')}</div>
+                    </div>
+                    <div class="client-actions">
+                        ${!client.accessActive && client.paid ? 
+                            `<button class="btn btn-success" onclick="activateClientAccess('${client.clientId}')">✅ Активировать доступ</button>` :
+                            client.accessActive ?
+                            `<button class="btn btn-warning" onclick="deactivateClientAccess('${client.clientId}')">🚫 Деактивировать</button>` :
+                            ''
+                        }
+                        ${client.blocked ? 
+                            `<button class="btn btn-success" onclick="unblockClient('${client.clientId}')">✅ Разблокировать</button>` :
+                            `<button class="btn btn-danger" onclick="blockClient('${client.clientId}')">🚫 Заблокировать</button>`
+                        }
+                        <button class="btn" onclick="resetClientRequests('${client.clientId}')">🔄 Сбросить</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Функции управления
+        function activateClientAccess(clientId) {
+            if (confirm(`Активировать доступ для клиента ${clientId}?`)) {
+                const adminData = JSON.parse(localStorage.getItem('vipsim_admin'));
+                const client = adminData.clients.find(c => c.clientId === clientId);
+                
+                if (client) {
+                    client.accessActive = true;
+                    client.remaining = 10;
+                    client.activatedAt = new Date().toISOString();
+                    localStorage.setItem('vipsim_admin', JSON.stringify(adminData));
+                    loadMobileAdminData();
+                    alert('✅ Доступ активирован!');
+                }
+            }
+        }
+
+        function deactivateClientAccess(clientId) {
+            if (confirm(`Деактивировать доступ для клиента ${clientId}?`)) {
+                const adminData = JSON.parse(localStorage.getItem('vipsim_admin'));
+                const client = adminData.clients.find(c => c.clientId === clientId);
+                
+                if (client) {
+                    client.accessActive = false;
+                    localStorage.setItem('vipsim_admin', JSON.stringify(adminData));
+                    loadMobileAdminData();
+                    alert('🚫 Доступ деактивирован!');
+                }
+            }
+        }
+
+        function activateAllPending() {
+            if (confirm('Активировать доступ для всех клиентов, ожидающих активации?')) {
+                const adminData = JSON.parse(localStorage.getItem('vipsim_admin'));
+                let activated = 0;
+                
+                adminData.clients.forEach(client => {
+                    if (!client.accessActive && client.paid) {
+                        client.accessActive = true;
+                        client.remaining = 10;
+                        client.activatedAt = new Date().toISOString();
+                        activated++;
+                    }
+                });
+                
+                localStorage.setItem('vipsim_admin', JSON.stringify(adminData));
+                loadMobileAdminData();
+                alert(`✅ Активировано ${activated} клиентов!`);
+            }
+        }
+
+        function clearAllMobileClients() {
+            if (confirm('❌ УДАЛИТЬ ВСЕХ КЛИЕНТОВ?\n\nЭто действие нельзя отменить!')) {
+                localStorage.setItem('vipsim_admin', JSON.stringify({"clients": [], "payments": []}));
+                loadMobileAdminData();
+                alert('✅ Все клиенты удалены!');
+            }
+        }
+
+        function blockClient(clientId) {
+            if (confirm(`Заблокировать клиента ${clientId}?`)) {
+                const adminData = JSON.parse(localStorage.getItem('vipsim_admin'));
+                const client = adminData.clients.find(c => c.clientId === clientId);
+                if (client) {
+                    client.blocked = true;
+                    localStorage.setItem('vipsim_admin', JSON.stringify(adminData));
+                    loadMobileAdminData();
+                    alert('Клиент заблокирован!');
+                    
+                }
+            }
+        }
+
+        function unblockClient(clientId) {
+            if (confirm(`Разблокировать клиента ${clientId}?`)) {
+                const adminData = JSON.parse(localStorage.getItem('vipsim_admin'));
+                const client = adminData.clients.find(c => c.clientId === clientId);
+                if (client) {
+                    client.blocked = false;
+                    localStorage.setItem('vipsim_admin', JSON.stringify(adminData));
+                    loadMobileAdminData();
+                    alert('Клиент разблокирован!');
+                }
+            }
+        }
+
+        function resetClientRequests(clientId) {
+            if (confirm(`Сбросить обращения для клиента ${clientId}?`)) {
+                const adminData = JSON.parse(localStorage.getItem('vipsim_admin'));
+                const client = adminData.clients.find(c => c.clientId === clientId);
+                if (client) {
+                    client.remaining = 10;
+                    client.totalRequests = 0;
+                    localStorage.setItem('vipsim_admin', JSON.stringify(adminData));
+                    loadMobileAdminData();
+                    alert('Обращения сброшены!');
+                }
+            }
+        }
+
+        function searchMobileClients() {
+            const searchTerm = document.getElementById('searchMobileClient').value.toLowerCase();
+            
+            if (searchTerm) {
+                document.getElementById('clearSearchMobile').style.display = 'block';
+            } else {
+                document.getElementById('clearSearchMobile').style.display = 'none';
+                loadMobileAdminData();
+                return;
+            }
+            
+            const adminData = JSON.parse(localStorage.getItem('vipsim_admin') || '{"clients": []}');
+            const filteredClients = adminData.clients.filter(client => 
+                client.clientId.toLowerCase().includes(searchTerm) || 
+                client.nickname.toLowerCase().includes(searchTerm)
+            );
+            
+            displayMobileClients(filteredClients);
+        }
+
+        function clearMobileSearch() {
+            document.getElementById('searchMobileClient').value = '';
+            document.getElementById('clearSearchMobile').style.display = 'none';
+            loadMobileAdminData();
+        }
+
+        function refreshMobileData() {
+            loadMobileAdminData();
+            alert('Данные обновлены!');
+        }
+
+        // Авто-обновление каждые 3 секунды
+        setInterval(loadMobileAdminData, 3000);
+
+        document.addEventListener('DOMContentLoaded', loadMobileAdminData);
+    </script>
+</body>
+</html>
