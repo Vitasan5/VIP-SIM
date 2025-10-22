@@ -82,13 +82,18 @@
         overflow: hidden;
       }
       .btn-support::before {
-        content: '';
+        content: "";
         position: absolute;
         top: 0;
         left: -100%;
         width: 100%;
         height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.4),
+          transparent
+        );
         transition: 0.5s;
       }
       .btn-support:hover::before {
@@ -124,7 +129,7 @@
         animation: pinkShine 2s ease-in-out infinite;
       }
       .btn-stats {
-        background: linear-gradient(135deg, #2196F3, #21CBF3, #2196F3);
+        background: linear-gradient(135deg, #2196f3, #21cbf3, #2196f3);
         background-size: 200% 200%;
         color: white;
         border: none;
@@ -205,7 +210,7 @@
         top: 0;
         width: 100%;
         height: 100%;
-        background-color: rgba(0,0,0,0.5);
+        background-color: rgba(0, 0, 0, 0.5);
         animation: fadeIn 0.3s;
       }
       .modal-content {
@@ -216,7 +221,7 @@
         width: 90%;
         max-width: 500px;
         text-align: center;
-        box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
         animation: slideIn 0.3s ease-out;
         position: relative;
       }
@@ -245,12 +250,12 @@
         padding: 15px;
         border-radius: 10px;
         text-align: center;
-        border-left: 4px solid #2196F3;
+        border-left: 4px solid #2196f3;
       }
       .stat-number {
         font-size: 24px;
         font-weight: 800;
-        color: #2196F3;
+        color: #2196f3;
         margin-bottom: 5px;
       }
       .stat-label {
@@ -273,7 +278,7 @@
         font-weight: 800;
         color: #d4af37;
         margin-bottom: 15px;
-        text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
       }
       .discount-amount {
         font-size: 42px;
@@ -339,7 +344,7 @@
         padding: 25px;
         background: #e3f2fd;
         border-radius: 12px;
-        border: 2px solid #2196F3;
+        border: 2px solid #2196f3;
       }
 
       /* Стили для слайдера услуг */
@@ -347,7 +352,7 @@
         margin: 20px 0;
         padding: 10px 0;
       }
-      
+
       .services-slider-container {
         position: relative;
         display: flex;
@@ -355,7 +360,7 @@
         max-width: 100%;
         margin: 0 auto;
       }
-      
+
       .services-slider-track {
         display: flex;
         gap: 15px;
@@ -366,44 +371,44 @@
         scrollbar-color: #d4af37 transparent;
         flex: 1;
       }
-      
+
       .services-slider-track::-webkit-scrollbar {
         height: 4px;
       }
-      
+
       .services-slider-track::-webkit-scrollbar-track {
         background: transparent;
         border-radius: 10px;
       }
-      
+
       .services-slider-track::-webkit-scrollbar-thumb {
         background: #d4af37;
         border-radius: 10px;
       }
-      
+
       .services-slider-track::-webkit-scrollbar-thumb:hover {
         background: #b8860b;
       }
-      
+
       .service-slide {
         flex: 0 0 auto;
         width: 150px;
         background: white;
         border-radius: 12px;
         padding: 12px;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         cursor: pointer;
         transition: all 0.3s ease;
         border: 1px solid #f0f0f0;
         position: relative;
       }
-      
+
       .service-slide:hover {
         transform: translateY(-2px);
         border-color: #d4af37;
         box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2);
       }
-      
+
       .service-image {
         position: relative;
         width: 100%;
@@ -413,7 +418,7 @@
         justify-content: center;
         align-items: center;
       }
-      
+
       .service-image img {
         width: 100%;
         height: auto;
@@ -421,7 +426,7 @@
         object-fit: contain;
         border-radius: 6px;
       }
-      
+
       .discount-badge {
         position: absolute;
         top: -8px;
@@ -438,7 +443,7 @@
         min-width: 35px;
         text-align: center;
       }
-      
+
       /* Стрелки слайдера */
       .slider-arrow {
         background: #d4af37;
@@ -457,16 +462,16 @@
         box-shadow: 0 2px 6px rgba(212, 175, 55, 0.3);
         z-index: 2;
       }
-      
+
       .slider-arrow:hover {
         background: #b8860b;
         transform: scale(1.05);
       }
-      
+
       .slider-arrow-left {
         margin-right: 8px;
       }
-      
+
       .slider-arrow-right {
         margin-left: 8px;
       }
@@ -476,7 +481,7 @@
         margin: 20px 0;
         padding: 0 10px;
       }
-      
+
       .operators-slider-container {
         position: relative;
         display: flex;
@@ -484,7 +489,7 @@
         max-width: 100%;
         margin: 0 auto;
       }
-      
+
       .operators-slider-track {
         display: flex;
         gap: 8px;
@@ -495,11 +500,11 @@
         -ms-overflow-style: none;
         flex: 1;
       }
-      
+
       .operators-slider-track::-webkit-scrollbar {
         display: none;
       }
-      
+
       .operator-btn {
         display: flex;
         align-items: center;
@@ -512,49 +517,49 @@
         font-size: 14px;
         color: white;
         transition: all 0.3s ease;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
         flex: 0 0 auto;
         width: 80px;
         text-align: center;
         position: relative;
         overflow: hidden;
       }
-      
+
       .operator-btn:hover {
         transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
       }
-      
+
       /* Цвета операторов */
       .operator-btn.mts {
         background: linear-gradient(135deg, #e30613, #ff0019);
       }
-      
+
       .operator-btn.volna {
         background: linear-gradient(135deg, #00a2ff, #0077cc);
       }
-      
+
       .operator-btn.win {
         background: linear-gradient(135deg, #ff6b00, #ff8c00);
       }
-      
+
       .operator-btn.miranda {
         background: linear-gradient(135deg, #8a2be2, #6a0dad);
       }
-      
+
       .operator-btn.megafon {
         background: linear-gradient(135deg, #56b929, #3d941c);
       }
-      
+
       .operator-btn.beeline {
         background: linear-gradient(135deg, #ffd100, #ffaa00);
       }
-      
+
       .operator-btn.t2 {
         background: #000;
         color: white;
       }
-      
+
       .operator-btn.yota {
         background: linear-gradient(135deg, #00a2ff, #0077cc);
         color: white;
@@ -566,24 +571,49 @@
       }
 
       @keyframes goldShine {
-        0%, 100% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
+        0%,
+        100% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
       }
       @keyframes pinkShine {
-        0%, 100% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
+        0%,
+        100% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
       }
       @keyframes blueShine {
-        0%, 100% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
+        0%,
+        100% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
       }
       @keyframes fadeIn {
-        from { opacity: 0; }
-        to { opacity: 1; }
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
       }
       @keyframes slideIn {
-        from { transform: translateY(-50px); opacity: 0; }
-        to { transform: translateY(0); opacity: 1; }
+        from {
+          transform: translateY(-50px);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
       }
     </style>
   </head>
@@ -592,24 +622,33 @@
       <!-- ЭКРАН ВХОДА -->
       <div id="loginScreen">
         <h1>⭐ Премиум-доступ</h1>
-        
+
         <!-- БЛОК РЕГИСТРАЦИИ -->
         <div id="registrationBlock">
           <p style="text-align: center; margin-bottom: 20px; color: #555">
             Для доступа к премиум-функциям необходимо оплатить 100 ₽
           </p>
-          
+
           <div class="benefits-box">
-            <div style="font-size: 24px; font-weight: bold; color: #b8860b; margin-bottom: 15px;">
+            <div
+              style="
+                font-size: 24px;
+                font-weight: bold;
+                color: #b8860b;
+                margin-bottom: 15px;
+              "
+            >
               💎 Что вы получаете:
             </div>
-            <div style="text-align: left; display: inline-block;">
-              <div style="margin: 8px 0;">✅ 10 обращений в премиум-поддержку</div>
-              <div style="margin: 8px 0;">🎁 Персональные скидки на услуги</div>
-              <div style="margin: 8px 0;">⭐ Приоритетное обслуживание</div>
+            <div style="text-align: left; display: inline-block">
+              <div style="margin: 8px 0">
+                ✅ 10 обращений в премиум-поддержку
+              </div>
+              <div style="margin: 8px 0">🎁 Персональные скидки на услуги</div>
+              <div style="margin: 8px 0">⭐ Приоритетное обслуживание</div>
             </div>
           </div>
-          
+
           <div class="login-form">
             <input
               type="text"
@@ -618,11 +657,18 @@
               maxlength="30"
               autocomplete="off"
             />
-            
+
             <!-- БЛОК С ID КЛИЕНТА -->
-            <div id="clientIdBlock" style="display: none;">
+            <div id="clientIdBlock" style="display: none">
               <div class="client-id-display">
-                <div style="font-weight: bold; color: #2e7d32; margin-bottom: 15px; font-size: 18px;">
+                <div
+                  style="
+                    font-weight: bold;
+                    color: #2e7d32;
+                    margin-bottom: 15px;
+                    font-size: 18px;
+                  "
+                >
                   🆔 ВАШ УНИКАЛЬНЫЙ ID
                 </div>
                 <div class="client-id-value" id="clientIdDisplay"></div>
@@ -630,17 +676,24 @@
                   📋 Копировать ID
                 </button>
               </div>
-              <p style="text-align: center; color: #d32f2f; font-weight: bold;">
+              <p style="text-align: center; color: #d32f2f; font-weight: bold">
                 ⚠️ Сохраните этот ID! Введите его в комментарии к платежу
               </p>
             </div>
-            
+
             <!-- КНОПКА ОПЛАТЫ -->
-            <a href="https://pro.selfwork.ru/kassa/10consultation" 
-               target="_blank" 
-               id="paymentButton"
-               class="btn"
-               style="display: none; background: linear-gradient(135deg, #d4af37, #b8860b); color: white; text-decoration: none;">
+            <a
+              href="https://pro.selfwork.ru/kassa/10consultation"
+              target="_blank"
+              id="paymentButton"
+              class="btn"
+              style="
+                display: none;
+                background: linear-gradient(135deg, #d4af37, #b8860b);
+                color: white;
+                text-decoration: none;
+              "
+            >
               💳 Перейти к оплате 100 ₽
             </a>
           </div>
@@ -648,7 +701,14 @@
 
         <!-- БЛОК ВХОДА ПО ID -->
         <div class="login-by-id">
-          <div style="font-size: 20px; font-weight: bold; color: #1976d2; margin-bottom: 15px;">
+          <div
+            style="
+              font-size: 20px;
+              font-weight: bold;
+              color: #1976d2;
+              margin-bottom: 15px;
+            "
+          >
             🔑 Вход в кабинет по ID
           </div>
           <input
@@ -657,13 +717,49 @@
             placeholder="Введите ваш VIP ID"
             maxlength="20"
             autocomplete="off"
-            style="width: 100%; max-width: 300px; padding: 12px; border: 2px solid #2196F3; border-radius: 8px; font-family: monospace; text-align: center; font-weight: bold; font-size: 16px; margin-bottom: 10px; display: block; margin-left: auto; margin-right: auto;"
+            style="
+              width: 100%;
+              max-width: 300px;
+              padding: 12px;
+              border: 2px solid #2196f3;
+              border-radius: 8px;
+              font-family: monospace;
+              text-align: center;
+              font-weight: bold;
+              font-size: 16px;
+              margin-bottom: 10px;
+              display: block;
+              margin-left: auto;
+              margin-right: auto;
+            "
           />
-          <button onclick="loginClient()" class="btn" style="width: 100%; max-width: 300px; background: #2196F3; color: white; padding: 12px 24px; font-size: 16px; white-space: nowrap; display: block; margin-left: auto; margin-right: auto;">
+          <button
+            onclick="loginClient()"
+            class="btn"
+            style="
+              width: 100%;
+              max-width: 300px;
+              background: #2196f3;
+              color: white;
+              padding: 12px 24px;
+              font-size: 16px;
+              white-space: nowrap;
+              display: block;
+              margin-left: auto;
+              margin-right: auto;
+            "
+          >
             🚀 Войти в кабинет
           </button>
 
-          <div style="margin-top: 15px; font-size: 12px; color: #666; text-align: center;">
+          <div
+            style="
+              margin-top: 15px;
+              font-size: 12px;
+              color: #666;
+              text-align: center;
+            "
+          >
             ID выдается после регистрации (формат: VIPABC123DEF)
           </div>
         </div>
@@ -688,480 +784,628 @@
         <button class="btn btn-offer" onclick="showDiscountModal()">
           🎁 Скидка на красивый номер
         </button>
-        
+
         <!-- Слайдер услуг со скидками -->
         <section class="services-slider-section">
           <div class="services-slider-container">
-            <button class="slider-arrow slider-arrow-left" onclick="scrollSlider(-1)">‹</button>
+            <button
+              class="slider-arrow slider-arrow-left"
+              onclick="scrollSlider(-1)"
+            >
+              ‹
+            </button>
             <div class="services-slider-track" id="servicesSliderTrack">
               <!-- Услуга 1 -->
-              <div class="service-slide" onclick="showServiceDiscount('Восстановление номера')">
+              <div
+                class="service-slide"
+                onclick="showServiceDiscount('Восстановление номера')"
+              >
                 <div class="service-image">
-                  <img src="img/Восстановление.jpg" alt="Восстановление номера" onerror="this.style.display='none'" />
-                  <div style="width: 100%; height: 80px; background: #f0f0f0; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #666; font-size: 12px; display: none;">📱 Восстановление</div>
+                  <img
+                    src="img/Восстановление.jpg"
+                    alt="Восстановление номера"
+                    onerror="this.style.display='none'"
+                  />
+                  <div
+                    style="
+                      width: 100%;
+                      height: 80px;
+                      background: #f0f0f0;
+                      border-radius: 8px;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      color: #666;
+                      font-size: 12px;
+                      display: none;
+                    "
+                  >
+                    📱 Восстановление
+                  </div>
                 </div>
               </div>
-              
+
               <!-- Услуга 2 -->
-              <div class="service-slide" onclick="showServiceDiscount('Смена владельца')">
+              <div
+                class="service-slide"
+                onclick="showServiceDiscount('Смена владельца')"
+              >
                 <div class="service-image">
-                  <img src="img/смена владельца.jpg" alt="Смена владельца" onerror="this.style.display='none'" />
+                  <img
+                    src="img/смена владельца.jpg"
+                    alt="Смена владельца"
+                    onerror="this.style.display='none'"
+                  />
                   <div class="discount-badge">-10%</div>
-                  <div style="width: 100%; height: 80px; background: #f0f0f0; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #666; font-size: 12px; display: none;">👤 Смена владельца</div>
+                  <div
+                    style="
+                      width: 100%;
+                      height: 80px;
+                      background: #f0f0f0;
+                      border-radius: 8px;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      color: #666;
+                      font-size: 12px;
+                      display: none;
+                    "
+                  >
+                    👤 Смена владельца
+                  </div>
                 </div>
               </div>
-              
+
               <!-- Услуга 3 -->
-              <div class="service-slide" onclick="showServiceDiscount('Перенос номера')">
+              <div
+                class="service-slide"
+                onclick="showServiceDiscount('Перенос номера')"
+              >
                 <div class="service-image">
-                  <img src="img/Смена оператора.jpg" alt="Перенос номера" onerror="this.style.display='none'" />
+                  <img
+                    src="img/Смена оператора.jpg"
+                    alt="Перенос номера"
+                    onerror="this.style.display='none'"
+                  />
                   <div class="discount-badge">-10%</div>
-                  <div style="width: 100%; height: 80px; background: #f0f0f0; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #666; font-size: 12px; display: none;">🔄 Перенос номера</div>
+                  <div
+                    style="
+                      width: 100%;
+                      height: 80px;
+                      background: #f0f0f0;
+                      border-radius: 8px;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      color: #666;
+                      font-size: 12px;
+                      display: none;
+                    "
+                  >
+                    🔄 Перенос номера
+                  </div>
                 </div>
               </div>
-              
+
               <!-- Услуга 4 -->
-              <div class="service-slide" onclick="showServiceDiscount('Корректировка данных')">
+              <div
+                class="service-slide"
+                onclick="showServiceDiscount('Корректировка данных')"
+              >
                 <div class="service-image">
-                  <img src="img/Корректируем личные данные в МТС.jpeg" alt="Корректировка данных" onerror="this.style.display='none'" />
+                  <img
+                    src="img/Корректируем личные данные в МТС.jpeg"
+                    alt="Корректировка данных"
+                    onerror="this.style.display='none'"
+                  />
                   <div class="discount-badge">-10%</div>
-                  <div style="width: 100%; height: 80px; background: #f0f0f0; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #666; font-size: 12px; display: none;">📝 Корректировка</div>
+                  <div
+                    style="
+                      width: 100%;
+                      height: 80px;
+                      background: #f0f0f0;
+                      border-radius: 8px;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      color: #666;
+                      font-size: 12px;
+                      display: none;
+                    "
+                  >
+                    📝 Корректировка
+                  </div>
                 </div>
               </div>
             </div>
-            <button class="slider-arrow slider-arrow-right" onclick="scrollSlider(1)">›</button>
+            <button
+              class="slider-arrow slider-arrow-right"
+              onclick="scrollSlider(1)"
+            >
+              ›
+            </button>
           </div>
         </section>
 
-        
+        <!-- Блок новостей и акций для кабинета -->
+        <section class="news-promo-section">
+          <div class="tariff-buttons">
+            <!-- Первый ряд: Тарифы -->
+            <a href="tariffs.html" class="btn btn-tariff">
+              <img
+                src="img/goldsim.png"
+                alt="SIM"
+                class="tariff-icon"
+                onerror="this.style.display='none'"
+              />
+              Тарифы для Крыма
+            </a>
+            <a
+              href="https://megasimka.ru/product-category/sim-cards/sim-internet/?ref=838"
+              class="btn btn-tariff"
+              target="_blank"
+            >
+              <img
+                src="img/goldsim.png"
+                alt="SIM"
+                class="tariff-icon"
+                onerror="this.style.display='none'"
+              />
+              Тарифы для РФ
+            </a>
+          </div>
 
-     <!-- Блок новостей и акций для кабинета -->
-<section class="news-promo-section">
-  <div class="tariff-buttons">
-    <!-- Первый ряд: Тарифы -->
-    <a href="tariffs.html" class="btn btn-tariff">
-      <img src="img/goldsim.png" alt="SIM" class="tariff-icon" onerror="this.style.display='none'">
-      Тарифы для Крыма 
-    </a>
-    <a href="https://megasimka.ru/product-category/sim-cards/sim-internet/?ref=838" class="btn btn-tariff" target="_blank">
-      <img src="img/goldsim.png" alt="SIM" class="tariff-icon" onerror="this.style.display='none'">
-      Тарифы для РФ
-    </a>
-  </div>
+          <!-- Второй ряд: Новости и Акции -->
+          <div class="news-promo-buttons">
+            <button class="btn btn-news" onclick="showNewsModal()">
+              <div class="btn-icon">📰</div>
+              <div class="btn-text">
+                <span class="btn-title">Новости </span>
+                <span class="btn-subtitle">Свежие обновления</span>
+              </div>
+            </button>
 
-  <!-- Второй ряд: Новости и Акции -->
-  <div class="news-promo-buttons">
-    <button class="btn btn-news" onclick="showNewsModal()">
-      <div class="btn-icon">📰</div>
-      <div class="btn-text">
-        <span class="btn-title">Новости операторов</span>
-        <span class="btn-subtitle">Свежие обновления</span>
-      </div>
-    </button>
-    
-    <button class="btn btn-promo" onclick="showPromoModal()">
-      <div class="btn-icon">🎁</div>
-      <div class="btn-text">
-        <span class="btn-title">Специальные акции</span>
-        <span class="btn-subtitle">Выгодные предложения</span>
-      </div>
-    </button>
-  </div>
-</section>
+            <button class="btn btn-promo" onclick="showPromoModal()">
+              <div class="btn-icon">🎁</div>
+              <div class="btn-text">
+                <span class="btn-title">Акции</span>
+                <span class="btn-subtitle">Выгодные предложения</span>
+              </div>
+            </button>
+          </div>
+        </section>
 
-<!-- Модальное окно новостей -->
-<div id="newsModal" class="modal">
-  <div class="modal-content">
-    <span class="close" onclick="closeNewsModal()">&times;</span>
-    <h3 style="color: #2196F3; margin-bottom: 20px; text-align: center;">📰 Новости </h3>
-    
-    <div class="news-list" id="cabinetNewsList">
-      <!-- Новости загружаются из JSONBin -->
-    </div>
-    
-    <div style="text-align: center; margin-top: 20px;">
-      <a href="news.html" class="btn-all-news">Все новости операторов →</a>
-    </div>
-  </div>
-</div>
+        <!-- Модальное окно новостей -->
+        <div id="newsModal" class="modal">
+          <div class="modal-content">
+            <span class="close" onclick="closeNewsModal()">&times;</span>
+            <h3 style="color: #2196f3; margin-bottom: 20px; text-align: center">
+              📰 Новости
+            </h3>
 
-<!-- Модальное окно акций -->
-<div id="promoModal" class="modal">
-  <div class="modal-content">
-    <span class="close" onclick="closePromoModal()">&times;</span>
-    <h3 style="color: #d4af37; margin-bottom: 20px; text-align: center;">🎁 Акции</h3>
-    
-    <div class="promo-content">
-      <div class="promo-item">
-        <div class="promo-title">🎉 Скидка 10% на все услуги</div>
-        <div class="promo-description">Для всех премиум-клиентов действует специальная скидка 10% на услуги восстановления номера, смены владельца и переноса номера.</div>
-        <div class="promo-date">Действует до 31 декабря 2025</div>
-      </div>
-      
-      <div class="promo-item">
-        <div class="promo-title">💎 Бесплатная консультация</div>
-        <div class="promo-description">При продлении премиум-доступа получайте дополнительную бесплатную консультацию от наших специалистов.</div>
-        <div class="promo-date">Постоянная акция</div>
-      </div>
-    </div>
-    
-    <div style="text-align: center; margin-top: 20px;">
-      <div class="promo-note">Акции обновляются регулярно. Следите за обновлениями!</div>
-    </div>
-  </div>
-</div>
+            <div class="news-list" id="cabinetNewsList">
+              <!-- Новости загружаются из JSONBin -->
+            </div>
 
-<style>
-  .news-promo-section {
-    margin: 20px 0;
-  }
-  
-  .news-promo-buttons {
-    display: flex;
-    justify-content: space-between;
-    margin: 15px 0;
-    gap: 10px;
-  }
-  
-  .btn-news, .btn-promo {
-    background: white;
-    color: #333;
-    border: 2px solid #e9ecef;
-    display: flex;
-    align-items: center;
-    width: calc(50% - 10px);
-    margin: 5px;
-    padding: 15px;
-    font-size: 14px;
-    text-align: left;
-    text-decoration: none;
-    cursor: pointer;
-    border-radius: 12px;
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    min-height: 80px;
-  }
-  
-  .btn-news:hover, .btn-promo:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 20px rgba(0,0,0,0.12);
-    border-color: #d4af37;
-  }
-  
-  .btn-news:hover {
-    background: linear-gradient(135deg, #e3f2fd, #f0f8ff);
-    border-color: #2196F3;
-  }
-  
-  .btn-promo:hover {
-    background: linear-gradient(135deg, #fff8e1, #fffde7);
-    border-color: #ffb300;
-  }
-  
-  .btn-icon {
-    font-size: 28px;
-    margin-right: 15px;
-    width: 50px;
-    height: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 10px;
-    flex-shrink: 0;
-  }
-  
-  .btn-news .btn-icon {
-    background: linear-gradient(135deg, #2196F3, #21CBF3);
-    color: white;
-  }
-  
-  .btn-promo .btn-icon {
-    background: linear-gradient(135deg, #ffb300, #ffca28);
-    color: white;
-  }
-  
-  .btn-text {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    min-width: 0;
-  }
-  
-  .btn-title {
-    font-size: 16px;
-    font-weight: 700;
-    margin-bottom: 4px;
-    color: #333;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    line-height: 1.2;
-  }
-  
-  .btn-subtitle {
-    font-size: 12px;
-    color: #666;
-    font-weight: 500;
-    line-height: 1.2;
-  }
+            <div style="text-align: center; margin-top: 20px">
+              <a href="news.html" class="btn-all-news"
+                >Все новости операторов →</a
+              >
+            </div>
+          </div>
+        </div>
 
-  /* Стили для модальных окон */
-  .modal {
-    display: none;
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0,0,0,0.5);
-    animation: fadeIn 0.3s;
-  }
-  
-  .modal-content {
-    background: white;
-    margin: 5% auto;
-    padding: 25px;
-    border-radius: 20px;
-    width: 90%;
-    max-width: 500px;
-    max-height: 80vh;
-    overflow-y: auto;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.2);
-    animation: slideIn 0.3s ease-out;
-    position: relative;
-  }
-  
-  .close {
-    position: absolute;
-    right: 15px;
-    top: 15px;
-    font-size: 28px;
-    font-weight: bold;
-    cursor: pointer;
-    color: #888;
-  }
-  
-  .close:hover {
-    color: #555;
-  }
-  
-  /* Стили для списка новостей в кабинете */
-  .news-item {
-    display: flex;
-    align-items: flex-start;
-    padding: 12px 0;
-    border-bottom: 1px solid #f0f0f0;
-  }
-  
-  .news-item:last-child {
-    border-bottom: none;
-  }
-  
-  .news-operator {
-    min-width: 60px;
-    font-weight: bold;
-    font-size: 12px;
-    color: white;
-    padding: 4px 8px;
-    border-radius: 4px;
-    text-align: center;
-    margin-right: 12px;
-    margin-top: 2px;
-    flex-shrink: 0;
-  }
-  
-  .mts-news .news-operator { background: #e30613; }
-  .volna-news .news-operator { background: #00a2ff; }
-  .win-news .news-operator { background: #ff6b00; }
-  
-  .news-content {
-    flex: 1;
-    min-width: 0;
-  }
-  
-  .news-title {
-    color: #333;
-    text-decoration: none;
-    font-size: 14px;
-    line-height: 1.4;
-    display: block;
-    margin-bottom: 4px;
-    transition: color 0.3s ease;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-  }
-  
-  .news-title:hover {
-    color: #2196F3;
-  }
-  
-  .news-meta {
-    font-size: 11px;
-    color: #666;
-    font-weight: 500;
-  }
-  
-  .news-badge {
-    background: #ff4444;
-    color: white;
-    padding: 2px 6px;
-    border-radius: 4px;
-    font-size: 9px;
-    font-weight: bold;
-    margin-left: 6px;
-  }
-  
-  .btn-all-news {
-    display: inline-block;
-    padding: 10px 20px;
-    background: #2196F3;
-    color: white;
-    text-decoration: none;
-    border-radius: 8px;
-    font-size: 14px;
-    font-weight: 600;
-    transition: all 0.3s ease;
-  }
-  
-  .btn-all-news:hover {
-    background: #1976D2;
-    transform: translateY(-2px);
-  }
-  
-  /* Стили для контента акций */
-  .promo-content {
-    margin: 15px 0;
-  }
-  
-  .promo-item {
-    background: #fff8e1;
-    border: 1px solid #ffd54f;
-    border-radius: 12px;
-    padding: 15px;
-    margin-bottom: 15px;
-    transition: transform 0.3s ease;
-  }
-  
-  .promo-item:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(255, 213, 79, 0.3);
-  }
-  
-  .promo-title {
-    font-size: 16px;
-    font-weight: bold;
-    color: #b8860b;
-    margin-bottom: 8px;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-  }
-  
-  .promo-description {
-    font-size: 14px;
-    color: #5d4037;
-    line-height: 1.4;
-    margin-bottom: 10px;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-  }
-  
-  .promo-date {
-    font-size: 12px;
-    color: #8d6e63;
-    font-weight: 500;
-  }
-  
-  .promo-note {
-    font-size: 12px;
-    color: #666;
-    font-style: italic;
-  }
-  
-  /* Анимации */
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-  
-  @keyframes slideIn {
-    from { transform: translateY(-50px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
-  }
-  
-  /* Мобильная адаптация */
-  @media (max-width: 768px) {
-    .modal-content {
-      margin: 10% auto;
-      padding: 20px;
-      width: 95%;
-    }
-    
-    .news-promo-buttons {
-      flex-direction: row;
-    }
-    
-    .btn-news, .btn-promo {
-      width: calc(50% - 5px);
-      padding: 12px;
-    }
-    
-    .btn-icon {
-      font-size: 24px;
-      width: 40px;
-      height: 40px;
-      margin-right: 12px;
-    }
-    
-    .btn-title {
-      font-size: 14px;
-    }
-    
-    .btn-subtitle {
-      font-size: 11px;
-    }
-  }
-</style>
+        <!-- Модальное окно акций -->
+        <div id="promoModal" class="modal">
+          <div class="modal-content">
+            <span class="close" onclick="closePromoModal()">&times;</span>
+            <h3 style="color: #d4af37; margin-bottom: 20px; text-align: center">
+              🎁 Акции
+            </h3>
 
-<script>
-  // Конфигурация JSONBin для кабинета
-  const NEWS_CONFIG = {
-    BIN_ID: '68f7d602ae596e708f224741',
-    MASTER_KEY: '$2a$10$h2nqVPwwIv04XRDJNXhHJuedTYrRgG9tIX5HbvnfiWo/BE3sWbxxW',
-    BASE_URL: 'https://api.jsonbin.io/v3/b'
-  };
+            <div class="promo-content">
+              <div class="promo-item">
+                <div class="promo-title">🎉 Скидка 10% на все услуги</div>
+                <div class="promo-description">
+                  Для всех премиум-клиентов действует специальная скидка 10% на
+                  услуги восстановления номера, смены владельца и переноса
+                  номера.
+                </div>
+                <div class="promo-date">Действует до 31 декабря 2025</div>
+              </div>
 
-  // Загрузка новостей для кабинета
-  async function loadCabinetNews() {
-    try {
-      const response = await fetch(`${NEWS_CONFIG.BASE_URL}/${NEWS_CONFIG.BIN_ID}/latest`, {
-        headers: {
-          'X-Master-Key': NEWS_CONFIG.MASTER_KEY
-        }
-      });
-      
-      if (!response.ok) throw new Error('Ошибка загрузки новостей');
-      
-      const data = await response.json();
-      return data.record;
-    } catch (error) {
-      console.error('Ошибка загрузки новостей:', error);
-      return null;
-    }
-  }
+              <div class="promo-item">
+                <div class="promo-title">💎 Бесплатная консультация</div>
+                <div class="promo-description">
+                  При продлении премиум-доступа получайте дополнительную
+                  бесплатную консультацию от наших специалистов.
+                </div>
+                <div class="promo-date">Постоянная акция</div>
+              </div>
+            </div>
 
-  // Функции для модальных окон новостей
-  async function showNewsModal() {
-    // Загружаем свежие новости
-    const newsData = await loadCabinetNews();
-    updateCabinetNewsModal(newsData);
-    document.getElementById('newsModal').style.display = 'block';
-  }
-  
-  function updateCabinetNewsModal(newsData) {
-    const newsList = document.getElementById('cabinetNewsList');
-    
-    if (!newsData) {
-      newsList.innerHTML = `
+            <div style="text-align: center; margin-top: 20px">
+              <div class="promo-note">
+                Акции обновляются регулярно. Следите за обновлениями!
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <style>
+          .news-promo-section {
+            margin: 20px 0;
+          }
+
+          .news-promo-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin: 15px 0;
+            gap: 10px;
+          }
+
+          .btn-news,
+          .btn-promo {
+            background: white;
+            color: #333;
+            border: 2px solid #e9ecef;
+            display: flex;
+            align-items: center;
+            width: calc(50% - 10px);
+            margin: 5px;
+            padding: 15px;
+            font-size: 14px;
+            text-align: left;
+            text-decoration: none;
+            cursor: pointer;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            min-height: 80px;
+          }
+
+          .btn-news:hover,
+          .btn-promo:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+            border-color: #d4af37;
+          }
+
+          .btn-news:hover {
+            background: linear-gradient(135deg, #e3f2fd, #f0f8ff);
+            border-color: #2196f3;
+          }
+
+          .btn-promo:hover {
+            background: linear-gradient(135deg, #fff8e1, #fffde7);
+            border-color: #ffb300;
+          }
+
+          .btn-icon {
+            font-size: 28px;
+            margin-right: 15px;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            flex-shrink: 0;
+          }
+
+          .btn-news .btn-icon {
+            background: linear-gradient(135deg, #2196f3, #21cbf3);
+            color: white;
+          }
+
+          .btn-promo .btn-icon {
+            background: linear-gradient(135deg, #ffb300, #ffca28);
+            color: white;
+          }
+
+          .btn-text {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            min-width: 0;
+          }
+
+          .btn-title {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 4px;
+            color: #333;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            line-height: 1.2;
+          }
+
+          .btn-subtitle {
+            font-size: 12px;
+            color: #666;
+            font-weight: 500;
+            line-height: 1.2;
+          }
+
+          /* Стили для модальных окон */
+          .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            animation: fadeIn 0.3s;
+          }
+
+          .modal-content {
+            background: white;
+            margin: 5% auto;
+            padding: 25px;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 500px;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            animation: slideIn 0.3s ease-out;
+            position: relative;
+          }
+
+          .close {
+            position: absolute;
+            right: 15px;
+            top: 15px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            color: #888;
+          }
+
+          .close:hover {
+            color: #555;
+          }
+
+          /* Стили для списка новостей в кабинете */
+          .news-item {
+            display: flex;
+            align-items: flex-start;
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f0f0;
+          }
+
+          .news-item:last-child {
+            border-bottom: none;
+          }
+
+          .news-operator {
+            min-width: 60px;
+            font-weight: bold;
+            font-size: 12px;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            text-align: center;
+            margin-right: 12px;
+            margin-top: 2px;
+            flex-shrink: 0;
+          }
+
+          .mts-news .news-operator {
+            background: #e30613;
+          }
+          .volna-news .news-operator {
+            background: #00a2ff;
+          }
+          .win-news .news-operator {
+            background: #ff6b00;
+          }
+
+          .news-content {
+            flex: 1;
+            min-width: 0;
+          }
+
+          .news-title {
+            color: #333;
+            text-decoration: none;
+            font-size: 14px;
+            line-height: 1.4;
+            display: block;
+            margin-bottom: 4px;
+            transition: color 0.3s ease;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+          }
+
+          .news-title:hover {
+            color: #2196f3;
+          }
+
+          .news-meta {
+            font-size: 11px;
+            color: #666;
+            font-weight: 500;
+          }
+
+          .news-badge {
+            background: #ff4444;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 9px;
+            font-weight: bold;
+            margin-left: 6px;
+          }
+
+          .btn-all-news {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #2196f3;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+          }
+
+          .btn-all-news:hover {
+            background: #1976d2;
+            transform: translateY(-2px);
+          }
+
+          /* Стили для контента акций */
+          .promo-content {
+            margin: 15px 0;
+          }
+
+          .promo-item {
+            background: #fff8e1;
+            border: 1px solid #ffd54f;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 15px;
+            transition: transform 0.3s ease;
+          }
+
+          .promo-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 213, 79, 0.3);
+          }
+
+          .promo-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #b8860b;
+            margin-bottom: 8px;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+          }
+
+          .promo-description {
+            font-size: 14px;
+            color: #5d4037;
+            line-height: 1.4;
+            margin-bottom: 10px;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+          }
+
+          .promo-date {
+            font-size: 12px;
+            color: #8d6e63;
+            font-weight: 500;
+          }
+
+          .promo-note {
+            font-size: 12px;
+            color: #666;
+            font-style: italic;
+          }
+
+          /* Анимации */
+          @keyframes fadeIn {
+            from {
+              opacity: 0;
+            }
+            to {
+              opacity: 1;
+            }
+          }
+
+          @keyframes slideIn {
+            from {
+              transform: translateY(-50px);
+              opacity: 0;
+            }
+            to {
+              transform: translateY(0);
+              opacity: 1;
+            }
+          }
+
+          /* Мобильная адаптация */
+          @media (max-width: 768px) {
+            .modal-content {
+              margin: 10% auto;
+              padding: 20px;
+              width: 95%;
+            }
+
+            .news-promo-buttons {
+              flex-direction: row;
+            }
+
+            .btn-news,
+            .btn-promo {
+              width: calc(50% - 5px);
+              padding: 12px;
+            }
+
+            .btn-icon {
+              font-size: 24px;
+              width: 40px;
+              height: 40px;
+              margin-right: 12px;
+            }
+
+            .btn-title {
+              font-size: 14px;
+            }
+
+            .btn-subtitle {
+              font-size: 11px;
+            }
+          }
+        </style>
+
+        <script>
+          // Конфигурация JSONBin для кабинета
+          const NEWS_CONFIG = {
+            BIN_ID: "68f7d602ae596e708f224741",
+            MASTER_KEY:
+              "$2a$10$h2nqVPwwIv04XRDJNXhHJuedTYrRgG9tIX5HbvnfiWo/BE3sWbxxW",
+            BASE_URL: "https://api.jsonbin.io/v3/b",
+          };
+
+          // Загрузка новостей для кабинета
+          async function loadCabinetNews() {
+            try {
+              const response = await fetch(
+                `${NEWS_CONFIG.BASE_URL}/${NEWS_CONFIG.BIN_ID}/latest`,
+                {
+                  headers: {
+                    "X-Master-Key": NEWS_CONFIG.MASTER_KEY,
+                  },
+                }
+              );
+
+              if (!response.ok) throw new Error("Ошибка загрузки новостей");
+
+              const data = await response.json();
+              return data.record;
+            } catch (error) {
+              console.error("Ошибка загрузки новостей:", error);
+              return null;
+            }
+          }
+
+          // Функции для модальных окон новостей
+          async function showNewsModal() {
+            // Загружаем свежие новости
+            const newsData = await loadCabinetNews();
+            updateCabinetNewsModal(newsData);
+            document.getElementById("newsModal").style.display = "block";
+          }
+
+          function updateCabinetNewsModal(newsData) {
+            const newsList = document.getElementById("cabinetNewsList");
+
+            if (!newsData) {
+              newsList.innerHTML = `
         <div class="news-item">
           <div class="news-content">
             <div class="news-title">Новости временно недоступны</div>
@@ -1169,18 +1413,18 @@
           </div>
         </div>
       `;
-      return;
-    }
+              return;
+            }
 
-    // Берем по одной последней новости от каждого оператора
-    const latestNews = [
-      { operator: 'mts', name: 'МТС', news: newsData.mts?.[0] },
-      { operator: 'volna', name: 'Волна', news: newsData.volna?.[0] },
-      { operator: 'win', name: 'Вин', news: newsData.win?.[0] }
-    ].filter(item => item.news);
+            // Берем по одной последней новости от каждого оператора
+            const latestNews = [
+              { operator: "mts", name: "МТС", news: newsData.mts?.[0] },
+              { operator: "volna", name: "Волна", news: newsData.volna?.[0] },
+              { operator: "win", name: "Вин", news: newsData.win?.[0] },
+            ].filter((item) => item.news);
 
-    if (latestNews.length === 0) {
-      newsList.innerHTML = `
+            if (latestNews.length === 0) {
+              newsList.innerHTML = `
         <div class="news-item">
           <div class="news-content">
             <div class="news-title">Новостей пока нет</div>
@@ -1188,111 +1432,142 @@
           </div>
         </div>
       `;
-      return;
-    }
+              return;
+            }
 
-    newsList.innerHTML = latestNews.map(item => `
+            newsList.innerHTML = latestNews
+              .map(
+                (item) => `
       <div class="news-item ${item.operator}-news">
         <div class="news-operator">${item.name}</div>
         <div class="news-content">
-          <a href="${item.news.link || '#'}" ${item.news.link ? 'target="_blank" rel="noopener"' : ''} class="news-title">
+          <a href="${item.news.link || "#"}" ${
+                  item.news.link ? 'target="_blank" rel="noopener"' : ""
+                } class="news-title">
             ${item.news.title}
-            ${item.news.badge ? `<span class="news-badge">${item.news.badge}</span>` : ''}
+            ${
+              item.news.badge
+                ? `<span class="news-badge">${item.news.badge}</span>`
+                : ""
+            }
           </a>
-          <div class="news-meta">${item.news.date}${item.news.category ? ' • ' + item.news.category : ''}</div>
+          <div class="news-meta">${item.news.date}${
+                  item.news.category ? " • " + item.news.category : ""
+                }</div>
         </div>
       </div>
-    `).join('');
-  }
-  
-  function closeNewsModal() {
-    document.getElementById('newsModal').style.display = 'none';
-  }
+    `
+              )
+              .join("");
+          }
 
-  // Функции для модальных окон акций
-  function showPromoModal() {
-    document.getElementById('promoModal').style.display = 'block';
-  }
-  
-  function closePromoModal() {
-    document.getElementById('promoModal').style.display = 'none';
-  }
-  
-  // Закрытие модальных окон при клике вне контента
-  window.addEventListener('click', function(event) {
-    const modals = ['newsModal', 'promoModal'];
-    modals.forEach(modalId => {
-      const modal = document.getElementById(modalId);
-      if (event.target === modal) {
-        if (modalId === 'newsModal') closeNewsModal();
-        if (modalId === 'promoModal') closePromoModal();
-      }
-    });
-  });
-  
-  // Закрытие модальных окон на Escape
-  document.addEventListener('keydown', function(event) {
-    if (event.key === 'Escape') {
-      closeNewsModal();
-      closePromoModal();
-    }
-  });
-</script>
-        
+          function closeNewsModal() {
+            document.getElementById("newsModal").style.display = "none";
+          }
+
+          // Функции для модальных окон акций
+          function showPromoModal() {
+            document.getElementById("promoModal").style.display = "block";
+          }
+
+          function closePromoModal() {
+            document.getElementById("promoModal").style.display = "none";
+          }
+
+          // Закрытие модальных окон при клике вне контента
+          window.addEventListener("click", function (event) {
+            const modals = ["newsModal", "promoModal"];
+            modals.forEach((modalId) => {
+              const modal = document.getElementById(modalId);
+              if (event.target === modal) {
+                if (modalId === "newsModal") closeNewsModal();
+                if (modalId === "promoModal") closePromoModal();
+              }
+            });
+          });
+
+          // Закрытие модальных окон на Escape
+          document.addEventListener("keydown", function (event) {
+            if (event.key === "Escape") {
+              closeNewsModal();
+              closePromoModal();
+            }
+          });
+        </script>
+
         <!-- Блок звонка операторам -->
         <section class="operators-call-section">
-          <h3 style="text-align: center; margin: 25px 0 15px 0; color: #333; font-size: 18px;">📞 Позвонить оператору</h3>
-          
+          <h3
+            style="
+              text-align: center;
+              margin: 25px 0 15px 0;
+              color: #333;
+              font-size: 18px;
+            "
+          >
+            📞 Позвонить оператору
+          </h3>
+
           <div class="operators-slider-container">
-            <button class="slider-arrow slider-arrow-left" onclick="scrollOperators(-1)">‹</button>
-            
+            <button
+              class="slider-arrow slider-arrow-left"
+              onclick="scrollOperators(-1)"
+            >
+              ‹
+            </button>
+
             <div class="operators-slider-track" id="operatorsSliderTrack">
               <!-- МТС -->
               <a href="tel:+74957660166" class="operator-btn mts">
                 <span class="operator-name">МТС</span>
               </a>
-              
+
               <!-- Волна -->
               <a href="tel:+79785550555" class="operator-btn volna">
                 <span class="operator-name">Волна</span>
               </a>
-              
+
               <!-- Вин -->
               <a href="tel:+79789090545" class="operator-btn win">
                 <span class="operator-name">Вин</span>
               </a>
-              
+
               <!-- Миранда -->
               <a href="tel:+79790003330" class="operator-btn miranda">
                 <span class="operator-name">Миранда</span>
               </a>
-              
+
               <!-- МегаФон -->
               <a href="tel:+79261110999" class="operator-btn megafon">
                 <span class="operator-name">МегаФон</span>
               </a>
-              
+
               <!-- Билайн -->
               <a href="tel:+74957972727" class="operator-btn beeline">
                 <span class="operator-name">Билайн</span>
               </a>
-              
+
               <!-- Т2 -->
               <a href="tel:+79515200611" class="operator-btn t2">
                 <span class="operator-name">Т2</span>
               </a>
-              
+
               <!-- Yota -->
               <a href="tel:88005500007" class="operator-btn yota">
                 <span class="operator-name">Yota</span>
               </a>
             </div>
-            
-            <button class="slider-arrow slider-arrow-right" onclick="scrollOperators(1)">›</button>
+
+            <button
+              class="slider-arrow slider-arrow-right"
+              onclick="scrollOperators(1)"
+            >
+              ›
+            </button>
           </div>
         </section>
 
-              <button class="btn btn-stats" onclick="showStats()">
+        <button class="btn btn-stats" onclick="showStats()">
           📊 Моя статистика
         </button>
 
@@ -1306,111 +1581,200 @@
       </div>
     </div>
 
-     <!-- Модальное окно статистики -->
+    <!-- Модальное окно статистики -->
     <div id="statsModal" class="modal">
       <div class="modal-content">
         <span class="close" onclick="closeStatsModal()">&times;</span>
-        <h3 style="color: #2196F3; margin-bottom: 15px;">📊 Ваша статистика</h3>
-        
+        <h3 style="color: #2196f3; margin-bottom: 15px">📊 Ваша статистика</h3>
+
         <div class="client-id">
           🆔 Ваш ID: <span id="clientIdDisplay"></span>
         </div>
-        
+
         <div class="stats-grid">
           <div class="stat-item">
             <div class="stat-number" id="statTotalRequests">0</div>
             <div class="stat-label">Всего обращений</div>
           </div>
-          
+
           <div class="stat-item">
             <div class="stat-number" id="statRemaining">10</div>
             <div class="stat-label">Осталось обращений</div>
           </div>
-          
+
           <div class="stat-item">
             <div class="stat-number" id="statThisMonth">0</div>
             <div class="stat-label">В этом месяце</div>
           </div>
-          
+
           <div class="stat-item">
             <div class="stat-number" id="statAvgWeek">0</div>
             <div class="stat-label">В неделю</div>
           </div>
         </div>
-        
-        <div style="margin-top: 20px; padding: 15px; background: #f8f9fa; border-radius: 10px;">
-          <div style="font-size: 14px; color: #666; margin-bottom: 10px;">
+
+        <div
+          style="
+            margin-top: 20px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+          "
+        >
+          <div style="font-size: 14px; color: #666; margin-bottom: 10px">
             📅 Дата регистрации: <span id="regDate"></span>
           </div>
-          <div style="font-size: 14px; color: #666;">
+          <div style="font-size: 14px; color: #666">
             ⏰ Последняя активность: <span id="lastActivity"></span>
           </div>
         </div>
       </div>
     </div>
 
-<!-- Модальное окно скидки -->
-<div id="discountModal" class="modal">
-  <div class="modal-content" style="background: linear-gradient(135deg, #ffd700, #ffed4e, #ffd700); border-radius: 20px; padding: 30px; position: relative;">
-    <span class="close" onclick="closeDiscountModal()" style="position: absolute; top: 15px; right: 20px; font-size: 28px; cursor: pointer; color: #666;">&times;</span>
-    
-    <div class="discount-title" style="font-size: 24px; font-weight: 800; color: #b8860b; margin-bottom: 15px; text-align: center;">
-      ПЕРСОНАЛЬНАЯ СКИДКА
-    </div>
-    
-    <div class="discount-amount" style="font-size: 42px; font-weight: 900; color: #e30613; margin: 20px 0; text-align: center; text-shadow: 2px 2px 4px rgba(0,0,0,0.1);">
-      1000₽
-    </div>
-    
-    <div class="discount-text" style="font-size: 18px; color: #5d4037; margin-bottom: 10px; text-align: center; font-weight: 600;">
-      на любой красивый номер от 5000₽
-    </div>
-    
-    <!-- КНОПКА ВЫБОРА НОМЕРА -->
-    <div style="margin: 25px 0;">
-      <a href="https://www.vip-sim.ru/numbers" 
-         target="_blank" 
-         class="btn-select-number"
-         style="display: block; width: 80%; margin: 0 auto; padding: 14px 24px; 
-                background: linear-gradient(135deg, #e30613, #ff0019); 
-                color: white; text-decoration: none; border-radius: 12px; 
-                font-weight: bold; font-size: 17px; text-align: center;
-                box-shadow: 0 4px 15px rgba(227, 6, 19, 0.4);
-                transition: all 0.3s ease;
-                border: 2px solid white;">
-        🎯 Выбрать номер
-      </a>
-    </div>
-    
-    <div class="discount-note" style="font-size: 14px; color: #8d6e63; margin-top: 15px; text-align: center; font-style: italic;">
-      *Скидка активируется при обращении в премиум-поддержку
-    </div>
-  </div>
-</div>
+    <!-- Модальное окно скидки -->
+    <div id="discountModal" class="modal">
+      <div
+        class="modal-content"
+        style="
+          background: linear-gradient(135deg, #ffd700, #ffed4e, #ffd700);
+          border-radius: 20px;
+          padding: 30px;
+          position: relative;
+        "
+      >
+        <span
+          class="close"
+          onclick="closeDiscountModal()"
+          style="
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 28px;
+            cursor: pointer;
+            color: #666;
+          "
+          >&times;</span
+        >
 
-<style>
-.btn-select-number:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(227, 6, 19, 0.5);
-    text-decoration: none;
-    color: white;
-}
+        <div
+          class="discount-title"
+          style="
+            font-size: 24px;
+            font-weight: 800;
+            color: #b8860b;
+            margin-bottom: 15px;
+            text-align: center;
+          "
+        >
+          ПЕРСОНАЛЬНАЯ СКИДКА
+        </div>
 
-.btn-select-number:active {
-    transform: translateY(-1px);
-}
-</style>
+        <div
+          class="discount-amount"
+          style="
+            font-size: 42px;
+            font-weight: 900;
+            color: #e30613;
+            margin: 20px 0;
+            text-align: center;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+          "
+        >
+          1000₽
+        </div>
+
+        <div
+          class="discount-text"
+          style="
+            font-size: 18px;
+            color: #5d4037;
+            margin-bottom: 10px;
+            text-align: center;
+            font-weight: 600;
+          "
+        >
+          на любой красивый номер от 5000₽
+        </div>
+
+        <!-- КНОПКА ВЫБОРА НОМЕРА -->
+        <div style="margin: 25px 0">
+          <a
+            href="https://www.vip-sim.ru/numbers"
+            target="_blank"
+            class="btn-select-number"
+            style="
+              display: block;
+              width: 80%;
+              margin: 0 auto;
+              padding: 14px 24px;
+              background: linear-gradient(135deg, #e30613, #ff0019);
+              color: white;
+              text-decoration: none;
+              border-radius: 12px;
+              font-weight: bold;
+              font-size: 17px;
+              text-align: center;
+              box-shadow: 0 4px 15px rgba(227, 6, 19, 0.4);
+              transition: all 0.3s ease;
+              border: 2px solid white;
+            "
+          >
+            🎯 Выбрать номер
+          </a>
+        </div>
+
+        <div
+          class="discount-note"
+          style="
+            font-size: 14px;
+            color: #8d6e63;
+            margin-top: 15px;
+            text-align: center;
+            font-style: italic;
+          "
+        >
+          *Скидка активируется при обращении в премиум-поддержку
+        </div>
+      </div>
+    </div>
+
+    <style>
+      .btn-select-number:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(227, 6, 19, 0.5);
+        text-decoration: none;
+        color: white;
+      }
+
+      .btn-select-number:active {
+        transform: translateY(-1px);
+      }
+    </style>
 
     <!-- Модальное окно для услуг -->
     <div id="serviceDiscountModal" class="modal">
-      <div class="modal-content" style="background: linear-gradient(135deg, #ffd700, #ffed4e, #ffd700);">
+      <div
+        class="modal-content"
+        style="background: linear-gradient(135deg, #ffd700, #ffed4e, #ffd700)"
+      >
         <span class="close" onclick="closeServiceDiscountModal()">&times;</span>
-        <div class="discount-title" id="serviceDiscountTitle">СКИДКА НА УСЛУГУ</div>
+        <div class="discount-title" id="serviceDiscountTitle">
+          СКИДКА НА УСЛУГУ
+        </div>
         <div class="discount-amount">-10%</div>
         <div class="discount-text" id="serviceDiscountText">на услугу</div>
         <div class="discount-note">
-          *Активируется при обращении в 
-          <a href="javascript:void(0);" onclick="activateServiceSupport()" style="color: #b8860b; text-decoration: underline; font-weight: bold;">поддержку</a>
+          *Активируется при обращении в
+          <a
+            href="javascript:void(0);"
+            onclick="activateServiceSupport()"
+            style="
+              color: #b8860b;
+              text-decoration: underline;
+              font-weight: bold;
+            "
+            >поддержку</a
+          >
         </div>
       </div>
     </div>
@@ -1418,69 +1782,81 @@
     <script>
       // === КОНФИГУРАЦИЯ JSONBIN ===
       const JSONBIN_CONFIG = {
-        BIN_ID: '68f0ad25d0ea881f40a5d3b5', // ЗАМЕНИ НА СВОЙ BIN ID
-        MASTER_KEY: '$2a$10$h2nqVPwwIv04XRDJNXhHJuedTYrRgG9tIX5HbvnfiWo/BE3sWbxxW',
-        BASE_URL: 'https://api.jsonbin.io/v3/b'
+        BIN_ID: "68f0ad25d0ea881f40a5d3b5", // ЗАМЕНИ НА СВОЙ BIN ID
+        MASTER_KEY:
+          "$2a$10$h2nqVPwwIv04XRDJNXhHJuedTYrRgG9tIX5HbvnfiWo/BE3sWbxxW",
+        BASE_URL: "https://api.jsonbin.io/v3/b",
       };
 
       // === ФУНКЦИИ РАБОТЫ С БАЗОЙ ===
       async function getDatabase() {
         try {
-          const response = await fetch(`${JSONBIN_CONFIG.BASE_URL}/${JSONBIN_CONFIG.BIN_ID}/latest`, {
-            headers: {
-              'X-Master-Key': JSONBIN_CONFIG.MASTER_KEY
+          const response = await fetch(
+            `${JSONBIN_CONFIG.BASE_URL}/${JSONBIN_CONFIG.BIN_ID}/latest`,
+            {
+              headers: {
+                "X-Master-Key": JSONBIN_CONFIG.MASTER_KEY,
+              },
             }
-          });
-          
-          if (!response.ok) throw new Error('Ошибка загрузки базы');
-          
+          );
+
+          if (!response.ok) throw new Error("Ошибка загрузки базы");
+
           const data = await response.json();
           return data.record || { clients: [], payments: [] };
         } catch (error) {
-          console.error('Ошибка загрузки базы:', error);
+          console.error("Ошибка загрузки базы:", error);
           return { clients: [], payments: [] };
         }
       }
 
       // === ОСНОВНЫЕ ФУНКЦИИ СИСТЕМЫ ===
-      
+
       // Генерация ID при вводе имени
-      document.getElementById('nicknameInput').addEventListener('input', function() {
-        const nickname = this.value.trim();
-        
-        if (nickname) {
-          const clientId = "VIP" + Date.now().toString(36).toUpperCase() + Math.random().toString(36).substr(2, 3).toUpperCase();
-          
-          document.getElementById('clientIdDisplay').textContent = clientId;
-          document.getElementById('clientIdBlock').style.display = 'block';
-          document.getElementById('paymentButton').style.display = 'block';
-          
-          localStorage.setItem('pendingClient', JSON.stringify({
-            clientId: clientId,
-            nickname: nickname
-          }));
-        } else {
-          document.getElementById('clientIdBlock').style.display = 'none';
-          document.getElementById('paymentButton').style.display = 'none';
-        }
-      });
-      
+      document
+        .getElementById("nicknameInput")
+        .addEventListener("input", function () {
+          const nickname = this.value.trim();
+
+          if (nickname) {
+            const clientId =
+              "VIP" +
+              Date.now().toString(36).toUpperCase() +
+              Math.random().toString(36).substr(2, 3).toUpperCase();
+
+            document.getElementById("clientIdDisplay").textContent = clientId;
+            document.getElementById("clientIdBlock").style.display = "block";
+            document.getElementById("paymentButton").style.display = "block";
+
+            localStorage.setItem(
+              "pendingClient",
+              JSON.stringify({
+                clientId: clientId,
+                nickname: nickname,
+              })
+            );
+          } else {
+            document.getElementById("clientIdBlock").style.display = "none";
+            document.getElementById("paymentButton").style.display = "none";
+          }
+        });
+
       // Копирование ID в буфер обмена
       function copyClientId() {
-        const clientId = document.getElementById('clientIdDisplay').textContent;
-        
+        const clientId = document.getElementById("clientIdDisplay").textContent;
+
         if (navigator.clipboard && window.isSecureContext) {
           navigator.clipboard.writeText(clientId).then(() => {
-            showCopyFeedback('✅ Скопировано!');
+            showCopyFeedback("✅ Скопировано!");
           });
         } else {
-          const textArea = document.createElement('textarea');
+          const textArea = document.createElement("textarea");
           textArea.value = clientId;
           document.body.appendChild(textArea);
           textArea.select();
-          document.execCommand('copy');
+          document.execCommand("copy");
           document.body.removeChild(textArea);
-          showCopyFeedback('✅ Скопировано!');
+          showCopyFeedback("✅ Скопировано!");
         }
       }
 
@@ -1492,61 +1868,67 @@
           button.textContent = originalText;
         }, 2000);
       }
-      
+
       // Вход клиента
       async function loginClient() {
-        const clientId = document.getElementById('clientIdInput').value.trim().toUpperCase();
+        const clientId = document
+          .getElementById("clientIdInput")
+          .value.trim()
+          .toUpperCase();
 
         if (!clientId) {
-          alert('⚠️ Введите ваш VIP ID');
+          alert("⚠️ Введите ваш VIP ID");
           return;
         }
 
-        document.body.classList.add('loading');
+        document.body.classList.add("loading");
 
         try {
           const db = await getDatabase();
-          const client = db.clients.find(c => c.clientId === clientId);
+          const client = db.clients.find((c) => c.clientId === clientId);
 
           if (!client) {
-            alert('❌ ID не найден. Проверьте правильность ввода или дождитесь активации.');
+            alert(
+              "❌ ID не найден. Проверьте правильность ввода или дождитесь активации."
+            );
             return;
           }
 
           if (client.blocked) {
-            alert('🚫 Доступ заблокирован. Обратитесь в поддержку.');
+            alert("🚫 Доступ заблокирован. Обратитесь в поддержку.");
             return;
           }
 
           if (!client.accessActive) {
-            alert('⏳ Доступ ещё не активирован. Дождитесь подтверждения оплаты администратором.');
+            alert(
+              "⏳ Доступ ещё не активирован. Дождитесь подтверждения оплаты администратором."
+            );
             return;
           }
 
           // Сохраняем сессию
-          localStorage.setItem('currentClientId', clientId);
-          
+          localStorage.setItem("currentClientId", clientId);
+
           // Показываем кабинет
           showPremiumScreen(client);
-          
         } catch (error) {
-          alert('❌ Ошибка входа. Проверьте интернет и попробуйте еще раз.');
+          alert("❌ Ошибка входа. Проверьте интернет и попробуйте еще раз.");
         } finally {
-          document.body.classList.remove('loading');
+          document.body.classList.remove("loading");
         }
       }
 
       function showPremiumScreen(client) {
-        document.getElementById('displayName').textContent = client.nickname;
-        document.getElementById('counter').textContent = client.remaining;
-        document.getElementById('loginScreen').classList.add('hidden');
-        document.getElementById('premiumScreen').classList.remove('hidden');
+        document.getElementById("displayName").textContent = client.nickname;
+        document.getElementById("counter").textContent = client.remaining;
+        document.getElementById("loginScreen").classList.add("hidden");
+        document.getElementById("premiumScreen").classList.remove("hidden");
       }
 
       // === ПРОВЕРКА БЛОКИРОВКИ ПЕРЕД КАЖДЫМ ДЕЙСТВИЕМ ===
       async function checkClientStatus() {
-        const clientId = localStorage.getItem('currentClientId');
-        
+        const clientId = localStorage.getItem("currentClientId");
+
         if (!clientId) {
           logout();
           return null;
@@ -1554,17 +1936,17 @@
 
         try {
           const db = await getDatabase();
-          const client = db.clients.find(c => c.clientId === clientId);
-          
+          const client = db.clients.find((c) => c.clientId === clientId);
+
           if (!client || client.blocked || !client.accessActive) {
             logout();
-            alert('🚫 Доступ заблокирован или закончился');
+            alert("🚫 Доступ заблокирован или закончился");
             return null;
           }
-          
+
           return client;
         } catch (error) {
-          alert('❌ Ошибка проверки статуса');
+          alert("❌ Ошибка проверки статуса");
           return null;
         }
       }
@@ -1579,14 +1961,16 @@
           return;
         }
 
-        document.body.classList.add('loading');
+        document.body.classList.add("loading");
 
         try {
           const db = await getDatabase();
-          const currentClient = db.clients.find(c => c.clientId === client.clientId);
-          
+          const currentClient = db.clients.find(
+            (c) => c.clientId === client.clientId
+          );
+
           if (!currentClient || currentClient.blocked) {
-            alert('🚫 Доступ заблокирован');
+            alert("🚫 Доступ заблокирован");
             logout();
             return;
           }
@@ -1595,23 +1979,28 @@
           const today = new Date().toDateString();
           currentClient.totalRequests = (currentClient.totalRequests || 0) + 1;
           currentClient.requestsByDate = currentClient.requestsByDate || {};
-          currentClient.requestsByDate[today] = (currentClient.requestsByDate[today] || 0) + 1;
+          currentClient.requestsByDate[today] =
+            (currentClient.requestsByDate[today] || 0) + 1;
           currentClient.lastActivity = new Date().toISOString();
           currentClient.remaining -= 1;
 
           // Сохраняем обновленные данные
-          const response = await fetch(`${JSONBIN_CONFIG.BASE_URL}/${JSONBIN_CONFIG.BIN_ID}`, {
-            method: 'PUT',
-            headers: {
-              'Content-Type': 'application/json',
-              'X-Master-Key': JSONBIN_CONFIG.MASTER_KEY
-            },
-            body: JSON.stringify(db)
-          });
+          const response = await fetch(
+            `${JSONBIN_CONFIG.BASE_URL}/${JSONBIN_CONFIG.BIN_ID}`,
+            {
+              method: "PUT",
+              headers: {
+                "Content-Type": "application/json",
+                "X-Master-Key": JSONBIN_CONFIG.MASTER_KEY,
+              },
+              body: JSON.stringify(db),
+            }
+          );
 
           if (response.ok) {
             // Обновляем счетчик
-            document.getElementById("counter").textContent = currentClient.remaining;
+            document.getElementById("counter").textContent =
+              currentClient.remaining;
 
             const used = 10 - currentClient.remaining;
             const verificationCode = generateVerificationCode(used);
@@ -1624,42 +2013,57 @@
 
             window.open(telegramUrl, "_blank", "noopener,noreferrer");
           } else {
-            alert('❌ Ошибка сохранения данных');
+            alert("❌ Ошибка сохранения данных");
           }
-
         } catch (error) {
-          alert('❌ Ошибка соединения. Попробуйте еще раз.');
+          alert("❌ Ошибка соединения. Попробуйте еще раз.");
         } finally {
-          document.body.classList.remove('loading');
+          document.body.classList.remove("loading");
         }
       }
 
       function generateVerificationCode(usedCount) {
         const now = new Date();
-        const months = ["j","f","m","a","m","j","j","a","s","o","n","d"];
+        const months = [
+          "j",
+          "f",
+          "m",
+          "a",
+          "m",
+          "j",
+          "j",
+          "a",
+          "s",
+          "o",
+          "n",
+          "d",
+        ];
         const day = now.getDate();
         const month = months[now.getMonth()];
-        const randomLetters = Math.random().toString(36).substr(2, 2).toUpperCase();
+        const randomLetters = Math.random()
+          .toString(36)
+          .substr(2, 2)
+          .toUpperCase();
         return day + month + randomLetters + usedCount;
       }
 
       function logout() {
-        localStorage.removeItem('currentClientId');
-        document.getElementById('premiumScreen').classList.add('hidden');
-        document.getElementById('loginScreen').classList.remove('hidden');
+        localStorage.removeItem("currentClientId");
+        document.getElementById("premiumScreen").classList.add("hidden");
+        document.getElementById("loginScreen").classList.remove("hidden");
       }
 
       // Проверка сессии при загрузке
       async function checkSession() {
-        const clientId = localStorage.getItem('currentClientId');
-        
+        const clientId = localStorage.getItem("currentClientId");
+
         if (clientId) {
-          document.body.classList.add('loading');
-          
+          document.body.classList.add("loading");
+
           try {
             const db = await getDatabase();
-            const client = db.clients.find(c => c.clientId === clientId);
-            
+            const client = db.clients.find((c) => c.clientId === clientId);
+
             if (client && client.accessActive && !client.blocked) {
               showPremiumScreen(client);
             } else {
@@ -1668,38 +2072,42 @@
           } catch (error) {
             logout();
           } finally {
-            document.body.classList.remove('loading');
+            document.body.classList.remove("loading");
           }
         }
       }
 
       // Функции для слайдеров
       function scrollSlider(direction) {
-        const slider = document.getElementById('servicesSliderTrack');
+        const slider = document.getElementById("servicesSliderTrack");
         const scrollAmount = 250;
-        slider.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
+        slider.scrollBy({ left: direction * scrollAmount, behavior: "smooth" });
       }
 
       function scrollOperators(direction) {
-        const slider = document.getElementById('operatorsSliderTrack');
+        const slider = document.getElementById("operatorsSliderTrack");
         const scrollAmount = 150;
-        slider.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
+        slider.scrollBy({ left: direction * scrollAmount, behavior: "smooth" });
       }
 
-      let currentService = '';
-      
+      let currentService = "";
+
       function showServiceDiscount(serviceName) {
         currentService = serviceName;
-        document.getElementById('serviceDiscountTitle').textContent = `СКИДКА НА ${serviceName.toUpperCase()}`;
-        document.getElementById('serviceDiscountText').textContent = `на услугу "${serviceName}"`;
-        document.getElementById('serviceDiscountModal').style.display = 'block';
+        document.getElementById(
+          "serviceDiscountTitle"
+        ).textContent = `СКИДКА НА ${serviceName.toUpperCase()}`;
+        document.getElementById(
+          "serviceDiscountText"
+        ).textContent = `на услугу "${serviceName}"`;
+        document.getElementById("serviceDiscountModal").style.display = "block";
       }
-      
+
       function closeServiceDiscountModal() {
-        document.getElementById('serviceDiscountModal').style.display = 'none';
-        currentService = '';
+        document.getElementById("serviceDiscountModal").style.display = "none";
+        currentService = "";
       }
-      
+
       function activateServiceSupport() {
         closeServiceDiscountModal();
         contactSupport();
@@ -1707,106 +2115,127 @@
 
       // Остальные функции
       async function showStats() {
-    const client = await checkClientStatus();
-    if (!client) return;
+        const client = await checkClientStatus();
+        if (!client) return;
 
-    try {
-        const db = await getDatabase();
-        const currentClient = db.clients.find(c => c.clientId === client.clientId);
-        
-        if (!currentClient) {
-            alert('❌ Данные клиента не найдены');
+        try {
+          const db = await getDatabase();
+          const currentClient = db.clients.find(
+            (c) => c.clientId === client.clientId
+          );
+
+          if (!currentClient) {
+            alert("❌ Данные клиента не найдены");
             return;
+          }
+
+          // Заполняем данные статистики
+          document.getElementById("clientIdDisplay").textContent =
+            currentClient.clientId;
+          document.getElementById("statTotalRequests").textContent =
+            currentClient.totalRequests || 0;
+          document.getElementById("statRemaining").textContent =
+            currentClient.remaining || 0;
+          document.getElementById("statThisMonth").textContent =
+            getRequestsThisMonth(currentClient);
+          document.getElementById("statAvgWeek").textContent =
+            getAveragePerWeek(currentClient);
+          document.getElementById("regDate").textContent = new Date(
+            currentClient.registrationDate
+          ).toLocaleDateString("ru-RU");
+          document.getElementById("lastActivity").textContent = new Date(
+            currentClient.lastActivity
+          ).toLocaleDateString("ru-RU");
+
+          // Показываем модальное окно
+          document.getElementById("statsModal").style.display = "block";
+        } catch (error) {
+          alert("❌ Ошибка загрузки статистики");
         }
+      }
 
-        // Заполняем данные статистики
-        document.getElementById('clientIdDisplay').textContent = currentClient.clientId;
-        document.getElementById('statTotalRequests').textContent = currentClient.totalRequests || 0;
-        document.getElementById('statRemaining').textContent = currentClient.remaining || 0;
-        document.getElementById('statThisMonth').textContent = getRequestsThisMonth(currentClient);
-        document.getElementById('statAvgWeek').textContent = getAveragePerWeek(currentClient);
-        document.getElementById('regDate').textContent = new Date(currentClient.registrationDate).toLocaleDateString('ru-RU');
-        document.getElementById('lastActivity').textContent = new Date(currentClient.lastActivity).toLocaleDateString('ru-RU');
+      // Добавьте вспомогательные функции для статистики
+      function getRequestsThisMonth(client) {
+        if (!client.requestsByDate) return 0;
 
-        // Показываем модальное окно
-        document.getElementById('statsModal').style.display = 'block';
-        
-    } catch (error) {
-        alert('❌ Ошибка загрузки статистики');
-    }
-}
+        const now = new Date();
+        const currentMonth = now.getMonth();
+        const currentYear = now.getFullYear();
 
-// Добавьте вспомогательные функции для статистики
-function getRequestsThisMonth(client) {
-    if (!client.requestsByDate) return 0;
-    
-    const now = new Date();
-    const currentMonth = now.getMonth();
-    const currentYear = now.getFullYear();
-    
-    return Object.entries(client.requestsByDate).reduce((total, [date, count]) => {
-        const requestDate = new Date(date);
-        if (requestDate.getMonth() === currentMonth && requestDate.getFullYear() === currentYear) {
-            return total + count;
-        }
-        return total;
-    }, 0);
-}
+        return Object.entries(client.requestsByDate).reduce(
+          (total, [date, count]) => {
+            const requestDate = new Date(date);
+            if (
+              requestDate.getMonth() === currentMonth &&
+              requestDate.getFullYear() === currentYear
+            ) {
+              return total + count;
+            }
+            return total;
+          },
+          0
+        );
+      }
 
-function getAveragePerWeek(client) {
-    if (!client.registrationDate || !client.totalRequests) return 0;
-    
-    const regDate = new Date(client.registrationDate);
-    const now = new Date();
-    const weeksDiff = Math.max(1, Math.ceil((now - regDate) / (7 * 24 * 60 * 60 * 1000)));
-    
-    return Math.round((client.totalRequests || 0) / weeksDiff);
-}
+      function getAveragePerWeek(client) {
+        if (!client.registrationDate || !client.totalRequests) return 0;
+
+        const regDate = new Date(client.registrationDate);
+        const now = new Date();
+        const weeksDiff = Math.max(
+          1,
+          Math.ceil((now - regDate) / (7 * 24 * 60 * 60 * 1000))
+        );
+
+        return Math.round((client.totalRequests || 0) / weeksDiff);
+      }
 
       function renewAccess() {
-        alert('🔁 Для продления доступа необходимо выйти из кабинета и снова войти, как при первой регистрации');
+        alert(
+          "🔁 Для продления доступа необходимо выйти из кабинета и снова войти, как при первой регистрации"
+        );
       }
 
       function showDiscountModal() {
-        document.getElementById('discountModal').style.display = 'block';
+        document.getElementById("discountModal").style.display = "block";
       }
 
       function closeDiscountModal() {
-        document.getElementById('discountModal').style.display = 'none';
+        document.getElementById("discountModal").style.display = "none";
       }
 
       function closeStatsModal() {
-        document.getElementById('statsModal').style.display = 'none';
+        document.getElementById("statsModal").style.display = "none";
       }
 
       // Инициализация слайдеров
       function initSliders() {
-        const sliders = ['servicesSliderTrack', 'operatorsSliderTrack'];
-        
-        sliders.forEach(sliderId => {
+        const sliders = ["servicesSliderTrack", "operatorsSliderTrack"];
+
+        sliders.forEach((sliderId) => {
           const slider = document.getElementById(sliderId);
           let isDown = false;
           let startX;
           let scrollLeft;
 
-          slider.addEventListener('mousedown', (e) => {
+          slider.addEventListener("mousedown", (e) => {
             isDown = true;
-            slider.style.cursor = 'grabbing';
+            slider.style.cursor = "grabbing";
             startX = e.pageX - slider.offsetLeft;
             scrollLeft = slider.scrollLeft;
           });
 
-          slider.addEventListener('mouseleave', () => {
+          slider.addEventListener("mouseleave", () => {
             isDown = false;
-            slider.style.cursor = 'grab';
+            slider.style.cursor = "grab";
           });
 
-          slider.addEventListener('mouseup', () => {
+          slider.addEventListener("mouseup", () => {
             isDown = false;
-            slider.style.cursor = 'grab';
+            slider.style.cursor = "grab";
           });
 
-          slider.addEventListener('mousemove', (e) => {
+          slider.addEventListener("mousemove", (e) => {
             if (!isDown) return;
             e.preventDefault();
             const x = e.pageX - slider.offsetLeft;
@@ -1815,51 +2244,45 @@ function getAveragePerWeek(client) {
           });
 
           // Touch events
-          slider.addEventListener('touchstart', (e) => {
+          slider.addEventListener("touchstart", (e) => {
             isDown = true;
             startX = e.touches[0].pageX - slider.offsetLeft;
             scrollLeft = slider.scrollLeft;
           });
 
-          slider.addEventListener('touchend', () => {
+          slider.addEventListener("touchend", () => {
             isDown = false;
           });
 
-          slider.addEventListener('touchmove', (e) => {
+          slider.addEventListener("touchmove", (e) => {
             if (!isDown) return;
             const x = e.touches[0].pageX - slider.offsetLeft;
             const walk = (x - startX) * 2;
             slider.scrollLeft = scrollLeft - walk;
           });
 
-          slider.style.cursor = 'grab';
+          slider.style.cursor = "grab";
         });
       }
 
       // Закрытие модальных окон
-      window.addEventListener('click', function(event) {
-        const modals = ['serviceDiscountModal', 'discountModal', 'statsModal'];
-        modals.forEach(modalId => {
+      window.addEventListener("click", function (event) {
+        const modals = ["serviceDiscountModal", "discountModal", "statsModal"];
+        modals.forEach((modalId) => {
           const modal = document.getElementById(modalId);
           if (event.target === modal) {
-            if (modalId === 'serviceDiscountModal') closeServiceDiscountModal();
-            if (modalId === 'discountModal') closeDiscountModal();
-            if (modalId === 'statsModal') closeStatsModal();
+            if (modalId === "serviceDiscountModal") closeServiceDiscountModal();
+            if (modalId === "discountModal") closeDiscountModal();
+            if (modalId === "statsModal") closeStatsModal();
           }
         });
       });
 
       // Запуск при загрузке
-      document.addEventListener('DOMContentLoaded', function() {
+      document.addEventListener("DOMContentLoaded", function () {
         checkSession();
         initSliders();
       });
-      
     </script>
   </body>
 </html>
-
-
-
-
-
