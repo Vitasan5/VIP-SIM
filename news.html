@@ -10,7 +10,7 @@
 
 <body>
 
-    <!-- Yandex.Metrika counter -->
+  <!-- Yandex.Metrika counter -->
 <script type="text/javascript">
     (function(m,e,t,r,i,k,a){
         m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
@@ -23,6 +23,7 @@
 </script>
 <noscript><div><img src="https://mc.yandex.ru/watch/104821156" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 <!-- /Yandex.Metrika counter -->
+
 
     <!-- ШАПКА -->
     <header>
@@ -64,6 +65,7 @@
         <!-- БЛОК НОВОСТЕЙ -->
         <section class="news-section">
             <h2 class="left-align">Новости и статьи</h2>
+
             
 
 <!DOCTYPE html>
@@ -495,6 +497,152 @@
 </body>
 </html>
             
+<!-- ОТДЕЛЬНЫЙ БЛОК ДЛЯ НОВОСТЕЙ ИЗ АДМИНКИ -->
+    <div class="admin-news-block" style="margin-top: 50px;">
+      
+        
+        <!-- Новости из админки будут загружены здесь -->
+        <div class="news-grid" id="adminNewsContainer">
+            <!-- Новости будут загружены автоматически -->
+        </div>
+    </div>
+</section>
+
+<style>
+/* Используем ваши существующие стили */
+.news-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    padding: 20px;
+    width: 100%;
+}
+
+.news-card {
+    border: 1px solid #ccc;
+    padding: 10px;
+    width: 250px;
+    text-align: center;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    flex: 0 0 auto;
+}
+
+.news-img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.news-title {
+    margin: 10px 0;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.btn-read {
+    background: #111211;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 5px;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.left-align {
+    text-align: left;
+    margin-bottom: 30px;
+    font-size: 28px;
+    color: #333;
+    border-bottom: 2px solid #333;
+    padding-bottom: 10px;
+    padding-left: 20px;
+}
+
+.admin-news-block {
+    padding: 20px 0;
+}
+</style>
+
+<script>
+// Конфигурация JSONBin для новостей из админки
+const ADMIN_NEWS_CONFIG = {
+  BIN_ID: '68fa7ce2ae596e708f271345',
+  MASTER_KEY: '$2a$10$h2nqVPwwIv04XRDJNXhHJuedTYrRgG9tIX5HbvnfiWo/BE3sWbxxW',
+  BASE_URL: 'https://api.jsonbin.io/v3/b'
+};
+
+// Загрузка новостей из админки
+async function loadAdminNews() {
+    try {
+        console.log('🔄 Загружаем новости из админки...');
+        
+        const response = await fetch(`${ADMIN_NEWS_CONFIG.BASE_URL}/${ADMIN_NEWS_CONFIG.BIN_ID}/latest`, {
+            headers: {
+                'X-Master-Key': ADMIN_NEWS_CONFIG.MASTER_KEY
+            }
+        });
+        
+        if (!response.ok) throw new Error('Ошибка загрузки новостей');
+        
+        const data = await response.json();
+        const newsData = data.record || [];
+        
+        console.log(`✅ Загружено ${newsData.length} новостей из админки`);
+        displayAdminNews(newsData);
+        
+    } catch (error) {
+        console.error('Ошибка загрузки новостей из админки:', error);
+        // Показываем сообщение об ошибке
+        document.getElementById('adminNewsContainer').innerHTML = `
+            <div style="text-align: center; color: #666; padding: 40px;">
+                <p style="font-size: 18px; margin-bottom: 10px;">Новости временно недоступны</p>
+                <p style="font-size: 14px; color: #888; margin-bottom: 20px;">Попробуйте обновить страницу</p>
+                <button onclick="loadAdminNews()" style="margin-top: 10px; padding: 10px 20px; background: #111211; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: 600;">
+                    🔄 Повторить загрузку
+                </button>
+            </div>
+        `;
+    }
+}
+
+// Отображение новостей из админки
+function displayAdminNews(newsData) {
+    const container = document.getElementById('adminNewsContainer');
+    
+    if (!newsData || newsData.length === 0) {
+        container.innerHTML = `
+            <div style="text-align: center; color: #666; padding: 40px;">
+                <p style="font-size: 18px; margin-bottom: 10px;">Пока нет новых новостей</p>
+                <p style="font-size: 14px; color: #888;">Новости появятся здесь после добавления через админку</p>
+            </div>
+        `;
+        return;
+    }
+    
+    // Отображаем все новости в вашем стиле
+    container.innerHTML = newsData.map(news => `
+        <div class="news-card">
+            <img src="${news.image}" 
+                 alt="${news.title}" 
+                 class="news-img"
+                 onerror="this.src='https://via.placeholder.com/250x150/111211/ffffff?text=Новость'">
+            <p class="news-title">${news.title}</p>
+            <a href="${news.link}" target="_blank" class="btn-read">Читать</a>
+        </div>
+    `).join('');
+}
+
+// Инициализация при загрузке страницы
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('🚀 Страница новостей загружена');
+    loadAdminNews();
+    
+    // Автообновление каждые 2 минуты
+    setInterval(loadAdminNews, 120000);
+});
+</script>
            
             <!-- Первая строка новостей -->
             <div class="news-grid">
@@ -762,6 +910,5 @@
     <!-- ЕДИНЫЙ JS -->
     <script src="js/script.js"></script>
 </body>
-
 
 </html>

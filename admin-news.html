@@ -1,0 +1,996 @@
+       <!-- Форма добавления новостей ОПЕРАТОРОВ из админки -->
+<div class="admin-news-form">
+
+  <h1>🔧 Админ-панель управления новостями</h1>
+
+  <h3>📝 Добавление новостей операторов</h3>
+  
+  <div class="news-form">
+    <div class="form-group">
+      <label for="operatorSelect">Оператор:</label>
+      <select id="operatorSelect">
+        <option value="mts">МТС</option>
+        <option value="volna">Волна</option>
+        <option value="win">Вин</option>
+      </select>
+    </div>
+    
+    <div class="form-group">
+      <label for="newsTitle">Заголовок новости:</label>
+      <input type="text" id="newsTitle" placeholder="Введите заголовок новости">
+    </div>
+    
+    <div class="form-group">
+      <label for="newsLink">Ссылка (опционально):</label>
+      <input type="text" id="newsLink" placeholder="https://example.com">
+    </div>
+    
+    <div class="form-group">
+      <label for="newsDate">Дата:</label>
+      <input type="text" id="newsDate" placeholder="Сегодня, 2 дня назад и т.д.">
+    </div>
+    
+    <div class="form-group">
+      <label for="newsCategory">Категория (опционально):</label>
+      <input type="text" id="newsCategory" placeholder="Акция, Технологии, Сеть">
+    </div>
+    
+    <div class="form-group">
+      <label for="newsBadge">Бейдж (опционально):</label>
+      <select id="newsBadge">
+        <option value="">Нет бейджа</option>
+        <option value="НОВОЕ">НОВОЕ</option>
+        <option value="ОБНОВЛЕНИЕ">ОБНОВЛЕНИЕ</option>
+        <option value="ВАЖНО">ВАЖНО</option>
+      </select>
+    </div>
+    
+    <div class="form-actions">
+      <button class="save-btn" onclick="addNews()">💾 Добавить новость</button>
+      <button class="reset-btn" onclick="resetNewsForm()">🔄 Сбросить форму</button>
+    </div>
+  </div>
+  
+  <div id="newsStatusMessage"></div>
+</div>
+
+<style>
+  .admin-news-form {
+    background: white;
+    border-radius: 16px;
+    padding: 25px;
+    margin: 20px 0;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  }
+  
+  .admin-news-form h3 {
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .news-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-bottom: 20px;
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .form-group label {
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: #333;
+  }
+  
+  .form-group input,
+  .form-group select {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+  }
+  
+  .form-actions {
+    grid-column: 1 / -1;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 10px;
+  }
+  
+  .save-btn {
+    padding: 12px 30px;
+    background: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+  }
+  
+  .save-btn:hover {
+    background: #45a049;
+    transform: translateY(-2px);
+  }
+  
+  .reset-btn {
+    padding: 12px 30px;
+    background: #f44336;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+  }
+  
+  .reset-btn:hover {
+    background: #da190b;
+    transform: translateY(-2px);
+  }
+  
+  .status-message {
+    padding: 10px;
+    border-radius: 8px;
+    margin-top: 10px;
+    text-align: center;
+    font-weight: 600;
+  }
+  
+  .status-success {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+  }
+  
+  .status-error {
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+  }
+  
+  @media (max-width: 768px) {
+    .news-form {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<script>
+  // Конфигурация JSONBin для админки
+  const ADMIN_NEWS_CONFIG = {
+    BIN_ID: '68f7d602ae596e708f224741',
+    MASTER_KEY: '$2a$10$h2nqVPwwIv04XRDJNXhHJuedTYrRgG9tIX5HbvnfiWo/BE3sWbxxW',
+    BASE_URL: 'https://api.jsonbin.io/v3/b'
+  };
+
+  // Добавление новой новости
+  async function addNews() {
+    const operator = document.getElementById('operatorSelect').value;
+    const title = document.getElementById('newsTitle').value.trim();
+    const link = document.getElementById('newsLink').value.trim();
+    const date = document.getElementById('newsDate').value.trim();
+    const category = document.getElementById('newsCategory').value.trim();
+    const badge = document.getElementById('newsBadge').value;
+
+    if (!title || !date) {
+      showNewsStatus('❌ Заполните обязательные поля: заголовок и дата', 'error');
+      return;
+    }
+
+    try {
+      // Загружаем текущие новости
+      const response = await fetch(`${ADMIN_NEWS_CONFIG.BASE_URL}/${ADMIN_NEWS_CONFIG.BIN_ID}/latest`, {
+        headers: {
+          'X-Master-Key': ADMIN_NEWS_CONFIG.MASTER_KEY
+        }
+      });
+      
+      if (!response.ok) throw new Error('Ошибка загрузки текущих новостей');
+      
+      const data = await response.json();
+      const currentNews = data.record || {};
+      
+      // Добавляем новую новость в начало списка
+      const newNewsItem = {
+        title,
+        link: link || '#',
+        date,
+        category: category || '',
+        badge: badge || ''
+      };
+
+      if (!currentNews[operator]) {
+        currentNews[operator] = [];
+      }
+      
+      currentNews[operator].unshift(newNewsItem);
+      
+      // Ограничиваем количество новостей (5 последних)
+      if (currentNews[operator].length > 5) {
+        currentNews[operator] = currentNews[operator].slice(0, 5);
+      }
+
+      // Сохраняем обновленные новости
+      const saveResponse = await fetch(`${ADMIN_NEWS_CONFIG.BASE_URL}/${ADMIN_NEWS_CONFIG.BIN_ID}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Master-Key': ADMIN_NEWS_CONFIG.MASTER_KEY
+        },
+        body: JSON.stringify(currentNews)
+      });
+
+      if (saveResponse.ok) {
+        showNewsStatus('✅ Новость успешно добавлена!', 'success');
+        resetNewsForm();
+      } else {
+        throw new Error('Ошибка сохранения новости');
+      }
+      
+    } catch (error) {
+      console.error('Ошибка добавления новости:', error);
+      showNewsStatus('❌ Ошибка при добавлении новости', 'error');
+    }
+  }
+
+  // Сброс формы
+  function resetNewsForm() {
+    document.getElementById('newsTitle').value = '';
+    document.getElementById('newsLink').value = '';
+    document.getElementById('newsDate').value = '';
+    document.getElementById('newsCategory').value = '';
+    document.getElementById('newsBadge').value = '';
+  }
+
+  // Показать статус сообщение
+  function showNewsStatus(message, type) {
+    const statusElement = document.getElementById('newsStatusMessage');
+    statusElement.textContent = message;
+    statusElement.className = `status-message status-${type}`;
+    
+    setTimeout(() => {
+      statusElement.textContent = '';
+      statusElement.className = 'status-message';
+    }, 5000);
+  }
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+<!-- Форма удаления новостей ОПЕРАТОРОВ из админки -->
+<div class="admin-news-form" style="margin-top: 30px; border: 2px solid #dc3545; background: #fff5f5;">
+  <h3 style="color: #dc3545; text-align: center; margin-bottom: 20px;">🗑️ УДАЛЕНИЕ новостей операторов</h3>
+  
+  <div class="form-group">
+    <label for="deleteOperatorSelect">Выберите оператора:</label>
+    <select id="deleteOperatorSelect" onchange="loadOperatorNews()">
+      <option value="mts">МТС</option>
+      <option value="volna">Волна</option>
+      <option value="win">Вин</option>
+    </select>
+  </div>
+  
+  <div id="operatorNewsListContainer" style="margin: 20px 0;">
+    <!-- Список новостей оператора будет загружен здесь -->
+  </div>
+  
+  <div class="form-actions">
+    <button class="save-btn" onclick="loadOperatorNews()" style="background: #6c757d;">
+      🔄 Обновить список
+    </button>
+    <button class="reset-btn" onclick="deleteSelectedOperatorNews()">
+      🗑️ Удалить выбранные
+    </button>
+  </div>
+  
+  <div id="operatorDeleteStatusMessage"></div>
+</div>
+
+<script>
+// Загрузка новостей оператора для удаления
+async function loadOperatorNews() {
+    const operator = document.getElementById('deleteOperatorSelect').value;
+    
+    try {
+        showOperatorDeleteStatus('⏳ Загружаем новости оператора...', 'success');
+        
+        const response = await fetch(`${ADMIN_NEWS_CONFIG.BASE_URL}/${ADMIN_NEWS_CONFIG.BIN_ID}/latest`, {
+            headers: {
+                'X-Master-Key': ADMIN_NEWS_CONFIG.MASTER_KEY
+            }
+        });
+        
+        if (!response.ok) throw new Error('Ошибка загрузки новостей');
+        
+        const data = await response.json();
+        const currentNews = data.record || {};
+        const operatorNews = currentNews[operator] || [];
+        
+        displayOperatorNewsList(operator, operatorNews);
+        
+    } catch (error) {
+        console.error('Ошибка загрузки новостей оператора:', error);
+        showOperatorDeleteStatus('❌ Ошибка загрузки новостей', 'error');
+    }
+}
+
+// Отображение списка новостей оператора для удаления
+function displayOperatorNewsList(operator, newsData) {
+    const container = document.getElementById('operatorNewsListContainer');
+    
+    if (!newsData || newsData.length === 0) {
+        container.innerHTML = `
+            <div style="text-align: center; color: #666; padding: 30px; background: white; border-radius: 8px; border: 1px solid #ddd;">
+                <p style="font-size: 16px; margin-bottom: 10px;">Нет новостей у оператора</p>
+                <p style="font-size: 14px; color: #888;">Добавьте новости через форму выше</p>
+            </div>
+        `;
+        return;
+    }
+    
+    const operatorNames = {
+        'mts': 'МТС',
+        'volna': 'Волна', 
+        'win': 'Вин'
+    };
+    
+    container.innerHTML = `
+        <div style="margin-bottom: 15px; font-weight: 600; color: #333; font-size: 16px;">
+            Новости оператора: ${operatorNames[operator]} (${newsData.length} шт.)
+        </div>
+        <div style="max-height: 400px; overflow-y: auto; border: 1px solid #ddd; border-radius: 8px; padding: 10px; background: white;">
+            ${newsData.map((news, index) => `
+                <div style="display: flex; align-items: flex-start; gap: 12px; padding: 12px; border-bottom: 1px solid #f0f0f0; ${index % 2 === 0 ? 'background: #f8f9fa;' : ''}">
+                    <input type="checkbox" id="operator-news-${operator}-${index}" value="${index}" style="margin-top: 3px;">
+                    <div style="flex: 1;">
+                        <div style="font-weight: 600; margin-bottom: 8px; color: #333; font-size: 14px; line-height: 1.4;">
+                            ${news.title}
+                        </div>
+                        <div style="display: flex; gap: 15px; font-size: 12px; color: #666; flex-wrap: wrap;">
+                            <div><strong>Дата:</strong> ${news.date}</div>
+                            ${news.category ? `<div><strong>Категория:</strong> ${news.category}</div>` : ''}
+                            ${news.badge ? `<div><strong>Бейдж:</strong> ${news.badge}</div>` : ''}
+                        </div>
+                        ${news.link && news.link !== '#' ? `
+                            <div style="font-size: 11px; color: #888; margin-top: 5px; word-break: break-all;">
+                                <strong>Ссылка:</strong> ${news.link}
+                            </div>
+                        ` : ''}
+                    </div>
+                    ${news.badge ? `
+                        <span style="background: #ff4444; color: white; padding: 2px 8px; border-radius: 12px; font-size: 10px; font-weight: bold; white-space: nowrap;">
+                            ${news.badge}
+                        </span>
+                    ` : ''}
+                </div>
+            `).join('')}
+        </div>
+        <div style="margin-top: 10px; font-size: 12px; color: #666; text-align: center;">
+            Выберите новости для удаления (отмечено: 0)
+        </div>
+    `;
+    
+    // Добавляем счетчик выбранных элементов
+    const checkboxes = container.querySelectorAll('input[type="checkbox"]');
+    checkboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', updateSelectedCount);
+    });
+    updateSelectedCount();
+}
+
+// Обновление счетчика выбранных новостей
+function updateSelectedCount() {
+    const container = document.getElementById('operatorNewsListContainer');
+    const checkboxes = container.querySelectorAll('input[type="checkbox"]:checked');
+    const countElement = container.querySelector('div:last-child');
+    
+    if (countElement) {
+        countElement.innerHTML = `Выберите новости для удаления (отмечено: ${checkboxes.length})`;
+    }
+}
+
+// Удаление выбранных новостей оператора
+async function deleteSelectedOperatorNews() {
+    const operator = document.getElementById('deleteOperatorSelect').value;
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+    const selectedIndexes = Array.from(checkboxes).map(cb => parseInt(cb.value)).sort((a, b) => b - a);
+    
+    if (selectedIndexes.length === 0) {
+        showOperatorDeleteStatus('❌ Выберите хотя бы одну новость для удаления', 'error');
+        return;
+    }
+    
+    if (!confirm(`Удалить ${selectedIndexes.length} новость(ей) у оператора?\n\nЭто действие нельзя отменить!`)) {
+        return;
+    }
+    
+    try {
+        showOperatorDeleteStatus('⏳ Удаляем выбранные новости...', 'success');
+        
+        // Загружаем текущие новости
+        const response = await fetch(`${ADMIN_NEWS_CONFIG.BASE_URL}/${ADMIN_NEWS_CONFIG.BIN_ID}/latest`, {
+            headers: {
+                'X-Master-Key': ADMIN_NEWS_CONFIG.MASTER_KEY
+            }
+        });
+        
+        if (!response.ok) throw new Error('Ошибка загрузки новостей');
+        
+        const data = await response.json();
+        const currentNews = data.record || {};
+        const operatorNews = currentNews[operator] || [];
+        
+        // Удаляем выбранные новости (с конца чтобы индексы не сбивались)
+        const updatedOperatorNews = operatorNews.filter((_, index) => !selectedIndexes.includes(index));
+        
+        // Обновляем данные
+        currentNews[operator] = updatedOperatorNews;
+        
+        // Сохраняем обновленные новости
+        const saveResponse = await fetch(`${ADMIN_NEWS_CONFIG.BASE_URL}/${ADMIN_NEWS_CONFIG.BIN_ID}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-Master-Key': ADMIN_NEWS_CONFIG.MASTER_KEY
+            },
+            body: JSON.stringify(currentNews)
+        });
+
+        if (saveResponse.ok) {
+            showOperatorDeleteStatus(`✅ Удалено ${selectedIndexes.length} новость(ей) у оператора!`, 'success');
+            // Обновляем список
+            setTimeout(() => {
+                loadOperatorNews();
+            }, 1000);
+        } else {
+            throw new Error('Ошибка сохранения изменений');
+        }
+        
+    } catch (error) {
+        console.error('Ошибка удаления новостей оператора:', error);
+        showOperatorDeleteStatus('❌ Ошибка удаления новостей: ' + error.message, 'error');
+    }
+}
+
+// Показать статус для удаления новостей оператора
+function showOperatorDeleteStatus(message, type) {
+    const statusElement = document.getElementById('operatorDeleteStatusMessage');
+    statusElement.textContent = message;
+    statusElement.style.padding = '10px';
+    statusElement.style.borderRadius = '6px';
+    statusElement.style.textAlign = 'center';
+    statusElement.style.fontWeight = '600';
+    statusElement.style.marginTop = '15px';
+    
+    if (type === 'success') {
+        statusElement.style.background = '#d4edda';
+        statusElement.style.color = '#155724';
+        statusElement.style.border = '1px solid #c3e6cb';
+    } else if (type === 'error') {
+        statusElement.style.background = '#f8d7da';
+        statusElement.style.color = '#721c24';
+        statusElement.style.border = '1px solid #f5c6cb';
+    }
+}
+
+// Загружаем новости при загрузке страницы
+document.addEventListener('DOMContentLoaded', function() {
+    setTimeout(() => {
+        loadOperatorNews();
+    }, 1000);
+});
+</script>
+
+<style>
+/* Дополнительные стили для формы удаления операторов */
+.admin-news-form {
+    background: white;
+    border-radius: 16px;
+    padding: 25px;
+    margin: 20px 0;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.form-group select {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+.form-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.save-btn {
+    padding: 10px 20px;
+    background: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.reset-btn {
+    padding: 10px 20px;
+    background: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+/* Стили для скролла */
+#operatorNewsListContainer div::-webkit-scrollbar {
+    width: 8px;
+}
+
+#operatorNewsListContainer div::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+#operatorNewsListContainer div::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 4px;
+}
+</style>
+
+
+
+
+
+<!-- ФОРМА ДОБАВЛЕНИЯ НОВОСТЕЙ ИЗ ДЗЕНА -->
+<div class="admin-news-form" style="margin-top: 30px; border: 2px solid #007bff; background: #f8f9fa; border-radius: 16px; padding: 25px;">
+  <h3 style="color: #007bff; text-align: center; margin-bottom: 20px;">📰 Добавление новости из ДЗЕНА</h3>
+  
+  <div class="news-form" style="display: grid; grid-template-columns: 1fr; gap: 15px;">
+    <div class="form-group">
+      <label style="font-weight: 600; margin-bottom: 5px;">Ссылка на статью в Дзене:</label>
+      <input type="url" id="zenUrl" placeholder="https://dzen.ru/b/..." style="width: 100%; padding: 12px; border: 2px solid #007bff; border-radius: 8px;">
+    </div>
+    
+    <div class="form-group">
+      <label style="font-weight: 600; margin-bottom: 5px;">URL картинки:</label>
+      <input type="url" id="newsImage" placeholder="https://avatars.dzeninfra.ru/get-zen_brief/..." style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 6px;">
+      <small style="color: #666; font-size: 12px;">Скопируйте URL картинки из статьи Дзена</small>
+    </div>
+    
+    <div class="form-group">
+      <label style="font-weight: 600; margin-bottom: 5px;">Заголовок новости:</label>
+      <textarea id="newsTitleManual" placeholder="Введите заголовок новости" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 6px; min-height: 80px; resize: vertical;"></textarea>
+    </div>
+  </div>
+  
+  <div class="form-actions" style="display: flex; gap: 10px; justify-content: center; margin-top: 20px;">
+    <button onclick="addNews()" style="background: #28a745; padding: 12px 30px; border: none; border-radius: 8px; color: white; cursor: pointer; font-weight: 600;">
+      💾 Добавить новость
+    </button>
+    <button onclick="resetNewsForm()" style="background: #6c757d; padding: 12px 30px; border: none; border-radius: 8px; color: white; cursor: pointer; font-weight: 600;">
+      🔄 Очистить форму
+    </button>
+  </div>
+  
+  <div id="newsPreview" style="margin-top: 20px; display: none; background: white; padding: 15px; border-radius: 12px; border: 2px solid #e9ecef;">
+    <h4 style="color: #333; margin-bottom: 15px;">Предпросмотр новости:</h4>
+    <div class="news-card-preview" style="max-width: 300px; background: #f8f9fa; padding: 15px; border-radius: 8px; border: 2px solid #007bff;">
+      <img id="previewImage" src="" alt="Preview" style="width: 100%; height: 150px; object-fit: cover; border-radius: 6px; background: #ddd;">
+      <p id="previewTitle" style="margin: 10px 0; font-weight: 600; color: #333; min-height: 40px;"></p>
+      <button class="btn-read" style="background: #007bff; color: white; padding: 8px 16px; border: none; border-radius: 6px; pointer-events: none;">Читать</button>
+    </div>
+  </div>
+  
+  <div id="newsStatusMessage" style="margin-top: 15px;"></div>
+</div>
+
+<script>
+// Конфигурация JSONBin для новостей Дзена
+const ZEN_NEWS_CONFIG = {
+  BIN_ID: '68fa7ce2ae596e708f271345',
+  MASTER_KEY: '$2a$10$h2nqVPwwIv04XRDJNXhHJuedTYrRgG9tIX5HbvnfiWo/BE3sWbxxW',
+  BASE_URL: 'https://api.jsonbin.io/v3/b'
+};
+
+// Обновление превью при вводе
+function updatePreview() {
+  const image = document.getElementById('newsImage').value.trim();
+  const title = document.getElementById('newsTitleManual').value.trim();
+  const link = document.getElementById('zenUrl').value.trim();
+  
+  if (image && title && link) {
+    const previewImage = document.getElementById('previewImage');
+    const previewTitle = document.getElementById('previewTitle');
+    
+    previewImage.src = image;
+    previewImage.onerror = function() {
+      this.src = 'https://via.placeholder.com/300x150/007bff/ffffff?text=Изображение';
+    };
+    
+    previewTitle.textContent = title.length > 80 ? title.substring(0, 80) + '...' : title;
+    document.getElementById('newsPreview').style.display = 'block';
+  } else {
+    document.getElementById('newsPreview').style.display = 'none';
+  }
+}
+
+// Добавление новости
+async function addNews() {
+  const image = document.getElementById('newsImage').value.trim();
+  const title = document.getElementById('newsTitleManual').value.trim();
+  const link = document.getElementById('zenUrl').value.trim();
+
+  // Валидация
+  if (!image) {
+    showNewsStatus('❌ Введите URL картинки', 'error');
+    return;
+  }
+  
+  if (!title) {
+    showNewsStatus('❌ Введите заголовок новости', 'error');
+    return;
+  }
+  
+  if (!link) {
+    showNewsStatus('❌ Введите ссылку на статью', 'error');
+    return;
+  }
+
+  try {
+    showNewsStatus('⏳ Добавляем новость...', 'success');
+    
+    // Загружаем текущие новости
+    const response = await fetch(`${ZEN_NEWS_CONFIG.BASE_URL}/${ZEN_NEWS_CONFIG.BIN_ID}/latest`, {
+      headers: {
+        'X-Master-Key': ZEN_NEWS_CONFIG.MASTER_KEY
+      }
+    });
+    
+    let currentNews = [];
+    if (response.ok) {
+      const data = await response.json();
+      currentNews = data.record || [];
+    } else {
+      throw new Error('Не удалось загрузить текущие новости');
+    }
+
+    // Создаем новую новость
+    const newNewsItem = {
+      id: 'news_' + Date.now(),
+      image: image,
+      title: title,
+      link: link,
+      date: new Date().toLocaleDateString('ru-RU'),
+      source: 'zen',
+      addedAt: new Date().toISOString()
+    };
+
+    // Добавляем в начало массива (новые сверху)
+    currentNews.unshift(newNewsItem);
+
+    // Сохраняем обновленные новости
+    const saveResponse = await fetch(`${ZEN_NEWS_CONFIG.BASE_URL}/${ZEN_NEWS_CONFIG.BIN_ID}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Master-Key': ZEN_NEWS_CONFIG.MASTER_KEY
+      },
+      body: JSON.stringify(currentNews)
+    });
+
+    if (saveResponse.ok) {
+      showNewsStatus('✅ Новость успешно добавлена! Она появится на сайте в разделе "Последние новости".', 'success');
+      resetNewsForm();
+      
+      // Показываем статистику
+      setTimeout(() => {
+        showNewsStatus(`📊 Всего новостей в базе: ${currentNews.length}`, 'success');
+      }, 2000);
+      
+    } else {
+      throw new Error('Ошибка сохранения новости');
+    }
+    
+  } catch (error) {
+    console.error('Ошибка добавления новости:', error);
+    showNewsStatus('❌ Ошибка: ' + error.message, 'error');
+  }
+}
+
+// Сброс формы
+function resetNewsForm() {
+  document.getElementById('zenUrl').value = '';
+  document.getElementById('newsImage').value = '';
+  document.getElementById('newsTitleManual').value = '';
+  document.getElementById('newsPreview').style.display = 'none';
+  
+  // Фокус на первое поле
+  document.getElementById('zenUrl').focus();
+}
+
+// Показать статус сообщение
+function showNewsStatus(message, type) {
+  const statusElement = document.getElementById('newsStatusMessage');
+  statusElement.textContent = message;
+  statusElement.style.padding = '12px';
+  statusElement.style.borderRadius = '8px';
+  statusElement.style.textAlign = 'center';
+  statusElement.style.fontWeight = '600';
+  statusElement.style.marginTop = '15px';
+  
+  if (type === 'success') {
+    statusElement.style.background = '#d4edda';
+    statusElement.style.color = '#155724';
+    statusElement.style.border = '2px solid #c3e6cb';
+  } else if (type === 'error') {
+    statusElement.style.background = '#f8d7da';
+    statusElement.style.color = '#721c24';
+    statusElement.style.border = '2px solid #f5c6cb';
+  }
+}
+
+// События для обновления превью
+document.getElementById('newsImage').addEventListener('input', updatePreview);
+document.getElementById('newsTitleManual').addEventListener('input', updatePreview);
+document.getElementById('zenUrl').addEventListener('input', updatePreview);
+</script>
+
+
+
+
+
+
+
+
+
+<!-- ФОРМА УДАЛЕНИЯ НОВОСТЕЙ -->
+<div class="admin-news-form" style="margin-top: 30px; border: 2px solid #dc3545; background: #f8f9fa; border-radius: 16px; padding: 25px;">
+  <h3 style="color: #dc3545; text-align: center; margin-bottom: 20px;">🗑️ УДАЛЕНИЕ новостей</h3>
+  
+  <div id="newsListContainer" style="margin-bottom: 20px;">
+    <!-- Список новостей будет загружен здесь -->
+  </div>
+  
+  <div style="display: flex; gap: 10px; justify-content: center; margin-top: 20px;">
+    <button onclick="loadNewsList()" style="background: #6c757d; padding: 10px 20px; border: none; border-radius: 6px; color: white; cursor: pointer; font-weight: 600;">
+      🔄 Обновить список
+    </button>
+    <button onclick="deleteSelectedNews()" style="background: #dc3545; padding: 10px 20px; border: none; border-radius: 6px; color: white; cursor: pointer; font-weight: 600;">
+      🗑️ Удалить выбранные
+    </button>
+  </div>
+  
+  <div id="deleteStatusMessage" style="margin-top: 15px;"></div>
+</div>
+
+<script>
+// Загрузка списка новостей для удаления
+async function loadNewsList() {
+    try {
+        showDeleteStatus('⏳ Загружаем список новостей...', 'success');
+        
+        const response = await fetch(`${ZEN_NEWS_CONFIG.BASE_URL}/${ZEN_NEWS_CONFIG.BIN_ID}/latest`, {
+            headers: {
+                'X-Master-Key': ZEN_NEWS_CONFIG.MASTER_KEY
+            }
+        });
+        
+        if (!response.ok) throw new Error('Ошибка загрузки новостей');
+        
+        const data = await response.json();
+        const newsData = data.record || [];
+        
+        displayNewsList(newsData);
+        
+    } catch (error) {
+        console.error('Ошибка загрузки списка новостей:', error);
+        showDeleteStatus('❌ Ошибка загрузки списка новостей', 'error');
+    }
+}
+
+// Отображение списка новостей для удаления
+function displayNewsList(newsData) {
+    const container = document.getElementById('newsListContainer');
+    
+    if (!newsData || newsData.length === 0) {
+        container.innerHTML = `
+            <div style="text-align: center; color: #666; padding: 20px; background: white; border-radius: 8px;">
+                <p>Нет новостей для отображения</p>
+            </div>
+        `;
+        return;
+    }
+    
+    container.innerHTML = `
+        <div style="margin-bottom: 10px; font-weight: 600; color: #333;">Выберите новости для удаления:</div>
+        <div style="max-height: 400px; overflow-y: auto; border: 1px solid #ddd; border-radius: 8px; padding: 10px; background: white;">
+            ${newsData.map((news, index) => `
+                <div style="display: flex; align-items: flex-start; gap: 10px; padding: 10px; border-bottom: 1px solid #f0f0f0; ${index % 2 === 0 ? 'background: #f8f9fa;' : ''}">
+                    <input type="checkbox" id="news-${news.id}" value="${news.id}" style="margin-top: 3px;">
+                    <div style="flex: 1;">
+                        <div style="font-weight: 600; margin-bottom: 5px; color: #333;">${news.title}</div>
+                        <div style="font-size: 12px; color: #666; margin-bottom: 5px;">
+                            <strong>Дата:</strong> ${news.date} | 
+                            <strong>ID:</strong> ${news.id}
+                        </div>
+                        <div style="font-size: 11px; color: #888; word-break: break-all;">
+                            <strong>Ссылка:</strong> ${news.link}
+                        </div>
+                    </div>
+                    <img src="${news.image}" 
+                         alt="Preview" 
+                         style="width: 60px; height: 40px; object-fit: cover; border-radius: 4px;"
+                         onerror="this.src='https://via.placeholder.com/60x40/dc3545/ffffff?text=X'">
+                </div>
+            `).join('')}
+        </div>
+        <div style="margin-top: 10px; font-size: 12px; color: #666;">
+            Всего новостей: ${newsData.length}
+        </div>
+    `;
+}
+
+// Удаление выбранных новостей
+async function deleteSelectedNews() {
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+    const selectedIds = Array.from(checkboxes).map(cb => cb.value);
+    
+    if (selectedIds.length === 0) {
+        showDeleteStatus('❌ Выберите хотя бы одну новость для удаления', 'error');
+        return;
+    }
+    
+    if (!confirm(`Удалить ${selectedIds.length} новость(ей)?\n\nЭто действие нельзя отменить!`)) {
+        return;
+    }
+    
+    try {
+        showDeleteStatus('⏳ Удаляем выбранные новости...', 'success');
+        
+        // Загружаем текущие новости
+        const response = await fetch(`${ZEN_NEWS_CONFIG.BASE_URL}/${ZEN_NEWS_CONFIG.BIN_ID}/latest`, {
+            headers: {
+                'X-Master-Key': ZEN_NEWS_CONFIG.MASTER_KEY
+            }
+        });
+        
+        if (!response.ok) throw new Error('Ошибка загрузки новостей');
+        
+        const data = await response.json();
+        let currentNews = data.record || [];
+        
+        // Фильтруем новости, оставляем только невыбранные
+        const updatedNews = currentNews.filter(news => !selectedIds.includes(news.id));
+        
+        // Сохраняем обновленный список
+        const saveResponse = await fetch(`${ZEN_NEWS_CONFIG.BASE_URL}/${ZEN_NEWS_CONFIG.BIN_ID}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-Master-Key': ZEN_NEWS_CONFIG.MASTER_KEY
+            },
+            body: JSON.stringify(updatedNews)
+        });
+
+        if (saveResponse.ok) {
+            showDeleteStatus(`✅ Удалено ${selectedIds.length} новость(ей)! Список обновлен.`, 'success');
+            // Обновляем список
+            setTimeout(() => {
+                loadNewsList();
+            }, 1000);
+        } else {
+            throw new Error('Ошибка сохранения изменений');
+        }
+        
+    } catch (error) {
+        console.error('Ошибка удаления новостей:', error);
+        showDeleteStatus('❌ Ошибка удаления новостей: ' + error.message, 'error');
+    }
+}
+
+// Показать статус для удаления
+function showDeleteStatus(message, type) {
+    const statusElement = document.getElementById('deleteStatusMessage');
+    statusElement.textContent = message;
+    statusElement.style.padding = '10px';
+    statusElement.style.borderRadius = '6px';
+    statusElement.style.textAlign = 'center';
+    statusElement.style.fontWeight = '600';
+    statusElement.style.marginTop = '15px';
+    
+    if (type === 'success') {
+        statusElement.style.background = '#d4edda';
+        statusElement.style.color = '#155724';
+        statusElement.style.border = '1px solid #c3e6cb';
+    } else if (type === 'error') {
+        statusElement.style.background = '#f8d7da';
+        statusElement.style.color = '#721c24';
+        statusElement.style.border = '1px solid #f5c6cb';
+    }
+}
+
+// Загружаем список новостей при загрузке страницы админки
+document.addEventListener('DOMContentLoaded', function() {
+    setTimeout(() => {
+        loadNewsList();
+    }, 1000);
+});
+</script>
+
+<style>
+/* Стили для формы удаления */
+.admin-news-form {
+    margin-top: 30px;
+    border: 2px solid #dc3545;
+    background: #f8f9fa;
+    border-radius: 16px;
+    padding: 25px;
+}
+
+.admin-news-form h3 {
+    color: #dc3545;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Стили для скролла */
+#newsListContainer div::-webkit-scrollbar {
+    width: 8px;
+}
+
+#newsListContainer div::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+#newsListContainer div::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 4px;
+}
+
+#newsListContainer div::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}
+</style>
+
+
+
+
+
+
+
+
+
