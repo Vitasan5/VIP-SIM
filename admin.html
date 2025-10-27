@@ -137,6 +137,24 @@
             opacity: 0.7;
             pointer-events: none;
         }
+        .subscription-status {
+            font-size: 11px;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        .subscription-active {
+            background: #d4edda;
+            color: #155724;
+        }
+        .subscription-expired {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        .subscription-soon {
+            background: #fff3cd;
+            color: #856404;
+        }
     </style>
 </head>
 <body>
@@ -144,9 +162,7 @@
         <a href="index.html" class="btn back-btn">← Назад в кабинет</a>
         <h1>🔧 Админ-панель VIP-SIM</h1>
 
-
-<!-- ФОРМА ДОБАВЛЕНИЯ КЛИЕНТА -->
-        
+        <!-- ФОРМА ДОБАВЛЕНИЯ КЛИЕНТА -->
         <div class="section">
             <h2>👥 Быстрое добавление клиента</h2>
             <div style="display: flex; gap: 10px; align-items: end; flex-wrap: wrap;">
@@ -157,6 +173,10 @@
                 <div style="flex: 1; min-width: 200px;">
                     <label style="display: block; font-size: 12px; color: #666; margin-bottom: 5px;">Имя клиента</label>
                     <input type="text" id="manualClientName" placeholder="Имя для обращений" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
+                </div>
+                <div style="flex: 1; min-width: 200px;">
+                    <label style="display: block; font-size: 12px; color: #666; margin-bottom: 5px;">Срок подписки (дней)</label>
+                    <input type="number" id="subscriptionDays" value="30" min="1" max="365" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
                 </div>
                 <div>
                     <button class="btn btn-success" onclick="addManualClient()" style="min-width: 150px; height: 42px;">
@@ -173,7 +193,7 @@
             </div>
             <div class="stat-card">
                 <div class="stat-number" id="activeClients">0</div>
-                <div class="stat-label">Активных клиентов</div>
+                <div class="stat-label">Активных подписок</div>
             </div>
             <div class="stat-card">
                 <div class="stat-number" id="totalRevenue">0 ₽</div>
@@ -240,6 +260,33 @@
             }
         }
 
+        // === ФУНКЦИИ ДЛЯ РАБОТЫ С ПОДПИСКОЙ ===
+        function calculateSubscriptionEnd(days = 30) {
+            const endDate = new Date();
+            endDate.setDate(endDate.getDate() + days);
+            return endDate.toISOString();
+        }
+
+        function getSubscriptionStatus(subscriptionEnd) {
+            const now = new Date();
+            const endDate = new Date(subscriptionEnd);
+            const daysLeft = Math.ceil((endDate - now) / (1000 * 60 * 60 * 24));
+            
+            if (daysLeft <= 0) {
+                return { status: 'expired', daysLeft: 0, text: 'Истекла', class: 'subscription-expired' };
+            } else if (daysLeft <= 7) {
+                return { status: 'soon', daysLeft, text: `Осталось ${daysLeft} дн.`, class: 'subscription-soon' };
+            } else {
+                return { status: 'active', daysLeft, text: `Осталось ${daysLeft} дн.`, class: 'subscription-active' };
+            }
+        }
+
+        function isSubscriptionActive(subscriptionEnd) {
+            const now = new Date();
+            const endDate = new Date(subscriptionEnd);
+            return now <= endDate;
+        }
+
         // === ФУНКЦИИ АДМИНКИ ===
         async function loadAdminData() {
             document.body.classList.add('loading');
@@ -249,7 +296,13 @@
                 
                 // Обновляем статистику
                 document.getElementById('totalClients').textContent = db.clients.length;
-                document.getElementById('activeClients').textContent = db.clients.filter(c => c.accessActive).length;
+                
+                // Активные подписки - те, у которых подписка не истекла
+                const activeSubscriptions = db.clients.filter(client => 
+                    client.subscriptionEnd && isSubscriptionActive(client.subscriptionEnd)
+                );
+                document.getElementById('activeClients').textContent = activeSubscriptions.length;
+                
                 document.getElementById('pendingActivations').textContent = db.clients.filter(c => !c.accessActive && c.paid).length;
                 
                 const totalRevenue = db.payments
@@ -275,30 +328,45 @@
                 return;
             }
             
-            clientsList.innerHTML = clients.map(client => `
-                <div class="client-card ${client.accessActive ? '' : 'inactive-client'} ${client.blocked ? 'blocked-client' : ''}">
+            clientsList.innerHTML = clients.map(client => {
+                const subscriptionStatus = client.subscriptionEnd ? 
+                    getSubscriptionStatus(client.subscriptionEnd) : 
+                    { text: 'Нет подписки', class: 'subscription-expired' };
+                
+                const isActive = client.subscriptionEnd && isSubscriptionActive(client.subscriptionEnd);
+                
+                return `
+                <div class="client-card ${!isActive ? 'inactive-client' : ''} ${client.blocked ? 'blocked-client' : ''}">
                     <div class="client-info">
                         <div><strong>${client.nickname}</strong></div>
                         <div class="client-id">${client.clientId}</div>
                         <div>
                             ${client.blocked ? '🚫 Заблокирован' : 
-                              client.accessActive ? '✅ Активен' : 
+                              client.accessActive && isActive ? '✅ Активен' : 
                               client.paid ? '⏳ Ожидает активации' : '❌ Не оплачено'}
                         </div>
                     </div>
                     <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; font-size: 12px;">
                         <div>📞 ${client.totalRequests || 0} обращений</div>
-                        <div>💰 ${client.remaining || 0} осталось</div>
+                        <div>
+                            <span class="subscription-status ${subscriptionStatus.class}">
+                                ${subscriptionStatus.text}
+                            </span>
+                        </div>
                         <div>${client.paid ? '✅ Оплачено' : '❌ Не оплачено'}</div>
                     </div>
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-size: 11px; margin-top: 10px;">
                         <div>📅 Рег.: ${new Date(client.registrationDate).toLocaleDateString('ru-RU')}</div>
-                        <div>⏰ Актив.: ${new Date(client.lastActivity).toLocaleDateString('ru-RU')}</div>
+                        <div>${client.subscriptionEnd ? `⏰ Подписка до: ${new Date(client.subscriptionEnd).toLocaleDateString('ru-RU')}` : '⏰ Нет подписки'}</div>
                     </div>
                     <div class="client-actions">
                         ${!client.accessActive && client.paid ? 
                             `<button class="btn btn-success" onclick="activateClientAccess('${client.clientId}')">✅ Активировать доступ</button>` :
-                            client.accessActive ?
+                            client.accessActive && !isActive ?
+                            `<button class="btn btn-success" onclick="extendSubscription('${client.clientId}')">📅 Продлить подписку</button>` :
+                            ''
+                        }
+                        ${client.accessActive && isActive ?
                             `<button class="btn" onclick="deactivateClientAccess('${client.clientId}')">🚫 Деактивировать</button>` :
                             ''
                         }
@@ -306,15 +374,17 @@
                             `<button class="btn btn-success" onclick="unblockClient('${client.clientId}')">✅ Разблокировать</button>` :
                             `<button class="btn btn-danger" onclick="blockClient('${client.clientId}')">🚫 Заблокировать</button>`
                         }
-                        <button class="btn" onclick="resetClientRequests('${client.clientId}')">🔄 Сбросить обращения</button>
+                        <button class="btn" onclick="extendSubscription('${client.clientId}')">📅 Продлить на 30 дн.</button>
                     </div>
                 </div>
-            `).join('');
+                `;
+            }).join('');
         }
 
         async function addManualClient() {
             const clientId = document.getElementById('manualClientId').value.trim().toUpperCase();
             const clientName = document.getElementById('manualClientName').value.trim();
+            const subscriptionDays = parseInt(document.getElementById('subscriptionDays').value) || 30;
             
             if (!clientId || !clientName) {
                 alert('Заполните все поля');
@@ -345,7 +415,7 @@
                     registrationDate: new Date().toISOString(),
                     totalRequests: 0,
                     lastActivity: new Date().toISOString(),
-                    remaining: 0,
+                    subscriptionEnd: calculateSubscriptionEnd(subscriptionDays),
                     paid: true,
                     accessActive: false,
                     blocked: false,
@@ -360,7 +430,7 @@
                     amount: 100,
                     date: new Date().toISOString(),
                     status: 'paid',
-                    description: 'Ручная регистрация'
+                    description: `Ручная регистрация (${subscriptionDays} дней)`
                 });
                 
                 const success = await updateDatabase(db);
@@ -369,6 +439,7 @@
                     loadAdminData();
                     document.getElementById('manualClientId').value = '';
                     document.getElementById('manualClientName').value = '';
+                    document.getElementById('subscriptionDays').value = '30';
                     alert('✅ Клиент добавлен! Теперь активируйте ему доступ.');
                 } else {
                     alert('❌ Ошибка сохранения');
@@ -382,7 +453,7 @@
         }
 
         async function activateClientAccess(clientId) {
-            if (confirm(`Активировать доступ для клиента ${clientId}?\n\nКлиент получит 10 обращений в поддержку.`)) {
+            if (confirm(`Активировать доступ для клиента ${clientId}?\n\nКлиент получит доступ к премиум-функциям на срок подписки.`)) {
                 document.body.classList.add('loading');
                 
                 try {
@@ -391,18 +462,66 @@
                     
                     if (client) {
                         client.accessActive = true;
-                        client.remaining = 10;
                         client.activatedAt = new Date().toISOString();
+                        
+                        // Если нет подписки, создаем стандартную на 30 дней
+                        if (!client.subscriptionEnd) {
+                            client.subscriptionEnd = calculateSubscriptionEnd(30);
+                        }
                         
                         const success = await updateDatabase(db);
                         
                         if (success) {
                             loadAdminData();
-                            alert('✅ Доступ активирован! Клиент может войти по своему ID.\n\nКлиент получил 10 обращений в поддержку.');
+                            alert('✅ Доступ активирован! Клиент может войти по своему ID.\n\nКлиент получил доступ к премиум-функциям.');
                         }
                     }
                 } catch (error) {
                     alert('❌ Ошибка активации');
+                } finally {
+                    document.body.classList.remove('loading');
+                }
+            }
+        }
+
+        async function extendSubscription(clientId, days = 30) {
+            const extendDays = prompt(`Продлить подписку для клиента ${clientId} на сколько дней?`, days);
+            
+            if (extendDays && parseInt(extendDays) > 0) {
+                document.body.classList.add('loading');
+                
+                try {
+                    const db = await getDatabase();
+                    const client = db.clients.find(c => c.clientId === clientId);
+                    
+                    if (client) {
+                        const currentEnd = client.subscriptionEnd ? new Date(client.subscriptionEnd) : new Date();
+                        const newEnd = new Date(currentEnd);
+                        newEnd.setDate(newEnd.getDate() + parseInt(extendDays));
+                        
+                        client.subscriptionEnd = newEnd.toISOString();
+                        client.accessActive = true;
+                        
+                        // Добавляем запись о продлении
+                        db.payments.push({
+                            id: 'extend_' + Date.now(),
+                            clientId: clientId,
+                            nickname: client.nickname,
+                            amount: 100,
+                            date: new Date().toISOString(),
+                            status: 'paid',
+                            description: `Продление подписки на ${extendDays} дней`
+                        });
+                        
+                        const success = await updateDatabase(db);
+                        
+                        if (success) {
+                            loadAdminData();
+                            alert(`✅ Подписка продлена на ${extendDays} дней! Новый срок: ${newEnd.toLocaleDateString('ru-RU')}`);
+                        }
+                    }
+                } catch (error) {
+                    alert('❌ Ошибка продления подписки');
                 } finally {
                     document.body.classList.remove('loading');
                 }
@@ -476,29 +595,6 @@
             }
         }
 
-        async function resetClientRequests(clientId) {
-            if (confirm(`Сбросить обращения для клиента ${clientId}?\n\nКлиент получит 10 новых обращений.`)) {
-                document.body.classList.add('loading');
-                
-                try {
-                    const db = await getDatabase();
-                    const client = db.clients.find(c => c.clientId === clientId);
-                    
-                    if (client) {
-                        client.remaining = 10;
-                        client.totalRequests = 0;
-                        await updateDatabase(db);
-                        loadAdminData();
-                        alert('✅ Обращения сброшены! Клиент получил 10 новых обращений.');
-                    }
-                } catch (error) {
-                    alert('❌ Ошибка сброса');
-                } finally {
-                    document.body.classList.remove('loading');
-                }
-            }
-        }
-
         async function clearDatabase() {
             if (confirm('❌ УДАЛИТЬ ВСЕ ДАННЫЕ?\n\nВсе клиенты и платежи будут удалены!')) {
                 document.body.classList.add('loading');
@@ -524,4 +620,5 @@
         // Запуск при загрузке
         document.addEventListener('DOMContentLoaded', loadAdminData);
     </script>
-
+</body>
+</html>

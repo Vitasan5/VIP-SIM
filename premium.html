@@ -1,6 +1,23 @@
+
 <!DOCTYPE html>
 <html lang="ru">
   <head>
+
+    <!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function(m,e,t,r,i,k,a){
+        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=104821156', 'ym');
+
+    ym(104821156, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", accurateTrackBounce:true, trackLinks:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/104821156" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Премиум-клиент | VIP-SIM.RU</title>
@@ -444,38 +461,6 @@
         text-align: center;
       }
 
-      /* Стрелки слайдера */
-      .slider-arrow {
-        background: #d4af37;
-        color: white;
-        border: none;
-        width: 32px;
-        height: 32px;
-        border-radius: 50%;
-        font-size: 16px;
-        font-weight: bold;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: all 0.3s ease;
-        box-shadow: 0 2px 6px rgba(212, 175, 55, 0.3);
-        z-index: 2;
-      }
-
-      .slider-arrow:hover {
-        background: #b8860b;
-        transform: scale(1.05);
-      }
-
-      .slider-arrow-left {
-        margin-right: 8px;
-      }
-
-      .slider-arrow-right {
-        margin-left: 8px;
-      }
-
       /* Стили для слайдера операторов */
       .operators-call-section {
         margin: 20px 0;
@@ -626,7 +611,7 @@
         <!-- БЛОК РЕГИСТРАЦИИ -->
         <div id="registrationBlock">
           <p style="text-align: center; margin-bottom: 20px; color: #555">
-            Для доступа к премиум-функциям необходимо оплатить 100 ₽
+            Для доступа к премиум-функциям необходимо оплатить 100 ₽ в месяц
           </p>
 
           <div class="benefits-box">
@@ -642,10 +627,11 @@
             </div>
             <div style="text-align: left; display: inline-block">
               <div style="margin: 8px 0">
-                ✅ 10 обращений в премиум-поддержку
+                ✅ Неограниченные обращения в премиум-поддержку
               </div>
               <div style="margin: 8px 0">🎁 Персональные скидки на услуги</div>
               <div style="margin: 8px 0">⭐ Приоритетное обслуживание</div>
+              <div style="margin: 8px 0">📅 Доступ на 30 дней</div>
             </div>
           </div>
 
@@ -694,7 +680,7 @@
                 text-decoration: none;
               "
             >
-              💳 Перейти к оплате 100 ₽
+              💳 Перейти к оплате 100 ₽ в месяц
             </a>
           </div>
         </div>
@@ -771,8 +757,11 @@
         <div class="welcome">Привет, <span id="displayName">друг</span>!</div>
 
         <div class="counter-box">
-          Осталось обращений:
-          <span class="counter-value" id="counter">10</span>/10
+          Статус подписки: 
+          <span class="counter-value" id="subscriptionStatus">Активна</span>
+          <div style="font-size: 14px; margin-top: 5px; color: #666;">
+            До окончания: <span id="daysLeft">30</span> дней
+          </div>
         </div>
 
         <div id="errorMessage" class="error"></div>
@@ -788,12 +777,6 @@
         <!-- Слайдер услуг со скидками -->
         <section class="services-slider-section">
           <div class="services-slider-container">
-            <button
-              class="slider-arrow slider-arrow-left"
-              onclick="scrollSlider(-1)"
-            >
-              ‹
-            </button>
             <div class="services-slider-track" id="servicesSliderTrack">
               <!-- Услуга 1 -->
               <div
@@ -918,12 +901,6 @@
                 </div>
               </div>
             </div>
-            <button
-              class="slider-arrow slider-arrow-right"
-              onclick="scrollSlider(1)"
-            >
-              ›
-            </button>
           </div>
         </section>
 
@@ -1509,13 +1486,6 @@
           </h3>
 
           <div class="operators-slider-container">
-            <button
-              class="slider-arrow slider-arrow-left"
-              onclick="scrollOperators(-1)"
-            >
-              ‹
-            </button>
-
             <div class="operators-slider-track" id="operatorsSliderTrack">
               <!-- МТС -->
               <a href="tel:+74957660166" class="operator-btn mts">
@@ -1557,13 +1527,6 @@
                 <span class="operator-name">Yota</span>
               </a>
             </div>
-
-            <button
-              class="slider-arrow slider-arrow-right"
-              onclick="scrollOperators(1)"
-            >
-              ›
-            </button>
           </div>
         </section>
 
@@ -1572,7 +1535,7 @@
         </button>
 
         <button class="btn btn-renew" onclick="renewAccess()">
-          🔁 Продлить доступ (100 ₽)
+          🔁 Продлить доступ (100 ₽/мес)
         </button>
 
         <button class="btn btn-logout" onclick="logout()">
@@ -1598,8 +1561,8 @@
           </div>
 
           <div class="stat-item">
-            <div class="stat-number" id="statRemaining">10</div>
-            <div class="stat-label">Осталось обращений</div>
+            <div class="stat-number" id="statRemaining">Активна</div>
+            <div class="stat-label">Статус подписки</div>
           </div>
 
           <div class="stat-item">
@@ -1906,6 +1869,14 @@
             return;
           }
 
+          // Проверяем срок действия подписки
+          const now = new Date();
+          const subscriptionEnd = new Date(client.subscriptionEnd);
+          if (now > subscriptionEnd) {
+            alert("❌ Срок действия подписки истек. Пожалуйста, продлите доступ.");
+            return;
+          }
+
           // Сохраняем сессию
           localStorage.setItem("currentClientId", clientId);
 
@@ -1920,7 +1891,15 @@
 
       function showPremiumScreen(client) {
         document.getElementById("displayName").textContent = client.nickname;
-        document.getElementById("counter").textContent = client.remaining;
+        
+        // Обновляем отображение статуса подписки
+        const now = new Date();
+        const subscriptionEnd = new Date(client.subscriptionEnd);
+        const daysLeft = Math.ceil((subscriptionEnd - now) / (1000 * 60 * 60 * 24));
+        
+        document.getElementById("subscriptionStatus").textContent = "Активна";
+        document.getElementById("daysLeft").textContent = daysLeft > 0 ? daysLeft : 0;
+        
         document.getElementById("loginScreen").classList.add("hidden");
         document.getElementById("premiumScreen").classList.remove("hidden");
       }
@@ -1944,6 +1923,15 @@
             return null;
           }
 
+          // Проверяем срок подписки
+          const now = new Date();
+          const subscriptionEnd = new Date(client.subscriptionEnd);
+          if (now > subscriptionEnd) {
+            logout();
+            alert("❌ Срок действия подписки истек. Пожалуйста, продлите доступ.");
+            return null;
+          }
+
           return client;
         } catch (error) {
           alert("❌ Ошибка проверки статуса");
@@ -1955,11 +1943,6 @@
       async function contactSupport() {
         const client = await checkClientStatus();
         if (!client) return;
-
-        if (client.remaining <= 0) {
-          alert("❌ Обращения закончились. Пожалуйста, продлите доступ.");
-          return;
-        }
 
         document.body.classList.add("loading");
 
@@ -1982,7 +1965,6 @@
           currentClient.requestsByDate[today] =
             (currentClient.requestsByDate[today] || 0) + 1;
           currentClient.lastActivity = new Date().toISOString();
-          currentClient.remaining -= 1;
 
           // Сохраняем обновленные данные
           const response = await fetch(
@@ -1998,15 +1980,9 @@
           );
 
           if (response.ok) {
-            // Обновляем счетчик
-            document.getElementById("counter").textContent =
-              currentClient.remaining;
-
-            const used = 10 - currentClient.remaining;
-            const verificationCode = generateVerificationCode(used);
             const formattedDate = new Date().toLocaleDateString("ru-RU");
 
-            const telegramMessage = `⭐ Обращение в поддержку премиум-клиентов (${used}/10).Мы ответим Вам в первую очередь. Задайте свой вопрос после Клиент ID \n\n📅 Дата: ${formattedDate}\n🆔 Код: ${verificationCode}\n👤 Клиент ID: ${client.clientId}`;
+            const telegramMessage = `⭐ Обращение в поддержку премиум-клиентов\n\n📅 Дата: ${formattedDate}\n👤 Клиент ID: ${client.clientId}\n💎 Премиум подписка активна`;
 
             const encoded = encodeURIComponent(telegramMessage);
             const telegramUrl = `https://t.me/vipsimsupport?text=${encoded}`;
@@ -2020,31 +1996,6 @@
         } finally {
           document.body.classList.remove("loading");
         }
-      }
-
-      function generateVerificationCode(usedCount) {
-        const now = new Date();
-        const months = [
-          "j",
-          "f",
-          "m",
-          "a",
-          "m",
-          "j",
-          "j",
-          "a",
-          "s",
-          "o",
-          "n",
-          "d",
-        ];
-        const day = now.getDate();
-        const month = months[now.getMonth()];
-        const randomLetters = Math.random()
-          .toString(36)
-          .substr(2, 2)
-          .toUpperCase();
-        return day + month + randomLetters + usedCount;
       }
 
       function logout() {
@@ -2065,7 +2016,15 @@
             const client = db.clients.find((c) => c.clientId === clientId);
 
             if (client && client.accessActive && !client.blocked) {
-              showPremiumScreen(client);
+              // Проверяем срок подписки
+              const now = new Date();
+              const subscriptionEnd = new Date(client.subscriptionEnd);
+              if (now <= subscriptionEnd) {
+                showPremiumScreen(client);
+              } else {
+                logout();
+                alert("❌ Срок действия подписки истек. Пожалуйста, продлите доступ.");
+              }
             } else {
               logout();
             }
@@ -2077,7 +2036,7 @@
         }
       }
 
-      // Функции для слайдеров
+      // Функции для слайдеров (стрелки убраны, оставлен только скролл)
       function scrollSlider(direction) {
         const slider = document.getElementById("servicesSliderTrack");
         const scrollAmount = 250;
@@ -2134,8 +2093,7 @@
             currentClient.clientId;
           document.getElementById("statTotalRequests").textContent =
             currentClient.totalRequests || 0;
-          document.getElementById("statRemaining").textContent =
-            currentClient.remaining || 0;
+          document.getElementById("statRemaining").textContent = "Активна";
           document.getElementById("statThisMonth").textContent =
             getRequestsThisMonth(currentClient);
           document.getElementById("statAvgWeek").textContent =
@@ -2208,7 +2166,7 @@
         document.getElementById("statsModal").style.display = "none";
       }
 
-      // Инициализация слайдеров
+      // Инициализация слайдеров (только свайп/скролл)
       function initSliders() {
         const sliders = ["servicesSliderTrack", "operatorsSliderTrack"];
 
@@ -2286,3 +2244,5 @@
     </script>
   </body>
 </html>
+```
+
