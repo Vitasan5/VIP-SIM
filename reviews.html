@@ -1,368 +1,671 @@
 <!DOCTYPE html>
 <html lang="ru">
-
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Отзывы — Vip-simka.Крым</title>
-    <link rel="stylesheet" href="css/style.css" />
+    <title>Отзывы | VIP-SIM.RU</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        
+        /* === СТРАНИЦА "ОТЗЫВЫ" === */
+        .reviews-section {
+            background-color: #ede6fa;
+            padding: 40px 16px;
+            font-family: Arial, sans-serif;
+            width: 100%;
+            box-sizing: border-box;
+            min-height: 100vh;
+        }
+
+        .reviews-section h2 {
+            text-align: center;
+            font-size: 22px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .review-form-container {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            padding: 24px;
+            text-align: center;
+            margin: 0 auto 30px;
+            width: 100%;
+            max-width: 500px;
+            box-sizing: border-box;
+        }
+
+        .review-form-container h3 {
+            margin: 0 0 16px;
+            color: #333;
+        }
+
+        .review-input {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+
+        .review-textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+            box-sizing: border-box;
+            height: 100px;
+            resize: vertical;
+            font-family: Arial, sans-serif;
+        }
+
+        .btn-submit {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 14px;
+            width: 100%;
+            margin-top: 10px;
+            transition: background 0.3s;
+        }
+
+        .btn-submit:hover {
+            background: #c0392b;
+        }
+
+        .btn-submit:disabled {
+            background: #cccccc;
+            cursor: not-allowed;
+        }
+
+        .review-hint {
+            font-size: 12px;
+            color: #777;
+            margin-top: 8px;
+        }
+
+        .reviews-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .review-card {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 100%;
+            max-width: calc(50% - 10px);
+            font-size: 14px;
+            line-height: 1.6;
+            color: #333;
+            box-sizing: border-box;
+        }
+
+        .review-callout {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            padding: 24px;
+            text-align: center;
+            font-size: 15px;
+            color: #333;
+            line-height: 1.7;
+            margin: 0 auto;
+            width: 100%;
+            max-width: 500px;
+            box-sizing: border-box;
+        }
+
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .reviewer-name {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .review-date {
+            font-size: 12px;
+            color: #777;
+        }
+
+        .review-rating {
+            color: #ffd700;
+            font-size: 16px;
+            margin: 5px 0;
+        }
+
+        .review-text {
+            color: #555;
+            line-height: 1.5;
+            margin-bottom: 10px;
+        }
+
+        .review-images {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .review-image {
+            width: 80px;
+            height: 80px;
+            border-radius: 6px;
+            object-fit: cover;
+            cursor: pointer;
+            border: 1px solid #ddd;
+        }
+
+        .review-image:hover {
+            opacity: 0.8;
+        }
+
+        .image-upload {
+            border: 2px dashed #ddd;
+            border-radius: 6px;
+            padding: 15px;
+            text-align: center;
+            margin: 10px 0;
+            cursor: pointer;
+            transition: border-color 0.3s;
+        }
+
+        .image-upload:hover {
+            border-color: #e74c3c;
+        }
+
+        .image-preview {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 10px 0;
+        }
+
+        .preview-item {
+            position: relative;
+            width: 80px;
+            height: 80px;
+        }
+
+        .preview-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 6px;
+            border: 1px solid #ddd;
+        }
+
+        .remove-image {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            font-size: 12px;
+            line-height: 1;
+        }
+
+        .back-btn {
+            background: #6c757d;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 6px;
+            display: inline-block;
+            margin-bottom: 20px;
+            font-size: 14px;
+            transition: background 0.3s;
+        }
+
+        .back-btn:hover {
+            background: #5a6268;
+        }
+
+        .loading {
+            opacity: 0.7;
+            pointer-events: none;
+        }
+
+        .char-count {
+            text-align: right;
+            font-size: 12px;
+            color: #777;
+            margin-top: 5px;
+        }
+
+        .success-message {
+            background: #d4edda;
+            color: #155724;
+            padding: 10px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            text-align: center;
+            display: none;
+        }
+
+        .image-modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.9);
+        }
+
+        .modal-content {
+            margin: auto;
+            display: block;
+            max-width: 90%;
+            max-height: 90%;
+            margin-top: 2%;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #fff;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* Адаптив */
+        @media (max-width: 600px) {
+            .review-card {
+                max-width: 100%;
+            }
+            
+            .reviews-section {
+                padding: 20px 10px;
+            }
+            
+            .review-image {
+                width: 60px;
+                height: 60px;
+            }
+            
+            .preview-item {
+                width: 60px;
+                height: 60px;
+            }
+        }
+    </style>
 </head>
-
 <body>
+    <!-- Модальное окно для просмотра изображений -->
+    <div id="imageModal" class="image-modal">
+        <span class="close-modal">&times;</span>
+        <img class="modal-content" id="modalImage">
+    </div>
 
-    <!-- Yandex.Metrika counter -->
-<script type="text/javascript">
-    (function(m,e,t,r,i,k,a){
-        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-        m[i].l=1*new Date();
-        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
-    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=104821156', 'ym');
+    <section class="reviews-section">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <a href="index.html" class="back-btn">← Назад в кабинет</a>
+            <h2>Отзывы наших клиентов</h2>
 
-    ym(104821156, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", accurateTrackBounce:true, trackLinks:true});
-</script>
-<noscript><div><img src="https://mc.yandex.ru/watch/104821156" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-<!-- /Yandex.Metrika counter -->
-
-    <!-- ШАПКА -->
-    <header>
-        <div class="logo">
-            <img src="img/logo.PNG" alt="VIP SIM">
-        </div>
-        <!-- Кнопка премиум-доступа-->
-  <a href="premium.html" class="premium-btn">⭐ Премиум-опции</a>
-        <nav>
-            <a href="index.html">Главная</a>
-            <a href="tariffs.html">Тарифы</a>
-            <a href="service.html">Сервис</a>
-            <a href="numbers.html">Красивые номера</a>
-            <a href="apple.html">Apple</a>
-            <a href="accessories.html">Аксессуары</a>
-            <a href="reviews.html">Отзывы</a>
-            <a href="news.html">Новости</a>
-        </nav>
-        <!-- Гамбургер-меню -->
-        <div class="menu-toggle" id="menuToggle">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-        <!-- Мобильное меню -->
-        <div class="mobile-menu" id="mobileMenu">
-            <a href="index.html">Главная</a>
-            <a href="tariffs.html">Тарифы</a>
-            <a href="service.html">Сервис</a>
-            <a href="numbers.html">Красивые номера</a>
-            <a href="apple.html">Apple</a>
-            <a href="accessories.html">Аксессуары</a>
-            <a href="reviews.html">Отзывы</a>
-            <a href="news.html">Новости</a>
-        </div>
-    </header>
-
-    <!-- ОБЩИЙ БЕЛЫЙ КОНТЕЙНЕР -->
-    <div class="page-wrapper">
-
-        <!-- БЛОК ОТЗЫВОВ С ФОНОМ #ede6fa -->
-        <section class="reviews-section">
-            <h2 class="left-align">Отзывы наших клиентов</h2>
-
-            <!-- Форма добавления (верхняя) -->
+            <!-- Форма добавления отзыва -->
             <div class="review-form-container">
-                <h3>Оставить отзыв</h3>
-                <input id="review-name-top" placeholder="Ваше имя" type="text" class="review-input">
-                <input id="review-city-top" placeholder="Ваш город" type="text" class="review-input">
-                <textarea id="review-text-top" placeholder="Ваш отзыв" rows="3" class="review-textarea"></textarea>
-                <button onclick="addReview('top')" class="btn-submit">Оставить отзыв</button>
-                <div id="review-hint-top" class="review-hint"></div>
+                <div class="success-message" id="successMessage">
+                    ✅ Ваш отзыв отправлен на модерацию! Спасибо!
+                </div>
+                
+                <h3>Оставьте ваш отзыв</h3>
+                <input type="text" class="review-input" id="reviewerName" placeholder="Ваше имя" maxlength="50">
+                <textarea class="review-textarea" id="reviewText" placeholder="Ваш отзыв..." maxlength="500"></textarea>
+                <div class="char-count"><span id="charCount">0</span>/500 символов</div>
+                
+                <!-- Загрузка изображений -->
+                <div class="image-upload" id="imageUploadArea">
+                    📷 Добавить фото (до 3 штук)
+                    <input type="file" id="imageInput" multiple accept="image/*" style="display: none;">
+                </div>
+                <div class="image-preview" id="imagePreview"></div>
+                
+                <button class="btn-submit" onclick="submitReview()" id="submitBtn">Отправить отзыв</button>
+                <div class="review-hint">Все отзывы проходят модерацию перед публикацией</div>
             </div>
 
             <!-- Список отзывов -->
-            <div id="reviews-list" class="reviews-grid"></div>
-
-            <!-- Форма добавления (нижняя) -->
-            <div class="review-form-container">
-                <h3>Оставить отзыв</h3>
-                <input id="review-name-bottom" placeholder="Ваше имя" type="text" class="review-input">
-                <input id="review-city-bottom" placeholder="Ваш город" type="text" class="review-input">
-                <textarea id="review-text-bottom" placeholder="Ваш отзыв" rows="3" class="review-textarea"></textarea>
-                <button onclick="addReview('bottom')" class="btn-submit">Оставить отзыв</button>
-                <div id="review-hint-bottom" class="review-hint"></div>
+            <div class="reviews-grid" id="reviewsList">
+                <!-- Отзывы будут загружены здесь -->
             </div>
 
-            <!-- Призыв -->
+            <!-- Призыв к действию -->
             <div class="review-callout">
-                <p>
-                    <strong>Если Вы наш клиент, мы предлагаем разместить здесь информацию о Вас или Вашем бизнесе. ЭТО
-                        БЕСПЛАТНО!</strong><br>
-                    Если Вас заинтересовало это предложение, сообщите нам об этом.
-                </p>
-            </div>
-        </section>
-
-    </div> <!-- конец page-wrapper -->
-
-    <!-- ПОДВАЛ -->
-    <footer class="site-footer">
-        <div class="footer-container">
-            <div class="footer-col">
-                <img src="img/logo.PNG" alt="Логотип Vip-simka" style="width: 120px; margin-bottom: 15px;">
-                <div class="share-container">
-                    <button onclick="sharePage()" class="share-btn">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4nyxhOq62ylFOpeWtfM9pfbieq0slJSmlUHJQz8-1Ry-f5bkXOwbzAYgVoYnuiaayV7Y&usqp=CAU"
-                            alt="Поделиться" class="share-icon">
-                        Поделиться с друзьями
-                    </button>
-                </div>
-                
-            </div>
-            <div class="footer-col">
-                <p class="footer-text">
-                    <strong>Уважаемые клиенты!</strong>
-                    <br><br>
-                    С 1 июня 2018 г. в соответствии с поправками в Федеральном законе “О связи” 126-ФЗ, продажа и
-                    активация SIM-карт возможна только по паспорту.
-                    <br><br>
-                    <a href="https://vip-simka.jimdofree.com/%D0%B7%D0%B0%D0%BA%D0%BE%D0%BD-%D0%BE-%D1%81%D0%B2%D1%8F%D0%B7%D0%B8/"
-                        target="_blank" class="footer-link">Подробнее...</a>
-                </p>
-                <p class="footer-disclaimer">
-                    Информационные материалы и цены, размещенные на сайте, не являются публичной офертой.
-                    <br><br>
-                    <strong>⚠️ Наш ресурс и наши консультанты не несут ответственности за изменения условий обслуживания
-                        абонентов со стороны операторов связи или компаний, их представляющих.</strong>
-                </p>
-            </div>
-            <div class="footer-col">
-                <h4 class="footer-title">Наши контакты:</h4>
-                <p class="contact-number">
-                    <strong>Max / Telegram / WhatsApp</strong><br>
-                    +7 991 555 666 3 (24/7)
-                </p>
-                <p class="footer-warning">
-                    <strong>ВАЖНО!</strong><br>
-                    Другие контакты не имеют отношения к нашему сайту, и мы не несем ответственности за действия третьих
-                    лиц, ссылающихся на наш сайт.
-                </p>
+                💫 Присоединяйтесь к нашим довольным клиентам!<br>
+                Оставьте свой отзыв и помогите другим сделать правильный выбор.
             </div>
         </div>
-    </footer>
+    </section>
 
-    <!-- КНОПКА "НАВЕРХ" -->
-    <a href="#" id="scrollToTop" class="scroll-to-top">▲</a>
-
-    <!-- ПЛАВАЮЩАЯ КНОПКА "СВЯЗЬ" -->
-    <div class="contact-float">
-        <div class="contact-wrapper">
-            <div class="contact-toggle">Мы на связи</div>
-            <div class="contact-menu">
-                <a href="https://wa.me/79915556663" target="_blank" title="WhatsApp" class="contact-link">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp"
-                        class="contact-icon">
-                </a>
-                <a href="https://t.me/vipsimka82" target="_blank" title="Telegram" class="contact-link">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram"
-                        class="contact-icon">
-                </a>
-                <a href="mailto:vip.simki@vk.com" title="Email" class="contact-link">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/4/4e/Gmail_Icon.png" alt="Email"
-                        class="contact-icon">
-                </a>
-                <a href="https://instagram.com/_vipsimka" target="_blank" title="Instagram" class="contact-link">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram"
-                        class="contact-icon">
-                </a>
-                <a href="https://facebook.com/vitalij.san.658372" target="_blank" title="Facebook" class="contact-link">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_(2019).svg"
-                        alt="Facebook" class="contact-icon">
-                </a>
-                <a href="https://vk.com/vip.simki" target="_blank" title="VK" class="contact-link">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/2/21/VK.com-logo.svg" alt="VK"
-                        class="contact-icon">
-                </a>
-            </div>
-        </div>
-    </div>
-
-    <!-- ЕДИНЫЙ JS -->
-    <script src="js/script.js"></script>
-
-    <!-- СКРИПТ ОТЗЫВОВ -->
     <script>
-        /* === Настройки === */
-        var API_URL = "https://script.google.com/macros/s/AKfycbx8TgCDQNctgDzJu9Uzr62wFlhwcggEaPXEnk1_AMCgEHDiyqEnNr8BNY8ybCqSGG_XsQ/exec";
-        var LOCAL_STORAGE_KEY = "user_reviews";
+        // Конфигурация JSONBIN
+        const REVIEWS_BIN_ID = '69010b95d0ea881f40c2d59d';
+        const JSONBIN_MASTER_KEY = '$2a$10$h2nqVPwwIv04XRDJNXhHJuedTYrRgG9tIX5HbvnfiWo/BE3sWbxxW';
+        const JSONBIN_BASE_URL = 'https://api.jsonbin.io/v3/b';
 
-        /* === Утилиты === */
-        function jsonpCall(paramsObj) {
-            return new Promise(function (resolve, reject) {
-                var cbName = "jsonp_cb_" + Date.now() + "_" + Math.floor(Math.random() * 100000);
-                window[cbName] = function (data) {
-                    resolve(data);
-                    cleanup();
-                };
-                function cleanup() {
-                    try { delete window[cbName]; } catch (e) { window[cbName] = undefined; }
-                    if (script && script.parentNode) script.parentNode.removeChild(script);
-                    if (timeout) clearTimeout(timeout);
-                }
-                var qs = Object.keys(paramsObj).map(function (k) {
-                    return encodeURIComponent(k) + "=" + encodeURIComponent(paramsObj[k]);
-                }).join("&");
-                var script = document.createElement("script");
-                script.src = API_URL + "?" + qs + "&callback=" + cbName;
-                script.onerror = function () { reject(new Error("Network error")); cleanup(); };
-                document.body.appendChild(script);
-                var timeout = setTimeout(function () { reject(new Error("Timeout")); cleanup(); }, 15000);
-            });
-        }
+        // Переменные для хранения данных
+        let selectedImages = [];
 
-        function createReviewElement(review) {
-            var wrap = document.createElement('div');
-            wrap.className = 'review-card';
-
-            var p = document.createElement('p');
-            p.style.margin = "0";
-            p.style.fontStyle = "italic";
-            p.textContent = review.text || '';
-
-            var meta = document.createElement('div');
-            meta.style.cssText = "margin-top:12px;font-weight:bold;color:#e74c3c;text-align:right;";
-
-            var who = document.createElement('div');
-            who.textContent = "— " + (review.name || "Аноним") + (review.city ? ", " + review.city : "");
-
-            var small = document.createElement('small');
-            small.style.color = "#777";
-            small.textContent = review.date || '';
-
-            meta.appendChild(who);
-            meta.appendChild(small);
-
-            wrap.appendChild(p);
-            wrap.appendChild(meta);
-            return wrap;
-        }
-
-        function parseRuDate(d) {
-            if (!d) return new Date(0);
-            var parts = d.split('.');
-            if (parts.length !== 3) return new Date(0);
-            return new Date(+parts[2], parts[1] - 1, +parts[0]);
-        }
-
-        function formatDate(date) {
-            var day = date.getDate();
-            var month = date.getMonth() + 1;
-            var year = date.getFullYear();
-            return (day < 10 ? '0' : '') + day + '.' + (month < 10 ? '0' : '') + month + '.' + year;
-        }
-
-        /* === Работа с отзывами === */
-        async function loadReviews() {
-            try {
-                var serverData = await jsonpCall({ action: "list", t: Date.now() });
-                var localReviews = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY) || "[]");
-                var allReviews = Array.isArray(serverData) ? serverData.concat(localReviews) : localReviews;
-                allReviews.sort(function (a, b) {
-                    return parseRuDate(b.date) - parseRuDate(a.date);
-                });
-
-                var list = document.getElementById('reviews-list');
-                list.innerHTML = '';
-                allReviews.forEach(function (r) {
-                    list.appendChild(createReviewElement(r));
-                });
-
-            } catch (e) {
-                console.error("Ошибка загрузки:", e);
-                document.getElementById('review-hint-top').textContent = "Не удалось загрузить отзывы. Попробуйте обновить страницу.";
-                document.getElementById('review-hint-bottom').textContent = "Не удалось загрузить отзывы. Попробуйте обновить страницу.";
-            }
-        }
-
-        async function addReview(position) {
-            var name = (document.getElementById('review-name-' + position).value || '').trim() || "Аноним";
-            var city = (document.getElementById('review-city-' + position).value || '').trim();
-            var text = (document.getElementById('review-text-' + position).value || '').trim();
-
-            if (!text) { alert("Введите отзыв"); return; }
-
-            var hintTop = document.getElementById('review-hint-top');
-            var hintBottom = document.getElementById('review-hint-bottom');
-            hintTop.textContent = "Отправка...";
-            hintBottom.textContent = "Отправка...";
-
-            try {
-                var newReview = {
-                    name: name,
-                    city: city,
-                    text: text,
-                    date: formatDate(new Date())
-                };
-
-                var localReviews = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY) || "[]");
-                localReviews.unshift(newReview);
-                localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(localReviews));
-
-                var list = document.getElementById('reviews-list');
-                var newReviewElement = createReviewElement(newReview);
-                if (list.firstChild) {
-                    list.insertBefore(newReviewElement, list.firstChild);
-                } else {
-                    list.appendChild(newReviewElement);
-                }
-
-                try {
-                    var result = await jsonpCall({
-                        action: "add",
-                        name: name,
-                        city: city,
-                        text: text,
-                        t: Date.now()
-                    });
-                    if (result && result.status === 'success') {
-                        setTimeout(loadReviews, 500);
-                    }
-                } catch (e) {
-                    console.error("Ошибка отправки на сервер:", e);
-                }
-
-                document.getElementById('review-name-top').value = '';
-                document.getElementById('review-city-top').value = '';
-                document.getElementById('review-text-top').value = '';
-                document.getElementById('review-name-bottom').value = '';
-                document.getElementById('review-city-bottom').value = '';
-                document.getElementById('review-text-bottom').value = '';
-
-                hintTop.textContent = "Спасибо! Отзыв сохранён.";
-                hintBottom.textContent = "Спасибо! Отзыв сохранён.";
-
-            } catch (e) {
-                hintTop.textContent = "Ошибка сохранения. Попробуйте ещё раз.";
-                hintBottom.textContent = "Ошибка сохранения. Попробуйте ещё раз.";
-                console.error(e);
-            }
-        }
-
-        function handleResize() {
-            var cards = document.querySelectorAll('#reviews-list > div');
-            cards.forEach(function (card) {
-                if (window.matchMedia("(max-width: 600px)").matches) {
-                    card.style.maxWidth = "100%";
-                } else {
-                    card.style.maxWidth = "calc(50% - 10px)";
-                }
-            });
-        }
-
-        document.addEventListener('DOMContentLoaded', function () {
+        // Инициализация
+        document.addEventListener('DOMContentLoaded', function() {
+            initImageUpload();
+            initModal();
             loadReviews();
-            window.addEventListener('resize', handleResize);
+            
+            // Счетчик символов
+            document.getElementById('reviewText').addEventListener('input', function() {
+                document.getElementById('charCount').textContent = this.value.length;
+            });
         });
+
+        // Инициализация загрузки изображений
+        function initImageUpload() {
+            const uploadArea = document.getElementById('imageUploadArea');
+            const fileInput = document.getElementById('imageInput');
+
+            uploadArea.addEventListener('click', () => fileInput.click());
+            
+            uploadArea.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                uploadArea.style.backgroundColor = '#f8f9fa';
+            });
+            
+            uploadArea.addEventListener('dragleave', () => {
+                uploadArea.style.backgroundColor = '';
+            });
+            
+            uploadArea.addEventListener('drop', (e) => {
+                e.preventDefault();
+                uploadArea.style.backgroundColor = '';
+                handleImageFiles(e.dataTransfer.files);
+            });
+            
+            fileInput.addEventListener('change', (e) => {
+                handleImageFiles(e.target.files);
+            });
+        }
+
+        function handleImageFiles(files) {
+            const maxImages = 3;
+            const remainingSlots = maxImages - selectedImages.length;
+            
+            if (files.length > remainingSlots) {
+                alert(`Можно загрузить не более ${maxImages} изображений. У вас осталось ${remainingSlots} слотов.`);
+                return;
+            }
+
+            for (let i = 0; i < Math.min(files.length, remainingSlots); i++) {
+                const file = files[i];
+                
+                // Проверка типа файла
+                if (!file.type.startsWith('image/')) {
+                    alert('Пожалуйста, загружайте только изображения');
+                    continue;
+                }
+                
+                // Проверка размера (макс 2MB)
+                if (file.size > 2 * 1024 * 1024) {
+                    alert('Размер изображения не должен превышать 2MB');
+                    continue;
+                }
+
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    selectedImages.push(e.target.result);
+                    updateImagePreview();
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function updateImagePreview() {
+            const preview = document.getElementById('imagePreview');
+            preview.innerHTML = '';
+            
+            selectedImages.forEach((image, index) => {
+                const previewItem = document.createElement('div');
+                previewItem.className = 'preview-item';
+                previewItem.innerHTML = `
+                    <img src="${image}" alt="Preview ${index + 1}">
+                    <button type="button" class="remove-image" onclick="removeImage(${index})">×</button>
+                `;
+                preview.appendChild(previewItem);
+            });
+        }
+
+        function removeImage(index) {
+            selectedImages.splice(index, 1);
+            updateImagePreview();
+        }
+
+        // Модальное окно для изображений
+        function initModal() {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            const closeBtn = document.querySelector('.close-modal');
+
+            closeBtn.onclick = function() {
+                modal.style.display = 'none';
+            }
+
+            modal.onclick = function(event) {
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                }
+            }
+        }
+
+        function openImageModal(src) {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            modal.style.display = 'block';
+            modalImg.src = src;
+        }
+
+        // Работа с JSONBIN
+        async function getReviews() {
+            try {
+                const response = await fetch(`${JSONBIN_BASE_URL}/${REVIEWS_BIN_ID}/latest`, {
+                    headers: {
+                        'X-Master-Key': JSONBIN_MASTER_KEY
+                    }
+                });
+                
+                if (!response.ok) throw new Error('Ошибка загрузки отзывов');
+                
+                const data = await response.json();
+                return data.record.reviews || [];
+            } catch (error) {
+                console.error('Ошибка загрузки:', error);
+                return [];
+            }
+        }
+
+        async function saveReviews(reviews) {
+            try {
+                const response = await fetch(`${JSONBIN_BASE_URL}/${REVIEWS_BIN_ID}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-Master-Key': JSONBIN_MASTER_KEY
+                    },
+                    body: JSON.stringify({ reviews })
+                });
+                
+                return response.ok;
+            } catch (error) {
+                console.error('Ошибка сохранения:', error);
+                return false;
+            }
+        }
+
+        // Загрузка и отображение отзывов
+        async function loadReviews() {
+            document.body.classList.add('loading');
+            
+            try {
+                const reviews = await getReviews();
+                displayReviews(reviews);
+            } catch (error) {
+                document.getElementById('reviewsList').innerHTML = `
+                    <div style="text-align: center; color: #666; width: 100%; padding: 40px;">
+                        Ошибка загрузки отзывов
+                    </div>
+                `;
+            } finally {
+                document.body.classList.remove('loading');
+            }
+        }
+
+        function displayReviews(reviews) {
+            const reviewsList = document.getElementById('reviewsList');
+            
+            // Сортируем по дате (новые сверху)
+            const sortedReviews = reviews
+                .filter(review => review.status === 'approved')
+                .sort((a, b) => new Date(b.date) - new Date(a.date));
+
+            if (sortedReviews.length === 0) {
+                reviewsList.innerHTML = `
+                    <div style="text-align: center; color: #666; width: 100%; padding: 40px;">
+                        Пока нет отзывов. Будьте первым!
+                    </div>
+                `;
+                return;
+            }
+
+            reviewsList.innerHTML = sortedReviews.map(review => `
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="reviewer-name">${escapeHtml(review.clientName)}</div>
+                        <div class="review-date">${formatDate(review.date)}</div>
+                    </div>
+                    <div class="review-rating">${'★'.repeat(review.rating)}</div>
+                    <div class="review-text">${escapeHtml(review.text)}</div>
+                    
+                    ${review.images && review.images.length > 0 ? `
+                        <div class="review-images">
+                            ${review.images.map((img, index) => `
+                                <img src="${img}" class="review-image" 
+                                     onclick="openImageModal('${img}')" 
+                                     alt="Фото отзыва ${index + 1}">
+                            `).join('')}
+                        </div>
+                    ` : ''}
+                </div>
+            `).join('');
+        }
+
+        // Отправка отзыва
+        async function submitReview() {
+            const name = document.getElementById('reviewerName').value.trim();
+            const text = document.getElementById('reviewText').value.trim();
+            const submitBtn = document.getElementById('submitBtn');
+
+            if (!name) {
+                alert('Пожалуйста, введите ваше имя');
+                return;
+            }
+
+            if (!text) {
+                alert('Пожалуйста, напишите текст отзыва');
+                return;
+            }
+
+            document.body.classList.add('loading');
+            submitBtn.disabled = true;
+
+            try {
+                const reviews = await getReviews();
+                
+                const newReview = {
+                    id: 'rev_' + Date.now(),
+                    clientName: name,
+                    rating: 5,
+                    text: text,
+                    images: selectedImages,
+                    date: new Date().toISOString(),
+                    status: 'pending'
+                };
+
+                const updatedReviews = [newReview, ...reviews];
+                const success = await saveReviews(updatedReviews);
+
+                if (success) {
+                    // Очищаем форму
+                    document.getElementById('reviewerName').value = '';
+                    document.getElementById('reviewText').value = '';
+                    document.getElementById('charCount').textContent = '0';
+                    selectedImages = [];
+                    updateImagePreview();
+                    
+                    // Показываем сообщение об успехе
+                    const successMessage = document.getElementById('successMessage');
+                    successMessage.style.display = 'block';
+                    setTimeout(() => {
+                        successMessage.style.display = 'none';
+                    }, 5000);
+                    
+                    // Обновляем список отзывов
+                    loadReviews();
+                } else {
+                    alert('❌ Ошибка отправки отзыва');
+                }
+            } catch (error) {
+                alert('❌ Ошибка соединения');
+            } finally {
+                document.body.classList.remove('loading');
+                submitBtn.disabled = false;
+            }
+        }
+
+        // Вспомогательные функции
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('ru-RU', {
+                day: '2-digit',
+                month: '2-digit',
+                year: 'numeric'
+            });
+        }
     </script>
 </body>
-
-
 </html>
-
