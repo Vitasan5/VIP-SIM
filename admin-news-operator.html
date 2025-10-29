@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Админка новостей операторов</title>
+    <style>
+        .admin-news-form {
+            background: white;
+            border-radius: 16px;
+            padding: 25px;
+            margin: 20px 0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .admin-news-form h3 {
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .news-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .form-group label {
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #333;
+        }
+        
+        .form-group input,
+        .form-group select {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+        
+        .form-actions {
+            grid-column: 1 / -1;
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .save-btn {
+            padding: 12px 30px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .save-btn:hover {
+            background: #45a049;
+            transform: translateY(-2px);
+        }
+        
+        .reset-btn {
+            padding: 12px 30px;
+            background: #ff9800;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .reset-btn:hover {
+            background: #e68900;
+            transform: translateY(-2px);
+        }
+        
+        .debug-btn {
+            padding: 12px 30px;
+            background: #9c27b0;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .debug-btn:hover {
+            background: #7b1fa2;
+            transform: translateY(-2px);
+        }
+        
+        .check-btn {
+            padding: 12px 30px;
+            background: #2196F3;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .check-btn:hover {
+            background: #1976D2;
+            transform: translateY(-2px);
+        }
+        
+        .status-message {
+            padding: 10px;
+            border-radius: 8px;
+            margin-top: 10px;
+            text-align: center;
+            font-weight: 600;
+        }
+        
+        .status-success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .status-error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        #debugInfo {
+            display: none;
+            margin-top: 20px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border: 1px solid #dee2e6;
+            font-family: monospace;
+            font-size: 12px;
+            white-space: pre-wrap;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        @media (max-width: 768px) {
+            .news-form {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-news-form">
+        <h3>📝 Добавление новостей операторов</h3>
+        
+        <div class="news-form">
+            <div class="form-group">
+                <label for="operatorSelect">Оператор:</label>
+                <select id="operatorSelect">
+                    <option value="mts">МТС</option>
+                    <option value="volna">Волна</option>
+                    <option value="win">Вин</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="newsTitle">Заголовок новости:</label>
+                <input type="text" id="newsTitle" placeholder="Введите заголовок новости" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="newsLink">Ссылка (опционально):</label>
+                <input type="text" id="newsLink" placeholder="https://example.com">
+            </div>
+            
+            <div class="form-group">
+                <label for="newsDate">Дата:</label>
+                <input type="text" id="newsDate" placeholder="29.10.2025" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="newsCategory">Категория (опционально):</label>
+                <input type="text" id="newsCategory" placeholder="Акция, Технологии, Сеть">
+            </div>
+            
+            <div class="form-group">
+                <label for="newsBadge">Бейдж (опционально):</label>
+                <select id="newsBadge">
+                    <option value="">Нет бейджа</option>
+                    <option value="НОВОЕ">НОВОЕ</option>
+                    <option value="ОБНОВЛЕНИЕ">ОБНОВЛЕНИЕ</option>
+                    <option value="ВАЖНО">ВАЖНО</option>
+                </select>
+            </div>
+            
+            <div class="form-actions">
+                <button class="save-btn" onclick="addNews()">💾 Добавить новость</button>
+                <button class="reset-btn" onclick="resetNewsForm()">🔄 Сбросить форму</button>
+                <button class="check-btn" onclick="checkCurrentNews()">🔍 Проверить данные</button>
+                <button class="debug-btn" onclick="toggleDebug()">🐛 Отладка</button>
+            </div>
+        </div>
+        
+        <div id="newsStatusMessage"></div>
+        <div id="debugInfo"></div>
+    </div>
+
+    <script>
+        // Конфигурация JSONBin для админки
+        const ADMIN_NEWS_CONFIG = {
+            BIN_ID: '68f7d602ae596e708f224741',
+            MASTER_KEY: '$2a$10$h2nqVPwwIv04XRDJNXhHJuedTYrRgG9tIX5HbvnfiWo/BE3sWbxxW',
+            BASE_URL: 'https://api.jsonbin.io/v3/b'
+        };
+
+        // Переменная для отладки
+        let debugData = {};
+
+        // Проверка текущих данных
+        async function checkCurrentNews() {
+            try {
+                showNewsStatus('⏳ Проверяем текущие данные...', 'success');
+                
+                const response = await fetch(`${ADMIN_NEWS_CONFIG.BASE_URL}/${ADMIN_NEWS_CONFIG.BIN_ID}/latest`, {
+                    headers: {
+                        'X-Master-Key': ADMIN_NEWS_CONFIG.MASTER_KEY
+                    }
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`Ошибка загрузки: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                
+                // Показываем текущие данные
+                document.getElementById('debugInfo').style.display = 'block';
+                document.getElementById('debugInfo').innerHTML = 
+                    'ТЕКУЩИЕ ДАННЫЕ В JSONBIN:\n\n' + 
+                    JSON.stringify(data.record, null, 2) +
+                    '\n\nМЕТАДАННЫЕ:\n' +
+                    JSON.stringify({
+                        binId: data.metadata?.id,
+                        createdAt: data.metadata?.createdAt,
+                        updatedAt: data.metadata?.updatedAt
+                    }, null, 2);
+                    
+            } catch (error) {
+                console.error('Ошибка проверки:', error);
+                showNewsStatus('❌ Ошибка проверки данных: ' + error.message, 'error');
+            }
+        }
+
+        // Добавление новой новости
+        async function addNews() {
+            const operator = document.getElementById('operatorSelect').value;
+            const title = document.getElementById('newsTitle').value.trim();
+            const link = document.getElementById('newsLink').value.trim();
+            const date = document.getElementById('newsDate').value.trim();
+            const category = document.getElementById('newsCategory').value.trim();
+            const badge = document.getElementById('newsBadge').value;
+
+            if (!title || !date) {
+                showNewsStatus('❌ Заполните обязательные поля: заголовок и дата', 'error');
+                return;
+            }
+
+            // Сбрасываем отладочные данные
+            debugData = {
+                startTime: new Date().toISOString(),
+                formData: { operator, title, link, date, category, badge }
+            };
+
+            try {
+                showNewsStatus('⏳ Добавляем новость...', 'success');
+                
+                // Шаг 1: Загружаем текущие новости
+                debugData.step1 = 'Загрузка текущих данных';
+                const response = await fetch(`${ADMIN_NEWS_CONFIG.BASE_URL}/${ADMIN_NEWS_CONFIG.BIN_ID}/latest`, {
+                    headers: {
+                        'X-Master-Key': ADMIN_NEWS_CONFIG.MASTER_KEY
+                    }
+                });
+                
+                debugData.step1_response = {
+                    status: response.status,
+                    ok: response.ok,
+                    statusText: response.statusText
+                };
+                
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    debugData.step1_error = errorText;
+                    throw new Error(`Ошибка загрузки: ${response.status} ${errorText}`);
+                }
+                
+                const data = await response.json();
+                debugData.step1_data = data;
+                debugData.currentRecord = data.record;
+                
+                const currentNews = data.record || {};
+                
+                // Шаг 2: Создаем новую новость
+                const newNewsItem = {
+                    title,
+                    link: link || '#',
+                    date,
+                    category: category || '',
+                    badge: badge || ''
+                };
+
+                debugData.newNewsItem = newNewsItem;
+
+                // Шаг 3: Добавляем в массив оператора
+                if (!currentNews[operator]) {
+                    currentNews[operator] = [];
+                }
+                
+                currentNews[operator].unshift(newNewsItem);
+                
+                // Ограничиваем количество новостей
+                if (currentNews[operator].length > 10) {
+                    currentNews[operator] = currentNews[operator].slice(0, 10);
+                }
+
+                debugData.finalData = currentNews;
+
+                // Шаг 4: Сохраняем обновленные новости
+                debugData.step4 = 'Сохранение данных';
+                const saveResponse = await fetch(`${ADMIN_NEWS_CONFIG.BASE_URL}/${ADMIN_NEWS_CONFIG.BIN_ID}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-Master-Key': ADMIN_NEWS_CONFIG.MASTER_KEY
+                    },
+                    body: JSON.stringify(currentNews)
+                });
+
+                debugData.step4_response = {
+                    status: saveResponse.status,
+                    ok: saveResponse.ok,
+                    statusText: saveResponse.statusText
+                };
+
+                if (saveResponse.ok) {
+                    const saveResult = await saveResponse.json();
+                    debugData.step4_result = saveResult;
+                    
+                    // Шаг 5: Проверяем, что данные действительно сохранились
+                    debugData.step5 = 'Проверка сохранения';
+                    const verifyResponse = await fetch(`${ADMIN_NEWS_CONFIG.BASE_URL}/${ADMIN_NEWS_CONFIG.BIN_ID}/latest`, {
+                        headers: {
+                            'X-Master-Key': ADMIN_NEWS_CONFIG.MASTER_KEY
+                        }
+                    });
+                    
+                    if (verifyResponse.ok) {
+                        const verifiedData = await verifyResponse.json();
+                        debugData.verifiedData = verifiedData.record;
+                        
+                        // Проверяем, добавилась ли наша новость
+                        const hasNewNews = verifiedData.record?.[operator]?.some(news => 
+                            news.title === title && news.date === date
+                        );
+                        
+                        debugData.verification = {
+                            hasNewNews: hasNewNews,
+                            operatorNewsCount: verifiedData.record?.[operator]?.length || 0
+                        };
+                        
+                        if (hasNewNews) {
+                            showNewsStatus('✅ Новость успешно добавлена и проверена!', 'success');
+                            resetNewsForm();
+                        } else {
+                            showNewsStatus('⚠️ Новость не найдена после сохранения', 'error');
+                        }
+                    } else {
+                        debugData.verificationError = 'Не удалось проверить сохранение';
+                        showNewsStatus('✅ Новость добавлена (проверка не удалась)', 'success');
+                        resetNewsForm();
+                    }
+                } else {
+                    const errorText = await saveResponse.text();
+                    debugData.step4_error = errorText;
+                    throw new Error(`Ошибка сохранения: ${saveResponse.status} ${errorText}`);
+                }
+                
+            } catch (error) {
+                console.error('Ошибка добавления новости:', error);
+                debugData.error = {
+                    message: error.message,
+                    stack: error.stack
+                };
+                
+                showNewsStatus('❌ Ошибка при добавлении новости: ' + error.message, 'error');
+                
+                // Показываем отладочную информацию при ошибке
+                document.getElementById('debugInfo').style.display = 'block';
+                document.getElementById('debugInfo').innerHTML = JSON.stringify(debugData, null, 2);
+            }
+        }
+
+        // Сброс формы
+        function resetNewsForm() {
+            document.getElementById('newsTitle').value = '';
+            document.getElementById('newsLink').value = '';
+            document.getElementById('newsDate').value = '';
+            document.getElementById('newsCategory').value = '';
+            document.getElementById('newsBadge').value = '';
+        }
+
+        // Показать статус сообщение
+        function showNewsStatus(message, type) {
+            const statusElement = document.getElementById('newsStatusMessage');
+            statusElement.textContent = message;
+            statusElement.className = `status-message status-${type}`;
+        }
+
+        // Переключение отладочной информации
+        function toggleDebug() {
+            const debugInfo = document.getElementById('debugInfo');
+            if (debugInfo.style.display === 'none' || debugInfo.style.display === '') {
+                debugInfo.style.display = 'block';
+                debugInfo.innerHTML = JSON.stringify(debugData, null, 2);
+            } else {
+                debugInfo.style.display = 'none';
+            }
+        }
+
+        // Устанавливаем сегодняшнюю дату по умолчанию
+        document.addEventListener('DOMContentLoaded', function() {
+            const today = new Date();
+            const formattedDate = `${today.getDate().toString().padStart(2, '0')}.${(today.getMonth() + 1).toString().padStart(2, '0')}.${today.getFullYear()}`;
+            document.getElementById('newsDate').value = formattedDate;
+            
+            // Инициализируем отладочные данные
+            debugData = {
+                initialized: new Date().toISOString(),
+                config: ADMIN_NEWS_CONFIG
+            };
+        });
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+<!-- Форма удаления новостей операторов -->
+<div class="admin-news-form" style="margin-top: 30px; border: 2px solid #dc3545; background: #fff5f5;">
+    <h3 style="color: #dc3545; text-align: center; margin-bottom: 20px;">🗑️ Удаление новостей операторов</h3>
+    
+    <div class="news-form">
+        <div class="form-group">
+            <label for="deleteOperatorSelect">Оператор:</label>
+            <select id="deleteOperatorSelect" onchange="loadOperatorNews()">
+                <option value="mts">МТС</option>
+                <option value="volna">Волна</option>
+                <option value="win">Вин</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="deleteNewsSelect">Выберите новость для удаления:</label>
+            <select id="deleteNewsSelect" style="height: 150px;" multiple>
+                <option value="">Загрузка новостей...</option>
+            </select>
+            <div style="font-size: 12px; color: #666; margin-top: 5px;">
+                🖱️ Для выбора нескольких новостей удерживайте Ctrl
+            </div>
+        </div>
+    </div>
+
+    <div id="operatorNewsInfo" style="margin: 15px 0; padding: 10px; background: white; border-radius: 8px; border: 1px solid #ddd;">
+        <!-- Информация о новостях будет здесь -->
+    </div>
+    
+    <div class="form-actions">
+        <button class="refresh-btn" onclick="loadOperatorNews()" style="background: #17a2b8;">
+            🔄 Обновить список
+        </button>
+        <button class="delete-btn" onclick="deleteSelectedNews()">
+            🗑️ Удалить выбранные
+        </button>
+        <button class="delete-all-btn" onclick="deleteAllOperatorNews()" style="background: #dc3545;">
+            💥 Удалить все новости оператора
+        </button>
+    </div>
+    
+    <div id="deleteStatusMessage"></div>
+</div>
+
+<style>
+    .refresh-btn {
+        padding: 12px 20px;
+        background: #17a2b8;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+    
+    .refresh-btn:hover {
+        background: #138496;
+        transform: translateY(-2px);
+    }
+    
+    .delete-btn {
+        padding: 12px 20px;
+        background: #ffc107;
+        color: #212529;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+    
+    .delete-btn:hover {
+        background: #e0a800;
+        transform: translateY(-2px);
+    }
+    
+    .delete-all-btn {
+        padding: 12px 20px;
+        background: #dc3545;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+    
+    .delete-all-btn:hover {
+        background: #c82333;
+        transform: translateY(-2px);
+    }
+    
+    .news-item-option {
+        padding: 8px;
+        border-bottom: 1px solid #eee;
+        cursor: pointer;
+    }
+    
+    .news-item-option:hover {
+        background: #f8f9fa;
+    }
+    
+    .news-item-title {
+        font-weight: 600;
+        display: block;
+        margin-bottom: 4px;
+    }
+    
+    .news-item-meta {
+        font-size: 11px;
+        color: #666;
+        display: block;
+    }
+    
+    .badge-preview {
+        background: #ff4444;
+        color: white;
+        padding: 1px 6px;
+        border-radius: 10px;
+        font-size: 9px;
+        font-weight: bold;
+        margin-left: 5px;
+    }
+</style>
+
+<script>
+// Загрузка новостей оператора для удаления
+async function loadOperatorNews() {
+    const operator = document.getElementById('deleteOperatorSelect').value;
+    const operatorNames = {
+        'mts': 'МТС',
+        'volna': 'Волна', 
+        'win': 'Вин'
+    };
+    
+    try {
+        showDeleteStatus('⏳ Загружаем новости оператора...', 'success');
+        
+        const response = await fetch(`${ADMIN_NEWS_CONFIG.BASE_URL}/${ADMIN_NEWS_CONFIG.BIN_ID}/latest`, {
+            headers: {
+                'X-Master-Key': ADMIN_NEWS_CONFIG.MASTER_KEY
+            }
+        });
+        
+        if (!response.ok) throw new Error('Ошибка загрузки новостей');
+        
+        const data = await response.json();
+        const currentNews = data.record || {};
+        const operatorNews = currentNews[operator] || [];
+        
+        updateNewsSelect(operator, operatorNews);
+        updateNewsInfo(operatorNames[operator], operatorNews);
+        
+    } catch (error) {
+        console.error('Ошибка загрузки новостей оператора:', error);
+        showDeleteStatus('❌ Ошибка загрузки новостей: ' + error.message, 'error');
+    }
+}
+
+// Обновление select с новостями
+function updateNewsSelect(operator, newsData) {
+    const select = document.getElementById('deleteNewsSelect');
+    
+    if (!newsData || newsData.length === 0) {
+        select.innerHTML = '<option value="">Нет новостей для удаления</option>';
+        return;
+    }
+    
+    let html = '';
+    newsData.forEach((news, index) => {
+        const title = news.title.length > 80 ? news.title.substring(0, 80) + '...' : news.title;
+        const badge = news.badge ? `<span class="badge-preview">${news.badge}</span>` : '';
+        
+        html += `
+            <option value="${index}" class="news-item-option">
+                <span class="news-item-title">${title}${badge}</span>
+                <span class="news-item-meta">📅 ${news.date} | 📁 ${news.category || 'Без категории'}</span>
+            </option>
+        `;
+    });
+    
+    select.innerHTML = html;
+}
+
+// Обновление информации о новостях
+function updateNewsInfo(operatorName, newsData) {
+    const infoDiv = document.getElementById('operatorNewsInfo');
+    
+    if (!newsData || newsData.length === 0) {
+        infoDiv.innerHTML = `
+            <div style="text-align: center; color: #666;">
+                <p style="font-size: 16px; margin-bottom: 10px;">📭 Нет новостей у оператора "${operatorName}"</p>
+                <p style="font-size: 14px; color: #888;">Добавьте новости через форму выше</p>
+            </div>
+        `;
+        return;
+    }
+    
+    const withBadge = newsData.filter(news => news.badge).length;
+    const withCategory = newsData.filter(news => news.category).length;
+    
+    infoDiv.innerHTML = `
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+            <div>
+                <strong>Оператор:</strong> ${operatorName} 
+                <strong>Новостей:</strong> ${newsData.length}
+            </div>
+            <div style="font-size: 12px; color: #666;">
+                📊 С бейджами: ${withBadge} | 📂 С категориями: ${withCategory}
+            </div>
+        </div>
+        <div style="margin-top: 10px; font-size: 12px; color: #888;">
+            🖱️ Выберите новости для удаления (удерживайте Ctrl для множественного выбора)
+        </div>
+    `;
+}
+
+// Удаление выбранных новостей
+async function deleteSelectedNews() {
+    const operator = document.getElementById('deleteOperatorSelect').value;
+    const select = document.getElementById('deleteNewsSelect');
+    const selectedOptions = Array.from(select.selectedOptions);
+    
+    if (selectedOptions.length === 0) {
+        showDeleteStatus('❌ Выберите хотя бы одну новость для удаления', 'error');
+        return;
+    }
+    
+    const selectedIndexes = selectedOptions.map(option => parseInt(option.value)).sort((a, b) => b - a);
+    
+    if (!confirm(`Удалить ${selectedIndexes.length} выбранных новостей?\n\nЭто действие нельзя отменить!`)) {
+        return;
+    }
+    
+    try {
+        showDeleteStatus('⏳ Удаляем выбранные новости...', 'success');
+        
+        // Загружаем текущие новости
+        const response = await fetch(`${ADMIN_NEWS_CONFIG.BASE_URL}/${ADMIN_NEWS_CONFIG.BIN_ID}/latest`, {
+            headers: {
+                'X-Master-Key': ADMIN_NEWS_CONFIG.MASTER_KEY
+            }
+        });
+        
+        if (!response.ok) throw new Error('Ошибка загрузки новостей');
+        
+        const data = await response.json();
+        const currentNews = data.record || {};
+        const operatorNews = currentNews[operator] || [];
+        
+        // Удаляем выбранные новости (с конца чтобы индексы не сбивались)
+        const updatedOperatorNews = operatorNews.filter((_, index) => !selectedIndexes.includes(index));
+        
+        // Обновляем данные
+        currentNews[operator] = updatedOperatorNews;
+        
+        // Сохраняем обновленные новости
+        const saveResponse = await fetch(`${ADMIN_NEWS_CONFIG.BASE_URL}/${ADMIN_NEWS_CONFIG.BIN_ID}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-Master-Key': ADMIN_NEWS_CONFIG.MASTER_KEY
+            },
+            body: JSON.stringify(currentNews)
+        });
+
+        if (saveResponse.ok) {
+            showDeleteStatus(`✅ Удалено ${selectedIndexes.length} новость(ей)!`, 'success');
+            // Обновляем список
+            setTimeout(() => {
+                loadOperatorNews();
+            }, 1000);
+        } else {
+            throw new Error('Ошибка сохранения изменений');
+        }
+        
+    } catch (error) {
+        console.error('Ошибка удаления новостей:', error);
+        showDeleteStatus('❌ Ошибка удаления новостей: ' + error.message, 'error');
+    }
+}
+
+// Удаление всех новостей оператора
+async function deleteAllOperatorNews() {
+    const operator = document.getElementById('deleteOperatorSelect').value;
+    const operatorNames = {
+        'mts': 'МТС',
+        'volna': 'Волна', 
+        'win': 'Вин'
+    };
+    
+    if (!confirm(`💥 УДАЛИТЬ ВСЕ НОВОСТИ оператора "${operatorNames[operator]}"?\n\nЭто действие нельзя отменить! Все новости будут безвозвратно удалены!`)) {
+        return;
+    }
+    
+    try {
+        showDeleteStatus('⏳ Удаляем все новости оператора...', 'success');
+        
+        // Загружаем текущие новости
+        const response = await fetch(`${ADMIN_NEWS_CONFIG.BASE_URL}/${ADMIN_NEWS_CONFIG.BIN_ID}/latest`, {
+            headers: {
+                'X-Master-Key': ADMIN_NEWS_CONFIG.MASTER_KEY
+            }
+        });
+        
+        if (!response.ok) throw new Error('Ошибка загрузки новостей');
+        
+        const data = await response.json();
+        const currentNews = data.record || {};
+        
+        // Сохраняем количество новостей для сообщения
+        const newsCount = currentNews[operator] ? currentNews[operator].length : 0;
+        
+        // Удаляем все новости оператора
+        delete currentNews[operator];
+        
+        // Сохраняем обновленные новости
+        const saveResponse = await fetch(`${ADMIN_NEWS_CONFIG.BASE_URL}/${ADMIN_NEWS_CONFIG.BIN_ID}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-Master-Key': ADMIN_NEWS_CONFIG.MASTER_KEY
+            },
+            body: JSON.stringify(currentNews)
+        });
+
+        if (saveResponse.ok) {
+            showDeleteStatus(`✅ Удалены все новости (${newsCount} шт.) оператора "${operatorNames[operator]}"!`, 'success');
+            // Обновляем список
+            setTimeout(() => {
+                loadOperatorNews();
+            }, 1000);
+        } else {
+            throw new Error('Ошибка сохранения изменений');
+        }
+        
+    } catch (error) {
+        console.error('Ошибка удаления всех новостей:', error);
+        showDeleteStatus('❌ Ошибка удаления новостей: ' + error.message, 'error');
+    }
+}
+
+// Показать статус для удаления новостей
+function showDeleteStatus(message, type) {
+    const statusElement = document.getElementById('deleteStatusMessage');
+    statusElement.textContent = message;
+    statusElement.className = `status-message status-${type}`;
+    
+    setTimeout(() => {
+        if (statusElement.textContent === message) {
+            statusElement.textContent = '';
+            statusElement.className = 'status-message';
+        }
+    }, 5000);
+}
+
+// Загружаем новости при загрузке страницы и при изменении оператора
+document.addEventListener('DOMContentLoaded', function() {
+    // Загружаем новости для первого оператора в списке
+    setTimeout(() => {
+        loadOperatorNews();
+    }, 1000);
+    
+    // Обновляем при изменении оператора
+    document.getElementById('deleteOperatorSelect').addEventListener('change', loadOperatorNews);
+});
+</script>
