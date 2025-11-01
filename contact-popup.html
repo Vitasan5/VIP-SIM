@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VIP-SIM - Свяжитесь с нами</title>
+    <title>Свяжитесь с нами</title>
     <style>
         * {
             margin: 0;
@@ -12,68 +12,13 @@
         }
         
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            background: rgba(0,0,0,0.8);
             display: flex;
-            flex-direction: column;
-            align-items: center;
             justify-content: center;
+            align-items: center;
+            min-height: 100vh;
             padding: 20px;
-            color: #333;
-        }
-        
-        .container {
-            max-width: 800px;
-            width: 100%;
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            padding: 30px;
-            margin-bottom: 30px;
-            text-align: center;
-        }
-        
-        h1 {
-            margin-bottom: 20px;
-            color: #2c3e50;
-        }
-        
-        p {
-            line-height: 1.6;
-            margin-bottom: 15px;
-        }
-        
-        .share-link {
-            display: inline-block;
-            background: #3498db;
-            color: white;
-            padding: 12px 24px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            margin-top: 15px;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
-        }
-        
-        .share-link:hover {
-            background: #2980b9;
-            transform: translateY(-2px);
-        }
-        
-        /* Стили для попапа */
-        .popup-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            z-index: 10000;
-            justify-content: center;
-            align-items: center;
         }
         
         .popup-content {
@@ -82,66 +27,20 @@
             padding: 30px;
             max-width: 500px;
             width: 90%;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            position: relative;
             text-align: center;
-        }
-        
-        .close-btn {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: none;
-            border: none;
-            font-size: 24px;
-            cursor: pointer;
-            color: #7f8c8d;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-        }
-        
-        .close-btn:hover {
-            background: #f8f9fa;
-            color: #e74c3c;
-        }
-        
-        .contact-float {
-            position: relative;
-            margin: 20px 0;
-        }
-        
-        .contact-toggle {
-            background: #3498db;
-            color: white;
-            padding: 12px 24px;
-            border-radius: 50px;
-            cursor: pointer;
-            font-weight: 600;
-            display: inline-block;
-            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
-            transition: all 0.3s ease;
-        }
-        
-        .contact-toggle:hover {
-            background: #2980b9;
-            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
         
         .contact-menu {
             display: flex;
             justify-content: center;
             gap: 15px;
-            margin-top: 20px;
+            margin: 25px 0;
             flex-wrap: wrap;
         }
         
         .contact-link {
-            display: inline-flex;
+            display: flex;
             align-items: center;
             justify-content: center;
             width: 50px;
@@ -149,12 +48,10 @@
             border-radius: 50%;
             background: #f8f9fa;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
         
         .contact-link:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+            transform: translateY(-3px);
         }
         
         .contact-icon {
@@ -162,154 +59,59 @@
             height: 24px;
         }
         
-        .popup-title {
-            margin-bottom: 20px;
+        h2 {
             color: #2c3e50;
+            margin-bottom: 10px;
         }
         
-        .url-display {
-            background: #f8f9fa;
-            padding: 15px;
-            border-radius: 8px;
-            margin: 20px 0;
-            word-break: break-all;
-            font-family: monospace;
-            border: 1px dashed #3498db;
+        p {
+            color: #7f8c8d;
+            margin-bottom: 20px;
         }
         
-        .copy-btn {
-            background: #27ae60;
+        .close-btn {
+            background: #3498db;
             color: white;
             border: none;
-            padding: 8px 16px;
-            border-radius: 4px;
+            padding: 10px 25px;
+            border-radius: 25px;
             cursor: pointer;
-            margin-left: 10px;
-            transition: all 0.3s ease;
+            font-size: 14px;
+            margin-top: 10px;
         }
         
-        .copy-btn:hover {
-            background: #219a52;
+        .close-btn:hover {
+            background: #2980b9;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>VIP-SIM - Ссылка для связи</h1>
-        <p>Используйте эту ссылку, чтобы поделиться способами связи:</p>
+    <div class="popup-content">
+        <h2>Свяжитесь с нами</h2>
+        <p>Выберите удобный способ связи</p>
         
-        <div class="url-display">
-            https://www.vip-sim.ru/#contact-popup
-            <button class="copy-btn" onclick="copyUrl()">Копировать</button>
+        <div class="contact-menu">
+            <a href="https://wa.me/79915556663" target="_blank" title="WhatsApp" class="contact-link">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" class="contact-icon">
+            </a>
+            <a href="https://t.me/vipsimka82" target="_blank" title="Telegram" class="contact-link">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram" class="contact-icon">
+            </a>
+            <a href="mailto:vip.simki@vk.com" title="Email" class="contact-link">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/4e/Gmail_Icon.png" alt="Email" class="contact-icon">
+            </a>
+            <a href="https://instagram.com/_vipsimka" target="_blank" title="Instagram" class="contact-link">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram" class="contact-icon">
+            </a>
+            <a href="https://facebook.com/vitalij.san.658372" target="_blank" title="Facebook" class="contact-link">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_(2019).svg" alt="Facebook" class="contact-icon">
+            </a>
+            <a href="https://vk.com/vip.simki" target="_blank" title="VK" class="contact-link">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/2/21/VK.com-logo.svg" alt="VK" class="contact-icon">
+            </a>
         </div>
         
-        <p>При переходе по этой ссылке откроется попап со всеми способами связи</p>
-        
-        <a href="#contact-popup" class="share-link">Открыть способы связи</a>
+        <button class="close-btn" onclick="window.close()">Закрыть</button>
     </div>
-
-    <!-- Попап с кнопкой связи -->
-    <div class="popup-overlay" id="contact-popup">
-        <div class="popup-content">
-            <button class="close-btn" id="close-popup">×</button>
-            <h2 class="popup-title">Свяжитесь с нами</h2>
-            
-            <!-- Плавающая кнопка "Связь" -->
-            <div class="contact-float">
-                <div class="contact-wrapper">
-                    <div class="contact-toggle">Мы на связи</div>
-                    <div class="contact-menu">
-                        <a href="https://wa.me/79915556663" target="_blank" title="WhatsApp" class="contact-link">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" class="contact-icon">
-                        </a>
-                        <a href="https://t.me/vipsimka82" target="_blank" title="Telegram" class="contact-link">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram" class="contact-icon">
-                        </a>
-                        <a href="mailto:vip.simki@vk.com" title="Email" class="contact-link">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/4/4e/Gmail_Icon.png" alt="Email" class="contact-icon">
-                        </a>
-                        <a href="https://instagram.com/_vipsimka" target="_blank" title="Instagram" class="contact-link">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram" class="contact-icon">
-                        </a>
-                        <a href="https://facebook.com/vitalij.san.658372" target="_blank" title="Facebook" class="contact-link">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_(2019).svg" alt="Facebook" class="contact-icon">
-                        </a>
-                        <a href="https://vk.com/vip.simki" target="_blank" title="VK" class="contact-link">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/2/21/VK.com-logo.svg" alt="VK" class="contact-icon">
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <p style="margin-top: 20px; color: #7f8c8d; font-size: 14px;">
-                Выберите удобный способ связи
-            </p>
-        </div>
-    </div>
-
-    <script>
-        // Получаем элементы
-        const contactPopup = document.getElementById('contact-popup');
-        const closePopup = document.getElementById('close-popup');
-        
-        // Функция для открытия попапа
-        function openPopup() {
-            contactPopup.style.display = 'flex';
-        }
-        
-        // Функция для закрытия попапа
-        function closePopupFunc() {
-            contactPopup.style.display = 'none';
-            // Убираем хэш из URL
-            history.replaceState(null, null, ' ');
-        }
-        
-        // Открываем попап при загрузке страницы, если в URL есть хэш
-        window.addEventListener('load', function() {
-            if (window.location.hash === '#contact-popup') {
-                openPopup();
-            }
-        });
-        
-        // Обработчики событий для ссылок
-        document.querySelectorAll('a[href="#contact-popup"]').forEach(link => {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                openPopup();
-            });
-        });
-        
-        closePopup.addEventListener('click', closePopupFunc);
-        
-        // Закрытие попапа при клике на overlay
-        contactPopup.addEventListener('click', function(e) {
-            if (e.target === contactPopup) {
-                closePopupFunc();
-            }
-        });
-        
-        // Закрытие попапа при нажатии Escape
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                closePopupFunc();
-            }
-        });
-        
-        // Функция копирования URL
-        function copyUrl() {
-            const url = 'https://www.vip-sim.ru/#contact-popup';
-            navigator.clipboard.writeText(url).then(() => {
-                const btn = document.querySelector('.copy-btn');
-                const originalText = btn.textContent;
-                btn.textContent = 'Скопировано!';
-                btn.style.background = '#27ae60';
-                
-                setTimeout(() => {
-                    btn.textContent = originalText;
-                    btn.style.background = '#27ae60';
-                }, 2000);
-            });
-        }
-    </script>
 </body>
 </html>
