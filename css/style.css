@@ -206,6 +206,23 @@ header nav a:hover {
 .card button:hover {
     background-color: #b00000;
 }
+/* --- Хиты с акцией --- */
+.card {
+  position: relative;  /* ← Это обязательно добавить к существующему .card */
+}
+
+.promo-badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: #ff4444;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: bold;
+  z-index: 1;
+}
 
 
 /* --- Каталог --- */
@@ -2972,4 +2989,5 @@ header nav a:hover {
   /* Ничего не скрываем — кнопка остаётся на месте */
   /* Убедись, что header использует flex или grid для корректного расположения */
 }
+
 
