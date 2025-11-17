@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html lang="ru">
+    
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Отзывы | VIP-SIM.RU</title>
+
+
     <style>
         * {
             margin: 0;
@@ -321,17 +324,56 @@
             }
         }
     </style>
+    <link rel="stylesheet" href="css/style.css" />
 </head>
+
 <body>
+
+     <!-- ШАПКА -->
+    <header>
+        <div class="logo">
+            <img src="img/logo.PNG" alt="VIP SIM">
+        </div>
+        <nav>
+            <a href="index.html">Главная</a>
+            <a href="tariffs.html">Тарифы</a>
+            <a href="service.html">Сервис</a>
+            <a href="numbers.html">Красивые номера</a>
+            <a href="apple.html">Apple</a>
+            <a href="accessories.html">Аксессуары</a>
+            <a href="reviews.html">Отзывы</a>
+            <a href="news.html">Новости</a>
+        </nav>
+        <!-- Гамбургер-меню -->
+        <div class="menu-toggle" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <!-- Мобильное меню -->
+        <div class="mobile-menu" id="mobileMenu">
+            <a href="index.html">Главная</a>
+            <a href="tariffs.html">Тарифы</a>
+            <a href="service.html">Сервис</a>
+            <a href="numbers.html">Красивые номера</a>
+            <a href="apple.html">Apple</a>
+            <a href="accessories.html">Аксессуары</a>
+            <a href="reviews.html">Отзывы</a>
+            <a href="news.html">Новости</a>
+        </div>
+    </header>
+
     <!-- Модальное окно для просмотра изображений -->
     <div id="imageModal" class="image-modal">
         <span class="close-modal">&times;</span>
         <img class="modal-content" id="modalImage">
     </div>
 
+    
+
     <section class="reviews-section">
         <div style="max-width: 1200px; margin: 0 auto;">
-            <a href="index.html" class="back-btn">← Назад в кабинет</a>
+            
             <h2>Отзывы наших клиентов</h2>
 
             <!-- Форма добавления отзыва -->
