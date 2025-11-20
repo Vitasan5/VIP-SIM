@@ -201,8 +201,199 @@
             grid-column: 1 / -1;
         }
 
-        /* АДАПТИВ */
+        /* АДАПТИВ ДЛЯ МОБИЛЬНЫХ */
         @media (max-width: 768px) {
+            /* Общие адаптивные настройки */
+            body {
+                font-size: 14px;
+            }
+            
+            /* Шапка */
+            header {
+                padding: 10px 15px;
+            }
+            
+            .logo img {
+                max-width: 120px;
+            }
+            
+            nav {
+                display: none;
+            }
+            
+            .menu-toggle {
+                display: flex;
+            }
+            
+            /* Основной контент */
+            .page-wrapper {
+                padding: 10px;
+            }
+            
+            .numbers-block h2 {
+                font-size: 1.5em;
+                margin-bottom: 20px;
+            }
+            
+            /* Карточки номеров */
+            .numbers-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .number-card {
+                padding: 20px;
+            }
+            
+            /* База номеров */
+            .database-section {
+                margin-top: 20px;
+                padding: 15px;
+                border-radius: 10px;
+            }
+            
+            .database-section h3 {
+                font-size: 1.3em;
+                margin-bottom: 20px;
+            }
+            
+            /* Панель поиска */
+            .search-panel {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .search-box {
+                min-width: 100%;
+                flex-direction: column;
+            }
+            
+            .search-box input {
+                width: 100%;
+                box-sizing: border-box;
+            }
+            
+            .filters {
+                width: 100%;
+                flex-direction: column;
+            }
+            
+            .filters select {
+                width: 100%;
+                min-width: 0;
+            }
+            
+            /* Результаты поиска */
+            .search-results {
+                padding: 15px;
+            }
+            
+            .numbers-columns {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .number-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+                padding: 12px;
+            }
+            
+            .number-price {
+                align-self: flex-end;
+                font-size: 1em;
+            }
+            
+            /* Подвал */
+            .site-footer {
+                padding: 20px 15px;
+            }
+            
+            .footer-container {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .footer-col {
+                width: 100%;
+            }
+            
+            /* Плавающая кнопка связи */
+            .contact-float {
+                bottom: 70px;
+                right: 15px;
+            }
+            
+            .contact-menu {
+                flex-direction: column;
+                bottom: 100%;
+                right: 0;
+                left: auto;
+            }
+            
+            .contact-link {
+                width: 40px;
+                height: 40px;
+            }
+            
+            .contact-icon {
+                width: 20px;
+                height: 20px;
+            }
+            
+            /* Мобильная навигация */
+            .mobile-nav-bar {
+                display: flex;
+            }
+            
+            /* Кнопка "Наверх" */
+            #scrollToTop {
+                width: 40px;
+                height: 40px;
+                font-size: 16px;
+                bottom: 80px;
+                right: 15px;
+            }
+        }
+        
+        /* Дополнительные адаптивные настройки для очень маленьких экранов */
+        @media (max-width: 480px) {
+            .numbers-block h2 {
+                font-size: 1.3em;
+            }
+            
+            .database-section h3 {
+                font-size: 1.2em;
+            }
+            
+            .number-phone {
+                font-size: 1.1em;
+            }
+            
+            .number-price {
+                font-size: 1em;
+            }
+            
+            .contact-float {
+                bottom: 60px;
+            }
+            
+            .mobile-nav-bar {
+                height: 50px;
+            }
+            
+            .nav-item {
+                font-size: 0.7em;
+            }
+        }
+        
+        /* АДАПТИВ ДЛЯ ПЛАНШЕТОВ */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .numbers-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
             .search-panel {
                 flex-direction: column;
             }
@@ -218,21 +409,6 @@
             .filters select {
                 flex: 1;
                 min-width: 0;
-            }
-            
-            .numbers-columns {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-            
-            .number-item {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 10px;
-            }
-            
-            .number-price {
-                align-self: flex-end;
             }
         }
     </style>
@@ -264,6 +440,10 @@
         <div class="logo">
             <img src="img/logo.PNG" alt="VIP SIM">
         </div>
+
+             <!-- Кнопка премиум-доступа -->
+  <a href="premium.html" class="premium-btn">⭐ Премиум-опции</a>
+  
         <nav>
             <a href="index.html">Главная</a>
             <a href="tariffs.html">Тарифы</a>
@@ -858,7 +1038,8 @@ document.addEventListener('DOMContentLoaded', function() {
     <!-- ЕДИНЫЙ JS -->
     <script src="js/script.js"></script>
 
-    
+<!-- Кнопка подписки на ТГ -->
+<script src="telegram-widget.js"></script>
 
 </body>
 </html>
