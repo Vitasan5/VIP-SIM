@@ -29,8 +29,6 @@
       <div class="logo">
         <img src="img/logo.PNG" alt="VIP SIM" />
       </div>
-           <!-- Кнопка премиум-доступа -->
-  <a href="premium.html" class="premium-btn">⭐ Премиум-опции</a>
       <nav>
         <a href="index.html">Главная</a>
         <a href="tariffs.html">Тарифы</a>
@@ -328,6 +326,43 @@
         </div>
       </div>
     </div>
+    <script>
+// Добавляем функционал задержки для плавающей кнопки
+document.addEventListener('DOMContentLoaded', function() {
+    const contactWrapper = document.querySelector('.contact-wrapper');
+    const contactMenu = document.querySelector('.contact-menu');
+    
+    let hideTimeout;
+    let isMenuOpen = false;
+    
+    // Показать меню
+    function showMenu() {
+        clearTimeout(hideTimeout);
+        contactMenu.style.display = 'block';
+        isMenuOpen = true;
+    }
+    
+    // Скрыть меню с задержкой
+    function hideMenu() {
+        hideTimeout = setTimeout(() => {
+            contactMenu.style.display = 'none';
+            isMenuOpen = false;
+        }, 300); // Задержка 300мс - можно регулировать
+    }
+    
+    // Отмена скрытия
+    function cancelHide() {
+        clearTimeout(hideTimeout);
+    }
+    
+    // Обработчики событий
+    contactWrapper.addEventListener('mouseenter', showMenu);
+    contactWrapper.addEventListener('mouseleave', hideMenu);
+    
+    contactMenu.addEventListener('mouseenter', cancelHide);
+    contactMenu.addEventListener('mouseleave', hideMenu);
+});
+</script>
 
     <!-- МОДАЛЬНОЕ ОКНО ДЛЯ УСЛУГ -->
     <div id="serviceModal" class="tariff-page modal">
@@ -571,4 +606,3 @@
 
   </body>
 </html>
-
