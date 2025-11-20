@@ -882,6 +882,44 @@ document.addEventListener('DOMContentLoaded', function() {
         </div>
     </div>
 
+    <script>
+// Добавляем функционал задержки для плавающей кнопки
+document.addEventListener('DOMContentLoaded', function() {
+    const contactWrapper = document.querySelector('.contact-wrapper');
+    const contactMenu = document.querySelector('.contact-menu');
+    
+    let hideTimeout;
+    let isMenuOpen = false;
+    
+    // Показать меню
+    function showMenu() {
+        clearTimeout(hideTimeout);
+        contactMenu.style.display = 'block';
+        isMenuOpen = true;
+    }
+    
+    // Скрыть меню с задержкой
+    function hideMenu() {
+        hideTimeout = setTimeout(() => {
+            contactMenu.style.display = 'none';
+            isMenuOpen = false;
+        }, 300); // Задержка 300мс - можно регулировать
+    }
+    
+    // Отмена скрытия
+    function cancelHide() {
+        clearTimeout(hideTimeout);
+    }
+    
+    // Обработчики событий
+    contactWrapper.addEventListener('mouseenter', showMenu);
+    contactWrapper.addEventListener('mouseleave', hideMenu);
+    
+    contactMenu.addEventListener('mouseenter', cancelHide);
+    contactMenu.addEventListener('mouseleave', hideMenu);
+});
+</script>
+    
     <!-- Font Awesome (все стили, включая Brands) -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
  <!-- MOBILE NAV BAR -->
@@ -917,3 +955,4 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 </html>
+
