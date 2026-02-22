@@ -1,600 +1,675 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ru">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Красивые номера — Vip-simka.Крым</title>
     <link rel="stylesheet" href="css/style.css" />
     <style>
-        /* СТИЛИ ДЛЯ БАЗЫ НОМЕРОВ */
+      /* СТИЛИ ДЛЯ БАЗЫ НОМЕРОВ */
+      .database-section {
+        margin-top: 40px;
+        padding: 30px;
+        background: #f8f9fa;
+        border-radius: 15px;
+        border: 1px solid #e9ecef;
+      }
+
+      .database-section h3 {
+        color: #333;
+        margin-bottom: 25px;
+        text-align: center;
+        font-size: 1.5em;
+      }
+
+      /* Панель поиска */
+      .search-panel {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        margin-bottom: 30px;
+        align-items: end;
+      }
+
+      .search-box {
+        flex: 1;
+        min-width: 300px;
+        display: flex;
+        gap: 10px;
+      }
+
+      .search-box input {
+        flex: 1;
+        padding: 12px 15px;
+        border: 2px solid #e30613;
+        border-radius: 8px;
+        font-size: 16px;
+        transition: border-color 0.3s;
+      }
+
+      .search-box input:focus {
+        outline: none;
+        border-color: #c10510;
+      }
+
+      .search-box button {
+        padding: 12px 20px;
+        background: #e30613;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: background 0.3s;
+      }
+
+      .search-box button:hover {
+        background: #c10510;
+      }
+
+      .filters {
+        display: flex;
+        gap: 15px;
+        flex-wrap: wrap;
+      }
+
+      .filters select {
+        padding: 12px 15px;
+        border: 2px solid #ddd;
+        border-radius: 8px;
+        font-size: 14px;
+        min-width: 200px;
+        cursor: pointer;
+        transition: border-color 0.3s;
+      }
+
+      .filters select:focus {
+        outline: none;
+        border-color: #e30613;
+      }
+
+      /* Результаты поиска */
+      .search-results {
+        background: white;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .results-count {
+        font-weight: bold;
+        margin-bottom: 15px;
+        color: #333;
+        font-size: 1.1em;
+      }
+
+      /* ДВЕ КОЛОНКИ */
+      .numbers-columns {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+      }
+
+      .numbers-column {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .column-title {
+        font-weight: bold;
+        color: #e30613;
+        margin-bottom: 10px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid #e30613;
+        text-align: center;
+      }
+
+      .number-item {
+        background: #f8f9fa;
+        padding: 15px;
+        border-radius: 8px;
+        border-left: 4px solid #e30613;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        transition:
+          transform 0.2s,
+          box-shadow 0.2s;
+      }
+
+      .number-item:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .number-info {
+        flex: 1;
+      }
+
+      .number-phone {
+        font-size: 1.2em;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 5px;
+      }
+
+      .number-details {
+        font-size: 0.9em;
+        color: #666;
+      }
+
+      .number-price {
+        font-weight: bold;
+        color: #e30613;
+        font-size: 1.1em;
+      }
+
+      .no-results {
+        text-align: center;
+        padding: 40px;
+        color: #666;
+        font-style: italic;
+        font-size: 1.1em;
+        grid-column: 1 / -1;
+      }
+
+      .loading {
+        text-align: center;
+        padding: 40px;
+        color: #666;
+        grid-column: 1 / -1;
+      }
+
+      .error-message {
+        text-align: center;
+        padding: 20px;
+        background: #f8d7da;
+        color: #721c24;
+        border-radius: 8px;
+        margin: 10px 0;
+        grid-column: 1 / -1;
+      }
+
+      .refresh-notice {
+        text-align: center;
+        padding: 10px;
+        background: #e7f3ff;
+        color: #0c5460;
+        border-radius: 5px;
+        margin-bottom: 15px;
+        font-size: 0.9em;
+        grid-column: 1 / -1;
+      }
+
+      /* АДАПТИВ ДЛЯ МОБИЛЬНЫХ */
+      @media (max-width: 768px) {
+        /* Общие адаптивные настройки */
+        body {
+          font-size: 14px;
+        }
+
+        /* Шапка */
+        header {
+          padding: 10px 15px;
+        }
+
+        .logo img {
+          max-width: 120px;
+        }
+
+        nav {
+          display: none;
+        }
+
+        .menu-toggle {
+          display: flex;
+        }
+
+        /* Основной контент */
+        .page-wrapper {
+          padding: 10px;
+        }
+
+        .numbers-block h2 {
+          font-size: 1.5em;
+          margin-bottom: 20px;
+        }
+
+        /* Карточки номеров */
+        .numbers-grid {
+          grid-template-columns: 1fr;
+          gap: 15px;
+        }
+
+        .number-card {
+          padding: 20px;
+        }
+
+        /* База номеров */
         .database-section {
-            margin-top: 40px;
-            padding: 30px;
-            background: #f8f9fa;
-            border-radius: 15px;
-            border: 1px solid #e9ecef;
+          margin-top: 20px;
+          padding: 15px;
+          border-radius: 10px;
         }
 
         .database-section h3 {
-            color: #333;
-            margin-bottom: 25px;
-            text-align: center;
-            font-size: 1.5em;
+          font-size: 1.3em;
+          margin-bottom: 20px;
         }
 
         /* Панель поиска */
         .search-panel {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            margin-bottom: 30px;
-            align-items: end;
+          flex-direction: column;
+          gap: 15px;
         }
 
         .search-box {
-            flex: 1;
-            min-width: 300px;
-            display: flex;
-            gap: 10px;
+          min-width: 100%;
+          flex-direction: column;
         }
 
         .search-box input {
-            flex: 1;
-            padding: 12px 15px;
-            border: 2px solid #e30613;
-            border-radius: 8px;
-            font-size: 16px;
-            transition: border-color 0.3s;
-        }
-
-        .search-box input:focus {
-            outline: none;
-            border-color: #c10510;
-        }
-
-        .search-box button {
-            padding: 12px 20px;
-            background: #e30613;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: background 0.3s;
-        }
-
-        .search-box button:hover {
-            background: #c10510;
+          width: 100%;
+          box-sizing: border-box;
         }
 
         .filters {
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
+          width: 100%;
+          flex-direction: column;
         }
 
         .filters select {
-            padding: 12px 15px;
-            border: 2px solid #ddd;
-            border-radius: 8px;
-            font-size: 14px;
-            min-width: 200px;
-            cursor: pointer;
-            transition: border-color 0.3s;
-        }
-
-        .filters select:focus {
-            outline: none;
-            border-color: #e30613;
+          width: 100%;
+          min-width: 0;
         }
 
         /* Результаты поиска */
         .search-results {
-            background: white;
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+          padding: 15px;
         }
 
-        .results-count {
-            font-weight: bold;
-            margin-bottom: 15px;
-            color: #333;
-            font-size: 1.1em;
-        }
-
-        /* ДВЕ КОЛОНКИ */
         .numbers-columns {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-        }
-
-        .numbers-column {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .column-title {
-            font-weight: bold;
-            color: #e30613;
-            margin-bottom: 10px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #e30613;
-            text-align: center;
+          grid-template-columns: 1fr;
+          gap: 15px;
         }
 
         .number-item {
-            background: #f8f9fa;
-            padding: 15px;
-            border-radius: 8px;
-            border-left: 4px solid #e30613;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-
-        .number-item:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        }
-
-        .number-info {
-            flex: 1;
-        }
-
-        .number-phone {
-            font-size: 1.2em;
-            font-weight: bold;
-            color: #333;
-            margin-bottom: 5px;
-        }
-
-        .number-details {
-            font-size: 0.9em;
-            color: #666;
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 10px;
+          padding: 12px;
         }
 
         .number-price {
-            font-weight: bold;
-            color: #e30613;
-            font-size: 1.1em;
+          align-self: flex-end;
+          font-size: 1em;
         }
 
-        .no-results {
-            text-align: center;
-            padding: 40px;
-            color: #666;
-            font-style: italic;
-            font-size: 1.1em;
-            grid-column: 1 / -1;
+        /* Подвал */
+        .site-footer {
+          padding: 20px 15px;
         }
 
-        .loading {
-            text-align: center;
-            padding: 40px;
-            color: #666;
-            grid-column: 1 / -1;
+        .footer-container {
+          flex-direction: column;
+          gap: 20px;
         }
 
-        .error-message {
-            text-align: center;
-            padding: 20px;
-            background: #f8d7da;
-            color: #721c24;
-            border-radius: 8px;
-            margin: 10px 0;
-            grid-column: 1 / -1;
+        .footer-col {
+          width: 100%;
         }
 
-        .refresh-notice {
-            text-align: center;
-            padding: 10px;
-            background: #e7f3ff;
-            color: #0c5460;
-            border-radius: 5px;
-            margin-bottom: 15px;
-            font-size: 0.9em;
-            grid-column: 1 / -1;
+        /* Плавающая кнопка связи */
+        .contact-float {
+          bottom: 70px;
+          right: 15px;
         }
 
-        /* АДАПТИВ ДЛЯ МОБИЛЬНЫХ */
-        @media (max-width: 768px) {
-            /* Общие адаптивные настройки */
-            body {
-                font-size: 14px;
-            }
-            
-            /* Шапка */
-            header {
-                padding: 10px 15px;
-            }
-            
-            .logo img {
-                max-width: 120px;
-            }
-            
-            nav {
-                display: none;
-            }
-            
-            .menu-toggle {
-                display: flex;
-            }
-            
-            /* Основной контент */
-            .page-wrapper {
-                padding: 10px;
-            }
-            
-            .numbers-block h2 {
-                font-size: 1.5em;
-                margin-bottom: 20px;
-            }
-            
-            /* Карточки номеров */
-            .numbers-grid {
-                grid-template-columns: 1fr;
-                gap: 15px;
-            }
-            
-            .number-card {
-                padding: 20px;
-            }
-            
-            /* База номеров */
-            .database-section {
-                margin-top: 20px;
-                padding: 15px;
-                border-radius: 10px;
-            }
-            
-            .database-section h3 {
-                font-size: 1.3em;
-                margin-bottom: 20px;
-            }
-            
-            /* Панель поиска */
-            .search-panel {
-                flex-direction: column;
-                gap: 15px;
-            }
-            
-            .search-box {
-                min-width: 100%;
-                flex-direction: column;
-            }
-            
-            .search-box input {
-                width: 100%;
-                box-sizing: border-box;
-            }
-            
-            .filters {
-                width: 100%;
-                flex-direction: column;
-            }
-            
-            .filters select {
-                width: 100%;
-                min-width: 0;
-            }
-            
-            /* Результаты поиска */
-            .search-results {
-                padding: 15px;
-            }
-            
-            .numbers-columns {
-                grid-template-columns: 1fr;
-                gap: 15px;
-            }
-            
-            .number-item {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 10px;
-                padding: 12px;
-            }
-            
-            .number-price {
-                align-self: flex-end;
-                font-size: 1em;
-            }
-            
-            /* Подвал */
-            .site-footer {
-                padding: 20px 15px;
-            }
-            
-            .footer-container {
-                flex-direction: column;
-                gap: 20px;
-            }
-            
-            .footer-col {
-                width: 100%;
-            }
-            
-            /* Плавающая кнопка связи */
-            .contact-float {
-                bottom: 70px;
-                right: 15px;
-            }
-            
-            .contact-menu {
-                flex-direction: column;
-                bottom: 100%;
-                right: 0;
-                left: auto;
-            }
-            
-            .contact-link {
-                width: 40px;
-                height: 40px;
-            }
-            
-            .contact-icon {
-                width: 20px;
-                height: 20px;
-            }
-            
-            /* Мобильная навигация */
-            .mobile-nav-bar {
-                display: flex;
-            }
-            
-            /* Кнопка "Наверх" */
-            #scrollToTop {
-                width: 40px;
-                height: 40px;
-                font-size: 16px;
-                bottom: 80px;
-                right: 15px;
-            }
+        .contact-menu {
+          flex-direction: column;
+          bottom: 100%;
+          right: 0;
+          left: auto;
         }
-        
-        /* Дополнительные адаптивные настройки для очень маленьких экранов */
-        @media (max-width: 480px) {
-            .numbers-block h2 {
-                font-size: 1.3em;
-            }
-            
-            .database-section h3 {
-                font-size: 1.2em;
-            }
-            
-            .number-phone {
-                font-size: 1.1em;
-            }
-            
-            .number-price {
-                font-size: 1em;
-            }
-            
-            .contact-float {
-                bottom: 60px;
-            }
-            
-            .mobile-nav-bar {
-                height: 50px;
-            }
-            
-            .nav-item {
-                font-size: 0.7em;
-            }
+
+        .contact-link {
+          width: 40px;
+          height: 40px;
         }
-        
-        /* АДАПТИВ ДЛЯ ПЛАНШЕТОВ */
-        @media (min-width: 769px) and (max-width: 1024px) {
-            .numbers-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .search-panel {
-                flex-direction: column;
-            }
-            
-            .search-box {
-                min-width: 100%;
-            }
-            
-            .filters {
-                width: 100%;
-            }
-            
-            .filters select {
-                flex: 1;
-                min-width: 0;
-            }
+
+        .contact-icon {
+          width: 20px;
+          height: 20px;
         }
+
+        /* Мобильная навигация */
+        .mobile-nav-bar {
+          display: flex;
+        }
+
+        /* Кнопка "Наверх" */
+        #scrollToTop {
+          width: 40px;
+          height: 40px;
+          font-size: 16px;
+          bottom: 80px;
+          right: 15px;
+        }
+      }
+
+      /* Дополнительные адаптивные настройки для очень маленьких экранов */
+      @media (max-width: 480px) {
+        .numbers-block h2 {
+          font-size: 1.3em;
+        }
+
+        .database-section h3 {
+          font-size: 1.2em;
+        }
+
+        .number-phone {
+          font-size: 1.1em;
+        }
+
+        .number-price {
+          font-size: 1em;
+        }
+
+        .contact-float {
+          bottom: 60px;
+        }
+
+        .mobile-nav-bar {
+          height: 50px;
+        }
+
+        .nav-item {
+          font-size: 0.7em;
+        }
+      }
+
+      /* АДАПТИВ ДЛЯ ПЛАНШЕТОВ */
+      @media (min-width: 769px) and (max-width: 1024px) {
+        .numbers-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .search-panel {
+          flex-direction: column;
+        }
+
+        .search-box {
+          min-width: 100%;
+        }
+
+        .filters {
+          width: 100%;
+        }
+
+        .filters select {
+          flex: 1;
+          min-width: 0;
+        }
+      }
     </style>
-</head>
+  </head>
 
-<body>
-
+  <body>
     <!-- Yandex.Metrika counter -->
     <script type="text/javascript">
-        (function(m,e,t,r,i,k,a){
-            m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-            m[i].l=1*new Date();
-            for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-            k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
-        })(window, document, 'script', 'https://mc.yandex.ru/metrika/tag.js', 'ym');
+      (function (m, e, t, r, i, k, a) {
+        m[i] =
+          m[i] ||
+          function () {
+            (m[i].a = m[i].a || []).push(arguments);
+          };
+        m[i].l = 1 * new Date();
+        for (var j = 0; j < document.scripts.length; j++) {
+          if (document.scripts[j].src === r) {
+            return;
+          }
+        }
+        ((k = e.createElement(t)),
+          (a = e.getElementsByTagName(t)[0]),
+          (k.async = 1),
+          (k.src = r),
+          a.parentNode.insertBefore(k, a));
+      })(
+        window,
+        document,
+        "script",
+        "https://mc.yandex.ru/metrika/tag.js",
+        "ym",
+      );
 
-        ym(104821156, 'init', {
-            clickmap:true,
-            trackLinks:true,
-            accurateTrackBounce:true,
-            webvisor:true
-        });
+      ym(104821156, "init", {
+        clickmap: true,
+        trackLinks: true,
+        accurateTrackBounce: true,
+        webvisor: true,
+      });
     </script>
-    <noscript><div><img src="https://mc.yandex.ru/watch/104821156" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <noscript
+      ><div>
+        <img
+          src="https://mc.yandex.ru/watch/104821156"
+          style="position: absolute; left: -9999px"
+          alt=""
+        /></div
+    ></noscript>
     <!-- /Yandex.Metrika counter -->
 
     <!-- ШАПКА -->
     <header>
-        <div class="logo">
-            <img src="img/logo.PNG" alt="VIP SIM">
-        </div>
+      <div class="logo">
+        <img src="img/logo.PNG" alt="VIP SIM" />
+      </div>
 
-             <!-- Кнопка премиум-доступа -->
-  <a href="premium.html" class="premium-btn">⭐ Премиум-опции</a>
-  
-        <nav>
-            <a href="index.html">Главная</a>
-            <a href="tariffs.html">Тарифы</a>
-            <a href="service.html">Сервис</a>
-            <a href="numbers.html">Красивые номера</a>
-            <a href="apple.html">Apple</a>
-            <a href="accessories.html">Аксессуары</a>
-            <a href="reviews.html">Отзывы</a>
-            <a href="news.html">Новости</a>
-        </nav>
-        <!-- Гамбургер-меню -->
-        <div class="menu-toggle" id="menuToggle">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-        <!-- Мобильное меню -->
-        <div class="mobile-menu" id="mobileMenu">
-            <a href="index.html">Главная</a>
-            <a href="tariffs.html">Тарифы</a>
-            <a href="service.html">Сервис</a>
-            <a href="numbers.html">Красивые номера</a>
-            <a href="apple.html">Apple</a>
-            <a href="accessories.html">Аксессуары</a>
-            <a href="reviews.html">Отзывы</a>
-            <a href="news.html">Новости</a>
-        </div>
+      <!-- Кнопка премиум-доступа -->
+      <a href="premium.html" class="premium-btn">⭐ Премиум-опции</a>
+
+      <nav>
+        <a href="index.html">Главная</a>
+        <a href="tariffs.html">Тарифы</a>
+        <a href="service.html">Сервис</a>
+        <a href="numbers.html">Красивые номера</a>
+        <a href="apple.html">Apple</a>
+        <a href="accessories.html">Аксессуары</a>
+        <a href="reviews.html">Отзывы</a>
+        <a href="news.html">Новости</a>
+      </nav>
+      <!-- Гамбургер-меню -->
+      <div class="menu-toggle" id="menuToggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <!-- Мобильное меню -->
+      <div class="mobile-menu" id="mobileMenu">
+        <a href="index.html">Главная</a>
+        <a href="tariffs.html">Тарифы</a>
+        <a href="service.html">Сервис</a>
+        <a href="numbers.html">Красивые номера</a>
+        <a href="apple.html">Apple</a>
+        <a href="accessories.html">Аксессуары</a>
+        <a href="reviews.html">Отзывы</a>
+        <a href="news.html">Новости</a>
+      </div>
     </header>
 
     <!-- ОБЩИЙ БЕЛЫЙ КОНТЕЙНЕР -->
     <div class="page-wrapper">
+      <section class="numbers-block">
+        <h2 class="left-align">Красивые номера</h2>
 
-        <section class="numbers-block">
-            <h2 class="left-align">Красивые номера</h2>
+        <div class="numbers-grid">
+          <!-- Карточка 1: Скачать список -->
+          <div class="number-card">
+            <img
+              src="https://img.icons8.com/ios-filled/50/e30613/download--v1.png"
+              alt="Скачать"
+              class="card-icon"
+            />
+            <h3>Скачать список</h3>
+            <p>Актуальные красивые номера</p>
+            <a
+              href="https://disk.yandex.ru/i/_i7hVOgxGVRejg"
+              target="_blank"
+              class="btn-primary"
+              >Скачать</a
+            >
+          </div>
 
-            <div class="numbers-grid">
-                <!-- Карточка 1: Скачать список -->
-                <div class="number-card">
-                    <img src="https://img.icons8.com/ios-filled/50/e30613/download--v1.png" alt="Скачать" class="card-icon">
-                    <h3>Скачать список</h3>
-                    <p>Актуальные красивые номера</p>
-                    <a href="https://disk.yandex.ru/i/_i7hVOgxGVRejg" target="_blank" class="btn-primary">Скачать</a>
-                </div>
+          <!-- Карточка 2: Подбор номера -->
+          <div class="number-card">
+            <img
+              src="https://img.icons8.com/ios-filled/50/e30613/search--v1.png"
+              alt="Подбор номера"
+              class="card-icon"
+            />
+            <h3>Подбор номера</h3>
+            <p>Умный поиск по цифрам</p>
+            <a
+              href="https://docs.google.com/forms/d/e/1FAIpQLSftkjOBj0bgBwQh3mfpMk4WzGNSyj7GbZnoQXQm5L7XRN9U0A/viewform?usp=sf_link"
+              target="_blank"
+              class="btn-primary"
+              >Подобрать</a
+            >
+          </div>
 
-                <!-- Карточка 2: Подбор номера -->
-                <div class="number-card">
-                    <img src="https://img.icons8.com/ios-filled/50/e30613/search--v1.png" alt="Подбор номера" class="card-icon">
-                    <h3>Подбор номера</h3>
-                    <p>Умный поиск по цифрам</p>
-                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSftkjOBj0bgBwQh3mfpMk4WzGNSyj7GbZnoQXQm5L7XRN9U0A/viewform?usp=sf_link"
-                       target="_blank" class="btn-primary">Подобрать</a>
-                </div>
+          <!-- Карточка 3: Распродажа -->
+          <div class="number-card">
+            <img
+              src="https://img.icons8.com/ios-filled/50/e30613/discount--v1.png"
+              alt="Распродажа"
+              class="card-icon"
+            />
+            <h3>Распродажа</h3>
+            <p>Скидки на топовые номера</p>
+            <a
+              href="https://disk.yandex.ru/d/A78q6BxgVF2sQA"
+              target="_blank"
+              class="btn-primary"
+              >К распродаже</a
+            >
+          </div>
+        </div>
 
-                <!-- Карточка 3: Распродажа -->
-                <div class="number-card">
-                    <img src="https://img.icons8.com/ios-filled/50/e30613/discount--v1.png" alt="Распродажа" class="card-icon">
-                    <h3>Распродажа</h3>
-                    <p>Скидки на топовые номера</p>
-                    <a href="https://disk.yandex.ru/d/A78q6BxgVF2sQA" target="_blank" class="btn-primary">К распродаже</a>
-                </div>
+        <!-- БАЗА НОМЕРОВ -->
+        <div class="database-section">
+          <h3>Онлайн база номеров</h3>
+
+          <!-- Панель поиска -->
+          <div class="search-panel">
+            <div class="search-box">
+              <input
+                type="text"
+                id="numberSearch"
+                placeholder="Введите цифры для поиска..."
+                onkeypress="handleKeyPress(event)"
+              />
+              <button onclick="searchNumbers()">
+                <i class="fas fa-search"></i> Найти
+              </button>
             </div>
 
-            <!-- БАЗА НОМЕРОВ -->
-            <div class="database-section">
-                <h3>Онлайн база номеров</h3>
-                
-                <!-- Панель поиска -->
-                <div class="search-panel">
-                    <div class="search-box">
-                        <input type="text" id="numberSearch" placeholder="Введите цифры для поиска..." onkeypress="handleKeyPress(event)">
-                        <button onclick="searchNumbers()"><i class="fas fa-search"></i> Найти</button>
-                    </div>
-                    
-                    <div class="filters">
-                        <select id="operatorFilter" onchange="searchNumbers()">
-                            <option value="">Все операторы</option>
-                            <option value="МТС">МТС</option>
-                            <option value="Волна">Волна</option>
-                            <option value="Вин">Вин</option>
-                            <option value="Миранда">Миранда</option>
-                        </select>
-                        
-                        <select id="priceFilter" onchange="searchNumbers()">
-                            <option value="">Любая цена</option>
-                            <option value="2500">2 500 ₽</option>
-                            <option value="4000">4 000 ₽</option>
-                            <option value="6000">6 000 ₽</option>
-                            <option value="8000">8 000 ₽</option>
-                            <option value="10000">10 000 ₽</option>
-                            <option value="20000">20 000 ₽</option>
-                            <option value="25000">25 000 ₽</option>
-                            <option value="35000">35 000 ₽</option>
-                            <option value="40000">40 000 ₽</option>
-                            <option value="45000">45 000 ₽</option>
-                            <option value="50000">50 000 ₽</option>
-                        </select>
-                    </div>
-                </div>
+            <div class="filters">
+              <select id="operatorFilter" onchange="searchNumbers()">
+                <option value="">Все операторы</option>
+                <option value="МТС">МТС</option>
+                <option value="Волна">Волна</option>
+                <option value="Вин">Вин</option>
+                <option value="Миранда">Миранда</option>
+              </select>
 
-                <!-- Результаты поиска -->
-                <div class="search-results">
-                    <div id="resultsCount" class="results-count">Загрузка номеров...</div>
-                    <div id="numbersList" class="numbers-columns"></div>
-                </div>
+              <select id="priceFilter" onchange="searchNumbers()">
+                <option value="">Любая цена</option>
+                <option value="2500">2 500 ₽</option>
+                <option value="4000">4 000 ₽</option>
+                <option value="6000">6 000 ₽</option>
+                <option value="8000">8 000 ₽</option>
+                <option value="10000">10 000 ₽</option>
+                <option value="20000">20 000 ₽</option>
+                <option value="25000">25 000 ₽</option>
+                <option value="35000">35 000 ₽</option>
+                <option value="40000">40 000 ₽</option>
+                <option value="45000">45 000 ₽</option>
+                <option value="50000">50 000 ₽</option>
+              </select>
             </div>
-        </section>
+          </div>
+
+          <!-- Результаты поиска -->
+          <div class="search-results">
+            <div id="resultsCount" class="results-count">
+              Загрузка номеров...
+            </div>
+            <div id="numbersList" class="numbers-columns"></div>
+          </div>
+        </div>
+      </section>
     </div>
 
     <!-- ПОДВАЛ -->
     <footer class="site-footer">
-        <div class="footer-container">
-            <div class="footer-col">
-                <img src="img/logo.PNG" alt="Логотип Vip-simka" style="width: 120px; margin-bottom: 15px;">
-                <div class="share-container">
-                    <button onclick="sharePage()" class="share-btn">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4nyxhOq62ylFOpeWtfM9pfbieq0slJSmlUHJQz8-1Ry-f5bkXOwbzAYgVoYnuiaayV7Y&usqp=CAU"
-                             alt="Поделиться" class="share-icon">
-                        Поделиться с друзьями
-                    </button>
-                </div>
-            </div>
-            <div class="footer-col">
-                <p class="footer-text">
-                    <strong>Уважаемые клиенты!</strong>
-                    <br><br>
-                    С 1 июня 2018 г. в соответствии с поправками в Федеральном законе "О связи" 126-ФЗ, продажа и
-                    активация SIM-карт возможна только по паспорту.
-                    <br><br>
-                    <a href="https://vip-simka.jimdofree.com/%D0%B7%D0%B0%D0%BA%D0%BE%D0%BD-%D0%BE-%D1%81%D0%B2%D1%8F%D0%B7%D0%B8/"
-                       target="_blank" class="footer-link">Подробнее...</a>
-                </p>
-                <p class="footer-disclaimer">
-                    Информационные материалы и цены, размещенные на сайте, не являются публичной офертой.
-                    <br><br>
-                    <strong>⚠️ Наш ресурс и наши консультанты не несут ответственности за изменения условий обслуживания
-                        абонентов со стороны операторов связи или компаний, их представляющих.</strong>
-                </p>
-            </div>
-            <div class="footer-col">
-                <h4 class="footer-title">Наши контакты:</h4>
-                <p class="contact-number">
-                    <strong>Max / Telegram / WhatsApp</strong><br>
-                    +7 991 555 666 3 (24/7)
-                </p>
-                <p class="footer-warning">
-                    <strong>ВАЖНО!</strong><br>
-                    Другие контакты не имеют отношения к нашему сайту, и мы не несем ответственности за действия третьих
-                    лиц, ссылающихся на наш сайт.
-                </p>
-            </div>
+      <div class="footer-container">
+        <div class="footer-col">
+          <img
+            src="img/logo.PNG"
+            alt="Логотип Vip-simka"
+            style="width: 120px; margin-bottom: 15px"
+          />
+          <div class="share-container">
+            <button onclick="sharePage()" class="share-btn">
+              <img
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4nyxhOq62ylFOpeWtfM9pfbieq0slJSmlUHJQz8-1Ry-f5bkXOwbzAYgVoYnuiaayV7Y&usqp=CAU"
+                alt="Поделиться"
+                class="share-icon"
+              />
+              Поделиться с друзьями
+            </button>
+          </div>
         </div>
+        <div class="footer-col">
+          <p class="footer-text">
+            <strong>Уважаемые клиенты!</strong>
+            <br /><br />
+            С 1 июня 2018 г. в соответствии с поправками в Федеральном законе "О
+            связи" 126-ФЗ, продажа и активация SIM-карт возможна только по
+            паспорту.
+            <br /><br />
+            <a
+              href="https://vip-simka.jimdofree.com/%D0%B7%D0%B0%D0%BA%D0%BE%D0%BD-%D0%BE-%D1%81%D0%B2%D1%8F%D0%B7%D0%B8/"
+              target="_blank"
+              class="footer-link"
+              >Подробнее...</a
+            >
+          </p>
+          <p class="footer-disclaimer">
+            Информационные материалы и цены, размещенные на сайте, не являются
+            публичной офертой.
+            <br /><br />
+            <strong
+              >⚠️ Наш ресурс и наши консультанты не несут ответственности за
+              изменения условий обслуживания абонентов со стороны операторов
+              связи или компаний, их представляющих.</strong
+            >
+          </p>
+        </div>
+        <div class="footer-col">
+          <h4 class="footer-title">Наши контакты:</h4>
+          <p class="contact-number">
+            <strong>Max / Telegram / WhatsApp</strong><br />
+            +7 991 555 666 3 (24/7)
+          </p>
+          <p class="footer-warning">
+            <strong>ВАЖНО!</strong><br />
+            Другие контакты не имеют отношения к нашему сайту, и мы несем
+            ответственности за действия третьих лиц, ссылающихся на наш сайт.
+          </p>
+        </div>
+      </div>
     </footer>
 
     <!-- КНОПКА "НАВЕРХ" -->
@@ -602,444 +677,545 @@
 
     <!-- ПЛАВАЮЩАЯ КНОПКА "СВЯЗЬ" -->
     <div class="contact-float">
-        <div class="contact-wrapper">
-            <div class="contact-toggle">Мы на связи</div>
-            <div class="contact-menu">
-                <a href="https://wa.me/79915556663" target="_blank" title="WhatsApp" class="contact-link">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" class="contact-icon">
-                </a>
-                <a href="https://t.me/vipsimka82" target="_blank" title="Telegram" class="contact-link">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram" class="contact-icon">
-                </a>
-                <a href="mailto:vip.simki@vk.com" title="Email" class="contact-link">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/4/4e/Gmail_Icon.png" alt="Email" class="contact-icon">
-                </a>
-                <a href="https://instagram.com/_vipsimka" target="_blank" title="Instagram" class="contact-link">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram" class="contact-icon">
-                </a>
-                <a href="https://facebook.com/vitalij.san.658372" target="_blank" title="Facebook" class="contact-link">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_(2019).svg" alt="Facebook" class="contact-icon">
-                </a>
-                <a href="https://vk.com/vip.simki" target="_blank" title="VK" class="contact-link">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/2/21/VK.com-logo.svg" alt="VK" class="contact-icon">
-                </a>
-            </div>
+      <div class="contact-wrapper">
+        <div class="contact-toggle">Мы на связи</div>
+        <div class="contact-menu">
+          <a
+            href="https://wa.me/79915556663"
+            target="_blank"
+            title="WhatsApp"
+            class="contact-link"
+          >
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
+              alt="WhatsApp"
+              class="contact-icon"
+            />
+          </a>
+          <a
+            href="https://t.me/vipsimka82"
+            target="_blank"
+            title="Telegram"
+            class="contact-link"
+          >
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg"
+              alt="Telegram"
+              class="contact-icon"
+            />
+          </a>
+          <a href="mailto:vip.simki@vk.com" title="Email" class="contact-link">
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/4/4e/Gmail_Icon.png"
+              alt="Email"
+              class="contact-icon"
+            />
+          </a>
+          <a
+            href="https://instagram.com/_vipsimka"
+            target="_blank"
+            title="Instagram"
+            class="contact-link"
+          >
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png"
+              alt="Instagram"
+              class="contact-icon"
+            />
+          </a>
+          <a
+            href="https://facebook.com/vitalij.san.658372"
+            target="_blank"
+            title="Facebook"
+            class="contact-link"
+          >
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_(2019).svg"
+              alt="Facebook"
+              class="contact-icon"
+            />
+          </a>
+          <a
+            href="https://vk.com/vip.simki"
+            target="_blank"
+            title="VK"
+            class="contact-link"
+          >
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/2/21/VK.com-logo.svg"
+              alt="VK"
+              class="contact-icon"
+            />
+          </a>
         </div>
+      </div>
     </div>
 
     <script>
-// Добавляем функционал задержки для плавающей кнопки
-document.addEventListener('DOMContentLoaded', function() {
-    const contactWrapper = document.querySelector('.contact-wrapper');
-    const contactMenu = document.querySelector('.contact-menu');
-    
-    let hideTimeout;
-    let isMenuOpen = false;
-    
-    // Показать меню
-    function showMenu() {
-        clearTimeout(hideTimeout);
-        contactMenu.style.display = 'block';
-        isMenuOpen = true;
-    }
-    
-    // Скрыть меню с задержкой
-    function hideMenu() {
-        hideTimeout = setTimeout(() => {
-            contactMenu.style.display = 'none';
+      // Добавляем функционал задержки для плавающей кнопки
+      document.addEventListener("DOMContentLoaded", function () {
+        const contactWrapper = document.querySelector(".contact-wrapper");
+        const contactMenu = document.querySelector(".contact-menu");
+
+        let hideTimeout;
+        let isMenuOpen = false;
+
+        // Показать меню
+        function showMenu() {
+          clearTimeout(hideTimeout);
+          contactMenu.style.display = "block";
+          isMenuOpen = true;
+        }
+
+        // Скрыть меню с задержкой
+        function hideMenu() {
+          hideTimeout = setTimeout(() => {
+            contactMenu.style.display = "none";
             isMenuOpen = false;
-        }, 300); // Задержка 300мс - можно регулировать
-    }
-    
-    // Отмена скрытия
-    function cancelHide() {
-        clearTimeout(hideTimeout);
-    }
-    
-    // Обработчики событий
-    contactWrapper.addEventListener('mouseenter', showMenu);
-    contactWrapper.addEventListener('mouseleave', hideMenu);
-    
-    contactMenu.addEventListener('mouseenter', cancelHide);
-    contactMenu.addEventListener('mouseleave', hideMenu);
-});
-</script>
+          }, 300); // Задержка 300мс - можно регулировать
+        }
+
+        // Отмена скрытия
+        function cancelHide() {
+          clearTimeout(hideTimeout);
+        }
+
+        // Обработчики событий
+        contactWrapper.addEventListener("mouseenter", showMenu);
+        contactWrapper.addEventListener("mouseleave", hideMenu);
+
+        contactMenu.addEventListener("mouseenter", cancelHide);
+        contactMenu.addEventListener("mouseleave", hideMenu);
+      });
+    </script>
 
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+
     <!-- MOBILE NAV BAR -->
     <div class="mobile-nav-bar">
-        <a href="index.html" class="nav-item active">
-            <i class="fas fa-home"></i>
-            <span>Главная</span>
-        </a>
-        <a href="tariffs.html" class="nav-item">
-            <i class="fas fa-signal"></i>
-            <span>Тарифы</span>
-        </a>
-        <a href="service.html" class="nav-item">
-            <i class="fas fa-cog"></i>
-            <span>Сервис</span>
-        </a>
-        <a href="numbers.html" class="nav-item">
-            <i class="fas fa-hashtag"></i>
-            <span>Номера</span>
-        </a>
-        <a href="https://t.me/vipsimka82" target="_blank" class="nav-item">
-            <i class="fab fa-telegram"></i>
-            <span>Поддержка</span>
-        </a>
+      <a href="index.html" class="nav-item active">
+        <i class="fas fa-home"></i>
+        <span>Главная</span>
+      </a>
+      <a href="tariffs.html" class="nav-item">
+        <i class="fas fa-signal"></i>
+        <span>Тарифы</span>
+      </a>
+      <a href="service.html" class="nav-item">
+        <i class="fas fa-cog"></i>
+        <span>Сервис</span>
+      </a>
+      <a href="numbers.html" class="nav-item">
+        <i class="fas fa-hashtag"></i>
+        <span>Номера</span>
+      </a>
+      <a href="https://t.me/vipsimka82" target="_blank" class="nav-item">
+        <i class="fab fa-telegram"></i>
+        <span>Поддержка</span>
+      </a>
     </div>
 
     <!-- JavaScript -->
     <script>
-        // Конфигурация BIN с API ключом
-        const BIN_CONFIG = {
-            API_KEY: "$2a$10$h2nqVPwwIv04XRDJNXhHJuedTYrRgG9tIX5HbvnfiWo/BE3sWbxxW"
-        };
+      // Конфигурация BIN с API ключом
+      const BIN_CONFIG = {
+        API_KEY: "$2a$10$h2nqVPwwIv04XRDJNXhHJuedTYrRgG9tIX5HbvnfiWo/BE3sWbxxW",
+      };
 
-        // Мульти-BIN система
-        const ADDITIONAL_BINS = [
-            "691cc77743b1c97be9b59e98", // основной BIN
-            "691e1b1143b1c97be9b7db33", // дополнительный BIN 1
-            "691e1b1d43b1c97be9b7db4c"  // дополнительный BIN 2
+      // Мульти-BIN система - объединяем 5 хранилищ в одну базу
+      const ADDITIONAL_BINS = [
+        "691cc77743b1c97be9b59e98", // хранилище 1
+        "691e1b1143b1c97be9b7db33", // хранилище 2
+        "691e1b1d43b1c97be9b7db4c", // хранилище 3
+        "699b4d3143b1c97be9944a59", // хранилище 4 (новое)
+        "699b4d42d0ea881f40cfafc6", // хранилище 5 (новое)
+      ];
+
+      // Глобальные переменные
+      let numbersDatabase = [];
+      let isDataLoaded = false;
+      let currentDisplayedNumbers = [];
+
+      // Инициализация при загрузке страницы
+      document.addEventListener("DOMContentLoaded", function () {
+        console.log(
+          "Страница загружена, начинаем загрузку данных из мульти-BIN системы...",
+        );
+        console.log("Всего BIN-хранилищ:", ADDITIONAL_BINS.length);
+        loadNumbersData();
+      });
+
+      // Загрузка данных из всех BIN'ов
+      async function loadNumbersData() {
+        try {
+          showLoading("Загрузка номеров из базы данных (5 хранилищ)...");
+
+          numbersDatabase = []; // Очищаем базу перед загрузкой
+          let loadedCount = 0;
+
+          // Загружаем данные из всех BIN'ов
+          for (let i = 0; i < ADDITIONAL_BINS.length; i++) {
+            const binId = ADDITIONAL_BINS[i];
+            const binNumbers = await loadBinData(binId, i + 1);
+            if (binNumbers && binNumbers.length > 0) {
+              numbersDatabase = [...numbersDatabase, ...binNumbers];
+              loadedCount++;
+            }
+          }
+
+          if (numbersDatabase.length === 0) {
+            throw new Error("Все BIN'ы пустые или содержат 0 номеров");
+          }
+
+          isDataLoaded = true;
+          console.log(
+            "Данные успешно загружены из всех BIN'ов. Всего номеров:",
+            numbersDatabase.length,
+          );
+          console.log(
+            "Загружено хранилищ:",
+            loadedCount,
+            "из",
+            ADDITIONAL_BINS.length,
+          );
+
+          // Показываем перемешанные номера из разных ценовых категорий
+          showRandomMixedNumbers();
+        } catch (error) {
+          console.error("Ошибка загрузки данных:", error);
+          showError("Ошибка загрузки базы номеров: " + error.message);
+          // Показываем тестовые данные
+          loadFallbackData();
+        }
+      }
+
+      // Загрузка данных из конкретного BIN'а
+      async function loadBinData(binId, binNumber) {
+        try {
+          console.log(`Загрузка данных из BIN ${binNumber} (${binId})...`);
+
+          const response = await fetch(
+            `https://api.jsonbin.io/v3/b/${binId}/latest`,
+            {
+              headers: {
+                "X-Master-Key": BIN_CONFIG.API_KEY,
+              },
+            },
+          );
+
+          console.log(`Ответ от BIN ${binNumber}:`, response.status);
+
+          if (!response.ok) {
+            console.warn(
+              `Ошибка HTTP для BIN ${binNumber}: ${response.status}`,
+            );
+            return [];
+          }
+
+          const data = await response.json();
+
+          let binNumbers = [];
+
+          // Обрабатываем структуру BIN
+          if (Array.isArray(data.record)) {
+            binNumbers = data.record;
+          } else if (data.record && Array.isArray(data.record.numbers)) {
+            binNumbers = data.record.numbers;
+          } else if (data.record && typeof data.record === "object") {
+            // Пытаемся найти массив в объекте
+            for (let key in data.record) {
+              if (Array.isArray(data.record[key])) {
+                binNumbers = data.record[key];
+                break;
+              }
+            }
+          }
+
+          console.log(
+            `Загружено из BIN ${binNumber}: ${binNumbers.length} номеров`,
+          );
+          return binNumbers;
+        } catch (error) {
+          console.error(`Ошибка загрузки BIN ${binNumber}:`, error);
+          return []; // Возвращаем пустой массив при ошибке
+        }
+      }
+
+      // Резервные данные
+      function loadFallbackData() {
+        numbersDatabase = [
+          {
+            id: 1,
+            phone: "+7 978 000-00-00",
+            operator: "МТС",
+            price: 2500,
+            pattern: "9780000000",
+          },
+          {
+            id: 2,
+            phone: "+7 978 111-11-11",
+            operator: "Волна",
+            price: 4000,
+            pattern: "9781111111",
+          },
+          {
+            id: 3,
+            phone: "+7 978 222-22-22",
+            operator: "Вин",
+            price: 6000,
+            pattern: "9782222222",
+          },
+          {
+            id: 4,
+            phone: "+7 978 333-33-33",
+            operator: "Миранда",
+            price: 8000,
+            pattern: "9783333333",
+          },
+          {
+            id: 5,
+            phone: "+7 978 444-44-44",
+            operator: "МТС",
+            price: 10000,
+            pattern: "9784444444",
+          },
+          {
+            id: 6,
+            phone: "+7 978 555-55-55",
+            operator: "Волна",
+            price: 20000,
+            pattern: "9785555555",
+          },
+          {
+            id: 7,
+            phone: "+7 978 666-66-66",
+            operator: "Вин",
+            price: 25000,
+            pattern: "9786666666",
+          },
+          {
+            id: 8,
+            phone: "+7 978 777-77-77",
+            operator: "Миранда",
+            price: 35000,
+            pattern: "9787777777",
+          },
+          {
+            id: 9,
+            phone: "+7 978 888-88-88",
+            operator: "МТС",
+            price: 40000,
+            pattern: "9788888888",
+          },
+          {
+            id: 10,
+            phone: "+7 978 999-99-99",
+            operator: "Волна",
+            price: 45000,
+            pattern: "9789999999",
+          },
+          {
+            id: 11,
+            phone: "+7 978 123-45-67",
+            operator: "Вин",
+            price: 50000,
+            pattern: "9781234567",
+          },
         ];
+        isDataLoaded = true;
+        showRandomMixedNumbers();
+        showError(
+          "Используются тестовые данные. Проверьте подключение к интернету.",
+        );
+      }
 
-        // Глобальные переменные
-        let numbersDatabase = [];
-        let isDataLoaded = false;
-        let currentDisplayedNumbers = [];
+      // Функция для перемешивания массива (Fisher-Yates shuffle)
+      function shuffleArray(array) {
+        const shuffled = [...array];
+        for (let i = shuffled.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+        }
+        return shuffled;
+      }
 
-        // Инициализация при загрузке страницы
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('Страница загружена, начинаем загрузку данных из мульти-BIN системы...');
-            loadNumbersData();
-        });
+      // Показать случайные номера из разных ценовых категорий
+      function showRandomMixedNumbers() {
+        if (!isDataLoaded || numbersDatabase.length === 0) return;
 
-        // Загрузка данных из всех BIN'ов
-        async function loadNumbersData() {
-            try {
-                showLoading('Загрузка номеров из базы данных...');
-                
-                numbersDatabase = []; // Очищаем базу перед загрузкой
-                
-                // Загружаем данные из всех BIN'ов
-                for (let i = 0; i < ADDITIONAL_BINS.length; i++) {
-                    const binId = ADDITIONAL_BINS[i];
-                    await loadBinData(binId, i + 1);
-                }
-                
-                if (numbersDatabase.length === 0) {
-                    throw new Error('Все BIN\'ы пустые или содержат 0 номеров');
-                }
-                
-                isDataLoaded = true;
-                console.log('Данные успешно загружены из всех BIN\'ов. Всего номеров:', numbersDatabase.length);
-                
-                // Показываем перемешанные номера из разных ценовых категорий
-                showRandomMixedNumbers();
-                
-            } catch (error) {
-                console.error('Ошибка загрузки данных:', error);
-                showError('Ошибка загрузки базы номеров: ' + error.message);
-                // Показываем тестовые данные
-                loadFallbackData();
-            }
+        // Перемешиваем всю базу данных
+        const shuffledAllNumbers = shuffleArray(numbersDatabase);
+
+        // Берем все номера для показа (или ограничиваем количеством если нужно)
+        currentDisplayedNumbers = shuffledAllNumbers;
+
+        console.log(
+          "Показаны перемешанные номера из разных ценовых категорий. Всего в базе:",
+          numbersDatabase.length,
+        );
+        console.log("Загружено хранилищ:", ADDITIONAL_BINS.length);
+
+        // Отображаем в двух колонках
+        displayResultsInColumns(currentDisplayedNumbers);
+      }
+
+      // Поиск номеров
+      function searchNumbers() {
+        if (!isDataLoaded) {
+          showError("Данные еще загружаются...");
+          return;
         }
 
-        // Загрузка данных из конкретного BIN'а
-        async function loadBinData(binId, binNumber) {
-            try {
-                console.log(`Загрузка данных из BIN ${binNumber} (${binId})...`);
-                
-                const response = await fetch(`https://api.jsonbin.io/v3/b/${binId}/latest`, {
-                    headers: {
-                        'X-Master-Key': BIN_CONFIG.API_KEY
-                    }
-                });
-                
-                console.log(`Ответ от BIN ${binNumber}:`, response.status);
-                
-                if (!response.ok) {
-                    throw new Error(`Ошибка HTTP для BIN ${binNumber}: ${response.status}`);
-                }
-                
-                const data = await response.json();
-                
-                let binNumbers = [];
-                
-                // Обрабатываем структуру BIN
-                if (Array.isArray(data.record)) {
-                    binNumbers = data.record;
-                } else {
-                    // Если структура другая, пробуем получить numbers массив
-                    binNumbers = data.record?.numbers || data.record || [];
-                }
-                
-                console.log(`Загружено из BIN ${binNumber}: ${binNumbers.length} номеров`);
-                
-                // Добавляем номера в общую базу
-                numbersDatabase = [...numbersDatabase, ...binNumbers];
-                
-            } catch (error) {
-                console.error(`Ошибка загрузки BIN ${binNumber}:`, error);
-                // Продолжаем загрузку из других BIN'ов даже если один не загрузился
-            }
+        const searchDigits = document.getElementById("numberSearch").value;
+        const operator = document.getElementById("operatorFilter").value;
+        const priceFilter = document.getElementById("priceFilter").value;
+
+        console.log("Поиск:", { searchDigits, operator, priceFilter });
+
+        let results = numbersDatabase;
+
+        // Поиск по цифрам
+        if (searchDigits) {
+          const cleanDigits = searchDigits.replace(/\D/g, "");
+          results = results.filter(
+            (item) =>
+              (item.pattern && item.pattern.includes(cleanDigits)) ||
+              (item.phone &&
+                item.phone.replace(/\D/g, "").includes(cleanDigits)),
+          );
+          console.log("После поиска по цифрам:", results.length);
         }
 
-        // Резервные данные
-        function loadFallbackData() {
-            numbersDatabase = [
-                {
-                    "id": 1,
-                    "phone": "+7 978 000-00-00",
-                    "operator": "МТС",
-                    "price": 2500,
-                    "pattern": "9780000000"
-                },
-                {
-                    "id": 2,
-                    "phone": "+7 978 111-11-11",
-                    "operator": "Волна", 
-                    "price": 4000,
-                    "pattern": "9781111111"
-                },
-                {
-                    "id": 3,
-                    "phone": "+7 978 222-22-22",
-                    "operator": "Вин",
-                    "price": 6000,
-                    "pattern": "9782222222"
-                },
-                {
-                    "id": 4,
-                    "phone": "+7 978 333-33-33",
-                    "operator": "Миранда",
-                    "price": 8000,
-                    "pattern": "9783333333"
-                },
-                {
-                    "id": 5,
-                    "phone": "+7 978 444-44-44",
-                    "operator": "МТС",
-                    "price": 10000,
-                    "pattern": "9784444444"
-                },
-                {
-                    "id": 6,
-                    "phone": "+7 978 555-55-55",
-                    "operator": "Волна",
-                    "price": 20000,
-                    "pattern": "9785555555"
-                },
-                {
-                    "id": 7,
-                    "phone": "+7 978 666-66-66",
-                    "operator": "Вин",
-                    "price": 25000,
-                    "pattern": "9786666666"
-                },
-                {
-                    "id": 8,
-                    "phone": "+7 978 777-77-77",
-                    "operator": "Миранда",
-                    "price": 35000,
-                    "pattern": "9787777777"
-                },
-                {
-                    "id": 9,
-                    "phone": "+7 978 888-88-88",
-                    "operator": "МТС",
-                    "price": 40000,
-                    "pattern": "9788888888"
-                },
-                {
-                    "id": 10,
-                    "phone": "+7 978 999-99-99",
-                    "operator": "Волна",
-                    "price": 45000,
-                    "pattern": "9789999999"
-                },
-                {
-                    "id": 11,
-                    "phone": "+7 978 123-45-67",
-                    "operator": "Вин",
-                    "price": 50000,
-                    "pattern": "9781234567"
-                }
-            ];
-            isDataLoaded = true;
-            showRandomMixedNumbers();
-            showError('Используются тестовые данные. Проверьте подключение к интернету.');
+        // Фильтр по оператору
+        if (operator) {
+          results = results.filter((item) => item.operator === operator);
+          console.log("После фильтра по оператору:", results.length);
         }
 
-        // Функция для перемешивания массива (Fisher-Yates shuffle)
-        function shuffleArray(array) {
-            const shuffled = [...array];
-            for (let i = shuffled.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-            }
-            return shuffled;
+        // Фильтр по точной цене
+        if (priceFilter) {
+          const exactPrice = parseInt(priceFilter);
+          results = results.filter((item) => item.price === exactPrice);
+          console.log("После фильтра по цене:", results.length);
         }
 
-        // Показать случайные номера из разных ценовых категорий
-        function showRandomMixedNumbers() {
-            if (!isDataLoaded || numbersDatabase.length === 0) return;
+        // Перемешиваем результаты поиска
+        const shuffledResults = shuffleArray(results);
+        currentDisplayedNumbers = shuffledResults;
+        displayResultsInColumns(currentDisplayedNumbers);
+      }
 
-            // Перемешиваем всю базу данных
-            const shuffledAllNumbers = shuffleArray(numbersDatabase);
-            
-            // Берем все номера для показа (или ограничиваем количеством если нужно)
-            currentDisplayedNumbers = shuffledAllNumbers;
-            
-            console.log('Показаны перемешанные номера из разных ценовых категорий:', currentDisplayedNumbers.length);
-            
-            // Отображаем в двух колонках
-            displayResultsInColumns(currentDisplayedNumbers);
+      // Отображение результатов в двух колонках
+      function displayResultsInColumns(numbers) {
+        const container = document.getElementById("numbersList");
+        const countElement = document.getElementById("resultsCount");
+
+        countElement.textContent = `Найдено номеров: ${numbers.length} (из ${numbersDatabase.length} в базе)`;
+
+        if (numbers.length === 0) {
+          container.innerHTML =
+            '<div class="no-results">Номера не найдены. Попробуйте изменить параметры поиска.</div>';
+          return;
         }
 
-        // Поиск номеров
-        function searchNumbers() {
-            if (!isDataLoaded) {
-                showError('Данные еще загружаются...');
-                return;
-            }
+        // Разделяем на две колонки
+        const midIndex = Math.ceil(numbers.length / 2);
+        const column1 = numbers.slice(0, midIndex);
+        const column2 = numbers.slice(midIndex);
 
-            const searchDigits = document.getElementById('numberSearch').value;
-            const operator = document.getElementById('operatorFilter').value;
-            const priceFilter = document.getElementById('priceFilter').value;
+        // Добавляем уведомление о случайном порядке и количестве хранилищ
+        const refreshNotice =
+          numbers.length === numbersDatabase.length
+            ? '<div class="refresh-notice">💫 Номера отображаются в случайном порядке. Обновите страницу для новой выборки!</div>'
+            : "";
 
-            console.log('Поиск:', { searchDigits, operator, priceFilter });
-
-            let results = numbersDatabase;
-
-            // Поиск по цифрам
-            if (searchDigits) {
-                const cleanDigits = searchDigits.replace(/\D/g, '');
-                results = results.filter(item => 
-                    item.pattern.includes(cleanDigits) || 
-                    item.phone.replace(/\D/g, '').includes(cleanDigits)
-                );
-                console.log('После поиска по цифрам:', results.length);
-            }
-
-            // Фильтр по оператору
-            if (operator) {
-                results = results.filter(item => item.operator === operator);
-                console.log('После фильтра по оператору:', results.length);
-            }
-
-            // Фильтр по точной цене
-            if (priceFilter) {
-                const exactPrice = parseInt(priceFilter);
-                results = results.filter(item => item.price === exactPrice);
-                console.log('После фильтра по цене:', results.length);
-            }
-
-            // Перемешиваем результаты поиска
-            const shuffledResults = shuffleArray(results);
-            currentDisplayedNumbers = shuffledResults;
-            displayResultsInColumns(currentDisplayedNumbers);
-        }
-
-        // Отображение результатов в двух колонках
-        function displayResultsInColumns(numbers) {
-            const container = document.getElementById('numbersList');
-            const countElement = document.getElementById('resultsCount');
-            
-            countElement.textContent = `Найдено номеров: ${numbers.length}`;
-            
-            if (numbers.length === 0) {
-                container.innerHTML = '<div class="no-results">Номера не найдены. Попробуйте изменить параметры поиска.</div>';
-                return;
-            }
-
-            // Разделяем на две колонки
-            const midIndex = Math.ceil(numbers.length / 2);
-            const column1 = numbers.slice(0, midIndex);
-            const column2 = numbers.slice(midIndex);
-
-            // Добавляем уведомление о случайном порядке
-            const refreshNotice = numbers.length === numbersDatabase.length ? 
-                '<div class="refresh-notice">💫 Номера отображаются в случайном порядке. Обновите страницу для новой выборки!</div>' : '';
-
-            container.innerHTML = refreshNotice + `
+        container.innerHTML =
+          refreshNotice +
+          `
                 <div class="numbers-column">
-                    
-                    ${column1.map(number => `
+                    ${column1
+                      .map(
+                        (number) => `
                         <div class="number-item">
                             <div class="number-info">
-                                <div class="number-phone">${number.phone}</div>
-                                <div class="number-details">${number.operator}</div>
+                                <div class="number-phone">${number.phone || "Нет номера"}</div>
+                                <div class="number-details">${number.operator || "Оператор не указан"}</div>
                             </div>
-                            <div class="number-price">${number.price.toLocaleString()} ₽</div>
+                            <div class="number-price">${number.price ? number.price.toLocaleString() + " ₽" : "Цена не указана"}</div>
                         </div>
-                    `).join('')}
+                    `,
+                      )
+                      .join("")}
                 </div>
                 <div class="numbers-column">
-                    
-                    ${column2.map(number => `
+                    ${column2
+                      .map(
+                        (number) => `
                         <div class="number-item">
                             <div class="number-info">
-                                <div class="number-phone">${number.phone}</div>
-                                <div class="number-details">${number.operator}</div>
+                                <div class="number-phone">${number.phone || "Нет номера"}</div>
+                                <div class="number-details">${number.operator || "Оператор не указан"}</div>
                             </div>
-                            <div class="number-price">${number.price.toLocaleString()} ₽</div>
+                            <div class="number-price">${number.price ? number.price.toLocaleString() + " ₽" : "Цена не указана"}</div>
                         </div>
-                    `).join('')}
+                    `,
+                      )
+                      .join("")}
                 </div>
             `;
-            
-            console.log('Отображено номеров:', numbers.length);
-            console.log('Колонка 1:', column1.length, 'номеров');
-            console.log('Колонка 2:', column2.length, 'номеров');
-        }
 
-        // Вспомогательные функции
-        function handleKeyPress(event) {
-            if (event.key === 'Enter') {
-                searchNumbers();
-            }
-        }
+        console.log("Отображено номеров:", numbers.length);
+        console.log("Колонка 1:", column1.length, "номеров");
+        console.log("Колонка 2:", column2.length, "номеров");
+      }
 
-        function showLoading(message) {
-            const container = document.getElementById('numbersList');
-            const countElement = document.getElementById('resultsCount');
-            countElement.textContent = message;
-            container.innerHTML = '<div class="loading">Пожалуйста, подождите...</div>';
+      // Вспомогательные функции
+      function handleKeyPress(event) {
+        if (event.key === "Enter") {
+          searchNumbers();
         }
+      }
 
-        function showError(message) {
-            const container = document.getElementById('numbersList');
-            container.innerHTML = `<div class="error-message">${message}</div>`;
-        }
+      function showLoading(message) {
+        const container = document.getElementById("numbersList");
+        const countElement = document.getElementById("resultsCount");
+        countElement.textContent = message;
+        container.innerHTML =
+          '<div class="loading">Пожалуйста, подождите...</div>';
+      }
 
-        function sharePage() {
-            if (navigator.share) {
-                navigator.share({
-                    title: 'VIP SIM - Красивые номера',
-                    url: window.location.href
-                });
-            } else {
-                alert('Скопируйте ссылку: ' + window.location.href);
-            }
-        }
+      function showError(message) {
+        const container = document.getElementById("numbersList");
+        container.innerHTML = `<div class="error-message">${message}</div>`;
+      }
 
-        // Функция для принудительного обновления номеров
-        function refreshNumbers() {
-            if (isDataLoaded) {
-                showRandomMixedNumbers();
-            }
+      function sharePage() {
+        if (navigator.share) {
+          navigator.share({
+            title: "VIP SIM - Красивые номера",
+            url: window.location.href,
+          });
+        } else {
+          alert("Скопируйте ссылку: " + window.location.href);
         }
+      }
+
+      // Функция для принудительного обновления номеров
+      function refreshNumbers() {
+        if (isDataLoaded) {
+          showRandomMixedNumbers();
+        }
+      }
     </script>
 
     <!-- ЕДИНЫЙ JS -->
     <script src="js/script.js"></script>
 
-<!-- Кнопка подписки на ТГ -->
-<script src="telegram-widget.js"></script>
-
-</body>
+    <!-- Кнопка подписки на ТГ -->
+    <script src="telegram-widget.js"></script>
+  </body>
 </html>
