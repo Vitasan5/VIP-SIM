@@ -151,6 +151,219 @@
         </p>
       </section>
 
+      <!-- РЕКЛАМНЫЙ ВИДЕОБЛОК (ПОСТЕР) -->
+<section class="promo-video-block">
+  <div class="promo-video-container">
+    <video class="promo-video" autoplay muted loop playsinline poster="img/video-poster.jpg">
+      <source src="video/Тариф УБМ-1700.mp4" type="video/mp4">
+      <source src="video/Тариф УБМ-1700.mp4" type="video/webm">
+      <!-- Если видео не загрузится - покажем картинку -->
+      <img src="img/Умный-1700 застака для видео.PNG" alt="Рекламный постер" class="promo-fallback">
+    </video>
+    
+    <!-- Кнопка звука (опционально) -->
+    <button class="video-sound-btn" aria-label="Включить звук">
+      <svg class="sound-icon sound-off" viewBox="0 0 24 24">
+        <path d="M3 9v6h4l5 5V4L7 9H3z"/>
+        <line x1="22" y1="9" x2="16" y2="15" stroke="currentColor" stroke-width="2"/>
+        <line x1="16" y1="9" x2="22" y2="15" stroke="currentColor" stroke-width="2"/>
+      </svg>
+      <svg class="sound-icon sound-on" style="display: none;" viewBox="0 0 24 24">
+        <path d="M3 9v6h4l5 5V4L7 9H3z"/>
+        <path d="M18.5 12c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/>
+        <path d="M20 12c0 2.83-1.44 5.33-3.6 6.7l1.4 1.4C20.42 18.07 22 15.23 22 12s-1.58-6.07-4.2-8.1l-1.4 1.4C18.56 6.67 20 9.17 20 12z"/>
+      </svg>
+    </button>
+  </div>
+</section>
+
+<style>
+/* СТИЛИ ДЛЯ РЕКЛАМНОГО ВИДЕОБЛОКА */
+.promo-video-block {
+  width: 100%;
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+.promo-video-container {
+  position: relative;
+  width: 100%;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+  aspect-ratio: 16 / 9; /* Соотношение сторон 16:9 */
+  background: #000; /* Фон пока грузится видео */
+}
+
+.promo-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Видео покрывает всю область */
+  display: block;
+  pointer-events: none; /* Запрещаем клики по видео (как постер) */
+}
+
+/* Запасной вариант, если видео не загрузилось */
+.promo-fallback {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Кнопка включения звука */
+.video-sound-btn {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.6);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  transition: all 0.3s ease;
+  z-index: 10;
+  backdrop-filter: blur(5px);
+  opacity: 0.7;
+  border: none;
+}
+
+.video-sound-btn:hover {
+  opacity: 1;
+  background: rgba(227, 6, 19, 0.8);
+  transform: scale(1.1);
+}
+
+.sound-icon {
+  width: 24px;
+  height: 24px;
+  fill: currentColor;
+}
+
+/* Анимация появления */
+.promo-video-block {
+  animation: fadeIn 1s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Мобильная версия */
+@media (max-width: 768px) {
+  .promo-video-block {
+    margin: 30px auto;
+    padding: 0 15px;
+  }
+  
+  .video-sound-btn {
+    width: 40px;
+    height: 40px;
+    bottom: 15px;
+    right: 15px;
+  }
+  
+  .sound-icon {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .promo-video-block {
+    margin: 20px auto;
+    padding: 0 10px;
+  }
+  
+  .video-sound-btn {
+    width: 36px;
+    height: 36px;
+    bottom: 10px;
+    right: 10px;
+  }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const videoBlock = document.querySelector('.promo-video-block');
+  if (!videoBlock) return;
+  
+  const video = videoBlock.querySelector('.promo-video');
+  const soundBtn = videoBlock.querySelector('.video-sound-btn');
+  const soundOffIcon = videoBlock.querySelector('.sound-off');
+  const soundOnIcon = videoBlock.querySelector('.sound-on');
+  
+  // Если видео есть и кнопка звука существует
+  if (video && soundBtn) {
+    // По умолчанию звук выключен
+    video.muted = true;
+    
+    // Кнопка включения/выключения звука
+    soundBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      
+      if (video.muted) {
+        video.muted = false;
+        soundOffIcon.style.display = 'none';
+        soundOnIcon.style.display = 'block';
+        
+        // Можно добавить событие в аналитику
+        console.log('Звук включен');
+        // ym(104821156,'reachGoal','video_sound_on');
+      } else {
+        video.muted = true;
+        soundOffIcon.style.display = 'block';
+        soundOnIcon.style.display = 'none';
+        
+        console.log('Звук выключен');
+        // ym(104821156,'reachGoal','video_sound_off');
+      }
+    });
+  }
+  
+  // Дополнительно: видео начинает проигрываться автоматически
+  // Если вдруг автоиграй не сработал
+  if (video) {
+    const playPromise = video.play();
+    
+    if (playPromise !== undefined) {
+      playPromise.catch(error => {
+        // Автовоспроизведение заблокировано браузером
+        console.log('Автовоспроизведение заблокировано');
+        // Можно показать кнопку "Play"
+      });
+    }
+  }
+  
+  // Эффект параллакса при скролле (опционально)
+  window.addEventListener('scroll', function() {
+    const rect = videoBlock.getBoundingClientRect();
+    const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+    
+    if (isVisible && video) {
+      // Можно добавить легкий эффект при скролле
+      const scrollPercent = (window.scrollY - rect.top) / rect.height;
+      // Не делаем ничего, но можно было бы добавить трансформацию
+    }
+  });
+});
+</script>
+
       <!-- ХИТЫ ПРОДАЖ -->
       <section class="hits-wrapper">
         <div class="hits">
@@ -201,6 +414,8 @@
           </a>
         </div>
       </section>
+
+      
 
       <!-- Блок Сервис со слайдером -->
       <section class="service-slider">
