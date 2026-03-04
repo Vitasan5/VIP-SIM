@@ -64,6 +64,125 @@
     <!-- ОБЩИЙ БЕЛЫЙ КОНТЕЙНЕР -->
     <div class="page-wrapper">
 
+        <!-- РЕКЛАМНЫЙ ВИДЕОБЛОК (ПОСТЕР) С КНОПКОЙ ПОДРОБНЕЕ -->
+        <style>
+            /* Рекламный видеоблок */
+            .promo-video-block {
+                width: 100%;
+                max-width: 1200px;
+                margin: 0 auto 30px;
+                padding: 0 15px;
+                box-sizing: border-box;
+            }
+            
+            .promo-video-container {
+                position: relative;
+                width: 100%;
+                border-radius: 16px;
+                overflow: hidden;
+                box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+                background: #f5f5f5;
+            }
+            
+            .promo-video {
+                width: 100%;
+                height: auto;
+                display: block;
+                object-fit: cover;
+                aspect-ratio: 16 / 9;
+            }
+            
+            .promo-fallback {
+                width: 100%;
+                height: auto;
+                display: block;
+            }
+            
+            /* Кнопка подробнее на видео (слева) */
+            .video-overlay {
+                position: absolute;
+                bottom: 20px;
+                left: 20px;
+                z-index: 10;
+            }
+            
+            .video-details-btn {
+                background: linear-gradient(135deg, #ff416c, #ff4b2b);
+                color: white;
+                border: none;
+                border-radius: 30px;
+                padding: 8px 20px;
+                font-size: 14px;
+                font-weight: bold;
+                cursor: pointer;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+                transition: all 0.3s ease;
+                border: 1px solid rgba(255, 255, 255, 0.3);
+                letter-spacing: 0.5px;
+            }
+            
+            .video-details-btn:hover {
+                transform: scale(1.05);
+                background: linear-gradient(135deg, #ff4b2b, #ff416c);
+                box-shadow: 0 8px 18px rgba(0, 0, 0, 0.4);
+                border-color: rgba(255, 255, 255, 0.6);
+            }
+            
+            /* Адаптация для мобильных */
+            @media (max-width: 768px) {
+                .promo-video-block {
+                    margin: 0 auto 20px;
+                    padding: 0 12px;
+                }
+                .promo-video-container {
+                    border-radius: 12px;
+                }
+                .video-overlay {
+                    bottom: 15px;
+                    left: 15px;
+                }
+                .video-details-btn {
+                    padding: 6px 16px;
+                    font-size: 12px;
+                }
+            }
+            
+            @media (max-width: 480px) {
+                .promo-video-block {
+                    margin: 0 auto 15px;
+                    padding: 0 10px;
+                }
+                .promo-video-container {
+                    border-radius: 8px;
+                }
+                .video-overlay {
+                    bottom: 10px;
+                    left: 10px;
+                }
+                .video-details-btn {
+                    padding: 5px 14px;
+                    font-size: 11px;
+                }
+            }
+        </style>
+        
+        <section class="promo-video-block">
+            <div class="promo-video-container">
+                <video class="promo-video" autoplay muted loop playsinline poster="img/video-poster.jpg">
+                    <source src="video/Тариф УБМ-1700.mp4" type="video/mp4">
+                    <source src="video/Тариф УБМ-1700.mp4" type="video/webm">
+                    <!-- Если видео не загрузится - покажем картинку -->
+                    <img src="img/Умный-1700 застака для видео.PNG" alt="Рекламный постер" class="promo-fallback">
+                </video>
+                
+                <!-- Кнопка подробнее (слева, уменьшенная) -->
+                <div class="video-overlay">
+                    <button class="video-details-btn" onclick="openModal('УБМ-1700')">🔍 ПОДРОБНЕЕ</button>
+                </div>
+            </div>
+        </section>
+
+
         <!-- БЛОК 1: Тарифы МТС (2 карточки) -->
         <section class="tariff-block">
             <h2>Тарифы для номера  любого региона, кроме крымских</h2>
@@ -441,6 +560,20 @@ document.addEventListener('DOMContentLoaded', function() {
         <script>
             // Данные по тарифам
             const TARIFFS = {
+                'УБМ-1700': {
+                    image: 'video/Тариф УБМ-1700.mp4', // или картинка img/Умный-1700 застака для видео.PNG
+                    image: 'img/УБМ-1700-4.jpg', // используем указанную картинку
+                    specs: `
+                <p><strong>Абонплата:</strong> 400 руб./мес</p>
+                <p><strong>Интернет:</strong> Безлимитный интернет</p>
+                <p><strong>Минуты:</strong> 1700 минут на все сети России</p>
+                <p><strong>СМС:</strong> 500 на все сети России</p>
+                <p><strong>Работает:</strong> Без роуминга в Крыму и по РФ</p>
+                <p><strong>Подключение:</strong> Только новый номер МТС</p>
+                <p><strong>Особенность:</strong> Саморегистрация. Доставка в любой регион</p>
+            `
+                },
+                
                 'Умный-L': {
                     image: 'img/Тарифы мтс умный L.jpg',
                     specs: `
@@ -617,5 +750,6 @@ document.addEventListener('DOMContentLoaded', function() {
       <script src="telegram-simple.js"></script>
 
 </body>
+
 
 </html>
