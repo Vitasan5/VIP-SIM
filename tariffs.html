@@ -61,10 +61,12 @@
         </div>
     </header>
 
+    
     <!-- ОБЩИЙ БЕЛЫЙ КОНТЕЙНЕР -->
     <div class="page-wrapper">
 
-        <!-- РЕКЛАМНЫЙ ВИДЕОБЛОК (ПОСТЕР) С КНОПКОЙ ПОДРОБНЕЕ -->
+
+<!-- РЕКЛАМНЫЙ ВИДЕОБЛОК (ПОСТЕР) С КНОПКОЙ ПОДРОБНЕЕ -->
         <style>
             /* Рекламный видеоблок */
             .promo-video-block {
@@ -164,6 +166,8 @@
                     font-size: 11px;
                 }
             }
+
+            
         </style>
         
         <section class="promo-video-block">
@@ -182,9 +186,11 @@
             </div>
         </section>
 
-
+        
         <!-- БЛОК 1: Тарифы МТС (2 карточки) -->
         <section class="tariff-block">
+
+            
             <h2>Тарифы для номера  любого региона, кроме крымских</h2>
             <p class="tariff-subtitle">Подключиться к любому тарифу, действующему в Крыму, можно по адресу:
                 г.Симферополь, пр.Кирова,16. Магазин Terminal.</p>
@@ -199,20 +205,22 @@
         </section>
 
         <!-- БЛОК 2: МТС-978 (3 карточки) -->
-        <section class="tariff-block">
-            <h2>Тарифы для крымского номера </h2>
-            <p class="tariff-subtitle">Подключиться к любому тарифу, действующему в Крыму, можно по адресу:
-                г.Симферополь, пр.Кирова,16. Магазин Terminal.</p>
-            <div class="image-row">
-                <a href="#" onclick="openModal('БОЛЬШЕ АКЦИЯ'); return false;">
-                    <img src="img/БОЛЬШЕ АКЦИЯ.jpg" alt="МТС-978 Больше">
-                </a>
-                <a href="#" onclick="openModal('СуперКрым АКЦИЯ'); return false;">
-                    <img src="img/СуперКрым АКЦИЯ.jpg" alt="МТС-978 СуперКрым">
-                </a>
-                
-            </div>
-        </section>
+<section class="tariff-block">
+    <h2>Тарифы для крымского номера </h2>
+    <p class="tariff-subtitle">Подключиться к любому тарифу, действующему в Крыму, можно по адресу:
+        г.Симферополь, пр.Кирова,16. Магазин Terminal.</p>
+    <div class="image-row">
+        <a href="#" onclick="openModal('БОЛЬШЕ АКЦИЯ'); return false;">
+            <img src="img/БОЛЬШЕ АКЦИЯ.jpg" alt="МТС-978 Больше">
+        </a>
+        <a href="#" onclick="openModal('СуперКрым АКЦИЯ'); return false;">
+            <img src="img/СуперКрым АКЦИЯ.jpg" alt="МТС-978 СуперКрым">
+        </a>
+        <a href="#" onclick="openModal('Нулевой'); return false;">
+            <img src="img/нулевой.jpg" alt="Нулевой тариф">
+        </a>
+    </div>
+</section>
 
         <!-- БЛОК 3: Непубличные тарифы МТС (918/988) -->
         <section class="tariff-block">
@@ -560,7 +568,7 @@ document.addEventListener('DOMContentLoaded', function() {
         <script>
             // Данные по тарифам
             const TARIFFS = {
-                'УБМ-1700': {
+                 'УБМ-1700': {
                     image: 'video/Тариф УБМ-1700.mp4', // или картинка img/Умный-1700 застака для видео.PNG
                     image: 'img/УБМ-1700-4.JPG', // используем указанную картинку
                     specs: `
@@ -574,7 +582,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 <p><strong>Особенность:</strong> Саморегистрация. Доставка в любой регион</p>
             `
                 },
-                
+
                 'Умный-L': {
                     image: 'img/Тарифы мтс умный L.jpg',
                     specs: `
@@ -621,6 +629,20 @@ document.addEventListener('DOMContentLoaded', function() {
                 <p><strong>СМС:</strong> 100 на все сети России</p>
                 <p><strong>Работает:</strong> Без роуминга в Крыму и по РФ</p>
                 <p><strong>Подключение:</strong> Только на номера МТС-978</p>
+            `
+                },
+
+                'Нулевой': {
+                    image: 'img/нулевой.jpg',
+                    specs: `
+                <p><strong>Абонплата:</strong> О руб./мес</p>
+                
+                <p><strong>Интернет:</strong> 0 Гб</p>
+                
+                <p><strong>Минуты:</strong> О - Оплачиваются по факту использования</p>
+                <p><strong>СМС:</strong> 0 - Оплачиваются по факту использования</p>
+                <p><strong>Работает:</strong> Без роуминга в Крыму и по РФ</p>
+                <p><strong>Подключение:</strong> Только новый номер МТС-978</p>
             `
                 },
                
@@ -752,8 +774,4 @@ document.addEventListener('DOMContentLoaded', function() {
 
 </body>
 
-
 </html>
-
-
-
