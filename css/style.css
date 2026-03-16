@@ -2260,7 +2260,17 @@ header nav a:hover {
         margin: 20px 10px 15px;
         font-weight: 600;
     }
-
+/* Заголовки на странице тарифов */
+    h2, .tariff-block h2, .operators-block h2, .service-slider h1 {
+        font-size: 18px !important;
+        margin: 20px 10px 15px !important;
+        font-weight: 600 !important;
+        color: #333 !important;
+    }
+    
+    .tariff-block:first-of-type h2 {
+        margin-top: 10px !important;
+    }
     h3 {
         font-size: 16px !important;
     }
@@ -2989,6 +2999,7 @@ header nav a:hover {
   /* Ничего не скрываем — кнопка остаётся на месте */
   /* Убедись, что header использует flex или grid для корректного расположения */
 }
+
 
 
 
