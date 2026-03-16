@@ -2590,7 +2590,7 @@ header nav a:hover {
 
     .page-wrapper {
         margin-top: 0 !important;
-        padding-top: 0 !important;
+        padding-top: 20 !important;
         border-radius: 0 !important;
     }
 
@@ -2989,5 +2989,6 @@ header nav a:hover {
   /* Ничего не скрываем — кнопка остаётся на месте */
   /* Убедись, что header использует flex или grid для корректного расположения */
 }
+
 
 
