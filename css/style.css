@@ -2254,22 +2254,90 @@ header nav a:hover {
 ======================================== */
 @media (max-width: 768px) {
 
-    /* === 1. Уменьшаем заголовки — как в приложении === */
-    h1, .left-align {
-        font-size: 18px !important;
-        margin: 20px 10px 15px;
-        font-weight: 600;
-    }
-/* Заголовки на странице тарифов */
-    h2, .tariff-block h2, .operators-block h2, .service-slider h1 {
-        font-size: 18px !important;
-        margin: 20px 10px 15px !important;
-        font-weight: 600 !important;
-        color: #333 !important;
+    /* === 1. Убираем отступы у контейнеров === */
+    section, .hits-wrapper, .catalog, .service-slider, 
+    .tariff-block, .operators-block, .image-card-section {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
     }
     
+    /* === 2. ЗАГОЛОВКИ - БЕЗ ОТСТУПА (вровень с контентом) === */
+    h1, h2, .left-align, 
+    .tariff-block h2,
+    .operators-block h2,
+    .service-slider h1,
+    .image-card-section h2,
+    .two-column-block::before {
+        font-size: 18px !important;
+        margin: 20px 0 15px 0 !important;  /* Убрали отступ 16px, теперь 0 */
+        font-weight: 600 !important;
+        color: #333 !important;
+        text-align: left !important;
+        padding-left: 0 !important;
+    }
+    
+    /* Первый заголовок после шапки */
     .tariff-block:first-of-type h2 {
-        margin-top: 10px !important;
+        margin-top: 16px !important;
+    }
+    
+    /* === 3. КОНТЕНТ - БЕЗ ОТСТУПОВ === */
+    .cards, 
+    .wave-slider, 
+    .win-slider, 
+    .operator-cards,
+    .product-slider-track, 
+    .image-row,
+    .hits .cards,
+    .catalog-items,
+    .service-slider .slider-wrapper {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+    
+    /* Карточки без дополнительных отступов */
+    .card, 
+    .wave-card, 
+    .win-card, 
+    .operator-card,
+    .product-card,
+    .catalog-card {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+    
+    /* Для слайдеров */
+    .wave-slider, .win-slider {
+        gap: 8px !important;
+    }
+    
+    /* Первая карточка в слайдере - без отступа слева */
+    .wave-slider > *:first-child,
+    .win-slider > *:first-child,
+    .cards > *:first-child {
+        margin-left: 0 !important;
+    }
+    
+    /* Заголовки внутри карточек */
+    h3, .card h3, .wave-info h3, .win-info h3 {
+        font-size: 16px !important;
+        text-align: left !important;
+        margin: 8px 0 4px 8px !important;
+    }
+    
+    /* Цены и текст внутри карточек */
+    .price, .wave-price, .win-price, 
+    .card p, .wave-info p, .win-info p {
+        text-align: left !important;
+        margin-left: 8px !important;
+        margin-right: 8px !important;
+    }
+    
+    /* Специально для страницы тарифов */
+    .wave-info, .win-info {
+        padding: 0 !important;
     }
     h3 {
         font-size: 16px !important;
@@ -2999,6 +3067,7 @@ header nav a:hover {
   /* Ничего не скрываем — кнопка остаётся на месте */
   /* Убедись, что header использует flex или grid для корректного расположения */
 }
+
 
 
 
