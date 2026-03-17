@@ -153,30 +153,125 @@
 
      <h1 class="left-align">Хиты продаж</h1>
 
-      <!-- РЕКЛАМНЫЙ ВИДЕОБЛОК (ПОСТЕР) -->
-<section class="promo-video-block">
-  <div class="promo-video-container">
-    <video class="promo-video" autoplay muted loop playsinline poster="img/video-poster.jpg">
-      <source src="video/Тариф УБМ-1700.mp4" type="video/mp4">
-      <source src="video/Тариф УБМ-1700.mp4" type="video/webm">
-      <!-- Если видео не загрузится - покажем картинку -->
-      <img src="img/Умный-1700 застака для видео.PNG" alt="Рекламный постер" class="promo-fallback">A
-    </video>
+     <!-- РЕКЛАМНЫЙ ВИДЕОБЛОК (ПОСТЕР) С КНОПКОЙ ПОДРОБНЕЕ -->
+<style>
+    /* Рекламный видеоблок */
+    .promo-video-block {
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto 30px;
+        padding: 0 15px;
+        box-sizing: border-box;
+    }
     
-    <!-- Кнопка звука (опционально) -->
-    <!-- <button class="video-sound-btn" aria-label="Включить звук">
-      <svg class="sound-icon sound-off" viewBox="0 0 24 24">
-        <path d="M3 9v6h4l5 5V4L7 9H3z"/>
-        <line x1="22" y1="9" x2="16" y2="15" stroke="currentColor" stroke-width="2"/>
-        <line x1="16" y1="9" x2="22" y2="15" stroke="currentColor" stroke-width="2"/>
-      </svg>
-      <svg class="sound-icon sound-on" style="display: none;" viewBox="0 0 24 24">
-        <path d="M3 9v6h4l5 5V4L7 9H3z"/>
-        <path d="M18.5 12c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/>
-        <path d="M20 12c0 2.83-1.44 5.33-3.6 6.7l1.4 1.4C20.42 18.07 22 15.23 22 12s-1.58-6.07-4.2-8.1l-1.4 1.4C18.56 6.67 20 9.17 20 12z"/>
-      </svg>
-    </button>-->
-  </div>
+    .promo-video-container {
+        position: relative;
+        width: 100%;
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        background: #f5f5f5;
+    }
+    
+    .promo-video {
+        width: 100%;
+        height: auto;
+        display: block;
+        object-fit: cover;
+        aspect-ratio: 16 / 9;
+    }
+    
+    .promo-fallback {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+    
+    /* Кнопка подробнее на видео (слева) */
+    .video-overlay {
+        position: absolute;
+        bottom: 20px;
+        left: 20px;
+        z-index: 10;
+    }
+    
+    .video-details-btn {
+        display: inline-block;
+        background: linear-gradient(135deg, #ff416c, #ff4b2b);
+        color: white;
+        border: none;
+        border-radius: 30px;
+        padding: 8px 20px;
+        font-size: 14px;
+        font-weight: bold;
+        cursor: pointer;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        transition: all 0.3s ease;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        letter-spacing: 0.5px;
+        text-decoration: none;
+    }
+    
+    .video-details-btn:hover {
+        transform: scale(1.05);
+        background: linear-gradient(135deg, #ff4b2b, #ff416c);
+        box-shadow: 0 8px 18px rgba(0, 0, 0, 0.4);
+        border-color: rgba(255, 255, 255, 0.6);
+        color: white;
+    }
+    
+    /* Адаптация для мобильных */
+    @media (max-width: 768px) {
+        .promo-video-block {
+            margin: 0 auto 20px;
+            padding: 0 12px;
+        }
+        .promo-video-container {
+            border-radius: 12px;
+        }
+        .video-overlay {
+            bottom: 15px;
+            left: 15px;
+        }
+        .video-details-btn {
+            padding: 6px 16px;
+            font-size: 12px;
+        }
+    }
+    
+    @media (max-width: 480px) {
+        .promo-video-block {
+            margin: 0 auto 15px;
+            padding: 0 10px;
+        }
+        .promo-video-container {
+            border-radius: 8px;
+        }
+        .video-overlay {
+            bottom: 10px;
+            left: 10px;
+        }
+        .video-details-btn {
+            padding: 5px 14px;
+            font-size: 11px;
+        }
+    }
+</style>
+
+<section class="promo-video-block">
+    <div class="promo-video-container">
+        <video class="promo-video" autoplay muted loop playsinline poster="img/video-poster.jpg">
+            <source src="video/Тариф УБМ-1700.mp4" type="video/mp4">
+            <source src="video/Тариф УБМ-1700.mp4" type="video/webm">
+            <!-- Если видео не загрузится - покажем картинку -->
+            <img src="img/Умный-1700 застака для видео.PNG" alt="Рекламный постер" class="promo-fallback">
+        </video>
+        
+        <!-- Кнопка подробнее (слева, уменьшенная) -->
+        <div class="video-overlay">
+            <a href="https://www.vip-sim.ru/tariffs" class="video-details-btn">🔍 ПОДРОБНЕЕ</a>
+        </div>
+    </div>
 </section>
 
 <style>
