@@ -201,6 +201,24 @@
             </div>
         </section>
 
+        <!-- БЛОК 0: УБМ (3 карточки) -->
+<section class="tariff-block">
+    <h2>Выгодные тарифы с новым номером (не 978) </h2>
+    <!-- <p class="tariff-subtitle">Подключиться к любому тарифу, действующему в Крыму, можно по адресу:
+                г.Симферополь, пр.Кирова,16. Магазин Terminal.</p> -->
+    <div class="image-row">
+        <a href="#" onclick="openModal('УБМ-1700'); return false;">
+            <img src="img/УБМ1700.jpg" alt="УБМ1700">
+        </a>
+        <a href="#" onclick="openModal('УБ UNLIM'); return false;">
+            <img src="img/УБ UNLIM.PNG" alt="УБ UNLIM">
+        </a>
+        <a href="#" onclick="openModal('UNLIM200'); return false;">
+            <img src="img/UNLIM200.png" alt="UNLIM200">
+        </a>
+    </div>
+</section>
+
         
         <!-- БЛОК 1: Тарифы МТС (2 карточки) -->
         <section class="tariff-block">
@@ -598,6 +616,40 @@ document.addEventListener('DOMContentLoaded', function() {
                 <p><strong>Работает:</strong> Без роуминга в Крыму и по РФ</p>
                 <p><strong>Подключение:</strong> Только новый номер МТС</p>
                 <p><strong>Формат:</strong> Только SIM </p>
+                <p><strong>Особенность:</strong> Саморегистрация. Доставка в любой регион</p>
+                
+            `
+                },
+
+                   'УБ UNLIM': {
+                    
+                    image: 'img/УБ UNLIM.PNG', // используем указанную картинку
+                    specs: `
+                <p><strong>Абонплата:</strong> 350 руб./мес</p>
+                <p><strong>Интернет:</strong> Безлимитный интернет</p>
+                <p><strong>Раздача:</strong> 150 Гб</p>
+                <p><strong>Минуты:</strong> 700 минут на все сети России</p>
+                <p><strong>СМС:</strong> 500 на все сети России</p>
+                <p><strong>Работает:</strong> Без роуминга в Крыму и по РФ</p>
+                <p><strong>Подключение:</strong> Только новый номер МТС</p>
+                <p><strong>Формат:</strong> SIM / eSIM</p>
+                <p><strong>Особенность:</strong> Регистрация через Госуслуги</p>
+                
+            `
+                },
+
+                     'UNLIM200': {
+                    
+                    image: 'img/UNLIM200.png', // используем указанную картинку
+                    specs: `
+                <p><strong>Абонплата:</strong> 300 руб./мес</p>
+                <p><strong>Интернет:</strong> Безлимитный интернет</p>
+                <p><strong>Раздача:</strong> 150 Гб</p>
+                <p><strong>Минуты:</strong> 200 минут на все сети России</p>
+                
+                <p><strong>Работает:</strong> Без роуминга в Крыму и по РФ</p>
+                <p><strong>Подключение:</strong> Только новый номер МТС</p>
+                <p><strong>Формат:</strong> Только SIM</p>
                 <p><strong>Особенность:</strong> Саморегистрация. Доставка в любой регион</p>
                 
             `
