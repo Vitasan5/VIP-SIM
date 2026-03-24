@@ -3068,7 +3068,12 @@ header nav a:hover {
   /* Убедись, что header использует flex или grid для корректного расположения */
 }
 
-
+@media (max-width: 768px) {
+  /* Отступ для заголовка блока Сервис */
+  .service-slider h1 {
+    margin-left: 16px !important;
+  }
+}
 
 
 
