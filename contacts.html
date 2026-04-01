@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes">
-    <title>VIP SIM — Контакты и онлайн-визитка</title>
+    <title>Вип-Сим — Контакты и онлайн-визитка</title>
+    <!-- Font Awesome 6 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
         * {
@@ -29,13 +30,15 @@
 <body>
     <div style="max-width: 560px; width: 100%; margin: 0 auto; animation: fadeSlideUp 0.45s ease-out;">
         
+        <!-- ГЛАВНАЯ КАРТОЧКА-ВИЗИТКА -->
         <div style="background: #ffffff; border-radius: 44px; box-shadow: 0 25px 45px -12px rgba(0,0,0,0.35), 0 4px 12px rgba(0,0,0,0.05); overflow: hidden;">
             
             <!-- Верхняя часть с логотипом (фон красный) -->
             <div style="background: linear-gradient(135deg, #e30613 0%, #b0020e 100%); padding: 28px 28px 24px 28px; text-align: center;">
                 <div style="display: flex; justify-content: center; align-items: center; gap: 12px; margin-bottom: 12px;">
-                    <div style="background: #e30613; width: 52px; height: 52px; border-radius: 28px; display: flex; align-items: center; justify-content: center; overflow: hidden;">
-                        <img src="/img/logo.png" alt="VIP SIM" style="width: 38px; height: 38px; object-fit: contain;">
+                    <!-- ЛОГОТИП на красном фоне -->
+                    <div style="background: #f9f9f9; width: 60px; height: 60px; border-radius: 28px; display: flex; align-items: center; justify-content: center; overflow: hidden;">
+                        <img src="img/logo.png" alt="VIP SIM" style="width: 50px; height: 50px; object-fit: contain;">
                     </div>
                     <div>
                         <h1 style="color: white; font-size: 28px; font-weight: 800; letter-spacing: -0.3px; margin: 0; line-height: 1.2;">ВИП СИМ</h1>
@@ -45,21 +48,22 @@
                 <div style="width: 60px; height: 3px; background: rgba(255,255,255,0.4); margin: 14px auto 0 auto; border-radius: 4px;"></div>
             </div>
             
-            <!-- БЛОК MAX -->
+            <!-- БЛОК MAX (первый, с оригинальной иконкой) -->
             <div style="padding: 24px 28px 12px 28px;">
-                <div style="background: #F8F9FC; border-radius: 28px; padding: 16px 20px; margin-bottom: 24px; border: 1px solid rgba(0,0,0,0.04);">
+                <div style="background: #F8F9FC; border-radius: 28px; padding: 16px 20px; margin-bottom: 24px; border: 1px solid rgba(0,0,0,0.04); box-shadow: 0 2px 6px rgba(0,0,0,0.02);">
                     <div style="display: flex; align-items: center; gap: 14px; flex-wrap: wrap; justify-content: space-between;">
                         <div style="display: flex; align-items: center; gap: 14px;">
+                            <!-- Иконка MAX -->
                             <div style="background: #e30613; width: 52px; height: 52px; border-radius: 32px; display: flex; align-items: center; justify-content: center; box-shadow: 0 6px 12px rgba(227,6,19,0.2);">
                                 <i class="fas fa-headset" style="font-size: 28px; color: white;"></i>
                             </div>
                             <div>
-                                <p style="font-size: 13px; font-weight: 600; color: #6c757d;">Менеджер</p>
-                                <p style="font-size: 20px; font-weight: 800; color: #1e2a3a;">+7 991 555 666 3</p>
-                                <p style="font-size: 12px; color: #28a745;"><i class="fas fa-circle" style="font-size: 8px; margin-right: 5px;"></i> Telegram / МАХ / WhatsApp 24/7</p>
+                                <p style="font-size: 13px; font-weight: 600; color: #6c757d; letter-spacing: 0.3px; margin: 0 0 2px 0;">Менеджер</p>
+                                <p style="font-size: 20px; font-weight: 800; color: #1e2a3a; margin: 0; line-height: 1.2;">+7 991 555 666 3</p>
+                                <p style="font-size: 12px; color: #28a745; margin: 4px 0 0 0;"><i class="fas fa-circle" style="font-size: 8px; margin-right: 5px;"></i> Telegram / МАХ / WhatsApp  24/7</p>
                             </div>
                         </div>
-                        <button id="copyPhoneBtn" style="background: #eef2f7; border: none; border-radius: 40px; padding: 10px 18px; font-size: 13px; font-weight: 600; color: #e30613; cursor: pointer;">
+                        <button id="copyPhoneBtn" style="background: #eef2f7; border: none; border-radius: 40px; padding: 10px 18px; font-size: 13px; font-weight: 600; color: #e30613; display: flex; align-items: center; gap: 8px; cursor: pointer; transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">
                             <i class="fas fa-copy"></i> Копировать
                         </button>
                     </div>
@@ -68,209 +72,226 @@
             
             <!-- ЗАГОЛОВОК МЕССЕНДЖЕРОВ -->
             <div style="padding: 0 28px 12px 28px;">
-                <div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
-                    <h2 style="font-size: 20px; font-weight: 700; color: #1e293b;"><i class="fas fa-share-alt" style="color: #e30613;"></i> Связь в один клик</h2>
-                    <span style="font-size: 12px; background: #f0f2f5; padding: 4px 12px; border-radius: 40px;">онлайн 24/7</span>
+                <div style="display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 20px;">
+                    <h2 style="font-size: 20px; font-weight: 700; color: #1e293b; letter-spacing: -0.2px;"><i class="fas fa-share-alt" style="color: #e30613; margin-right: 8px; font-size: 18px;"></i> Связь в один клик</h2>
+                    <span style="font-size: 12px; background: #f0f2f5; padding: 4px 12px; border-radius: 40px; color: #4b5563;">онлайн 24/7</span>
                 </div>
             </div>
             
-            <!-- СЕТКА КОНТАКТОВ -->
+            <!-- СЕТКА КОНТАКТОВ: 1. MAX, 2. Telegram, 3. WhatsApp, 4. VK, 5. Email, 6. Instagram, 7. Facebook, 8. На главную -->
             <div style="padding: 0 28px 20px 28px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px;">
                 
-                <!-- MAX -->
-                <a href="https://clck.ru/3S4o3f" target="_blank" style="display: flex; align-items: center; gap: 14px; background: #f9fafc; border-radius: 24px; padding: 14px 18px; text-decoration: none; border: 1px solid #eef2f6;">
-                    <div style="background: #2e06e3; width: 48px; height: 48px; border-radius: 28px; display: flex; align-items: center; justify-content: center; overflow: hidden;">
+                <!-- 1. MAX (прямой чат) -->
+                <a href="https://clck.ru/3S4o3f" target="_blank" rel="noopener noreferrer" style="display: flex; align-items: center; gap: 14px; background: #f9fafc; border-radius: 24px; padding: 14px 18px; text-decoration: none; transition: all 0.2s; border: 1px solid #eef2f6;">
+                    <div style="background: #2e06e3; width: 48px; height: 48px; border-radius: 28px; display: flex; align-items: center; justify-content: center; box-shadow: 0 6px 12px rgba(46,6,227,0.2); overflow: hidden;">
                         <img src="https://upload.wikimedia.org/wikipedia/commons/7/75/Max_logo_2025.png" alt="MAX" style="width: 28px; height: 28px; object-fit: contain;">
                     </div>
                     <div>
-                        <div style="font-weight: 800;">Менеджер MAX</div>
-                        <div style="font-size: 12px; color: #6c757d;">Прямой чат (клик)</div>
+                        <div style="font-weight: 800; color: #1e2a3a; font-size: 17px;"> MAX</div>
+                        <div style="font-size: 12px; color: #6c757d;">Прямой чат</div>
                     </div>
-                    <i class="fas fa-chevron-right" style="margin-left: auto; color: #cbd5e1;"></i>
+                    <i class="fas fa-chevron-right" style="margin-left: auto; color: #cbd5e1; font-size: 14px;"></i>
                 </a>
                 
-                <!-- Telegram -->
-                <a href="https://t.me/vipsimka82" target="_blank" style="display: flex; align-items: center; gap: 14px; background: #f9fafc; border-radius: 24px; padding: 14px 18px; text-decoration: none; border: 1px solid #eef2f6;">
-                    <div style="background: #26A5E4; width: 48px; height: 48px; border-radius: 28px; display: flex; align-items: center; justify-content: center;">
+                <!-- 2. Telegram -->
+                <a href="https://t.me/vipsimka82" target="_blank" rel="noopener noreferrer" style="display: flex; align-items: center; gap: 14px; background: #f9fafc; border-radius: 24px; padding: 14px 18px; text-decoration: none; border: 1px solid #eef2f6;">
+                    <div style="background: #26A5E4; width: 48px; height: 48px; border-radius: 28px; display: flex; align-items: center; justify-content: center; box-shadow: 0 6px 12px rgba(38,165,228,0.2);">
                         <i class="fab fa-telegram" style="font-size: 28px; color: white;"></i>
                     </div>
                     <div>
-                        <div style="font-weight: 800;">Telegram</div>
+                        <div style="font-weight: 800; color: #1e2a3a; font-size: 17px;">Telegram</div>
                         <div style="font-size: 12px; color: #6c757d;">Оперативная поддержка</div>
                     </div>
                     <i class="fas fa-chevron-right" style="margin-left: auto; color: #cbd5e1;"></i>
                 </a>
                 
-                <!-- WhatsApp -->
-                <a href="https://wa.me/79915556663" target="_blank" style="display: flex; align-items: center; gap: 14px; background: #f9fafc; border-radius: 24px; padding: 14px 18px; text-decoration: none; border: 1px solid #eef2f6;">
-                    <div style="background: #25D366; width: 48px; height: 48px; border-radius: 28px; display: flex; align-items: center; justify-content: center;">
+                <!-- 3. WhatsApp -->
+                <a href="https://wa.me/79915556663" target="_blank" rel="noopener noreferrer" style="display: flex; align-items: center; gap: 14px; background: #f9fafc; border-radius: 24px; padding: 14px 18px; text-decoration: none; border: 1px solid #eef2f6;">
+                    <div style="background: #25D366; width: 48px; height: 48px; border-radius: 28px; display: flex; align-items: center; justify-content: center; box-shadow: 0 6px 12px rgba(37,211,102,0.2);">
                         <i class="fab fa-whatsapp" style="font-size: 28px; color: white;"></i>
                     </div>
                     <div>
-                        <div style="font-weight: 800;">WhatsApp</div>
+                        <div style="font-weight: 800; color: #1e2a3a; font-size: 17px;">WhatsApp</div>
                         <div style="font-size: 12px; color: #6c757d;">Написать сообщение</div>
                     </div>
                     <i class="fas fa-chevron-right" style="margin-left: auto; color: #cbd5e1;"></i>
                 </a>
                 
-                <!-- VK -->
-                <a href="https://vk.com/vip.simki" target="_blank" style="display: flex; align-items: center; gap: 14px; background: #f9fafc; border-radius: 24px; padding: 14px 18px; text-decoration: none; border: 1px solid #eef2f6;">
+                <!-- 4. VK (ВКонтакте) -->
+                <a href="https://vk.com/vip.simki" target="_blank" rel="noopener noreferrer" style="display: flex; align-items: center; gap: 14px; background: #f9fafc; border-radius: 24px; padding: 14px 18px; text-decoration: none; border: 1px solid #eef2f6;">
                     <div style="background: #0077FF; width: 48px; height: 48px; border-radius: 28px; display: flex; align-items: center; justify-content: center;">
                         <i class="fab fa-vk" style="font-size: 26px; color: white;"></i>
                     </div>
                     <div>
-                        <div style="font-weight: 800;">ВКонтакте</div>
+                        <div style="font-weight: 800; color: #1e2a3a; font-size: 17px;">ВКонтакте</div>
                         <div style="font-size: 12px; color: #6c757d;">Сообщество VIP SIM</div>
                     </div>
                     <i class="fas fa-chevron-right" style="margin-left: auto; color: #cbd5e1;"></i>
                 </a>
                 
-                <!-- Email -->
+                <!-- 5. Email -->
                 <a href="mailto:vip.simki@vk.com" style="display: flex; align-items: center; gap: 14px; background: #f9fafc; border-radius: 24px; padding: 14px 18px; text-decoration: none; border: 1px solid #eef2f6;">
                     <div style="background: #EA4335; width: 48px; height: 48px; border-radius: 28px; display: flex; align-items: center; justify-content: center;">
                         <i class="fas fa-envelope" style="font-size: 24px; color: white;"></i>
                     </div>
                     <div>
-                        <div style="font-weight: 800;">Email</div>
+                        <div style="font-weight: 800; color: #1e2a3a; font-size: 17px;">Email</div>
                         <div style="font-size: 12px; color: #6c757d;">vip.simki@vk.com</div>
                     </div>
                     <i class="fas fa-chevron-right" style="margin-left: auto; color: #cbd5e1;"></i>
                 </a>
                 
-                <!-- Instagram -->
-                <a href="https://instagram.com/_vipsimka" target="_blank" style="display: flex; align-items: center; gap: 14px; background: #f9fafc; border-radius: 24px; padding: 14px 18px; text-decoration: none; border: 1px solid #eef2f6;">
+                <!-- 6. Instagram -->
+                <a href="https://instagram.com/_vipsimka" target="_blank" rel="noopener noreferrer" style="display: flex; align-items: center; gap: 14px; background: #f9fafc; border-radius: 24px; padding: 14px 18px; text-decoration: none; border: 1px solid #eef2f6;">
                     <div style="background: radial-gradient(circle at 30% 110%, #ffdb7e, #ff9a5a, #d6249f, #285AEB); width: 48px; height: 48px; border-radius: 28px; display: flex; align-items: center; justify-content: center;">
                         <i class="fab fa-instagram" style="font-size: 26px; color: white;"></i>
                     </div>
                     <div>
-                        <div style="font-weight: 800;">Instagram</div>
+                        <div style="font-weight: 800; color: #1e2a3a; font-size: 17px;">Instagram</div>
                         <div style="font-size: 12px; color: #6c757d;">Актуальные новости</div>
                     </div>
                     <i class="fas fa-chevron-right" style="margin-left: auto; color: #cbd5e1;"></i>
                 </a>
                 
-                <!-- Facebook -->
-                <a href="https://facebook.com/vitalij.san.658372" target="_blank" style="display: flex; align-items: center; gap: 14px; background: #f9fafc; border-radius: 24px; padding: 14px 18px; text-decoration: none; border: 1px solid #eef2f6;">
+                <!-- 7. Facebook -->
+                <a href="https://facebook.com/vitalij.san.658372" target="_blank" rel="noopener noreferrer" style="display: flex; align-items: center; gap: 14px; background: #f9fafc; border-radius: 24px; padding: 14px 18px; text-decoration: none; border: 1px solid #eef2f6;">
                     <div style="background: #1877F2; width: 48px; height: 48px; border-radius: 28px; display: flex; align-items: center; justify-content: center;">
                         <i class="fab fa-facebook-f" style="font-size: 26px; color: white;"></i>
                     </div>
                     <div>
-                        <div style="font-weight: 800;">Facebook</div>
+                        <div style="font-weight: 800; color: #1e2a3a; font-size: 17px;">Facebook</div>
                         <div style="font-size: 12px; color: #6c757d;">Страница компании</div>
                     </div>
                     <i class="fas fa-chevron-right" style="margin-left: auto; color: #cbd5e1;"></i>
                 </a>
                 
-                <!-- НА ГЛАВНУЮ -->
-                <a href="/" style="display: flex; align-items: center; gap: 14px; background: linear-gradient(135deg, #e30613 0%, #b0020e 100%); border-radius: 24px; padding: 14px 18px; text-decoration: none; box-shadow: 0 4px 12px rgba(227,6,19,0.3);">
+                <!-- 8. НА ГЛАВНУЮ (переход на главную страницу сайта, без добавления # в URL) -->
+                <a href="/" style="display: flex; align-items: center; gap: 14px; background: linear-gradient(135deg, #e30613 0%, #b0020e 100%); border-radius: 24px; padding: 14px 18px; text-decoration: none; transition: all 0.2s; border: none; box-shadow: 0 4px 12px rgba(227,6,19,0.3);">
                     <div style="background: rgba(255,255,255,0.2); width: 48px; height: 48px; border-radius: 28px; display: flex; align-items: center; justify-content: center;">
                         <i class="fas fa-home" style="font-size: 26px; color: white;"></i>
                     </div>
                     <div>
-                        <div style="font-weight: 800; color: white;">На главную</div>
-                        <div style="font-size: 12px; color: rgba(255,255,255,0.8);">Вернуться на сайт</div>
+                        <div style="font-weight: 800; color: white; font-size: 17px;">Наш сайт</div>
+                        <div style="font-size: 12px; color: rgba(255,255,255,0.8);">Перейти</div>
                     </div>
-                    <i class="fas fa-arrow-right" style="margin-left: auto; color: rgba(255,255,255,0.8);"></i>
+                    <i class="fas fa-arrow-right" style="margin-left: auto; color: rgba(255,255,255,0.8); font-size: 14px;"></i>
                 </a>
             </div>
             
-            <!-- QR-КОД И ССЫЛКА (чистый URL) -->
-            <div style="padding: 16px 28px 28px 28px; border-top: 1px solid #f0f2f6;">
+            <!-- БЛОК QR-КОДА И ССЫЛКИ -->
+            <div style="padding: 16px 28px 28px 28px; border-top: 1px solid #f0f2f6; margin-top: 8px;">
                 <div style="background: #F7F9FD; border-radius: 28px; padding: 20px;">
                     <div style="display: flex; align-items: center; gap: 20px; flex-wrap: wrap; justify-content: center;">
                         <div style="text-align: center;">
-                            <div id="qrcode" style="width: 100px; height: 100px; background: white; border-radius: 20px; padding: 8px; display: flex; align-items: center; justify-content: center;">
+                            <div id="qrcode" style="width: 100px; height: 100px; background: white; border-radius: 20px; padding: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); display: flex; align-items: center; justify-content: center; margin: 0 auto;">
                                 <i class="fas fa-qrcode" style="font-size: 48px; color: #2c3e50;"></i>
                             </div>
-                            <p style="font-size: 11px; margin-top: 10px;">Наведите камеру</p>
+                            <p style="font-size: 11px; margin-top: 10px; color: #5a6874;">Наведите камеру</p>
                         </div>
-                        <div style="flex:1;">
-                            <p style="font-weight: 700;"><i class="fas fa-link"></i> QR-код ведет на эту визитку</p>
-                            <div style="background: white; border-radius: 60px; border: 1px solid #e2e8f0; padding: 6px 12px; display: flex; justify-content: space-between;">
-                                <span id="currentUrlShort" style="font-size: 12px;"></span>
-                                <button id="copyUrlBtn" style="background: none; border: none; cursor: pointer; color: #e30613;"><i class="fas fa-copy"></i></button>
+                        <div style="flex:1; min-width: 160px;">
+                            <p style="font-weight: 700; color: #1e293b; margin-bottom: 6px; display: flex; gap: 6px;"><i class="fas fa-link"></i> QR-код ведет на эту визитку</p>
+                            <div style="background: white; border-radius: 60px; border: 1px solid #e2e8f0; padding: 6px 12px; display: flex; align-items: center; justify-content: space-between;">
+                                <span id="currentUrlShort" style="font-size: 12px; color: #4b5563; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">vip-sim.contact/me</span>
+                                <button id="copyUrlBtn" style="background: none; border: none; cursor: pointer; color: #e30613; font-size: 16px;"><i class="fas fa-copy"></i></button>
                             </div>
-                            <p style="font-size: 12px; margin-top: 12px;"><i class="fas fa-clock"></i> Поддержка 24/7 — ответим в течение 5 минут</p>
+                            <p style="font-size: 12px; color: #6c757d; margin-top: 12px;"><i class="fas fa-clock"></i> Поддержка 24/7 — ответим в течение 5 минут</p>
                         </div>
                     </div>
                 </div>
             </div>
             
             <!-- Футер -->
-            <div style="padding: 20px 28px 24px; text-align: center; border-top: 1px solid #edf2f7;">
-                <p style="font-size: 12px; color: #8b9ab0;"><i class="fas fa-shield-alt"></i> Официальный сервис · SIM-карты, тарифы, восстановление</p>
+            <div style="padding: 20px 28px 24px 28px; background: #ffffff; text-align: center; border-top: 1px solid #edf2f7;">
+                <p style="font-size: 12px; color: #8b9ab0;"><i class="fas fa-shield-alt"></i>  Официальный сервис · SIM-карты, тарифы, восстановление</p>
                 <p style="font-size: 11px; color: #b9c3d0; margin-top: 8px;">© VIP SIM — эксклюзивные тарифы Крым / Россия</p>
             </div>
         </div>
         
         <div style="text-align: center; margin-top: 20px;">
-            <div style="display: inline-flex; gap: 8px; background: rgba(0,0,0,0.05); padding: 6px 16px; border-radius: 60px;">
-                <i class="fas fa-qrcode"></i>
-                <span style="font-size: 12px;">Отсканируйте QR код или поделитесь ссылкой</span>
+            <div style="display: inline-flex; gap: 8px; background: rgba(0,0,0,0.05); backdrop-filter: blur(4px); padding: 6px 16px; border-radius: 60px;">
+                <i class="fas fa-qrcode" style="font-size: 12px;"></i>
+                <span style="font-size: 12px; font-weight: 500;">Отсканируйте QR код или поделитесь ссылкой</span>
             </div>
         </div>
     </div>
 
+    <!-- QRCode.js для генерации QR -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <script>
         (function() {
-            // Получаем "чистый" URL без .html
-            function getCleanUrl() {
-                let url = window.location.href;
-                if (url.endsWith('.html')) {
-                    url = url.slice(0, -5);
-                }
-                return url;
-            }
-            
-            const cleanUrl = getCleanUrl();
-            
-            // Универсальное копирование
-            function copyToClipboard(text, successMsg) {
+            // Копирование текста с уведомлением
+            function copyToClipboard(text, successMsg = "Скопировано!") {
                 navigator.clipboard.writeText(text).then(() => {
                     const toast = document.createElement('div');
-                    toast.innerText = successMsg || 'Скопировано!';
-                    toast.style.cssText = 'position:fixed;bottom:30px;left:50%;transform:translateX(-50%);background:#1f2937;color:white;padding:8px 20px;border-radius:40px;font-size:14px;z-index:9999';
+                    toast.innerText = successMsg;
+                    toast.style.position = 'fixed';
+                    toast.style.bottom = '30px';
+                    toast.style.left = '50%';
+                    toast.style.transform = 'translateX(-50%)';
+                    toast.style.background = '#1f2937';
+                    toast.style.color = 'white';
+                    toast.style.padding = '8px 20px';
+                    toast.style.borderRadius = '40px';
+                    toast.style.fontSize = '14px';
+                    toast.style.zIndex = '9999';
+                    toast.style.fontWeight = '500';
+                    toast.style.boxShadow = '0 8px 18px rgba(0,0,0,0.2)';
                     document.body.appendChild(toast);
                     setTimeout(() => toast.remove(), 1800);
-                }).catch(() => alert('❌ Не удалось скопировать'));
-            }
-            
-            // Кнопка копирования телефона
-            document.getElementById('copyPhoneBtn')?.addEventListener('click', () => {
-                copyToClipboard('+79915556663', 'Номер скопирован ✅');
-            });
-            
-            // Отображение и копирование чистого URL
-            const urlSpan = document.getElementById('currentUrlShort');
-            const copyUrl = document.getElementById('copyUrlBtn');
-            if (urlSpan && copyUrl) {
-                let display = cleanUrl;
-                if (display.length > 45) {
-                    display = display.replace(/^https?:\/\//, '').substring(0, 42) + '...';
-                }
-                urlSpan.innerText = display;
-                copyUrl.addEventListener('click', () => copyToClipboard(cleanUrl, 'Ссылка на визитку скопирована'));
-            }
-            
-            // QR-код с чистым URL
-            const qrDiv = document.getElementById('qrcode');
-            if (qrDiv && typeof QRCode !== 'undefined') {
-                qrDiv.innerHTML = '';
-                new QRCode(qrDiv, {
-                    text: cleanUrl,
-                    width: 100,
-                    height: 100,
-                    colorDark: "#e30613",
-                    colorLight: "#ffffff"
+                }).catch(() => {
+                    alert('❌ Не удалось скопировать, скопируйте вручную');
                 });
             }
             
-            // Анимация карточек
-            document.querySelectorAll('a[style*="background: #f9fafc"], a[style*="linear-gradient(135deg, #e30613"]').forEach(card => {
+            // Кнопка копирования номера MAX
+            const copyPhone = document.getElementById('copyPhoneBtn');
+            if (copyPhone) {
+                copyPhone.addEventListener('click', () => {
+                    copyToClipboard('+79915556663', 'Номер скопирован ✅');
+                });
+            }
+            
+            // Кнопка копирования URL
+            const copyUrlBtn = document.getElementById('copyUrlBtn');
+            const currentUrlSpan = document.getElementById('currentUrlShort');
+            if (copyUrlBtn && currentUrlSpan) {
+                const fullUrl = window.location.href;
+                let displayUrl = fullUrl;
+                if (fullUrl.length > 45) {
+                    displayUrl = fullUrl.replace(/^https?:\/\//, '').substring(0, 42) + '...';
+                }
+                currentUrlSpan.innerText = displayUrl;
+                copyUrlBtn.addEventListener('click', () => {
+                    copyToClipboard(fullUrl, 'Ссылка на визитку скопирована');
+                });
+            }
+            
+            // Генерация QR-кода с текущим URL
+            const qrContainer = document.getElementById('qrcode');
+            if (qrContainer && typeof QRCode !== 'undefined') {
+                qrContainer.innerHTML = '';
+                try {
+                    new QRCode(qrContainer, {
+                        text: window.location.href,
+                        width: 100,
+                        height: 100,
+                        colorDark: "#e30613",
+                        colorLight: "#ffffff",
+                        correctLevel: QRCode.CorrectLevel.M
+                    });
+                } catch(e) {
+                    qrContainer.innerHTML = '<i class="fas fa-qrcode" style="font-size: 48px; color:#e30613;"></i>';
+                }
+            } else if(qrContainer) {
+                qrContainer.innerHTML = '<i class="fas fa-qrcode" style="font-size: 48px; color:#e30613;"></i>';
+            }
+            
+            // Анимация при наведении для всех контактных карточек
+            const contactCards = document.querySelectorAll('a[style*="display: flex; align-items: center; gap: 14px; background: #f9fafc"], a[style*="background: linear-gradient(135deg, #e30613"]');
+            contactCards.forEach(card => {
                 card.addEventListener('mouseenter', () => {
                     card.style.transform = 'translateY(-2px)';
-                    card.style.transition = '0.2s';
+                    card.style.transition = 'transform 0.2s ease, box-shadow 0.2s';
                     card.style.boxShadow = '0 12px 20px -12px rgba(0,0,0,0.15)';
                 });
                 card.addEventListener('mouseleave', () => {
@@ -279,23 +300,43 @@
                 });
             });
             
-            // Адаптивная сетка
-            const grid = document.querySelector('div[style*="grid-template-columns: repeat(2, 1fr); gap: 16px;"]');
-            if (grid) {
-                const updateGrid = () => grid.style.gridTemplateColumns = window.innerWidth < 480 ? '1fr' : 'repeat(2, 1fr)';
-                updateGrid();
-                window.addEventListener('resize', updateGrid);
+            // Предотвращаем добавление # в URL для кнопки "На главную"
+            const homeBtn = document.querySelector('a[href="/"]');
+            if (homeBtn) {
+                homeBtn.addEventListener('click', function(e) {
+                    // Если href="/", то ничего не делаем, браузер сам перейдет
+                    // Но если вдруг нужно предотвратить добавление якорей - это стандартное поведение
+                    // Просто разрешаем переход
+                });
             }
             
-            // Шаринг по клику на заголовок
-            const header = document.querySelector('h2');
-            if (header && header.innerText.includes('Связь в один клик')) {
-                header.style.cursor = 'pointer';
-                header.addEventListener('click', () => {
-                    if (navigator.share) {
-                        navigator.share({ title: 'VIP SIM — Визитка', url: cleanUrl });
+            // Адаптивная сетка: на очень узких экранах делаем 1 колонку
+            const adaptGrid = () => {
+                const gridContainer = document.querySelector('div[style*="grid-template-columns: repeat(2, 1fr); gap: 16px;"]');
+                if (gridContainer) {
+                    if (window.innerWidth < 480) {
+                        gridContainer.style.gridTemplateColumns = '1fr';
                     } else {
-                        copyToClipboard(cleanUrl, 'Ссылка скопирована');
+                        gridContainer.style.gridTemplateColumns = 'repeat(2, 1fr)';
+                    }
+                }
+            };
+            adaptGrid();
+            window.addEventListener('resize', adaptGrid);
+            
+            // Добавляем возможность поделиться визиткой при клике на заголовок "Связь в один клик"
+            const shareHeader = document.querySelector('h2');
+            if (shareHeader && shareHeader.innerText.includes('Связь в один клик')) {
+                shareHeader.style.cursor = 'pointer';
+                shareHeader.addEventListener('click', () => {
+                    if (navigator.share) {
+                        navigator.share({
+                            title: 'VIP SIM — Визитка',
+                            text: 'Эксклюзивные тарифы, поддержка 24/7. Все контакты.',
+                            url: window.location.href,
+                        }).catch(() => {});
+                    } else {
+                        copyToClipboard(window.location.href, 'Ссылка скопирована, поделитесь!');
                     }
                 });
             }
