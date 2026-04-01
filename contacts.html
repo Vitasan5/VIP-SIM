@@ -48,12 +48,11 @@
                 <div style="width: 60px; height: 3px; background: rgba(255,255,255,0.4); margin: 14px auto 0 auto; border-radius: 4px;"></div>
             </div>
             
-            <!-- БЛОК MAX (первый, с оригинальной иконкой) -->
+            <!-- БЛОК MAX -->
             <div style="padding: 24px 28px 12px 28px;">
                 <div style="background: #F8F9FC; border-radius: 28px; padding: 16px 20px; margin-bottom: 24px; border: 1px solid rgba(0,0,0,0.04); box-shadow: 0 2px 6px rgba(0,0,0,0.02);">
                     <div style="display: flex; align-items: center; gap: 14px; flex-wrap: wrap; justify-content: space-between;">
                         <div style="display: flex; align-items: center; gap: 14px;">
-                            <!-- Иконка MAX -->
                             <div style="background: #e30613; width: 52px; height: 52px; border-radius: 32px; display: flex; align-items: center; justify-content: center; box-shadow: 0 6px 12px rgba(227,6,19,0.2);">
                                 <i class="fas fa-headset" style="font-size: 28px; color: white;"></i>
                             </div>
@@ -78,10 +77,10 @@
                 </div>
             </div>
             
-            <!-- СЕТКА КОНТАКТОВ: 1. MAX, 2. Telegram, 3. WhatsApp, 4. VK, 5. Email, 6. Instagram, 7. Facebook, 8. На главную -->
+            <!-- СЕТКА КОНТАКТОВ -->
             <div style="padding: 0 28px 20px 28px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px;">
                 
-                <!-- 1. MAX (прямой чат) -->
+                <!-- 1. MAX -->
                 <a href="https://clck.ru/3S4o3f" target="_blank" rel="noopener noreferrer" style="display: flex; align-items: center; gap: 14px; background: #f9fafc; border-radius: 24px; padding: 14px 18px; text-decoration: none; transition: all 0.2s; border: 1px solid #eef2f6;">
                     <div style="background: #2e06e3; width: 48px; height: 48px; border-radius: 28px; display: flex; align-items: center; justify-content: center; box-shadow: 0 6px 12px rgba(46,6,227,0.2); overflow: hidden;">
                         <img src="https://upload.wikimedia.org/wikipedia/commons/7/75/Max_logo_2025.png" alt="MAX" style="width: 28px; height: 28px; object-fit: contain;">
@@ -117,7 +116,7 @@
                     <i class="fas fa-chevron-right" style="margin-left: auto; color: #cbd5e1;"></i>
                 </a>
                 
-                <!-- 4. VK (ВКонтакте) -->
+                <!-- 4. VK -->
                 <a href="https://vk.com/vip.simki" target="_blank" rel="noopener noreferrer" style="display: flex; align-items: center; gap: 14px; background: #f9fafc; border-radius: 24px; padding: 14px 18px; text-decoration: none; border: 1px solid #eef2f6;">
                     <div style="background: #0077FF; width: 48px; height: 48px; border-radius: 28px; display: flex; align-items: center; justify-content: center;">
                         <i class="fab fa-vk" style="font-size: 26px; color: white;"></i>
@@ -165,7 +164,7 @@
                     <i class="fas fa-chevron-right" style="margin-left: auto; color: #cbd5e1;"></i>
                 </a>
                 
-                <!-- 8. НА ГЛАВНУЮ (переход на главную страницу сайта, без добавления # в URL) -->
+                <!-- 8. НА ГЛАВНУЮ -->
                 <a href="/" style="display: flex; align-items: center; gap: 14px; background: linear-gradient(135deg, #e30613 0%, #b0020e 100%); border-radius: 24px; padding: 14px 18px; text-decoration: none; transition: all 0.2s; border: none; box-shadow: 0 4px 12px rgba(227,6,19,0.3);">
                     <div style="background: rgba(255,255,255,0.2); width: 48px; height: 48px; border-radius: 28px; display: flex; align-items: center; justify-content: center;">
                         <i class="fas fa-home" style="font-size: 26px; color: white;"></i>
@@ -178,7 +177,7 @@
                 </a>
             </div>
             
-            <!-- БЛОК QR-КОДА И ССЫЛКИ -->
+            <!-- БЛОК QR-КОДА И ССЫЛКИ (теперь с чистым URL) -->
             <div style="padding: 16px 28px 28px 28px; border-top: 1px solid #f0f2f6; margin-top: 8px;">
                 <div style="background: #F7F9FD; border-radius: 28px; padding: 20px;">
                     <div style="display: flex; align-items: center; gap: 20px; flex-wrap: wrap; justify-content: center;">
@@ -191,7 +190,7 @@
                         <div style="flex:1; min-width: 160px;">
                             <p style="font-weight: 700; color: #1e293b; margin-bottom: 6px; display: flex; gap: 6px;"><i class="fas fa-link"></i> QR-код ведет на эту визитку</p>
                             <div style="background: white; border-radius: 60px; border: 1px solid #e2e8f0; padding: 6px 12px; display: flex; align-items: center; justify-content: space-between;">
-                                <span id="currentUrlShort" style="font-size: 12px; color: #4b5563; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">vip-sim.contact/me</span>
+                                <span id="currentUrlShort" style="font-size: 12px; color: #4b5563; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"></span>
                                 <button id="copyUrlBtn" style="background: none; border: none; cursor: pointer; color: #e30613; font-size: 16px;"><i class="fas fa-copy"></i></button>
                             </div>
                             <p style="font-size: 12px; color: #6c757d; margin-top: 12px;"><i class="fas fa-clock"></i> Поддержка 24/7 — ответим в течение 5 минут</p>
@@ -219,6 +218,18 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <script>
         (function() {
+            // Функция для получения чистого URL без .html в конце
+            function getCleanUrl() {
+                let url = window.location.href;
+                // Убираем .html в конце, если он есть
+                if (url.endsWith('.html')) {
+                    url = url.slice(0, -5);
+                }
+                return url;
+            }
+            
+            const cleanUrl = getCleanUrl();
+            
             // Копирование текста с уведомлением
             function copyToClipboard(text, successMsg = "Скопировано!") {
                 navigator.clipboard.writeText(text).then(() => {
@@ -251,28 +262,27 @@
                 });
             }
             
-            // Кнопка копирования URL
+            // Кнопка копирования ЧИСТОГО URL (без .html)
             const copyUrlBtn = document.getElementById('copyUrlBtn');
             const currentUrlSpan = document.getElementById('currentUrlShort');
             if (copyUrlBtn && currentUrlSpan) {
-                const fullUrl = window.location.href;
-                let displayUrl = fullUrl;
-                if (fullUrl.length > 45) {
-                    displayUrl = fullUrl.replace(/^https?:\/\//, '').substring(0, 42) + '...';
+                let displayUrl = cleanUrl;
+                if (displayUrl.length > 45) {
+                    displayUrl = displayUrl.replace(/^https?:\/\//, '').substring(0, 42) + '...';
                 }
                 currentUrlSpan.innerText = displayUrl;
                 copyUrlBtn.addEventListener('click', () => {
-                    copyToClipboard(fullUrl, 'Ссылка на визитку скопирована');
+                    copyToClipboard(cleanUrl, 'Ссылка на визитку скопирована');
                 });
             }
             
-            // Генерация QR-кода с текущим URL
+            // Генерация QR-кода с ЧИСТЫМ URL (без .html)
             const qrContainer = document.getElementById('qrcode');
             if (qrContainer && typeof QRCode !== 'undefined') {
                 qrContainer.innerHTML = '';
                 try {
                     new QRCode(qrContainer, {
-                        text: window.location.href,
+                        text: cleanUrl,
                         width: 100,
                         height: 100,
                         colorDark: "#e30613",
@@ -300,16 +310,6 @@
                 });
             });
             
-            // Предотвращаем добавление # в URL для кнопки "На главную"
-            const homeBtn = document.querySelector('a[href="/"]');
-            if (homeBtn) {
-                homeBtn.addEventListener('click', function(e) {
-                    // Если href="/", то ничего не делаем, браузер сам перейдет
-                    // Но если вдруг нужно предотвратить добавление якорей - это стандартное поведение
-                    // Просто разрешаем переход
-                });
-            }
-            
             // Адаптивная сетка: на очень узких экранах делаем 1 колонку
             const adaptGrid = () => {
                 const gridContainer = document.querySelector('div[style*="grid-template-columns: repeat(2, 1fr); gap: 16px;"]');
@@ -333,10 +333,10 @@
                         navigator.share({
                             title: 'VIP SIM — Визитка',
                             text: 'Эксклюзивные тарифы, поддержка 24/7. Все контакты.',
-                            url: window.location.href,
+                            url: cleanUrl,
                         }).catch(() => {});
                     } else {
-                        copyToClipboard(window.location.href, 'Ссылка скопирована, поделитесь!');
+                        copyToClipboard(cleanUrl, 'Ссылка скопирована, поделитесь!');
                     }
                 });
             }
