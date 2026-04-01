@@ -8,17 +8,16 @@
     <!-- Web App Manifest для добавления на главный экран -->
     <link rel="manifest" href="data:application/manifest+json,{}" id="manifest-placeholder">
     
-    <!-- Apple Touch Icon (иконка для iOS) -->
+    <!-- Apple Touch Icon -->
     <link rel="apple-touch-icon" href="img/logo.png">
     
-    <!-- Meta для PWA / добавления на экран -->
+    <!-- Meta для PWA -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="ВИП СИМ">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="theme-color" content="#e30613">
     
-    <!-- Font Awesome 6 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
         * {
@@ -40,7 +39,6 @@
             100% { opacity: 1; transform: translateY(0); }
         }
         
-        /* Кнопка добавления на экран */
         .install-btn {
             background: linear-gradient(135deg, #e30613 0%, #b0020e 100%);
             color: white;
@@ -63,7 +61,6 @@
             box-shadow: 0 8px 20px rgba(227,6,19,0.3);
         }
         
-        /* Кнопка сохранения контакта */
         .save-contact-btn {
             background: #2e06e3;
             color: white;
@@ -86,7 +83,6 @@
             box-shadow: 0 8px 20px rgba(46,6,227,0.3);
         }
         
-        /* Баннер для установки PWA */
         .install-banner {
             background: #1f2937;
             color: white;
@@ -122,7 +118,6 @@
 <body>
     <div style="max-width: 560px; width: 100%; margin: 0 auto; animation: fadeSlideUp 0.45s ease-out;">
         
-        <!-- ГЛАВНАЯ КАРТОЧКА-ВИЗИТКА -->
         <div style="background: #ffffff; border-radius: 44px; box-shadow: 0 25px 45px -12px rgba(0,0,0,0.35), 0 4px 12px rgba(0,0,0,0.05); overflow: hidden;">
             
             <!-- Верхняя часть с логотипом -->
@@ -160,19 +155,17 @@
                 </div>
             </div>
             
-            <!-- КНОПКИ ДОБАВЛЕНИЯ (НОВЫЕ) -->
+            <!-- КНОПКИ ДОБАВЛЕНИЯ -->
             <div style="padding: 0 28px 12px 28px; display: flex; flex-direction: column; gap: 12px;">
-                <!-- Кнопка добавления на главный экран -->
                 <button id="installAppBtn" class="install-btn">
                     <i class="fas fa-download"></i> Добавить на главный экран
                 </button>
-                <!-- Кнопка сохранения в контакты -->
                 <button id="saveContactBtn" class="save-contact-btn">
                     <i class="fas fa-address-card"></i> Сохранить в контакты
                 </button>
             </div>
             
-            <!-- Баннер для установки PWA (показывается при первом посещении) -->
+            <!-- Баннер для установки PWA -->
             <div id="installBanner" style="display: none; padding: 0 28px 12px 28px;"></div>
             
             <!-- ЗАГОЛОВОК МЕССЕНДЖЕРОВ -->
@@ -183,9 +176,8 @@
                 </div>
             </div>
             
-            <!-- СЕТКА КОНТАКТОВ (остается без изменений) -->
+            <!-- СЕТКА КОНТАКТОВ -->
             <div style="padding: 0 28px 20px 28px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px;">
-                <!-- 1. MAX -->
                 <a href="https://clck.ru/3S4o3f" target="_blank" style="display: flex; align-items: center; gap: 14px; background: #f9fafc; border-radius: 24px; padding: 14px 18px; text-decoration: none; border: 1px solid #eef2f6;">
                     <div style="background: #2e06e3; width: 48px; height: 48px; border-radius: 28px; display: flex; align-items: center; justify-content: center; overflow: hidden;">
                         <img src="https://upload.wikimedia.org/wikipedia/commons/7/75/Max_logo_2025.png" alt="MAX" style="width: 28px; height: 28px; object-fit: contain;">
@@ -196,7 +188,6 @@
                     </div>
                     <i class="fas fa-chevron-right" style="margin-left: auto; color: #cbd5e1;"></i>
                 </a>
-                <!-- 2. Telegram -->
                 <a href="https://t.me/vipsimka82" target="_blank" style="display: flex; align-items: center; gap: 14px; background: #f9fafc; border-radius: 24px; padding: 14px 18px; text-decoration: none; border: 1px solid #eef2f6;">
                     <div style="background: #26A5E4; width: 48px; height: 48px; border-radius: 28px; display: flex; align-items: center; justify-content: center;">
                         <i class="fab fa-telegram" style="font-size: 28px; color: white;"></i>
@@ -207,7 +198,6 @@
                     </div>
                     <i class="fas fa-chevron-right" style="margin-left: auto; color: #cbd5e1;"></i>
                 </a>
-                <!-- 3. WhatsApp -->
                 <a href="https://wa.me/79915556663" target="_blank" style="display: flex; align-items: center; gap: 14px; background: #f9fafc; border-radius: 24px; padding: 14px 18px; text-decoration: none; border: 1px solid #eef2f6;">
                     <div style="background: #25D366; width: 48px; height: 48px; border-radius: 28px; display: flex; align-items: center; justify-content: center;">
                         <i class="fab fa-whatsapp" style="font-size: 28px; color: white;"></i>
@@ -218,7 +208,6 @@
                     </div>
                     <i class="fas fa-chevron-right" style="margin-left: auto; color: #cbd5e1;"></i>
                 </a>
-                <!-- 4. VK -->
                 <a href="https://vk.com/vip.simki" target="_blank" style="display: flex; align-items: center; gap: 14px; background: #f9fafc; border-radius: 24px; padding: 14px 18px; text-decoration: none; border: 1px solid #eef2f6;">
                     <div style="background: #0077FF; width: 48px; height: 48px; border-radius: 28px; display: flex; align-items: center; justify-content: center;">
                         <i class="fab fa-vk" style="font-size: 26px; color: white;"></i>
@@ -229,7 +218,6 @@
                     </div>
                     <i class="fas fa-chevron-right" style="margin-left: auto; color: #cbd5e1;"></i>
                 </a>
-                <!-- 5. Email -->
                 <a href="mailto:vip.simki@vk.com" style="display: flex; align-items: center; gap: 14px; background: #f9fafc; border-radius: 24px; padding: 14px 18px; text-decoration: none; border: 1px solid #eef2f6;">
                     <div style="background: #EA4335; width: 48px; height: 48px; border-radius: 28px; display: flex; align-items: center; justify-content: center;">
                         <i class="fas fa-envelope" style="font-size: 24px; color: white;"></i>
@@ -240,7 +228,6 @@
                     </div>
                     <i class="fas fa-chevron-right" style="margin-left: auto; color: #cbd5e1;"></i>
                 </a>
-                <!-- 6. Instagram -->
                 <a href="https://instagram.com/_vipsimka" target="_blank" style="display: flex; align-items: center; gap: 14px; background: #f9fafc; border-radius: 24px; padding: 14px 18px; text-decoration: none; border: 1px solid #eef2f6;">
                     <div style="background: radial-gradient(circle at 30% 110%, #ffdb7e, #ff9a5a, #d6249f, #285AEB); width: 48px; height: 48px; border-radius: 28px; display: flex; align-items: center; justify-content: center;">
                         <i class="fab fa-instagram" style="font-size: 26px; color: white;"></i>
@@ -251,7 +238,6 @@
                     </div>
                     <i class="fas fa-chevron-right" style="margin-left: auto; color: #cbd5e1;"></i>
                 </a>
-                <!-- 7. Facebook -->
                 <a href="https://facebook.com/vitalij.san.658372" target="_blank" style="display: flex; align-items: center; gap: 14px; background: #f9fafc; border-radius: 24px; padding: 14px 18px; text-decoration: none; border: 1px solid #eef2f6;">
                     <div style="background: #1877F2; width: 48px; height: 48px; border-radius: 28px; display: flex; align-items: center; justify-content: center;">
                         <i class="fab fa-facebook-f" style="font-size: 26px; color: white;"></i>
@@ -262,7 +248,6 @@
                     </div>
                     <i class="fas fa-chevron-right" style="margin-left: auto; color: #cbd5e1;"></i>
                 </a>
-                <!-- 8. НА ГЛАВНУЮ -->
                 <a href="/" style="display: flex; align-items: center; gap: 14px; background: linear-gradient(135deg, #e30613 0%, #b0020e 100%); border-radius: 24px; padding: 14px 18px; text-decoration: none; box-shadow: 0 4px 12px rgba(227,6,19,0.3);">
                     <div style="background: rgba(255,255,255,0.2); width: 48px; height: 48px; border-radius: 28px; display: flex; align-items: center; justify-content: center;">
                         <i class="fas fa-home" style="font-size: 26px; color: white;"></i>
@@ -275,7 +260,7 @@
                 </a>
             </div>
             
-            <!-- QR-КОД -->
+            <!-- QR-КОД (исправлен — теперь ведет на contacts.html) -->
             <div style="padding: 16px 28px 28px 28px; border-top: 1px solid #f0f2f6;">
                 <div style="background: #F7F9FD; border-radius: 28px; padding: 20px;">
                     <div style="display: flex; align-items: center; gap: 20px; flex-wrap: wrap; justify-content: center;">
@@ -310,20 +295,15 @@
                 <span style="font-size: 12px;">Отсканируйте QR код или поделитесь ссылкой</span>
             </div>
         </div>
-    </div>Ф
+    </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <script>
         (function() {
-            // Получаем чистый URL
-            function getCleanUrl() {
-                let url = window.location.href;
-                if (url.endsWith('.html')) {
-                    url = url.slice(0, -5);
-                }
-                return url;
-            }
-            const cleanUrl = getCleanUrl();
+            // РАБОЧИЙ URL — тот, который точно открывается (с .html)
+            const workingUrl = 'https://www.vip-sim.ru/contacts.html';
+            // Чистый URL для отображения
+            const cleanUrl = 'https://www.vip-sim.ru/contacts';
             
             // Копирование
             function copyToClipboard(text, successMsg) {
@@ -341,7 +321,7 @@
                 copyToClipboard('+79915556663', 'Номер скопирован ✅');
             });
             
-            // QR и ссылка с чистым URL
+            // Отображение чистого URL (для красоты), но копируется тоже чистый
             const urlSpan = document.getElementById('currentUrlShort');
             const copyUrl = document.getElementById('copyUrlBtn');
             if (urlSpan && copyUrl) {
@@ -351,21 +331,31 @@
                 copyUrl.addEventListener('click', () => copyToClipboard(cleanUrl, 'Ссылка скопирована'));
             }
             
+            // QR-КОД — используем РАБОЧИЙ URL (с .html), чтобы открывалось без ошибки
             const qrDiv = document.getElementById('qrcode');
             if (qrDiv && typeof QRCode !== 'undefined') {
                 qrDiv.innerHTML = '';
-                new QRCode(qrDiv, { text: cleanUrl, width: 100, height: 100, colorDark: "#e30613", colorLight: "#ffffff" });
+                try {
+                    new QRCode(qrDiv, { 
+                        text: workingUrl,  // ← теперь contacts.html, а не contacts
+                        width: 100, 
+                        height: 100, 
+                        colorDark: "#e30613", 
+                        colorLight: "#ffffff" 
+                    });
+                } catch(e) {
+                    qrDiv.innerHTML = '<i class="fas fa-qrcode" style="font-size: 48px; color:#e30613;"></i>';
+                }
             }
             
-            // ========== ДОБАВЛЕНИЕ НА ГЛАВНЫЙ ЭКРАН (PWA) ==========
+            // ========== PWA (добавление на главный экран) ==========
             let deferredPrompt;
             
-            // Создаем манифест динамически
             const manifest = {
                 name: "ВИП СИМ",
                 short_name: "ВИП СИМ",
                 description: "Эксклюзивный сервис и поддержка 24/7",
-                start_url: "/contacts",
+                start_url: "/contacts.html",
                 display: "standalone",
                 theme_color: "#e30613",
                 background_color: "#ffffff",
@@ -377,22 +367,19 @@
                 }]
             };
             
-            // Обновляем манифест
             const manifestBlob = new Blob([JSON.stringify(manifest)], {type: 'application/json'});
             const manifestURL = URL.createObjectURL(manifestBlob);
             document.getElementById('manifest-placeholder').href = manifestURL;
             
-            // Слушаем событие beforeinstallprompt
             window.addEventListener('beforeinstallprompt', (e) => {
                 e.preventDefault();
                 deferredPrompt = e;
-                // Показываем баннер с предложением установить
                 const bannerDiv = document.getElementById('installBanner');
                 if (bannerDiv && !localStorage.getItem('installBannerClosed')) {
                     bannerDiv.innerHTML = `
                         <div class="install-banner">
                             <i class="fas fa-mobile-alt" style="font-size: 20px;"></i>
-                            <span>Добавьте визитку на главный экран для быстрого доступа</span>
+                            <span>Добавьте визитку на главный экран</span>
                             <button id="installNowBtn">Установить</button>
                             <button id="closeBannerBtn" class="close-banner">×</button>
                         </div>
@@ -414,24 +401,21 @@
                 }
             });
             
-            // Кнопка "Добавить на главный экран"
             document.getElementById('installAppBtn')?.addEventListener('click', () => {
                 if (deferredPrompt) {
                     deferredPrompt.prompt();
                     deferredPrompt.userChoice.then(() => { deferredPrompt = null; });
                 } else {
-                    // Если PWA не поддерживается или уже установлено
                     if (navigator.share) {
-                        navigator.share({ title: 'ВИП СИМ', url: cleanUrl });
+                        navigator.share({ title: 'ВИП СИМ', url: workingUrl });
                     } else {
-                        copyToClipboard(cleanUrl, 'Ссылка скопирована! Откройте в браузере и выберите "Добавить на главный экран"');
+                        copyToClipboard(workingUrl, 'Ссылка скопирована! Откройте в браузере и выберите "Добавить на главный экран"');
                     }
                 }
             });
             
-            // ========== СОХРАНЕНИЕ В КОНТАКТЫ (vCard) ==========
+            // ========== СОХРАНЕНИЕ В КОНТАКТЫ ==========
             document.getElementById('saveContactBtn')?.addEventListener('click', () => {
-                // Создаем vCard
                 const vCardData = `BEGIN:VCARD
 VERSION:3.0
 FN:ВИП СИМ
@@ -441,12 +425,11 @@ TEL;TYPE=WORK,VOICE:+79915556663
 TEL;TYPE=CELL,VOICE:+79915556663
 EMAIL;TYPE=WORK:vip.simki@vk.com
 URL;TYPE=WORK:https://www.vip-sim.ru
-URL;TYPE=WORK:${cleanUrl}
+URL;TYPE=WORK:${workingUrl}
 NOTE:Telegram: @vipsimka82\nWhatsApp: +79915556663\nVK: vk.com/vip.simki\nInstagram: @_vipsimka
 CATEGORIES:Бизнес,Связь
 END:VCARD`;
                 
-                // Создаем blob и скачиваем
                 const blob = new Blob([vCardData], { type: 'text/vcard' });
                 const url = URL.createObjectURL(blob);
                 const link = document.createElement('a');
@@ -457,7 +440,6 @@ END:VCARD`;
                 document.body.removeChild(link);
                 URL.revokeObjectURL(url);
                 
-                // Показываем уведомление
                 const toast = document.createElement('div');
                 toast.innerText = '📇 Файл контакта создан! Откройте его чтобы добавить в телефонную книгу';
                 toast.style.cssText = 'position:fixed;bottom:30px;left:50%;transform:translateX(-50%);background:#1f2937;color:white;padding:12px 24px;border-radius:40px;font-size:13px;z-index:9999;text-align:center;width:90%;max-width:320px';
