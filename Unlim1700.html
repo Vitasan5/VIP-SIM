@@ -27,7 +27,7 @@
             box-shadow: 0 20px 35px -12px rgba(0,0,0,0.12);
         }
 
-        /* КРАСНАЯ ШАПКА: только название УБМ-1700 белым жирным */
+        /* КРАСНАЯ ШАПКА: название УБМ-1700 белым жирным */
         .red-header {
             background: #e31e24;
             padding: 42px 24px 42px 24px;
@@ -42,27 +42,16 @@
             text-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
 
-        /* ТРИ КРАСНЫХ БЛОКА: первый безлимитный интернет, второй минуты, третий смс */
-        .three-red-adaptive {
+        /* НОВЫЙ КОНТЕЙНЕР: три красных блока в ряд (квадратные) на десктопе */
+        .three-red-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
             background: white;
             padding: 36px 32px 16px 32px;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 24px;
         }
-        .full-width-card {
-            flex: 1 1 100%;
-        }
-        .two-cards-row {
-            flex: 1;
-            display: flex;
-            gap: 24px;
-            min-width: 0;
-        }
-        .two-cards-row .red-card {
-            flex: 1;
-        }
-        .red-card {
+        /* квадратные блоки — равная ширина и высота, фиксированное соотношение */
+        .red-card-square {
             background: #e31e24;
             border-radius: 28px;
             padding: 28px 16px;
@@ -70,13 +59,18 @@
             color: white;
             box-shadow: 0 10px 20px rgba(227,30,36,0.25);
             transition: transform 0.2s;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-height: 220px;
+            aspect-ratio: 1 / 0.9; /* чуть вытянутые к квадрату, но визуально квадратные */
         }
-        .red-card .main-text {
+        .red-card-square .main-text {
             font-size: 1.6rem;
             font-weight: 800;
             margin-bottom: 8px;
         }
-        .red-card .sub-text {
+        .red-card-square .sub-text {
             font-size: 0.85rem;
             opacity: 0.95;
             font-weight: 500;
@@ -186,17 +180,20 @@
 
         /* ===== АДАПТИВ (мобильный) ===== */
         @media (max-width: 700px) {
-            .three-red-adaptive {
+            .three-red-grid {
+                display: flex;
+                flex-direction: column;
+                gap: 16px;
                 padding: 24px 20px 12px 20px;
-                gap: 16px;
             }
-            .two-cards-row {
-                gap: 16px;
-            }
-            .red-card {
+            /* на мобилке убираем фиксированную высоту и aspect-ratio, блоки естественной высоты */
+            .red-card-square {
+                min-height: auto;
+                aspect-ratio: auto;
                 padding: 20px 12px;
+                width: 100%;
             }
-            .red-card .main-text {
+            .red-card-square .main-text {
                 font-size: 1.3rem;
             }
             .benefits-grid {
@@ -231,11 +228,8 @@
         }
 
         @media (max-width: 480px) {
-            .two-cards-row {
-                gap: 12px;
-            }
-            .red-card .main-text {
-                font-size: 1.1rem;
+            .red-card-square .main-text {
+                font-size: 1.2rem;
             }
             .benefits-grid {
                 gap: 12px;
@@ -245,35 +239,31 @@
 </head>
 <body>
 <div class="landing">
-  <!-- КРАСНАЯ ШАПКА: только название УБМ-1700 -->
-<div class="red-header">
-    <div class="product-name">УБМ-1700</div>
-    <div style="color: white; font-size: 1rem; margin-top: 12px; font-weight: 500; opacity: 0.9;">
-        Когда одна сим-карта может всё
+    <!-- КРАСНАЯ ШАПКА: название УБМ-1700 + подзаголовок -->
+    <div class="red-header">
+        <div class="product-name">УБМ-1700</div>
+        <div style="color: white; font-size: 1rem; margin-top: 12px; font-weight: 500; opacity: 0.9;">
+            Когда одна сим-карта может всё
+        </div>
     </div>
-</div>
 
-    <!-- ТРИ КРАСНЫХ БЛОКА В НУЖНОМ ПОРЯДКЕ:
+    <!-- ТРИ КРАСНЫХ БЛОКА В РЯД (КВАДРАТНЫЕ НА ДЕСКТОПЕ) 
          1. Безлимитный интернет
          2. 1700 минут
          3. 500 смс
     -->
-    <div class="three-red-adaptive">
-        <!-- Первый блок: Безлимитный интернет (на всю ширину на мобилке) -->
-        <div class="red-card full-width-card">
+    <div class="three-red-grid">
+        <div class="red-card-square">
             <div class="main-text">БЕЗЛИМИТНЫЙ ИНТЕРНЕТ</div>
             <div class="sub-text">без скрытых условий и дневных лимитов</div>
         </div>
-        <!-- Два следующих блока (минуты и смс) идут в ряд -->
-        <div class="two-cards-row">
-            <div class="red-card">
-                <div class="main-text">1700 минут</div>
-                <div class="sub-text">на все номера РФ</div>
-            </div>
-            <div class="red-card">
-                <div class="main-text">500 sms</div>
-                <div class="sub-text">по России</div>
-            </div>
+        <div class="red-card-square">
+            <div class="main-text">1700 минут</div>
+            <div class="sub-text">на все номера РФ</div>
+        </div>
+        <div class="red-card-square">
+            <div class="main-text">500 sms</div>
+            <div class="sub-text">по России</div>
         </div>
     </div>
 
@@ -316,7 +306,7 @@
         🔗 <a href="https://vip-sim.ru/" target="_blank" rel="noopener noreferrer">Перейти на сайт vip-sim.ru</a> — подробнее о тарифах
     </div>
 
-    <!-- дополнительная строка с тезисами для соответствия картинке (не мешает, но можно оставить) -->
+    <!-- дополнительная строка с тезисами -->
     <div class="footer-links">
         ⚡ Выгодный тариф на интернет-связь | Сим-карты для модема и роутера | Хит Безлимит
     </div>
