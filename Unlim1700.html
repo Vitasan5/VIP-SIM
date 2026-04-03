@@ -2,247 +2,275 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Тариф Умный М | VIP-SIM</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Безлимитный интернет | Сим-карта с доставкой</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background: #eef2f5;
-            padding: 20px;
+            background: #f0f2f5;
+            font-family: 'Segoe UI', Roboto, -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+            padding: 24px 16px;
+        }
+
+        /* карточка лендинга — белый фон, черный текст, акцент красный */
+        .landing-card {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 40px;
+            box-shadow: 0 20px 35px -10px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        /* верхняя секция с картинкой (фоновая имитация плашки) */
+        .hero-section {
+            background: #000000;  /* черный фон как на оригинале */
+            padding: 32px 32px 28px 32px;
+            position: relative;
+        }
+
+        /* плашка ХИТ — красная, как на картинке */
+        .hit-badge {
+            background: #e31e24;  /* насыщенный красный */
+            display: inline-block;
+            padding: 6px 24px;
+            border-radius: 40px;
+            font-weight: 800;
+            font-size: 0.85rem;
+            letter-spacing: 1.5px;
+            color: white;
+            margin-bottom: 24px;
+            text-transform: uppercase;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        /* заголовок — название */
+        .main-title {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: white;
+            line-height: 1.2;
+            margin-bottom: 16px;
+            letter-spacing: -0.01em;
+        }
+        .main-title span {
+            color: #e31e24;
+        }
+
+        /* три блока в ряд (1700 минут / интернет / 500 смс) */
+        .stats-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 36px 32px 20px 32px;
+            background: white;
+            justify-content: center;
+        }
+        .stat-block {
+            flex: 1;
+            min-width: 140px;
+            background: #ffffff;
+            border-radius: 28px;
+            text-align: center;
+            padding: 24px 12px;
+            box-shadow: 0 5px 18px rgba(0,0,0,0.05);
+            border: 1px solid #eeeef0;
+            transition: all 0.2s;
+        }
+        .stat-number {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: #000000;
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+        .stat-label {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #2c3e4e;
+            letter-spacing: 0.3px;
+        }
+        .stat-label small {
+            font-weight: 400;
+            font-size: 0.85rem;
+            color: #5f6c80;
+        }
+
+        /* абонентская плата ниже */
+        .price-block {
+            text-align: center;
+            padding: 8px 32px 28px 32px;
+            background: white;
+        }
+        .price-value {
+            font-size: 2.4rem;
+            font-weight: 800;
+            color: #000;
+            background: #f8f9fc;
+            display: inline-block;
+            padding: 12px 32px;
+            border-radius: 60px;
+            letter-spacing: 0px;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.02), 0 5px 12px rgba(0,0,0,0.05);
+        }
+        .price-value span {
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        /* четыре светлых блока с плюсами (белый фон, легкая тень) */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 24px;
+            padding: 40px 32px 32px 32px;
+            background: #ffffff;
+            border-top: 1px solid #f0f0f0;
+        }
+        .feature-card {
+            background: #ffffff;
+            border-radius: 28px;
+            padding: 24px 18px;
+            text-align: center;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+            border: 1px solid #f3f3f5;
+            transition: transform 0.2s;
+        }
+        .feature-icon {
+            font-size: 2.6rem;
+            margin-bottom: 16px;
+        }
+        .feature-title {
+            font-weight: 800;
+            font-size: 1.25rem;
+            margin-bottom: 10px;
+            color: #000;
+        }
+        .feature-desc {
+            font-size: 0.85rem;
+            color: #2c3e4e;
             line-height: 1.4;
         }
-        .card {
-            max-width: 1100px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 32px;
-            overflow: hidden;
-            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.15);
-        }
-        /* Темная шапка как на картинке */
-        .header {
-            background: #0b1426;
-            padding: 28px 32px 24px;
-            color: white;
-        }
-        .hit-badge {
-            background: linear-gradient(105deg, #ff8c2c, #ff6b2b);
-            display: inline-block;
-            padding: 5px 20px;
-            border-radius: 40px;
-            font-weight: 800;
-            font-size: 0.75rem;
-            letter-spacing: 1px;
-            margin-bottom: 20px;
-            color: white;
-        }
-        .header h1 {
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 8px;
-        }
-        .header h1 span {
-            color: #ffaa33;
-        }
-        .no-roaming {
-            border-left: 3px solid #ffaa33;
-            padding-left: 16px;
-            font-size: 0.9rem;
-            opacity: 0.9;
-            margin-top: 12px;
-        }
-        /* Основной блок с тарифом */
-        .tariff-row {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 28px;
-            padding: 32px;
-            border-bottom: 1px solid #e9edf2;
-        }
-        .tariff-details {
-            flex: 1.2;
-            background: #f8fafd;
-            border-radius: 28px;
-            padding: 24px;
-        }
-        .indicators {
-            display: flex;
-            gap: 28px;
-            flex-wrap: wrap;
-            margin-bottom: 24px;
-        }
-        .indicator {
-            font-size: 1.8rem;
-            font-weight: 800;
-            color: #0b1426;
-        }
-        .indicator span {
-            font-size: 1rem;
-            font-weight: 500;
-            color: #4a5b6e;
-        }
-        .price {
-            font-size: 2rem;
-            font-weight: 800;
-            color: #0b1426;
-            margin: 16px 0 12px;
-        }
-        .price small {
-            font-size: 0.9rem;
-            font-weight: 500;
-        }
-        .new-num {
-            background: #ffefe2;
-            display: inline-block;
-            padding: 6px 18px;
-            border-radius: 40px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            color: #c2410c;
-            margin-top: 8px;
-        }
-        .benefits-side {
-            flex: 0.9;
-            background: #fff7ef;
-            border-radius: 28px;
-            padding: 24px;
-        }
-        .benefits-side p {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 18px;
-            font-weight: 500;
-        }
-        .btn-orange {
-            display: block;
-            background: #0b1426;
-            color: white;
+
+        /* кнопка связи в конце */
+        .contact-button-wrapper {
             text-align: center;
-            padding: 14px;
+            padding: 20px 32px 48px 32px;
+            background: white;
+        }
+        .contact-btn {
+            display: inline-block;
+            background: #e31e24;   /* красный как плашка ХИТ */
+            color: white;
+            font-weight: 800;
+            font-size: 1.25rem;
+            padding: 16px 48px;
             border-radius: 60px;
             text-decoration: none;
-            font-weight: 700;
-            margin-top: 28px;
             transition: 0.2s;
+            box-shadow: 0 12px 20px -8px rgba(227,30,36,0.4);
+            border: none;
+            letter-spacing: 0.5px;
         }
-        .btn-orange:hover {
-            background: #ff7a2f;
+        .contact-btn:hover {
+            background: #bb0f15;
+            transform: scale(1.02);
+            box-shadow: 0 16px 24px -8px rgba(227,30,36,0.5);
         }
-        /* Сетка преимуществ (лаконично) */
-        .grid-features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-            gap: 20px;
-            padding: 32px;
-            background: white;
-        }
-        .feature {
+
+        /* подвал - небольшая заметка про регионы (Крым уже в блоке) */
+        .extra-note {
+            background: #fafafc;
+            padding: 18px 32px;
             text-align: center;
-            padding: 12px 8px;
+            font-size: 0.75rem;
+            color: #5b6e8c;
+            border-top: 1px solid #eceef2;
         }
-        .feature .emoji {
-            font-size: 2rem;
-            margin-bottom: 8px;
-        }
-        .feature h4 {
-            font-weight: 800;
-            margin-bottom: 6px;
-            font-size: 1rem;
-        }
-        .feature p {
-            font-size: 0.8rem;
-            color: #4b5568;
-        }
-        .contacts-link {
-            text-align: center;
-            padding: 20px 32px 32px;
-            background: white;
-            border-top: 1px solid #edf2f7;
-        }
-        .contacts-link a {
-            background: #ff7a2f;
-            color: white;
-            text-decoration: none;
-            padding: 12px 32px;
-            border-radius: 48px;
-            font-weight: 700;
-            display: inline-block;
-        }
+
         @media (max-width: 700px) {
-            .tariff-row { padding: 20px; }
-            .header { padding: 20px; }
-            .indicators { gap: 16px; }
+            .hero-section { padding: 24px 20px; }
+            .main-title { font-size: 1.9rem; }
+            .stats-row { padding: 24px 20px; gap: 12px; }
+            .stat-block { padding: 16px 8px; }
+            .stat-number { font-size: 2rem; }
+            .features-grid { padding: 24px 20px; gap: 16px; }
+            .contact-btn { padding: 12px 32px; font-size: 1rem; }
         }
     </style>
 </head>
 <body>
-<div class="card">
-    <!-- шапка: хит, тариф, отсутствие роуминга -->
-    <div class="header">
+<div class="landing-card">
+    <!-- Верхняя секция: фон черный, плашка ХИТ, заголовок (Безлимитный интернет) -->
+    <div class="hero-section">
         <div class="hit-badge">ХИТ</div>
-        <h1>VIP-номера и тарифы <br><span>«УМНЫЙ М»</span></h1>
-        <div class="no-roaming">Без роуминга по РФ, включая Крым</div>
+        <div class="main-title">
+            Безлимитный <span>интернет</span>
+        </div>
+        <!-- Добавим подзаголовок для ясности, но не нарушая структуру -->
+        <div style="color: rgba(255,255,255,0.75); font-size: 0.9rem; margin-top: 8px;">Сим-карта с доставкой на дом</div>
     </div>
 
-    <!-- блок с минутами/интернет/sms как на картинке -->
-    <div class="tariff-row">
-        <div class="tariff-details">
-            <div class="indicators">
-                <div class="indicator">1700 <span>минут</span></div>
-                <div class="indicator">800 <span>интернет</span></div>
-                <div class="indicator">500 <span>sms</span></div>
-            </div>
-            <div class="price">400 ₽<small>/мес</small></div>
-            <div class="new-num">Подключение только на новый номер (не 978)</div>
-            <!-- короткий тезис "безлимит с доставкой" -->
-            <div style="margin-top: 20px; font-size: 0.85rem; font-weight: 500;">🚚 Безлимит с доставкой на дом!</div>
+    <!-- ТРИ БЛОКА В РЯД: 1700 минут / 800 интернет / 500 sms -->
+    <div class="stats-row">
+        <div class="stat-block">
+            <div class="stat-number">1700</div>
+            <div class="stat-label">минут</div>
         </div>
-
-        <div class="benefits-side">
-            <p>📦 <strong>Выгодный тариф</strong> — оптимально для любых устройств</p>
-            <p>📶 <strong>Раздача до 150 ГБ</strong> — интернет для всех гаджетов</p>
-            <p>🚛 <strong>Доставка по России</strong> — быстро и удобно</p>
-            <p>📱 <strong>Сим-карты для модема и роутера</strong></p>
-            <p>🌐 <strong>Выгодный тариф на интернет-связь</strong></p>
-            <!-- кнопка связи (ссылка из ТЗ) -->
-            <a href="https://www.vip-sim.ru/contacts.html" class="btn-orange">📞 Узнайте подробнее</a>
+        <div class="stat-block">
+            <div class="stat-number">800</div>
+            <div class="stat-label">интернет <small>(ГБ)</small></div>
+        </div>
+        <div class="stat-block">
+            <div class="stat-number">500</div>
+            <div class="stat-label">sms</div>
         </div>
     </div>
 
-    <!-- лаконичный блок преимуществ: безлимит, раздача, доставка, для роутера -->
-    <div class="grid-features">
-        <div class="feature">
-            <div class="emoji">🏠</div>
-            <h4>Безлимит с доставкой на дом</h4>
-            <p>Привезём сим-карту, подключим удалённо</p>
+    <!-- Абонентская плата ниже -->
+    <div class="price-block">
+        <div class="price-value">400 ₽ <span>/мес</span></div>
+        <div style="margin-top: 12px; font-size: 0.8rem; color: #e31e24; font-weight: 500;">Подключение только на новый номер</div>
+    </div>
+
+    <!-- Четыре светлых блока: Бесплатная доставка, Раздача 150 ГБ, Для любого устройства, В любом регионе, включая Крым -->
+    <div class="features-grid">
+        <div class="feature-card">
+            <div class="feature-icon">🚚</div>
+            <div class="feature-title">Бесплатная доставка</div>
+            <div class="feature-desc">По России — курьером или почтой. Без скрытых платежей.</div>
         </div>
-        <div class="feature">
-            <div class="emoji">📡</div>
-            <h4>Раздача до 150 ГБ</h4>
-            <p>Хватит на ноутбук, ТВ и планшет</p>
+        <div class="feature-card">
+            <div class="feature-icon">📶</div>
+            <div class="feature-title">Раздача 150 ГБ</div>
+            <div class="feature-desc">Делитесь интернетом с ноутбуком, телевизором или планшетом.</div>
         </div>
-        <div class="feature">
-            <div class="emoji">🚚</div>
-            <h4>Доставка по России</h4>
-            <p>От Калининграда до Владивостока</p>
+        <div class="feature-card">
+            <div class="feature-icon">📱💻</div>
+            <div class="feature-title">Для любого устройства</div>
+            <div class="feature-desc">Сим-карта подходит для телефона, модема, роутера и планшета.</div>
         </div>
-        <div class="feature">
-            <div class="emoji">📶</div>
-            <h4>Сим-карты для модема и роутера</h4>
-            <p>Стабильная связь где угодно</p>
+        <div class="feature-card">
+            <div class="feature-icon">🗺️</div>
+            <div class="feature-title">В любом регионе, включая Крым</div>
+            <div class="feature-desc">Без роуминга и доплат. Работает по всей России стабильно.</div>
         </div>
     </div>
 
-    <!-- прямая кнопка связи с contacts.html, ещё один акцент -->
-    <div class="contacts-link">
-        <a href="https://www.vip-sim.ru/contacts.html">📞 Свяжитесь с нами → Получить тариф</a>
-        <p style="margin-top: 16px; font-size: 0.7rem; color: #6c7a8e;">Сим-карты для интернета. Хит Безлимит!</p>
+    <!-- Кнопка связи со ссылкой на contacts.html -->
+    <div class="contact-button-wrapper">
+        <a href="https://www.vip-sim.ru/contacts.html" class="contact-btn">📞 Связь с оператором</a>
+        <p style="margin-top: 16px; font-size: 0.75rem; color: #6c7a8e;">Узнайте подробности и закажите сим-карту</p>
+    </div>
+
+    <!-- небольшая плашка для акцента, не нарушающая дизайн -->
+    <div class="extra-note">
+        ⚡ Выгодный тариф на интернет-связь. Сим-карты для модема и роутера. Хит Безлимит!
     </div>
 </div>
 </body>
