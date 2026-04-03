@@ -497,22 +497,265 @@ document.addEventListener('DOMContentLoaded', function() {
       </section>
 
       <!-- КАТАЛОГ -->
-      <section class="catalog">
-        <div class="catalog-items">
-          <a href="tariffs.html" class="catalog-card">
+     <style>
+/* Стили для попапа */
+#megasimka-popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.85);
+    z-index: 999999;
+    justify-content: center;
+    align-items: center;
+    overflow-y: auto;
+}
+#megasimka-popup .popup-content {
+    background: white;
+    padding: 30px 20px;
+    border-radius: 15px;
+    max-width: 550px;
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.3);
+    position: relative;
+    margin: 20px;
+}
+#megasimka-popup .hit-badge {
+    background: #e30613;
+    color: white;
+    padding: 5px 20px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: bold;
+    font-family: Arial, sans-serif;
+    display: inline-block;
+    margin-bottom: 15px;
+}
+#megasimka-popup h2 {
+    color: #333;
+    margin-bottom: 10px;
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    font-size: 26px;
+}
+#megasimka-popup h3 {
+    color: #e30613;
+    margin-bottom: 15px;
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    font-size: 28px;
+}
+#megasimka-popup .feature-text {
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+}
+#megasimka-popup .services-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+#megasimka-popup .service-block {
+    flex: 1;
+    background: #ffe6e6;
+    border-radius: 12px;
+    padding: 15px 10px;
+    text-align: center;
+    min-width: 100px;
+    border: 1px solid #ffcccc;
+}
+#megasimka-popup .service-number {
+    font-size: 32px;
+    font-weight: bold;
+    color: #e30613;
+    font-family: Arial, sans-serif;
+}
+#megasimka-popup .service-infinite {
+    font-size: 42px;
+    font-weight: bold;
+    color: #e30613;
+    font-family: Arial, sans-serif;
+}
+#megasimka-popup .service-label {
+    font-size: 14px;
+    color: #e30613;
+    font-family: Arial, sans-serif;
+    font-weight: 500;
+}
+#megasimka-popup .price-block {
+    margin-bottom: 20px;
+}
+#megasimka-popup .price {
+    background: #e30613;
+    color: white;
+    padding: 8px 20px;
+    border-radius: 30px;
+    font-size: 24px;
+    font-weight: bold;
+    font-family: Arial, sans-serif;
+    display: inline-block;
+}
+#megasimka-popup .condition {
+    color: #999;
+    font-size: 12px;
+    font-family: Arial, sans-serif;
+    margin-bottom: 20px;
+}
+#megasimka-popup .buttons-row {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+#megasimka-popup .order-btn {
+    background: #e30613;
+    color: white;
+    padding: 14px 30px;
+    text-decoration: none;
+    border-radius: 30px;
+    font-weight: bold;
+    transition: all 0.3s;
+    font-family: Arial, sans-serif;
+    display: inline-block;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+#megasimka-popup .order-btn:hover {
+    background: #b00510;
+    transform: scale(1.05);
+}
+#megasimka-popup .catalog-btn {
+    background: #95a5a6;
+    color: white;
+    padding: 14px 30px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+}
+#megasimka-popup .catalog-btn:hover {
+    background: #7f8c8d;
+    transform: scale(1.05);
+}
+body.popup-open-megasimka {
+    overflow: hidden;
+}
+</style>
+
+<!-- КАТАЛОГ -->
+<section class="catalog">
+    <div class="catalog-items">
+        <!-- Первая карточка — БЕЗ попапа -->
+        <a href="tariffs.html" class="catalog-card">
             <img src="img/каталог Крым.jpg" alt="Каталог Крым" />
-          </a>
-          <a
-            href="https://megasimka.ru/product-category/sim-cards/sim-internet/?ref=838"
-            class="catalog-card"
-          >
+        </a>
+        
+        <!-- Вторая карточка — С ПОПАПОМ -->
+        <a href="#" class="catalog-card" id="megasimka-trigger">
             <img src="img/каталог Россия.jpg" alt="Каталог Россия" />
-          </a>
+        </a>
+    </div>
+</section>
+
+<!-- ПОПАП -->
+<div id="megasimka-popup">
+    <div class="popup-content">
+        <div class="hit-badge">ХИТ</div>
+        
+        <h2>БЕЗЛИМИТ с доставкой!</h2>
+        <h3>УМНЫЙ М</h3>
+        
+        <p class="feature-text">✅ Без роуминга по РФ, включая Крым</p>
+        
+        <div class="services-row">
+            <div class="service-block">
+                <div class="service-number">1700</div>
+                <div class="service-label">минут</div>
+            </div>
+            <div class="service-block">
+                <div class="service-infinite">∞</div>
+                <div class="service-label">интернет</div>
+            </div>
+            <div class="service-block">
+                <div class="service-number">500</div>
+                <div class="service-label">sms</div>
+            </div>
         </div>
-      </section>
+        
+        <div class="price-block">
+            <span class="price">400 руб/мес</span>
+        </div>
+        
+        <p class="condition">Подключение только на новый номер (не 978)</p>
+        
+        <div class="buttons-row">
+            <!-- Кнопка Заказать тариф -->
+            <a href="https://www.vip-sim.ru/contact-popup.html" class="order-btn">📞 Заказать тариф</a>
+            
+            <!-- Кнопка Перейти в каталог -->
+            <button class="catalog-btn" id="megasimka-catalog-btn">🛒 Перейти в каталог</button>
+        </div>
+    </div>
+</div>
 
-      
-
+<script>
+(function() {
+    const targetUrl = "https://megasimka.ru/product-category/sim-cards/sim-internet/?ref=838";
+    let pendingUrl = null;
+    
+    const popup = document.getElementById('megasimka-popup');
+    const trigger = document.getElementById('megasimka-trigger');
+    const catalogBtn = document.getElementById('megasimka-catalog-btn');
+    
+    function openPopup(url) {
+        pendingUrl = url;
+        if (popup) {
+            popup.style.display = 'flex';
+            document.body.classList.add('popup-open-megasimka');
+        }
+    }
+    
+    function closePopupAndRedirect() {
+        if (popup) {
+            popup.style.display = 'none';
+            document.body.classList.remove('popup-open-megasimka');
+        }
+        if (pendingUrl) {
+            window.location.href = pendingUrl;
+        }
+    }
+    
+    if (trigger) {
+        trigger.addEventListener('click', function(e) {
+            e.preventDefault();
+            openPopup(targetUrl);
+        });
+    }
+    
+    if (catalogBtn) {
+        catalogBtn.addEventListener('click', closePopupAndRedirect);
+    }
+    
+    if (popup) {
+        popup.addEventListener('click', function(e) {
+            if (e.target === popup) {
+                closePopupAndRedirect();
+            }
+        });
+    }
+})();
+</script>
       <!-- Блок Сервис со слайдером -->
       <section class="service-slider">
         <h1 class="left-align">Сервис</h1>
