@@ -42,15 +42,14 @@
             text-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
 
-        /* НОВЫЙ КОНТЕЙНЕР: три красных блока в ряд (квадратные) на десктопе */
-        .three-red-grid {
+        /* === ДЕСКТОП: три красных блока в ряд (квадратные) === */
+        .three-red-desktop {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 24px;
             background: white;
             padding: 36px 32px 16px 32px;
         }
-        /* квадратные блоки — равная ширина и высота, фиксированное соотношение */
         .red-card-square {
             background: #e31e24;
             border-radius: 28px;
@@ -63,7 +62,7 @@
             flex-direction: column;
             justify-content: center;
             min-height: 220px;
-            aspect-ratio: 1 / 0.9; /* чуть вытянутые к квадрату, но визуально квадратные */
+            aspect-ratio: 1 / 0.9; /* визуально квадратные блоки */
         }
         .red-card-square .main-text {
             font-size: 1.6rem;
@@ -71,6 +70,46 @@
             margin-bottom: 8px;
         }
         .red-card-square .sub-text {
+            font-size: 0.85rem;
+            opacity: 0.95;
+            font-weight: 500;
+        }
+
+        /* === МОБИЛЬНАЯ ВЕРСИЯ: скрываем десктопный вариант, показываем мобильный === */
+        .three-red-mobile {
+            display: none;
+            background: white;
+            padding: 36px 32px 16px 32px;
+            flex-wrap: wrap;
+            gap: 24px;
+        }
+        .full-width-card {
+            flex: 1 1 100%;
+        }
+        .two-cards-row {
+            flex: 1;
+            display: flex;
+            gap: 24px;
+            min-width: 0;
+        }
+        .two-cards-row .red-card {
+            flex: 1;
+        }
+        .red-card {
+            background: #e31e24;
+            border-radius: 28px;
+            padding: 28px 16px;
+            text-align: center;
+            color: white;
+            box-shadow: 0 10px 20px rgba(227,30,36,0.25);
+            transition: transform 0.2s;
+        }
+        .red-card .main-text {
+            font-size: 1.6rem;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+        .red-card .sub-text {
             font-size: 0.85rem;
             opacity: 0.95;
             font-weight: 500;
@@ -178,22 +217,25 @@
             font-weight: 500;
         }
 
-        /* ===== АДАПТИВ (мобильный) ===== */
-        @media (max-width: 700px) {
-            .three-red-grid {
+        /* ===== АДАПТИВ (планшеты и мобильные) ===== */
+        @media (max-width: 800px) {
+            /* на планшетах и телефонах прячем десктопную сетку и показываем мобильную версию (первый блок на всю ширину, минуты и смс в ряд) */
+            .three-red-desktop {
+                display: none;
+            }
+            .three-red-mobile {
                 display: flex;
                 flex-direction: column;
-                gap: 16px;
                 padding: 24px 20px 12px 20px;
+                gap: 16px;
             }
-            /* на мобилке убираем фиксированную высоту и aspect-ratio, блоки естественной высоты */
-            .red-card-square {
-                min-height: auto;
-                aspect-ratio: auto;
+            .two-cards-row {
+                gap: 16px;
+            }
+            .red-card {
                 padding: 20px 12px;
-                width: 100%;
             }
-            .red-card-square .main-text {
+            .red-card .main-text {
                 font-size: 1.3rem;
             }
             .benefits-grid {
@@ -228,8 +270,11 @@
         }
 
         @media (max-width: 480px) {
-            .red-card-square .main-text {
-                font-size: 1.2rem;
+            .two-cards-row {
+                gap: 12px;
+            }
+            .red-card .main-text {
+                font-size: 1.1rem;
             }
             .benefits-grid {
                 gap: 12px;
@@ -247,12 +292,8 @@
         </div>
     </div>
 
-    <!-- ТРИ КРАСНЫХ БЛОКА В РЯД (КВАДРАТНЫЕ НА ДЕСКТОПЕ) 
-         1. Безлимитный интернет
-         2. 1700 минут
-         3. 500 смс
-    -->
-    <div class="three-red-grid">
+    <!-- ДЕСКТОПНАЯ ВЕРСИЯ: три квадратных блока в ряд -->
+    <div class="three-red-desktop">
         <div class="red-card-square">
             <div class="main-text">БЕЗЛИМИТНЫЙ ИНТЕРНЕТ</div>
             <div class="sub-text">без скрытых условий и дневных лимитов</div>
@@ -264,6 +305,24 @@
         <div class="red-card-square">
             <div class="main-text">500 sms</div>
             <div class="sub-text">по России</div>
+        </div>
+    </div>
+
+    <!-- МОБИЛЬНАЯ ВЕРСИЯ (первый блок на всю ширину, минуты и смс под ним в ряд) -->
+    <div class="three-red-mobile">
+        <div class="red-card full-width-card">
+            <div class="main-text">БЕЗЛИМИТНЫЙ ИНТЕРНЕТ</div>
+            <div class="sub-text">без скрытых условий и дневных лимитов</div>
+        </div>
+        <div class="two-cards-row">
+            <div class="red-card">
+                <div class="main-text">1700 минут</div>
+                <div class="sub-text">на все номера РФ</div>
+            </div>
+            <div class="red-card">
+                <div class="main-text">500 sms</div>
+                <div class="sub-text">по России</div>
+            </div>
         </div>
     </div>
 
