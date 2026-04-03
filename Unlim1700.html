@@ -1,374 +1,406 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes"
+    />
     <title>УБМ-1700 | Безлимитный интернет</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
-        body {
-            background: #f2f4f8;
-            font-family: 'Segoe UI', Roboto, -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
-            padding: 20px 16px;
-        }
+      body {
+        background: #f2f4f8;
+        font-family:
+          "Segoe UI",
+          Roboto,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Helvetica Neue",
+          sans-serif;
+        padding: 20px 16px;
+      }
 
-        /* главная карточка */
-        .landing {
-            max-width: 1200px;
-            margin: 0 auto;
-            background: #ffffff;
-            border-radius: 32px;
-            overflow: hidden;
-            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.12);
-        }
+      /* главная карточка */
+      .landing {
+        max-width: 1200px;
+        margin: 0 auto;
+        background: #ffffff;
+        border-radius: 32px;
+        overflow: hidden;
+        box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.12);
+      }
 
-        /* КРАСНАЯ ШАПКА: название УБМ-1700 белым жирным */
-        .red-header {
-            background: #e31e24;
-            padding: 42px 24px 42px 24px;
-            text-align: center;
-        }
-        .product-name {
-            font-size: 3.2rem;
-            font-weight: 900;
-            color: white;
-            letter-spacing: 1px;
-            line-height: 1.2;
-            text-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
+      /* КРАСНАЯ ШАПКА: название УБМ-1700 белым жирным */
+      .red-header {
+        background: #e31e24;
+        padding: 42px 24px 42px 24px;
+        text-align: center;
+      }
+      .product-name {
+        font-size: 3.2rem;
+        font-weight: 900;
+        color: white;
+        letter-spacing: 1px;
+        line-height: 1.2;
+        text-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
 
-        /* === ДЕСКТОП: три красных блока в ряд (квадратные) === */
+     /* === ДЕСКТОП: три красных блока в ряд (квадратные, компактные) === */
+.three-red-desktop {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    background: white;
+    padding: 36px 32px 16px 32px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+.red-card-square {
+    background: #e31e24;
+    border-radius: 24px;
+    padding: 18px 12px;
+    text-align: center;
+    color: white;
+    box-shadow: 0 8px 16px rgba(227,30,36,0.2);
+    transition: transform 0.2s;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 140px;
+    aspect-ratio: 1 / 0.75;
+}
+.red-card-square .main-text {
+    font-size: 1.2rem;
+    font-weight: 800;
+    margin-bottom: 6px;
+}
+.red-card-square .sub-text {
+    font-size: 0.7rem;
+    opacity: 0.95;
+    font-weight: 500;
+}
+
+      /* === МОБИЛЬНАЯ ВЕРСИЯ: скрываем десктопный вариант, показываем мобильный === */
+      .three-red-mobile {
+        display: none;
+        background: white;
+        padding: 36px 32px 16px 32px;
+        flex-wrap: wrap;
+        gap: 24px;
+      }
+      .full-width-card {
+        flex: 1 1 100%;
+      }
+      .two-cards-row {
+        flex: 1;
+        display: flex;
+        gap: 24px;
+        min-width: 0;
+      }
+      .two-cards-row .red-card {
+        flex: 1;
+      }
+      .red-card {
+        background: #e31e24;
+        border-radius: 28px;
+        padding: 28px 16px;
+        text-align: center;
+        color: white;
+        box-shadow: 0 10px 20px rgba(227, 30, 36, 0.25);
+        transition: transform 0.2s;
+      }
+      .red-card .main-text {
+        font-size: 1.6rem;
+        font-weight: 800;
+        margin-bottom: 8px;
+      }
+      .red-card .sub-text {
+        font-size: 0.85rem;
+        opacity: 0.95;
+        font-weight: 500;
+      }
+
+      /* Уточнение: Только новый номер */
+      .new-number-note {
+        text-align: center;
+        padding: 12px 32px 28px 32px;
+        background: white;
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: #e31e24;
+        letter-spacing: 0.3px;
+      }
+      .new-number-note span {
+        background: #fff0f0;
+        display: inline-block;
+        padding: 6px 24px;
+        border-radius: 60px;
+      }
+
+      /* 4 светлых блока: 2 в ряд на всех экранах */
+      .benefits-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+        padding: 28px 32px 32px 32px;
+        background: #ffffff;
+        border-top: 1px solid #f0f2f5;
+      }
+      .benefit-item {
+        background: #ffffff;
+        border-radius: 28px;
+        padding: 24px 20px;
+        text-align: center;
+        box-shadow: 0 8px 22px rgba(0, 0, 0, 0.05);
+        border: 1px solid #f1f3f8;
+      }
+      .benefit-icon {
+        font-size: 2.6rem;
+        margin-bottom: 14px;
+      }
+      .benefit-title {
+        font-weight: 800;
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+        color: #000;
+      }
+      .benefit-desc {
+        font-size: 0.85rem;
+        color: #2d3e50;
+        line-height: 1.4;
+      }
+
+      /* Кнопка связи */
+      .button-area {
+        text-align: center;
+        padding: 20px 32px 24px 32px;
+        background: white;
+      }
+      .contact-btn {
+        display: inline-block;
+        background: #e31e24;
+        color: white;
+        font-weight: 800;
+        font-size: 1.2rem;
+        padding: 15px 44px;
+        border-radius: 60px;
+        text-decoration: none;
+        box-shadow: 0 12px 20px -8px rgba(227, 30, 36, 0.4);
+        transition: 0.2s;
+        letter-spacing: 0.5px;
+      }
+      .contact-btn:hover {
+        background: #bb0f15;
+        transform: scale(1.02);
+      }
+
+      /* Некрупная ссылка на сайт в конце */
+      .site-link-footer {
+        text-align: center;
+        padding: 12px 32px 32px 32px;
+        background: white;
+        font-size: 0.8rem;
+      }
+      .site-link-footer a {
+        color: #2c3e66;
+        text-decoration: none;
+        border-bottom: 1px dashed #b0bedb;
+        font-weight: 500;
+      }
+      .site-link-footer a:hover {
+        color: #e31e24;
+        border-bottom: 1px solid #e31e24;
+      }
+
+      .footer-links {
+        background: #fafafd;
+        padding: 14px 32px;
+        text-align: center;
+        font-size: 0.7rem;
+        color: #4f6080;
+        border-top: 1px solid #edeff4;
+        font-weight: 500;
+      }
+
+      /* ===== АДАПТИВ (планшеты и мобильные) ===== */
+      @media (max-width: 800px) {
+        /* на планшетах и телефонах прячем десктопную сетку и показываем мобильную версию (первый блок на всю ширину, минуты и смс в ряд) */
         .three-red-desktop {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 24px;
-            background: white;
-            padding: 36px 32px 16px 32px;
+          display: none;
         }
-        .red-card-square {
-            background: #e31e24;
-            border-radius: 28px;
-            padding: 28px 16px;
-            text-align: center;
-            color: white;
-            box-shadow: 0 10px 20px rgba(227,30,36,0.25);
-            transition: transform 0.2s;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            min-height: 220px;
-            aspect-ratio: 1 / 0.9; /* визуально квадратные блоки */
-        }
-        .red-card-square .main-text {
-            font-size: 1.6rem;
-            font-weight: 800;
-            margin-bottom: 8px;
-        }
-        .red-card-square .sub-text {
-            font-size: 0.85rem;
-            opacity: 0.95;
-            font-weight: 500;
-        }
-
-        /* === МОБИЛЬНАЯ ВЕРСИЯ: скрываем десктопный вариант, показываем мобильный === */
         .three-red-mobile {
-            display: none;
-            background: white;
-            padding: 36px 32px 16px 32px;
-            flex-wrap: wrap;
-            gap: 24px;
-        }
-        .full-width-card {
-            flex: 1 1 100%;
+          display: flex;
+          flex-direction: column;
+          padding: 24px 20px 12px 20px;
+          gap: 16px;
         }
         .two-cards-row {
-            flex: 1;
-            display: flex;
-            gap: 24px;
-            min-width: 0;
-        }
-        .two-cards-row .red-card {
-            flex: 1;
+          gap: 16px;
         }
         .red-card {
-            background: #e31e24;
-            border-radius: 28px;
-            padding: 28px 16px;
-            text-align: center;
-            color: white;
-            box-shadow: 0 10px 20px rgba(227,30,36,0.25);
-            transition: transform 0.2s;
+          padding: 20px 12px;
         }
         .red-card .main-text {
-            font-size: 1.6rem;
-            font-weight: 800;
-            margin-bottom: 8px;
+          font-size: 1.3rem;
         }
-        .red-card .sub-text {
-            font-size: 0.85rem;
-            opacity: 0.95;
-            font-weight: 500;
-        }
-
-        /* Уточнение: Только новый номер */
-        .new-number-note {
-            text-align: center;
-            padding: 12px 32px 28px 32px;
-            background: white;
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: #e31e24;
-            letter-spacing: 0.3px;
-        }
-        .new-number-note span {
-            background: #fff0f0;
-            display: inline-block;
-            padding: 6px 24px;
-            border-radius: 60px;
-        }
-
-        /* 4 светлых блока: 2 в ряд на всех экранах */
         .benefits-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 24px;
-            padding: 28px 32px 32px 32px;
-            background: #ffffff;
-            border-top: 1px solid #f0f2f5;
+          padding: 24px 20px;
+          gap: 16px;
         }
         .benefit-item {
-            background: #ffffff;
-            border-radius: 28px;
-            padding: 24px 20px;
-            text-align: center;
-            box-shadow: 0 8px 22px rgba(0,0,0,0.05);
-            border: 1px solid #f1f3f8;
-        }
-        .benefit-icon {
-            font-size: 2.6rem;
-            margin-bottom: 14px;
+          padding: 18px 12px;
         }
         .benefit-title {
-            font-weight: 800;
-            font-size: 1.2rem;
-            margin-bottom: 10px;
-            color: #000;
+          font-size: 1rem;
         }
-        .benefit-desc {
-            font-size: 0.85rem;
-            color: #2d3e50;
-            line-height: 1.4;
-        }
-
-        /* Кнопка связи */
         .button-area {
-            text-align: center;
-            padding: 20px 32px 24px 32px;
-            background: white;
+          padding: 16px 20px 20px;
         }
         .contact-btn {
-            display: inline-block;
-            background: #e31e24;
-            color: white;
-            font-weight: 800;
-            font-size: 1.2rem;
-            padding: 15px 44px;
-            border-radius: 60px;
-            text-decoration: none;
-            box-shadow: 0 12px 20px -8px rgba(227,30,36,0.4);
-            transition: 0.2s;
-            letter-spacing: 0.5px;
+          padding: 12px 32px;
+          font-size: 1rem;
         }
-        .contact-btn:hover {
-            background: #bb0f15;
-            transform: scale(1.02);
+        .product-name {
+          font-size: 2.4rem;
         }
-
-        /* Некрупная ссылка на сайт в конце */
+        .red-header {
+          padding: 32px 20px;
+        }
+        .new-number-note {
+          padding: 8px 20px 20px 20px;
+        }
         .site-link-footer {
-            text-align: center;
-            padding: 12px 32px 32px 32px;
-            background: white;
-            font-size: 0.8rem;
+          padding: 10px 20px 28px;
         }
-        .site-link-footer a {
-            color: #2c3e66;
-            text-decoration: none;
-            border-bottom: 1px dashed #b0bedb;
-            font-weight: 500;
-        }
-        .site-link-footer a:hover {
-            color: #e31e24;
-            border-bottom: 1px solid #e31e24;
-        }
+      }
 
-        .footer-links {
-            background: #fafafd;
-            padding: 14px 32px;
-            text-align: center;
-            font-size: 0.7rem;
-            color: #4f6080;
-            border-top: 1px solid #edeff4;
-            font-weight: 500;
+      @media (max-width: 480px) {
+        .two-cards-row {
+          gap: 12px;
         }
-
-        /* ===== АДАПТИВ (планшеты и мобильные) ===== */
-        @media (max-width: 800px) {
-            /* на планшетах и телефонах прячем десктопную сетку и показываем мобильную версию (первый блок на всю ширину, минуты и смс в ряд) */
-            .three-red-desktop {
-                display: none;
-            }
-            .three-red-mobile {
-                display: flex;
-                flex-direction: column;
-                padding: 24px 20px 12px 20px;
-                gap: 16px;
-            }
-            .two-cards-row {
-                gap: 16px;
-            }
-            .red-card {
-                padding: 20px 12px;
-            }
-            .red-card .main-text {
-                font-size: 1.3rem;
-            }
-            .benefits-grid {
-                padding: 24px 20px;
-                gap: 16px;
-            }
-            .benefit-item {
-                padding: 18px 12px;
-            }
-            .benefit-title {
-                font-size: 1rem;
-            }
-            .button-area {
-                padding: 16px 20px 20px;
-            }
-            .contact-btn {
-                padding: 12px 32px;
-                font-size: 1rem;
-            }
-            .product-name {
-                font-size: 2.4rem;
-            }
-            .red-header {
-                padding: 32px 20px;
-            }
-            .new-number-note {
-                padding: 8px 20px 20px 20px;
-            }
-            .site-link-footer {
-                padding: 10px 20px 28px;
-            }
+        .red-card .main-text {
+          font-size: 1.1rem;
         }
-
-        @media (max-width: 480px) {
-            .two-cards-row {
-                gap: 12px;
-            }
-            .red-card .main-text {
-                font-size: 1.1rem;
-            }
-            .benefits-grid {
-                gap: 12px;
-            }
+        .benefits-grid {
+          gap: 12px;
         }
+      }
     </style>
-</head>
-<body>
-<div class="landing">
-    <!-- КРАСНАЯ ШАПКА: название УБМ-1700 + подзаголовок -->
-    <div class="red-header">
+  </head>
+  <body>
+    <div class="landing">
+      <!-- КРАСНАЯ ШАПКА: название УБМ-1700 + подзаголовок -->
+      <div class="red-header">
         <div class="product-name">УБМ-1700</div>
-        <div style="color: white; font-size: 1rem; margin-top: 12px; font-weight: 500; opacity: 0.9;">
-            Когда одна сим-карта может всё
+        <div
+          style="
+            color: white;
+            font-size: 1rem;
+            margin-top: 12px;
+            font-weight: 500;
+            opacity: 0.9;
+          "
+        >
+          Когда одна сим-карта может всё
         </div>
-    </div>
+      </div>
 
-    <!-- ДЕСКТОПНАЯ ВЕРСИЯ: три квадратных блока в ряд -->
-    <div class="three-red-desktop">
+      <!-- ДЕСКТОПНАЯ ВЕРСИЯ: три квадратных блока в ряд -->
+      <div class="three-red-desktop">
         <div class="red-card-square">
-            <div class="main-text">БЕЗЛИМИТНЫЙ ИНТЕРНЕТ</div>
-            <div class="sub-text">без скрытых условий и дневных лимитов</div>
+          <div class="main-text">БЕЗЛИМИТНЫЙ ИНТЕРНЕТ</div>
+          <div class="sub-text">без скрытых условий и дневных лимитов</div>
         </div>
         <div class="red-card-square">
-            <div class="main-text">1700 минут</div>
-            <div class="sub-text">на все номера РФ</div>
+          <div class="main-text">1700 минут</div>
+          <div class="sub-text">на все номера РФ</div>
         </div>
         <div class="red-card-square">
-            <div class="main-text">500 sms</div>
-            <div class="sub-text">по России</div>
+          <div class="main-text">500 sms</div>
+          <div class="sub-text">по России</div>
         </div>
-    </div>
+      </div>
 
-    <!-- МОБИЛЬНАЯ ВЕРСИЯ (первый блок на всю ширину, минуты и смс под ним в ряд) -->
-    <div class="three-red-mobile">
+      <!-- МОБИЛЬНАЯ ВЕРСИЯ (первый блок на всю ширину, минуты и смс под ним в ряд) -->
+      <div class="three-red-mobile">
         <div class="red-card full-width-card">
-            <div class="main-text">БЕЗЛИМИТНЫЙ ИНТЕРНЕТ</div>
-            <div class="sub-text">без скрытых условий и дневных лимитов</div>
+          <div class="main-text">БЕЗЛИМИТНЫЙ ИНТЕРНЕТ</div>
+          <div class="sub-text">без скрытых условий и дневных лимитов</div>
         </div>
         <div class="two-cards-row">
-            <div class="red-card">
-                <div class="main-text">1700 минут</div>
-                <div class="sub-text">на все номера РФ</div>
-            </div>
-            <div class="red-card">
-                <div class="main-text">500 sms</div>
-                <div class="sub-text">по России</div>
-            </div>
+          <div class="red-card">
+            <div class="main-text">1700 минут</div>
+            <div class="sub-text">на все номера РФ</div>
+          </div>
+          <div class="red-card">
+            <div class="main-text">500 sms</div>
+            <div class="sub-text">по России</div>
+          </div>
         </div>
-    </div>
+      </div>
 
-    <!-- УТОЧНЕНИЕ: Только новый номер -->
-    <div class="new-number-note">
+      <!-- УТОЧНЕНИЕ: Только новый номер -->
+      <div class="new-number-note">
         <span>📌 Только новый номер</span>
-    </div>
+      </div>
 
-    <!-- 4 СВЕТЛЫХ БЛОКА (2 в ряд на всех устройствах) -->
-    <div class="benefits-grid">
+      <!-- 4 СВЕТЛЫХ БЛОКА (2 в ряд на всех устройствах) -->
+      <div class="benefits-grid">
         <div class="benefit-item">
-            <div class="benefit-icon">🚚</div>
-            <div class="benefit-title">Бесплатная доставка</div>
-            <div class="benefit-desc">В ближайший пункт WB</div>
+          <div class="benefit-icon">🚚</div>
+          <div class="benefit-title">Бесплатная доставка</div>
+          <div class="benefit-desc">В ближайший пункт WB</div>
         </div>
         <div class="benefit-item">
-            <div class="benefit-icon">📶</div>
-            <div class="benefit-title">Раздача 150 ГБ</div>
-            <div class="benefit-desc">Делитесь интернетом с ноутбуком, ТВ или планшетом</div>
+          <div class="benefit-icon">📶</div>
+          <div class="benefit-title">Раздача 150 ГБ</div>
+          <div class="benefit-desc">
+            Делитесь интернетом с ноутбуком, ТВ или планшетом
+          </div>
         </div>
         <div class="benefit-item">
-            <div class="benefit-icon">📱💻</div>
-            <div class="benefit-title">Для любого устройства</div>
-            <div class="benefit-desc">Сим-карта для телефона, модема, роутера и планшета</div>
+          <div class="benefit-icon">📱💻</div>
+          <div class="benefit-title">Для любого устройства</div>
+          <div class="benefit-desc">
+            Сим-карта для телефона, модема, роутера и планшета
+          </div>
         </div>
         <div class="benefit-item">
-            <div class="benefit-icon">🗺️</div>
-            <div class="benefit-title">В любом регионе, включая Крым</div>
-            <div class="benefit-desc">Без роуминга и доплат — стабильная связь по всей РФ</div>
+          <div class="benefit-icon">🗺️</div>
+          <div class="benefit-title">В любом регионе, включая Крым</div>
+          <div class="benefit-desc">
+            Без роуминга и доплат — стабильная связь по всей РФ
+          </div>
         </div>
-    </div>
+      </div>
 
-    <!-- КНОПКА СВЯЗИ (ссылка на contacts.html) -->
-    <div class="button-area">
-        <a href="https://www.vip-sim.ru/contacts.html" class="contact-btn">📞 Связь с оператором</a>
-    </div>
+      <!-- КНОПКА СВЯЗИ (ссылка на contacts.html) -->
+      <div class="button-area">
+        <a href="https://www.vip-sim.ru/contacts.html" class="contact-btn"
+          >📞 Связь с оператором</a
+        >
+      </div>
 
-    <!-- НЕКРУПНО: ПРЕДЛОЖЕНИЕ ПЕРЕЙТИ НА САЙТ -->
-    <div class="site-link-footer">
-        🔗 <a href="https://vip-sim.ru/" target="_blank" rel="noopener noreferrer">Перейти на сайт vip-sim.ru</a> — подробнее о тарифах
-    </div>
+      <!-- НЕКРУПНО: ПРЕДЛОЖЕНИЕ ПЕРЕЙТИ НА САЙТ -->
+      <div class="site-link-footer">
+        🔗
+        <a href="https://vip-sim.ru/" target="_blank" rel="noopener noreferrer"
+          >Перейти на сайт vip-sim.ru</a
+        >
+        — подробнее о тарифах
+      </div>
 
-    <!-- дополнительная строка с тезисами -->
-    <div class="footer-links">
-        ⚡ Выгодный тариф на интернет-связь | Сим-карты для модема и роутера | Хит Безлимит
+      <!-- дополнительная строка с тезисами -->
+      <div class="footer-links">
+        ⚡ Выгодный тариф на интернет-связь | Сим-карты для модема и роутера |
+        Хит Безлимит
+      </div>
     </div>
-</div>
-</body>
+  </body>
 </html>
