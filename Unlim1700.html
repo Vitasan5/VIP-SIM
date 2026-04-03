@@ -1,9 +1,11 @@
+Понял, сделал всё чётко по вашему описанию: красная шапка, название УБМ-1700, три красных блока с белым текстом, адаптив под мобильные, и кнопка связи.
+```html
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>Безлимитный интернет | Сим-карта с доставкой</title>
+    <title>УБМ-1700 | Безлимитный интернет</title>
     <style>
         * {
             margin: 0;
@@ -12,266 +14,382 @@
         }
 
         body {
-            background: #f0f2f5;
+            background: #f2f4f8;
             font-family: 'Segoe UI', Roboto, -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
-            padding: 24px 16px;
+            padding: 20px 16px;
         }
 
-        /* карточка лендинга — белый фон, черный текст, акцент красный */
-        .landing-card {
+        /* главная карточка */
+        .landing {
             max-width: 1200px;
             margin: 0 auto;
             background: #ffffff;
-            border-radius: 40px;
-            box-shadow: 0 20px 35px -10px rgba(0,0,0,0.1);
+            border-radius: 32px;
             overflow: hidden;
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.12);
         }
 
-        /* верхняя секция с картинкой (фоновая имитация плашки) */
-        .hero-section {
-            background: #000000;  /* черный фон как на оригинале */
-            padding: 32px 32px 28px 32px;
-            position: relative;
+        /* ШАПКА: красная, только название УБМ-1700 белым жирным */
+        .red-header {
+            background: #e31e24;   /* ярко-красный как на плашке */
+            padding: 42px 24px 42px 24px;
+            text-align: center;
         }
-
-        /* плашка ХИТ — красная, как на картинке */
-        .hit-badge {
-            background: #e31e24;  /* насыщенный красный */
-            display: inline-block;
-            padding: 6px 24px;
-            border-radius: 40px;
-            font-weight: 800;
-            font-size: 0.85rem;
-            letter-spacing: 1.5px;
+        .product-name {
+            font-size: 3.2rem;
+            font-weight: 900;
             color: white;
-            margin-bottom: 24px;
-            text-transform: uppercase;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        }
-
-        /* заголовок — название */
-        .main-title {
-            font-size: 2.8rem;
-            font-weight: 800;
-            color: white;
+            letter-spacing: 1px;
             line-height: 1.2;
-            margin-bottom: 16px;
-            letter-spacing: -0.01em;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
-        .main-title span {
-            color: #e31e24;
-        }
+        /* возможно небольшой подзаголовок не нужен, но для воздуха оставим только название */
 
-        /* три блока в ряд (1700 минут / интернет / 500 смс) */
-        .stats-row {
+        /* ТРИ КРАСНЫХ БЛОКА В РЯД (с белым текстом) */
+        .three-red-blocks {
             display: flex;
             flex-wrap: wrap;
             gap: 20px;
-            padding: 36px 32px 20px 32px;
+            padding: 36px 32px 24px 32px;
             background: white;
-            justify-content: center;
         }
-        .stat-block {
+        .red-card {
             flex: 1;
-            min-width: 140px;
-            background: #ffffff;
+            background: #e31e24;
             border-radius: 28px;
+            padding: 28px 16px;
             text-align: center;
-            padding: 24px 12px;
-            box-shadow: 0 5px 18px rgba(0,0,0,0.05);
-            border: 1px solid #eeeef0;
-            transition: all 0.2s;
+            color: white;
+            box-shadow: 0 8px 18px rgba(227,30,36,0.25);
+            transition: transform 0.2s;
         }
-        .stat-number {
-            font-size: 2.8rem;
+        .red-card .main-text {
+            font-size: 1.7rem;
             font-weight: 800;
-            color: #000000;
-            line-height: 1;
             margin-bottom: 8px;
+            line-height: 1.3;
         }
-        .stat-label {
-            font-size: 1rem;
-            font-weight: 600;
-            color: #2c3e4e;
-            letter-spacing: 0.3px;
-        }
-        .stat-label small {
-            font-weight: 400;
-            font-size: 0.85rem;
-            color: #5f6c80;
-        }
-
-        /* абонентская плата ниже */
-        .price-block {
-            text-align: center;
-            padding: 8px 32px 28px 32px;
-            background: white;
-        }
-        .price-value {
-            font-size: 2.4rem;
-            font-weight: 800;
-            color: #000;
-            background: #f8f9fc;
-            display: inline-block;
-            padding: 12px 32px;
-            border-radius: 60px;
-            letter-spacing: 0px;
-            box-shadow: inset 0 1px 3px rgba(0,0,0,0.02), 0 5px 12px rgba(0,0,0,0.05);
-        }
-        .price-value span {
-            font-size: 1.1rem;
+        .red-card .sub-text {
+            font-size: 0.9rem;
+            opacity: 0.95;
             font-weight: 500;
         }
 
-        /* четыре светлых блока с плюсами (белый фон, легкая тень) */
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 24px;
-            padding: 40px 32px 32px 32px;
-            background: #ffffff;
-            border-top: 1px solid #f0f0f0;
-        }
-        .feature-card {
-            background: #ffffff;
-            border-radius: 28px;
-            padding: 24px 18px;
-            text-align: center;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
-            border: 1px solid #f3f3f5;
-            transition: transform 0.2s;
-        }
-        .feature-icon {
-            font-size: 2.6rem;
-            margin-bottom: 16px;
-        }
-        .feature-title {
-            font-weight: 800;
-            font-size: 1.25rem;
-            margin-bottom: 10px;
-            color: #000;
-        }
-        .feature-desc {
-            font-size: 0.85rem;
-            color: #2c3e4e;
-            line-height: 1.4;
+        /* Адаптив: на мобильном первый блок (Безлимитный интернет) на всю ширину, а блоки минуты и смс под ним в ряд */
+        @media (max-width: 700px) {
+            .three-red-blocks {
+                flex-direction: column;
+                gap: 16px;
+                padding: 28px 20px;
+            }
+            /* первый блок занимает всю ширину */
+            .red-card:first-child {
+                width: 100%;
+            }
+            /* второй и третий блоки идут в ряд (inline-flex или grid) */
+            .two-small-row {
+                display: flex;
+                flex-direction: row;
+                gap: 16px;
+                width: 100%;
+            }
+            .two-small-row .red-card {
+                flex: 1;
+                min-width: 0;
+            }
+            /* обертка для корректного отображения: переопределим структуру через js? проще через flex-wrap и порядок. Но мы можем обойтись без доп.обертки, используя order? 
+            Лучше создать адаптив через медиа-запрос: первый блок отдельно, а два других обернем в flex. Для чистоты HTML добавим небольшую модификацию с помощью flex направления */
+            /* сделаем через display: flex; flex-wrap: wrap; а внутри .three-red-blocks зададим специальный порядок. */
+            .three-red-blocks {
+                display: flex;
+                flex-wrap: wrap;
+                flex-direction: column;
+            }
+            .red-card:first-child {
+                order: 1;
+                width: 100%;
+            }
+            /* создадим контейнер для двух блоков */
+            .three-red-blocks {
+                display: block;
+            }
+            .inline-minutes-sms {
+                display: flex;
+                gap: 16px;
+                margin-top: 16px;
+                width: 100%;
+            }
+            .inline-minutes-sms .red-card {
+                flex: 1;
+                margin: 0;
+            }
+            /* скроем стандартное отображение .red-card в мобильной версии, но перестроим через JS? нет, проще в HTML обернуть. Но я перепишу HTML с умной обёрткой, чтобы на десктопе было три блока в ряд, а на мобильном первый отдельно, два в ряд. Сделаем дублирование без JS — просто два варианта отображения? Нет, можно с помощью CSS Grid. */
         }
 
-        /* кнопка связи в конце */
-        .contact-button-wrapper {
-            text-align: center;
-            padding: 20px 32px 48px 32px;
+        /* Решение: используем CSS Grid для адаптива без лишних оберток */
+        .three-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            padding: 36px 32px 24px 32px;
             background: white;
         }
-        .contact-btn {
-            display: inline-block;
-            background: #e31e24;   /* красный как плашка ХИТ */
-            color: white;
-            font-weight: 800;
-            font-size: 1.25rem;
-            padding: 16px 48px;
-            border-radius: 60px;
-            text-decoration: none;
-            transition: 0.2s;
-            box-shadow: 0 12px 20px -8px rgba(227,30,36,0.4);
-            border: none;
-            letter-spacing: 0.5px;
+        .three-grid .red-card {
+            margin: 0;
         }
-        .contact-btn:hover {
-            background: #bb0f15;
-            transform: scale(1.02);
-            box-shadow: 0 16px 24px -8px rgba(227,30,36,0.5);
-        }
-
-        /* подвал - небольшая заметка про регионы (Крым уже в блоке) */
-        .extra-note {
-            background: #fafafc;
-            padding: 18px 32px;
-            text-align: center;
-            font-size: 0.75rem;
-            color: #5b6e8c;
-            border-top: 1px solid #eceef2;
-        }
-
+        /* мобильная версия: первый блок на всю ширину, остальные два в ряд 2 колонки */
         @media (max-width: 700px) {
-            .hero-section { padding: 24px 20px; }
-            .main-title { font-size: 1.9rem; }
-            .stats-row { padding: 24px 20px; gap: 12px; }
-            .stat-block { padding: 16px 8px; }
-            .stat-number { font-size: 2rem; }
-            .features-grid { padding: 24px 20px; gap: 16px; }
-            .contact-btn { padding: 12px 32px; font-size: 1rem; }
+            .three-grid {
+                grid-template-columns: 1fr;
+                gap: 18px;
+                padding: 28px 20px;
+            }
+            /* создаем грид для двух последних блоков вручную через вложенный контейнер? проще: */
+            .three-grid {
+                display: flex;
+                flex-direction: column;
+            }
+            .three-grid .red-card:first-child {
+                width: 100%;
+            }
+            .two-cols {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 16px;
+                margin-top: 8px;
+            }
+            /* но для чистоты кода я сделаю более элегантно — добавлю специальный враппер в html. Чтобы не мучиться, внутри three-grid после первого блока поставлю div class="two-cols" с двумя карточками. На десктопе этот div будет отображаться как обычные три колонки? нет, тогда нарушится. Значит правильнее — сделать универсальный вариант через CSS Grid и order. */
+            /* Альтернатива: использовать display: contents, но не везде. Я перепишу HTML чуть ниже с учетом адаптива. */
         }
+
+        /* ЧИСТОВОЙ ВАРИАНТ: я переделаю HTML, чтобы на всех экранах было красиво. Сейчас создам финальную разметку с адаптивом через грид и медиа-запрос. */
     </style>
 </head>
 <body>
-<div class="landing-card">
-    <!-- Верхняя секция: фон черный, плашка ХИТ, заголовок (Безлимитный интернет) -->
-    <div class="hero-section">
-        <div class="hit-badge">ХИТ</div>
-        <div class="main-title">
-            Безлимитный <span>интернет</span>
-        </div>
-        <!-- Добавим подзаголовок для ясности, но не нарушая структуру -->
-        <div style="color: rgba(255,255,255,0.75); font-size: 0.9rem; margin-top: 8px;">Сим-карта с доставкой на дом</div>
+<div class="landing">
+    <!-- Красная шапка: только название УБМ-1700 белым жирным -->
+    <div class="red-header">
+        <div class="product-name">УБМ-1700</div>
     </div>
 
-    <!-- ТРИ БЛОКА В РЯД: 1700 минут / 800 интернет / 500 sms -->
-    <div class="stats-row">
-        <div class="stat-block">
-            <div class="stat-number">1700</div>
-            <div class="stat-label">минут</div>
+    <!-- ТРИ КРАСНЫХ БЛОКА В РЯД (адаптив: на мобилке первый на всю ширину, остальные два под ним в ряд) -->
+    <div class="three-red-adaptive">
+        <div class="red-card full-width-card">
+            <div class="main-text">Безлимитный интернет</div>
+            <div class="sub-text">без скрытых условий</div>
         </div>
-        <div class="stat-block">
-            <div class="stat-number">800</div>
-            <div class="stat-label">интернет <small>(ГБ)</small></div>
-        </div>
-        <div class="stat-block">
-            <div class="stat-number">500</div>
-            <div class="stat-label">sms</div>
+        <div class="two-cards-row">
+            <div class="red-card">
+                <div class="main-text">1700 минут</div>
+                <div class="sub-text">на все номера РФ</div>
+            </div>
+            <div class="red-card">
+                <div class="main-text">500 sms</div>
+                <div class="sub-text">по России</div>
+            </div>
         </div>
     </div>
 
-    <!-- Абонентская плата ниже -->
-    <div class="price-block">
-        <div class="price-value">400 ₽ <span>/мес</span></div>
-        <div style="margin-top: 12px; font-size: 0.8rem; color: #e31e24; font-weight: 500;">Подключение только на новый номер</div>
-    </div>
-
-    <!-- Четыре светлых блока: Бесплатная доставка, Раздача 150 ГБ, Для любого устройства, В любом регионе, включая Крым -->
-    <div class="features-grid">
-        <div class="feature-card">
-            <div class="feature-icon">🚚</div>
-            <div class="feature-title">Бесплатная доставка</div>
-            <div class="feature-desc">По России — курьером или почтой. Без скрытых платежей.</div>
+    <!-- основные плюсы: 4 светлых блока (2 в ряд на десктопе и на мобилке 2 в ряд) -->
+    <div class="benefits-grid">
+        <div class="benefit-item">
+            <div class="benefit-icon">🚚</div>
+            <div class="benefit-title">Бесплатная доставка</div>
+            <div class="benefit-desc">По всей России — курьером или почтой</div>
         </div>
-        <div class="feature-card">
-            <div class="feature-icon">📶</div>
-            <div class="feature-title">Раздача 150 ГБ</div>
-            <div class="feature-desc">Делитесь интернетом с ноутбуком, телевизором или планшетом.</div>
+        <div class="benefit-item">
+            <div class="benefit-icon">📶</div>
+            <div class="benefit-title">Раздача 150 ГБ</div>
+            <div class="benefit-desc">Делитесь интернетом с ноутбуком и ТВ</div>
         </div>
-        <div class="feature-card">
-            <div class="feature-icon">📱💻</div>
-            <div class="feature-title">Для любого устройства</div>
-            <div class="feature-desc">Сим-карта подходит для телефона, модема, роутера и планшета.</div>
+        <div class="benefit-item">
+            <div class="benefit-icon">📱💻</div>
+            <div class="benefit-title">Для любого устройства</div>
+            <div class="benefit-desc">Сим-карта для телефона, модема, роутера</div>
         </div>
-        <div class="feature-card">
-            <div class="feature-icon">🗺️</div>
-            <div class="feature-title">В любом регионе, включая Крым</div>
-            <div class="feature-desc">Без роуминга и доплат. Работает по всей России стабильно.</div>
+        <div class="benefit-item">
+            <div class="benefit-icon">🗺️</div>
+            <div class="benefit-title">В любом регионе, включая Крым</div>
+            <div class="benefit-desc">Без роуминга и доплат по РФ</div>
         </div>
     </div>
 
-    <!-- Кнопка связи со ссылкой на contacts.html -->
-    <div class="contact-button-wrapper">
+    <!-- Кнопка связи в конце -->
+    <div class="button-area">
         <a href="https://www.vip-sim.ru/contacts.html" class="contact-btn">📞 Связь с оператором</a>
-        <p style="margin-top: 16px; font-size: 0.75rem; color: #6c7a8e;">Узнайте подробности и закажите сим-карту</p>
+        <div class="small-note">Узнайте подробности и закажите сим-карту</div>
     </div>
-
-    <!-- небольшая плашка для акцента, не нарушающая дизайн -->
-    <div class="extra-note">
-        ⚡ Выгодный тариф на интернет-связь. Сим-карты для модема и роутера. Хит Безлимит!
+    <!-- дополнительный мини-блок с тезисами для соответствия картинке -->
+    <div class="footer-links">
+        ⚡ Выгодный тариф на интернет-связь | Сим-карты для модема и роутера | Хит Безлимит
     </div>
 </div>
+
+<style>
+    /* Стили для трех красных блоков (адаптив: первый на всю ширину, остальные два в ряд) */
+    .three-red-adaptive {
+        background: white;
+        padding: 36px 32px 24px 32px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 24px;
+    }
+    .full-width-card {
+        flex: 1 1 100%;
+    }
+    .two-cards-row {
+        flex: 1;
+        display: flex;
+        gap: 24px;
+        min-width: 0;
+    }
+    .two-cards-row .red-card {
+        flex: 1;
+    }
+    .red-card {
+        background: #e31e24;
+        border-radius: 28px;
+        padding: 28px 16px;
+        text-align: center;
+        color: white;
+        box-shadow: 0 10px 20px rgba(227,30,36,0.25);
+        transition: transform 0.2s;
+    }
+    .red-card .main-text {
+        font-size: 1.6rem;
+        font-weight: 800;
+        margin-bottom: 8px;
+    }
+    .red-card .sub-text {
+        font-size: 0.85rem;
+        opacity: 0.95;
+        font-weight: 500;
+    }
+
+    /* Сетка для 4 светлых блоков: 2 в ряд на всех экранах */
+    .benefits-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+        padding: 40px 32px 20px 32px;
+        background: #ffffff;
+        border-top: 1px solid #f0f2f5;
+    }
+    .benefit-item {
+        background: #ffffff;
+        border-radius: 28px;
+        padding: 24px 20px;
+        text-align: center;
+        box-shadow: 0 8px 22px rgba(0,0,0,0.05);
+        border: 1px solid #f1f3f8;
+        transition: all 0.2s;
+    }
+    .benefit-icon {
+        font-size: 2.6rem;
+        margin-bottom: 14px;
+    }
+    .benefit-title {
+        font-weight: 800;
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+        color: #000;
+    }
+    .benefit-desc {
+        font-size: 0.85rem;
+        color: #2d3e50;
+        line-height: 1.4;
+    }
+
+    /* кнопка связи */
+    .button-area {
+        text-align: center;
+        padding: 28px 32px 40px 32px;
+        background: white;
+    }
+    .contact-btn {
+        display: inline-block;
+        background: #e31e24;
+        color: white;
+        font-weight: 800;
+        font-size: 1.2rem;
+        padding: 15px 44px;
+        border-radius: 60px;
+        text-decoration: none;
+        box-shadow: 0 12px 20px -8px rgba(227,30,36,0.4);
+        transition: 0.2s;
+        letter-spacing: 0.5px;
+    }
+    .contact-btn:hover {
+        background: #bb0f15;
+        transform: scale(1.02);
+    }
+    .small-note {
+        margin-top: 16px;
+        font-size: 0.75rem;
+        color: #6c7e9e;
+    }
+    .footer-links {
+        background: #fafafd;
+        padding: 16px 32px;
+        text-align: center;
+        font-size: 0.7rem;
+        color: #4f6080;
+        border-top: 1px solid #edeff4;
+        font-weight: 500;
+    }
+
+    @media (max-width: 700px) {
+        .three-red-adaptive {
+            padding: 24px 20px;
+            gap: 16px;
+        }
+        .two-cards-row {
+            gap: 16px;
+        }
+        .red-card {
+            padding: 20px 12px;
+        }
+        .red-card .main-text {
+            font-size: 1.3rem;
+        }
+        .benefits-grid {
+            padding: 28px 20px;
+            gap: 16px;
+        }
+        .benefit-item {
+            padding: 18px 12px;
+        }
+        .benefit-title {
+            font-size: 1rem;
+        }
+        .button-area {
+            padding: 20px 20px 32px;
+        }
+        .contact-btn {
+            padding: 12px 32px;
+            font-size: 1rem;
+        }
+        .product-name {
+            font-size: 2.4rem;
+        }
+        .red-header {
+            padding: 32px 20px;
+        }
+    }
+
+    /* Для очень маленьких экранов блоки минут и смс остаются в ряд 2 колонки */
+    @media (max-width: 480px) {
+        .two-cards-row {
+            gap: 12px;
+        }
+        .red-card .main-text {
+            font-size: 1.1rem;
+        }
+        .benefits-grid {
+            gap: 12px;
+        }
+    }
+</style>
 </body>
 </html>
+```
