@@ -28,8 +28,244 @@
     <!-- ШАПКА -->
     <header>
         <div class="logo">
-            <img src="img/logo.png" alt="VIP SIM">
+            <img src="img/logo.PNG" alt="VIP SIM">
         </div>
+
+<!-- Кнопка премиум-доступа -->
+  <!--<a href="premium.html" class="premium-btn">⭐ Премиум-опции</a>-->
+
+
+
+  <!-- БЛОК С ПЕРЕКЛЮЧАЮЩИМИСЯ КНОПКАМИ (вторая кнопка) -->
+<style>
+.switch-buttons-container {
+    display: inline-block;
+    position: relative;
+    margin-left: 10px;
+}
+
+/* ЯРКАЯ ЖЕЛТАЯ кнопка для Розыгрыш тарифа */
+.switch-btn-raffle {
+    display: inline-block;
+    background: linear-gradient(135deg, #FFEB3B, #FFC107);
+    color: #000000;
+    border: none;
+    border-radius: 30px;
+    padding: 8px 20px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(255, 193, 7, 0.6);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    letter-spacing: 0.5px;
+    text-decoration: none;
+    font-family: inherit;
+    text-shadow: 0 1px 1px rgba(255,255,255,0.5);
+}
+
+.switch-btn-raffle:hover {
+    transform: scale(1.05);
+    background: linear-gradient(135deg, #FFD600, #FFB300);
+    box-shadow: 0 8px 25px rgba(255, 193, 7, 0.8);
+    border-color: rgba(255, 255, 255, 0.8);
+    color: #000000;
+}
+
+/* Стиль для обычной кнопки (когда не розыгрыш) */
+.switch-btn-default {
+    display: inline-block;
+    background: linear-gradient(135deg, #FFD700, #DAA520);
+    color: #000000;
+    border: none;
+    border-radius: 30px;
+    padding: 8px 20px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 215, 0, 0.5);
+    letter-spacing: 0.5px;
+    text-decoration: none;
+    font-family: inherit;
+    text-shadow: 0 1px 1px rgba(255,255,255,0.3);
+}
+
+.switch-btn-default:hover {
+    transform: scale(1.05);
+    background: linear-gradient(135deg, #FFC107, #B8860B);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.3);
+    border-color: rgba(255, 215, 0, 0.8);
+    color: #000000;
+}
+
+/* Анимация */
+.switch-btn-raffle, .switch-btn-default {
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.fade-out {
+    opacity: 0;
+    transform: scale(0.8);
+}
+
+.fade-in {
+    animation: fadeInScale 0.4s ease;
+}
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Эффект сияния для розыгрыша */
+.switch-btn-raffle {
+    position: relative;
+    overflow: hidden;
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+.switch-btn-raffle::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -60%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0) 80%);
+    transform: rotate(25deg);
+    animation: shine 3s infinite;
+    pointer-events: none;
+}
+
+@keyframes shine {
+    0% {
+        transform: translateX(-100%) rotate(25deg);
+    }
+    20%, 100% {
+        transform: translateX(100%) rotate(25deg);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        box-shadow: 0 4px 15px rgba(255, 193, 7, 0.6);
+    }
+    50% {
+        box-shadow: 0 4px 25px rgba(255, 193, 7, 1);
+    }
+}
+
+@media (max-width: 768px) {
+    .switch-btn-raffle, .switch-btn-default {
+        padding: 6px 16px;
+        font-size: 12px;
+    }
+    .switch-buttons-container {
+        margin-left: 5px;
+    }
+}
+</style>
+
+<!-- КОНТЕЙНЕР ДЛЯ ВТОРОЙ КНОПКИ (которая будет меняться) -->
+<div id="switchButtonsContainer" class="switch-buttons-container"></div>
+
+<script>
+(function() {
+    // ===== НАСТРОЙКИ =====
+    // Текст и ссылка для обычного состояния (когда не розыгрыш)
+    const DEFAULT_BUTTON = {
+        text: '💎 Премиум-опции',
+        url: 'premium.html',
+        className: 'switch-btn-default'
+    };
+    
+    // Текст и ссылка для розыгрыша
+    const RAFFLE_BUTTON = {
+        text: '🎁 РОЗЫГРЫШ ТАРИФА',
+        url: 'https://t.me/simki_vip978',
+        className: 'switch-btn-raffle'
+    };
+    
+    const SWITCH_INTERVAL_MS = 5000; // 5 секунд
+    // ======================
+    
+    let isRaffle = false;
+    let intervalId = null;
+    let container = null;
+    let currentBtn = null;
+    
+    function createButton(btnData) {
+        const btn = document.createElement('a');
+        btn.href = btnData.url;
+        btn.textContent = btnData.text;
+        btn.className = btnData.className;
+        
+        if (btnData.url.startsWith('http') && btnData.url !== '#') {
+            btn.target = '_blank';
+        }
+        
+        return btn;
+    }
+    
+    function switchButton() {
+        if (!container) return;
+        
+        isRaffle = !isRaffle;
+        const nextBtnData = isRaffle ? RAFFLE_BUTTON : DEFAULT_BUTTON;
+        const newBtn = createButton(nextBtnData);
+        
+        if (currentBtn) {
+            currentBtn.classList.add('fade-out');
+            
+            setTimeout(() => {
+                if (currentBtn && currentBtn.parentNode) {
+                    container.removeChild(currentBtn);
+                }
+                container.appendChild(newBtn);
+                currentBtn = newBtn;
+                newBtn.classList.add('fade-in');
+                setTimeout(() => {
+                    newBtn.classList.remove('fade-in');
+                }, 400);
+            }, 300);
+        } else {
+            container.appendChild(newBtn);
+            currentBtn = newBtn;
+        }
+    }
+    
+    function init() {
+        container = document.getElementById('switchButtonsContainer');
+        if (!container) {
+            console.error('Ошибка: контейнер #switchButtonsContainer не найден!');
+            return;
+        }
+        
+        container.innerHTML = '';
+        currentBtn = createButton(DEFAULT_BUTTON);
+        container.appendChild(currentBtn);
+        
+        if (intervalId) clearInterval(intervalId);
+        intervalId = setInterval(switchButton, SWITCH_INTERVAL_MS);
+    }
+    
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        init();
+    }
+})();
+</script>
+
+
         <nav>
             <a href="index.html">Главная</a>
             <a href="tariffs.html">Тарифы</a>
@@ -915,6 +1151,5 @@ document.addEventListener('DOMContentLoaded', function() {
 <script src="telegram-widget.js"></script>
 
 </body>
-
 
 </html>
