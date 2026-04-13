@@ -8,48 +8,63 @@
 <body style="margin:0; padding:20px; font-family:'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background:#f2f4f8; box-sizing:border-box;">
     <div style="max-width:680px; margin:0 auto; background:white; border-radius:28px; box-shadow:0 12px 30px rgba(0,0,0,0.08); overflow:hidden; padding:0;">
         <!-- Header -->
-        <div style="background:linear-gradient(135deg, #e31e24 0%, #e31e24 100%); padding:28px 32px; text-align:center;">
-            <h1 style="margin:0; color:white; font-weight:600; font-size:26px; letter-spacing:-0.3px;">Заказ доставки сим-карты</h1>
+        <div style="background:#e31e24; padding:28px 32px; text-align:center;">
+            <h1 style="margin:0; color:white; font-weight:600; font-size:26px;">Заказ доставки сим-карты</h1>
             <p style="margin:10px 0 0; color:#ffcdce; font-size:15px;">Доставка до пункта выдачи Wildberries</p>
         </div>
         
         <!-- Форма -->
         <form id="orderForm" style="padding:30px 32px 40px; background:#fff;">
+            <!-- 1. Номер телефона к кабинету WB -->
             <div style="margin-bottom:24px;">
                 <label style="display:block; font-weight:600; font-size:14px; color:#1e2a32; margin-bottom:8px;">
                     📱 Номер телефона (кабинета Wildberries)
                 </label>
                 <input type="tel" id="wbPhone" required
                        placeholder="+7 999 123-45-67"
-                       style="width:100%; padding:14px 16px; font-size:16px; border:1.5px solid #e2e8f0; border-radius:18px; box-sizing:border-box; font-family:inherit;">
+                       style="width:100%; padding:14px 16px; font-size:16px; border:1.5px solid #e2e8f0; border-radius:18px; box-sizing:border-box;">
                 <div style="font-size:12px; color:#64748b; margin-top:6px;">Укажите номер, привязанный к вашему аккаунту WB</div>
             </div>
 
+            <!-- 2. Адрес пункта выдачи WB -->
             <div style="margin-bottom:24px;">
                 <label style="display:block; font-weight:600; font-size:14px; color:#1e2a32; margin-bottom:8px;">
                     📍 Адрес пункта выдачи WB (где удобно забрать)
                 </label>
                 <input type="text" id="pickupPoint" required
                        placeholder="г. Москва, ул. Примерная, д.10, ПВЗ WB"
-                       style="width:100%; padding:14px 16px; font-size:16px; border:1.5px solid #e2e8f0; border-radius:18px; box-sizing:border-box; font-family:inherit;">
+                       style="width:100%; padding:14px 16px; font-size:16px; border:1.5px solid #e2e8f0; border-radius:18px; box-sizing:border-box;">
             </div>
 
+            <!-- 3. Контактный номер телефона -->
             <div style="margin-bottom:24px;">
                 <label style="display:block; font-weight:600; font-size:14px; color:#1e2a32; margin-bottom:8px;">
                     📞 Контактный номер телефона (для связи)
                 </label>
                 <input type="tel" id="contactPhone" required
                        placeholder="+7 900 123-45-67"
-                       style="width:100%; padding:14px 16px; font-size:16px; border:1.5px solid #e2e8f0; border-radius:18px; box-sizing:border-box; font-family:inherit;">
+                       style="width:100%; padding:14px 16px; font-size:16px; border:1.5px solid #e2e8f0; border-radius:18px; box-sizing:border-box;">
             </div>
 
-            <div style="margin-bottom:28px;">
+            <!-- 4. E-mail -->
+            <div style="margin-bottom:24px;">
                 <label style="display:block; font-weight:600; font-size:14px; color:#1e2a32; margin-bottom:8px;">
                     ✉️ Ваш E-mail (действующий)
                 </label>
                 <input type="email" id="email" required
                        placeholder="example@mail.ru"
-                       style="width:100%; padding:14px 16px; font-size:16px; border:1.5px solid #e2e8f0; border-radius:18px; box-sizing:border-box; font-family:inherit;">
+                       style="width:100%; padding:14px 16px; font-size:16px; border:1.5px solid #e2e8f0; border-radius:18px; box-sizing:border-box;">
+            </div>
+
+            <!-- 5. Время платежа из чека (НОВОЕ ПОЛЕ) -->
+            <div style="margin-bottom:28px;">
+                <label style="display:block; font-weight:600; font-size:14px; color:#1e2a32; margin-bottom:8px;">
+                    🕐 Время платежа из чека
+                </label>
+                <input type="text" id="paymentTime" required
+                       placeholder="Например: 12.04.2026 15:34"
+                       style="width:100%; padding:14px 16px; font-size:16px; border:1.5px solid #e2e8f0; border-radius:18px; box-sizing:border-box;">
+                <div style="font-size:12px; color:#64748b; margin-top:6px;">Укажите дату и время из чека после оплаты</div>
             </div>
 
             <!-- Кнопка оплаты -->
@@ -61,28 +76,10 @@
                         Перейти к оплате ↗
                     </a>
                 </div>
-                <p style="font-size:13px; color:#4a5b6e; margin-top:10px;">Оплатите заказ и прикрепите скриншот ниже</p>
+                <p style="font-size:13px; color:#4a5b6e; margin-top:10px;">Оплатите заказ и укажите ниже дату и время платежа из чека</p>
             </div>
 
-            <!-- Прикрепить скрин -->
-            <div style="margin-bottom:32px;">
-                <label style="display:block; font-weight:600; font-size:14px; color:#1e2a32; margin-bottom:8px;">
-                    🧾 Скриншот оплаты (чек/квитанция)
-                </label>
-                <div style="border:1.5px dashed #cbd5e1; border-radius:24px; background:#fefcf5; padding:16px; text-align:center;" id="fileDropArea">
-                    <input type="file" id="screenshotFile" accept="image/*" style="display:none;">
-                    <div onclick="document.getElementById('screenshotFile').click();" style="cursor:pointer;">
-                        <span style="color:#e31e24; font-weight:500;">📎 Нажмите или перетащите файл</span>
-                        <p style="font-size:12px; color:#6c7a8d; margin:6px 0 0;">JPG, PNG (до 2 МБ)</p>
-                    </div>
-                </div>
-                <div id="filePreview" style="margin-top:12px; display:none; background:#ffe5e5; border-radius:30px; padding:8px 14px; display:none; align-items:center; justify-content:space-between;">
-                    <span id="fileNameDisplay"></span>
-                    <button type="button" id="removeFileBtn" style="background:none; border:none; color:#b91c1c; cursor:pointer;">✕</button>
-                </div>
-                <div id="uploadProgress" style="display:none; margin-top:8px; font-size:12px; color:#e31e24;"></div>
-            </div>
-
+            <!-- Кнопка Отправить -->
             <button type="submit" id="submitBtn" 
                     style="width:100%; background:#e31e24; border:none; padding:16px; font-size:18px; font-weight:700; color:white; border-radius:60px; cursor:pointer;">
                 📩 Отправить заявку
@@ -94,83 +91,15 @@
     <script>
         (function() {
             const form = document.getElementById('orderForm');
-            const fileInput = document.getElementById('screenshotFile');
-            const filePreviewDiv = document.getElementById('filePreview');
-            const fileNameSpan = document.getElementById('fileNameDisplay');
-            const removeFileBtn = document.getElementById('removeFileBtn');
-            const progressDiv = document.getElementById('uploadProgress');
-            let selectedFile = null;
-
-            function updateFilePreview(file) {
-                if (file) {
-                    fileNameSpan.innerText = `✅ Файл: ${file.name}`;
-                    filePreviewDiv.style.display = 'flex';
-                } else {
-                    filePreviewDiv.style.display = 'none';
+            
+            function validatePhone(phone, fieldName) {
+                const digits = phone.replace(/[\s\-\(\)\+]/g, '');
+                if (digits.length < 10 || digits.length > 15) {
+                    return `${fieldName} должен содержать от 10 до 15 цифр`;
                 }
+                return null;
             }
-
-            fileInput.addEventListener('change', function(e) {
-                if (fileInput.files && fileInput.files.length > 0) {
-                    selectedFile = fileInput.files[0];
-                    updateFilePreview(selectedFile);
-                }
-            });
-
-            if (removeFileBtn) {
-                removeFileBtn.addEventListener('click', function() {
-                    fileInput.value = '';
-                    selectedFile = null;
-                    updateFilePreview(null);
-                });
-            }
-
-            // Конвертация файла в base64
-            function fileToBase64(file) {
-                return new Promise((resolve, reject) => {
-                    const reader = new FileReader();
-                    reader.onload = () => resolve(reader.result);
-                    reader.onerror = reject;
-                    reader.readAsDataURL(file);
-                });
-            }
-
-            // Отправка через FormSubmit с base64 изображением (встроенным в письмо)
-            async function sendOrderWithBase64(formDataFields, base64Image, fileName) {
-                const formData = new FormData();
-                formData.append('wb_phone', formDataFields.wbPhone);
-                formData.append('pickup_address', formDataFields.pickupPoint);
-                formData.append('contact_phone', formDataFields.contactPhone);
-                formData.append('email', formDataFields.email);
-                formData.append('_subject', '📦 НОВАЯ ЗАЯВКА СИМ-КАРТА + СКРИНШОТ');
-                formData.append('_captcha', 'false');
-                formData.append('_template', 'table');
-                
-                // Вставляем скриншот в виде HTML-ссылки или прямого изображения
-                const message = `
-                    🔹 Номер кабинета WB: ${formDataFields.wbPhone}
-                    🔹 Адрес ПВЗ WB: ${formDataFields.pickupPoint}
-                    🔹 Контактный телефон: ${formDataFields.contactPhone}
-                    🔹 E-mail клиента: ${formDataFields.email}
-                    
-                    🖼️ СКРИНШОТ ОПЛАТЫ (нажмите на ссылку или скопируйте в браузер):
-                    ${base64Image}
-                    
-                    Имя файла: ${fileName}
-                    
-                    ⚠️ Если ссылка длинная - скопируйте её целиком в адресную строку браузера.
-                `;
-                formData.append('message', message);
-                formData.append('_replyto', formDataFields.email);
-                
-                const response = await fetch('https://formsubmit.co/ajax/vip.simki@vk.com', {
-                    method: 'POST',
-                    body: formData,
-                    headers: { 'Accept': 'application/json' }
-                });
-                return await response.json();
-            }
-
+            
             form.addEventListener('submit', async function(event) {
                 event.preventDefault();
                 
@@ -178,46 +107,63 @@
                 const pickup = document.getElementById('pickupPoint').value.trim();
                 const contactPhone = document.getElementById('contactPhone').value.trim();
                 const email = document.getElementById('email').value.trim();
+                const paymentTime = document.getElementById('paymentTime').value.trim();
                 
-                if (!wbPhone) { alert('Укажите номер телефона кабинета WB'); return; }
-                if (!pickup) { alert('Укажите адрес ПВЗ'); return; }
-                if (!contactPhone) { alert('Укажите контактный телефон'); return; }
-                if (!email || !email.includes('@')) { alert('Введите корректный E-mail'); return; }
-                if (!selectedFile) { alert('Прикрепите скриншот оплаты'); return; }
+                if (!wbPhone) { alert('Укажите номер телефона кабинета Wildberries'); return; }
+                if (!pickup) { alert('Укажите адрес пункта выдачи Wildberries'); return; }
+                if (!contactPhone) { alert('Укажите контактный номер телефона'); return; }
+                if (!email || !email.includes('@')) { alert('Введите корректный e-mail адрес'); return; }
+                if (!paymentTime) { alert('Укажите время платежа из чека'); return; }
+                
+                const phoneError1 = validatePhone(wbPhone, 'Телефон кабинета WB');
+                if (phoneError1) { alert(phoneError1); return; }
+                const phoneError2 = validatePhone(contactPhone, 'Контактный телефон');
+                if (phoneError2) { alert(phoneError2); return; }
                 
                 const submitBtn = document.getElementById('submitBtn');
                 const originalText = submitBtn.innerHTML;
                 submitBtn.innerHTML = '⏳ Отправка...';
                 submitBtn.disabled = true;
-                progressDiv.style.display = 'block';
-                progressDiv.innerHTML = '📤 Подготовка скриншота...';
+                
+                // Формируем данные для отправки
+                const formData = new FormData();
+                formData.append('wb_phone', wbPhone);
+                formData.append('pickup_address', pickup);
+                formData.append('contact_phone', contactPhone);
+                formData.append('email', email);
+                formData.append('payment_time', paymentTime);
+                formData.append('_subject', '📦 Новая заявка на доставку сим-карты WB');
+                formData.append('_captcha', 'false');
+                formData.append('_template', 'table');
+                
+                const message = `
+                    🔹 Номер кабинета WB: ${wbPhone}
+                    🔹 Адрес ПВЗ WB: ${pickup}
+                    🔹 Контактный телефон: ${contactPhone}
+                    🔹 E-mail клиента: ${email}
+                    🔹 Время платежа из чека: ${paymentTime}
+                `;
+                formData.append('message', message);
+                formData.append('_replyto', email);
                 
                 try {
-                    // Конвертируем скриншот в base64
-                    progressDiv.innerHTML = '🖼️ Конвертация изображения...';
-                    const base64 = await fileToBase64(selectedFile);
+                    const response = await fetch('https://formsubmit.co/ajax/vip.simki@vk.com', {
+                        method: 'POST',
+                        body: formData,
+                        headers: { 'Accept': 'application/json' }
+                    });
                     
-                    progressDiv.innerHTML = '📧 Отправка заявки на почту...';
-                    
-                    const formFields = { wbPhone, pickupPoint: pickup, contactPhone, email };
-                    const result = await sendOrderWithBase64(formFields, base64, selectedFile.name);
-                    
-                    if (result.success || result.message === 'OK') {
-                        alert('✅ Заявка отправлена! Скриншот встроен в письмо (ссылка base64). Менеджер свяжется с вами.');
+                    if (response.ok) {
+                        alert('✅ Заявка успешно отправлена! Менеджер проверит оплату по указанному времени и свяжется с вами.');
                         form.reset();
-                        selectedFile = null;
-                        fileInput.value = '';
-                        updateFilePreview(null);
                     } else {
-                        alert('❌ Ошибка: ' + (result.message || 'Не удалось отправить'));
+                        throw new Error('Ошибка отправки');
                     }
                 } catch (error) {
-                    console.error(error);
-                    alert('❌ Ошибка: ' + error.message + '\nПопробуйте другой файл (меньше 1 МБ)');
+                    alert('❌ Ошибка: Не удалось отправить заявку. Пожалуйста, попробуйте позже.');
                 } finally {
                     submitBtn.innerHTML = originalText;
                     submitBtn.disabled = false;
-                    progressDiv.style.display = 'none';
                 }
             });
         })();
