@@ -1439,6 +1439,110 @@ body.popup-open-megasimka {
     }
 </style>
 
+      <!-- ===== СЛАЙДЕР НОВОСТЕЙ НА ГЛАВНОЙ (белый фон, чёрный заголовок, сиреневые карточки) ===== -->
+<style>
+  .vs7-slider::-webkit-scrollbar { height: 6px; }
+  .vs7-slider::-webkit-scrollbar-track { background: rgba(196,181,253,.35); border-radius: 3px; }
+  .vs7-slider::-webkit-scrollbar-thumb { background: #e53935; border-radius: 3px; }
+  .vs7-slider { scrollbar-width: thin; scrollbar-color: #e53935 rgba(196,181,253,.35); }
+  .vs7-card:hover { border-color: #e53935 !important; transform: translateY(-4px); box-shadow: 0 8px 24px rgba(229,57,53,.25); }
+  .vs7-card:hover .vs7-card__img img { transform: scale(1.06); }
+  .vs7-arrow:hover { background: #e53935 !important; color: #fff !important; }
+</style>
+
+<section style="width:100%;max-width:100%;margin:0 auto;padding:48px 20px;background:#ffffff;font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;color:#111;box-sizing:border-box;">
+
+  <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:24px;flex-wrap:wrap;">
+    <h2 style="font-size:28px;font-weight:700;margin:0;color:#000000;">Новости и статьи</h2>
+    <a href="news.html" style="color:#e53935;text-decoration:none;font-weight:600;font-size:15px;white-space:nowrap;">Все новости →</a>
+  </div>
+
+  <div style="position:relative;">
+    <button type="button" onclick="vs7Scroll(-1)" aria-label="Назад" style="position:absolute;left:-8px;top:50%;transform:translateY(-50%);z-index:5;width:40px;height:40px;border-radius:50%;border:1px solid #c4b5fd;background:#ffffff;color:#7c3aed;font-size:20px;cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,.15);transition:background .2s,color .2s;">‹</button>
+    <button type="button" onclick="vs7Scroll(1)" aria-label="Вперёд" style="position:absolute;right:-8px;top:50%;transform:translateY(-50%);z-index:5;width:40px;height:40px;border-radius:50%;border:1px solid #c4b5fd;background:#ffffff;color:#7c3aed;font-size:20px;cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,.15);transition:background .2s,color .2s;">›</button>
+
+    <div id="vs7Track" class="vs7-slider" style="display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;padding-bottom:10px;box-sizing:border-box;">
+      <!-- Карточки вставит JS -->
+    </div>
+  </div>
+
+</section>
+
+<script>
+(function() {
+  // ТОТ ЖЕ JSONBin, что и в news.html (блок "Новости из админки")
+  var ADMIN_NEWS_CONFIG = {
+    BIN_ID: '68fa7ce2ae596e708f271345',
+    MASTER_KEY: '$2a$10$h2nqVPwwIv04XRDJNXhHJuedTYrRgG9tIX5HbvnfiWo/BE3sWbxxW',
+    BASE_URL: 'https://api.jsonbin.io/v3/b'
+  };
+
+  var LIMIT = 10; // последние 10 новостей
+
+  function esc(s) {
+    return String(s == null ? '' : s)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+  }
+
+  function buildCard(news) {
+    var img = news.image || 'https://via.placeholder.com/600x600/e9d5ff/7c3aed?text=NEWS';
+    var title = esc(news.title || 'Без названия');
+    var link = esc(news.link || 'news.html');
+    return '' +
+      '<a href="' + link + '" target="_blank" rel="noopener" class="vs7-card" style="flex:0 0 calc((100% - 64px) / 5);min-width:0;scroll-snap-align:start;display:flex;flex-direction:column;aspect-ratio:1/1;background:#ede4ff;border:1px solid #c4b5fd;border-radius:16px;overflow:hidden;text-decoration:none;color:#111;box-sizing:border-box;transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease;">' +
+        '<div class="vs7-card__img" style="flex:0 0 55%;overflow:hidden;background:#d8c8ff;">' +
+          '<img src="' + esc(img) + '" alt="" loading="lazy" onerror="this.src=\'https://via.placeholder.com/600x600/e9d5ff/7c3aed?text=NEWS\'" style="width:100%;height:100%;object-fit:cover;display:block;transition:transform .35s ease;">' +
+        '</div>' +
+        '<div style="flex:1;padding:12px;display:flex;flex-direction:column;justify-content:space-between;box-sizing:border-box;">' +
+          '<p style="font-size:13px;line-height:1.3;font-weight:600;color:#1a1a1a;margin:0;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;">' + title + '</p>' +
+          '<span style="font-size:12px;font-weight:700;color:#e53935;margin-top:6px;">Читать →</span>' +
+        '</div>' +
+      '</a>';
+  }
+
+  function render(newsArray) {
+    var track = document.getElementById('vs7Track');
+    if (!track) return;
+    if (!Array.isArray(newsArray) || newsArray.length === 0) {
+      track.innerHTML = '<div style="color:#7c3aed;padding:20px;">Новости пока не добавлены</div>';
+      return;
+    }
+    // Новые добавляются В НАЧАЛО массива → первые 10 и есть последние
+    var last10 = newsArray.slice(0, LIMIT);
+    track.innerHTML = last10.map(buildCard).join('');
+  }
+
+  async function loadNews() {
+    try {
+      var res = await fetch(ADMIN_NEWS_CONFIG.BASE_URL + '/' + ADMIN_NEWS_CONFIG.BIN_ID + '/latest', {
+        headers: { 'X-Master-Key': ADMIN_NEWS_CONFIG.MASTER_KEY }
+      });
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      var data = await res.json();
+      render(data.record || []);
+    } catch (e) {
+      console.error('Ошибка загрузки новостей для слайдера:', e);
+      var track = document.getElementById('vs7Track');
+      if (track) track.innerHTML = '<div style="color:#7c3aed;padding:20px;">Не удалось загрузить новости</div>';
+    }
+  }
+
+  window.vs7Scroll = function(dir) {
+    var track = document.getElementById('vs7Track');
+    if (!track) return;
+    var card = track.querySelector('.vs7-card');
+    if (!card) return;
+    var step = card.getBoundingClientRect().width + 16;
+    track.scrollBy({ left: dir * step * 5, behavior: 'smooth' });
+  };
+
+  document.addEventListener('DOMContentLoaded', loadNews);
+  setInterval(loadNews, 120000); // автообновление раз в 2 минуты
+})();
+</script>
+<!-- ===== /СЛАЙДЕР НОВОСТЕЙ ===== -->
+      
 <div class="compact-voting-100">
     <div class="compact-title-100">
         📊 Кого больше? — голосуй за своего оператора
