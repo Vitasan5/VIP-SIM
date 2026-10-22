@@ -1439,7 +1439,7 @@ body.popup-open-megasimka {
     }
 </style>
 
-<!-- ===== СЛАЙДЕР НОВОСТЕЙ НА ГЛАВНОЙ (5 / 3 / 3, на мобильном только картинки) ===== -->
+<!-- ===== СЛАЙДЕР НОВОСТЕЙ НА ГЛАВНОЙ (5 / 3 / 2, на мобильном только картинки) ===== -->
 <style>
   .vs7-slider::-webkit-scrollbar { height: 6px; }
   .vs7-slider::-webkit-scrollbar-track { background: rgba(196,181,253,.35); border-radius: 3px; }
@@ -1454,9 +1454,9 @@ body.popup-open-megasimka {
   @media (max-width: 1024px) {
     .vs7-card { flex: 0 0 calc((100% - 32px) / 3) !important; }
   }
-  /* Телефон: 3 карточки, только картинки, без заголовков */
+  /* Телефон: 2 крупные карточки, только картинки */
   @media (max-width: 768px) {
-    .vs7-card { flex: 0 0 calc((100% - 32px) / 3) !important; }
+    .vs7-card { flex: 0 0 calc((100% - 16px) / 2) !important; }
     .vs7-arrow { display: none !important; }
 
     /* картинка занимает всю карточку */
