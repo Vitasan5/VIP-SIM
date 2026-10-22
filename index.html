@@ -1439,7 +1439,7 @@ body.popup-open-megasimka {
     }
 </style>
 
-      <!-- ===== СЛАЙДЕР НОВОСТЕЙ НА ГЛАВНОЙ (белый фон, чёрный заголовок, сиреневые карточки) ===== -->
+<!-- ===== СЛАЙДЕР НОВОСТЕЙ НА ГЛАВНОЙ (5 / 3 / 3, на мобильном только картинки) ===== -->
 <style>
   .vs7-slider::-webkit-scrollbar { height: 6px; }
   .vs7-slider::-webkit-scrollbar-track { background: rgba(196,181,253,.35); border-radius: 3px; }
@@ -1448,6 +1448,22 @@ body.popup-open-megasimka {
   .vs7-card:hover { border-color: #e53935 !important; transform: translateY(-4px); box-shadow: 0 8px 24px rgba(229,57,53,.25); }
   .vs7-card:hover .vs7-card__img img { transform: scale(1.06); }
   .vs7-arrow:hover { background: #e53935 !important; color: #fff !important; }
+
+  /* ===== АДАПТИВ ===== */
+  /* Планшет: 3 карточки */
+  @media (max-width: 1024px) {
+    .vs7-card { flex: 0 0 calc((100% - 32px) / 3) !important; }
+  }
+  /* Телефон: 3 карточки, только картинки, без заголовков */
+  @media (max-width: 768px) {
+    .vs7-card { flex: 0 0 calc((100% - 32px) / 3) !important; }
+    .vs7-arrow { display: none !important; }
+
+    /* картинка занимает всю карточку */
+    .vs7-card__img { flex: 1 1 100% !important; height: 100% !important; }
+    /* текстовый блок полностью скрыт */
+    .vs7-card__body { display: none !important; }
+  }
 </style>
 
 <section style="width:100%;max-width:100%;margin:0 auto;padding:48px 20px;background:#ffffff;font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;color:#111;box-sizing:border-box;">
@@ -1494,9 +1510,8 @@ body.popup-open-megasimka {
         '<div class="vs7-card__img" style="flex:0 0 55%;overflow:hidden;background:#d8c8ff;">' +
           '<img src="' + esc(img) + '" alt="" loading="lazy" onerror="this.src=\'https://via.placeholder.com/600x600/e9d5ff/7c3aed?text=NEWS\'" style="width:100%;height:100%;object-fit:cover;display:block;transition:transform .35s ease;">' +
         '</div>' +
-        '<div style="flex:1;padding:12px;display:flex;flex-direction:column;justify-content:space-between;box-sizing:border-box;">' +
-          '<p style="font-size:13px;line-height:1.3;font-weight:600;color:#1a1a1a;margin:0;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;">' + title + '</p>' +
-          '<span style="font-size:12px;font-weight:700;color:#e53935;margin-top:6px;">Читать →</span>' +
+        '<div class="vs7-card__body" style="flex:1;padding:12px;display:flex;flex-direction:column;justify-content:center;box-sizing:border-box;overflow:hidden;">' +
+          '<p class="vs7-card__title" style="font-size:13px;line-height:1.3;font-weight:600;color:#1a1a1a;margin:0;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden;">' + title + '</p>' +
         '</div>' +
       '</a>';
   }
@@ -1508,7 +1523,6 @@ body.popup-open-megasimka {
       track.innerHTML = '<div style="color:#7c3aed;padding:20px;">Новости пока не добавлены</div>';
       return;
     }
-    // Новые добавляются В НАЧАЛО массива → первые 10 и есть последние
     var last10 = newsArray.slice(0, LIMIT);
     track.innerHTML = last10.map(buildCard).join('');
   }
@@ -1534,11 +1548,11 @@ body.popup-open-megasimka {
     var card = track.querySelector('.vs7-card');
     if (!card) return;
     var step = card.getBoundingClientRect().width + 16;
-    track.scrollBy({ left: dir * step * 5, behavior: 'smooth' });
+    track.scrollBy({ left: dir * step * (window.innerWidth <= 1024 ? 1 : 5), behavior: 'smooth' });
   };
 
   document.addEventListener('DOMContentLoaded', loadNews);
-  setInterval(loadNews, 120000); // автообновление раз в 2 минуты
+  setInterval(loadNews, 120000);
 })();
 </script>
 <!-- ===== /СЛАЙДЕР НОВОСТЕЙ ===== -->
