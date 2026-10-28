@@ -436,18 +436,18 @@
 
         <!-- БЛОК 0: УБМ (3 карточки) -->
 <section class="tariff-block">
-    <h2>Выгодные тарифы с новым номером (не 978) </h2>
+    <h2>Выгодные тарифы с новым номером (краснодарские) </h2>
     <!-- <p class="tariff-subtitle">Подключиться к любому тарифу, действующему в Крыму, можно по адресу:
                 г.Симферополь, пр.Кирова,16. Магазин Terminal.</p> -->
     <div class="image-row">
-        <a href="#" onclick="openModal('УБМ-1700'); return false;">
-            <img src="img/УБМ1700.jpg" alt="УБМ1700">
+        <a href="#" onclick="openModal('UnlimS'); return false;">
+            <img src="img/unlimS.png" alt="UnlimS">
         </a>
-        <a href="#" onclick="openModal('УБ UNLIM'); return false;">
-            <img src="img/УБ UNLIM.PNG" alt="УБ UNLIM">
+        <a href="#" onclick="openModal('UnlimM'); return false;">
+            <img src="img/unlimM.png" alt="UnlimM">
         </a>
-        <a href="#" onclick="openModal('UNLIM200'); return false;">
-            <img src="img/UNLIM200.png" alt="UNLIM200">
+        <a href="#" onclick="openModal('UnlimL'); return false;">
+            <img src="img/unlimL.png" alt="UnlimL">
         </a>
     </div>
 </section>
@@ -488,9 +488,9 @@
     </div>
 </section>
 
-        <!-- БЛОК 3: Непубличные тарифы МТС (918/988) -->
+        <!-- БЛОК 3: Непубличные тарифы МТС (красивый краснодарский номер 918/988) -->
         <section class="tariff-block">
-            <h2>Непубличные тарифы с новым номером (918/988) Sim / e-Sim</h2>
+            <h2>Непубличные тарифы с новым номером<br>(красивый краснодарский номер 918/988) Sim / e-Sim</h2>
           <!-- <p class="tariff-subtitle">Подключиться к любому тарифу, действующему в Крыму, можно по адресу:
                 г.Симферополь, пр.Кирова,16. Магазин Terminal.</p> -->
             <div class="image-row">
@@ -849,15 +849,15 @@ document.addEventListener('DOMContentLoaded', function() {
         <script>
             // Данные по тарифам
             const TARIFFS = {
-                 'УБМ-1700': {
+                 'UnlimS': {
                     image: 'video/Тариф УБМ-1700.mp4', // или картинка img/Умный-1700 застака для видео.PNG
-                    image: 'img/УБМ-1700-4.JPG', // используем указанную картинку
+                    image: 'img/unlimS.png', // используем указанную картинку
                     specs: `
-                <p><strong>Абонплата:</strong> 400 руб./мес</p>
+                <p><strong>Абонплата:</strong> 350 руб./мес</p>
                 <p><strong>Интернет:</strong> Безлимитный интернет</p>
-                <p><strong>Раздача:</strong> 150 Гб</p>
-                <p><strong>Минуты:</strong> 1700 минут на все сети России</p>
-                <p><strong>СМС:</strong> 500 на все сети России</p>
+                <p><strong>Раздача:</strong> - </p> 
+                <p><strong>Минуты:</strong> 700 минут на все сети России</p>
+                <p><strong>СМС:</strong> 300 на все сети России</p>
                 <p><strong>Работает:</strong> Без роуминга в Крыму и по РФ</p>
                 <p><strong>Подключение:</strong> Только новый номер МТС</p>
                 <p><strong>Формат:</strong> Только SIM </p>
@@ -866,14 +866,14 @@ document.addEventListener('DOMContentLoaded', function() {
             `
                 },
 
-                   'УБ UNLIM': {
+                   'UnlimM': {
                     
-                    image: 'img/УБ UNLIM.PNG', // используем указанную картинку
+                    image: 'img/unlimM.png', // используем указанную картинку
                     specs: `
-                <p><strong>Абонплата:</strong> 350 руб./мес</p>
+                <p><strong>Абонплата:</strong> 450 руб./мес</p>
                 <p><strong>Интернет:</strong> Безлимитный интернет</p>
                 <p><strong>Раздача:</strong> 150 Гб</p>
-                <p><strong>Минуты:</strong> 700 минут на все сети России</p>
+                <p><strong>Минуты:</strong> 1500 минут на все сети России</p>
                 <p><strong>СМС:</strong> 500 на все сети России</p>
                 <p><strong>Работает:</strong> Без роуминга в Крыму и по РФ</p>
                 <p><strong>Подключение:</strong> Только новый номер МТС</p>
@@ -883,15 +883,15 @@ document.addEventListener('DOMContentLoaded', function() {
             `
                 },
 
-                     'UNLIM200': {
+                     'UnlimL': {
                     
-                    image: 'img/UNLIM200.png', // используем указанную картинку
+                    image: 'img/UnlimL.png', // используем указанную картинку
                     specs: `
-                <p><strong>Абонплата:</strong> 300 руб./мес</p>
+                <p><strong>Абонплата:</strong> 600 руб./мес</p>
                 <p><strong>Интернет:</strong> Безлимитный интернет</p>
                 <p><strong>Раздача:</strong> 150 Гб</p>
-                <p><strong>Минуты:</strong> 200 минут на все сети России</p>
-                
+                <p><strong>Минуты:</strong> 2500 минут на все сети России</p>
+                <p><strong>СМС:</strong> 1000 на все сети России</p>
                 <p><strong>Работает:</strong> Без роуминга в Крыму и по РФ</p>
                 <p><strong>Подключение:</strong> Только новый номер МТС</p>
                 <p><strong>Формат:</strong> Только SIM</p>
