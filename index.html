@@ -259,7 +259,7 @@
 (function() {
     // ===== НАСТРОЙКИ =====
     // Текст и ссылка для обычного состояния (когда не розыгрыш)
-      const DEFAULT_BUTTON = {
+    const DEFAULT_BUTTON = {
         text: '💎 ВЫГОДНЫЙ ТАРИФ',
         url: 'https://t.me/simki_vip978/5112',
         className: 'switch-btn-default'
@@ -267,7 +267,7 @@
     
     // Текст и ссылка для розыгрыша
     const RAFFLE_BUTTON = {
-        text: 'ЗА ПОДПИСКУ 🎁 ',
+        text: '🎁 ЗА ПОДПИСКУ  ',
         url: 'https://t.me/simki_vip978/5112',
         className: 'switch-btn-raffle'
     };
@@ -343,16 +343,16 @@
 })();
 </script>
 
-   <nav>
-            <a href="index.html">Главная</a>
-            <a href="tariffs.html">Тарифы</a>
-            <a href="service.html">Сервис</a>
-            <a href="numbers.html">Красивые номера</a>
-            <!--<a href="apple.html">Apple</a>
+      <nav>
+        <a href="index.html">Главная</a>
+        <a href="tariffs.html">Тарифы</a>
+        <a href="service.html">Сервис</a>
+        <a href="numbers.html">Красивые номера</a>
+        <!--<a href="apple.html">Apple</a>
             <a href="accessories.html">Аксессуары</a>-->
-            <a href="reviews.html">Отзывы</a>
-            <a href="news.html">Новости</a>
-        </nav>
+        <a href="reviews.html">Отзывы</a>
+        <a href="news.html">Новости</a>
+      </nav>
       <!-- Гамбургер-меню -->
       <div class="menu-toggle" id="menuToggle">
         <span></span>
@@ -365,7 +365,7 @@
         <a href="tariffs.html">Тарифы</a>
         <a href="service.html">Сервис</a>
         <a href="numbers.html">Красивые номера</a>
-          <!--<a href="apple.html">Apple</a>
+        <!--<a href="apple.html">Apple</a>
             <a href="accessories.html">Аксессуары</a>-->
         <a href="reviews.html">Отзывы</a>
         <a href="news.html">Новости</a>
@@ -385,313 +385,32 @@
       </section>
 
      <h1 class="left-align">Хиты продаж</h1>
-<!-- РЕКЛАМНЫЙ ВИДЕОБЛОК (ПОСТЕР) С КНОПКОЙ ПОДРОБНЕЕ -->
-<style>
-    /* Рекламный видеоблок */
-    .promo-video-block {
-        width: 100%;
-        max-width: 1200px;
-        margin: 0 auto 30px;
-        padding: 0 15px;
-        box-sizing: border-box;
-    }
-    
-    .promo-video-container {
-        position: relative;
-        width: 100%;
-        border-radius: 16px;
-        overflow: hidden;
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-        background: #f5f5f5;
-    }
-    
-    .promo-video {
-        width: 100%;
-        height: auto;
-        display: block;
-        object-fit: cover;
-        aspect-ratio: 16 / 9;
-    }
-    
-    .promo-fallback {
-        width: 100%;
-        height: auto;
-        display: block;
-    }
-    
-    /* Кнопка подробнее на видео (слева) */
-    .video-overlay {
-        position: absolute;
-        bottom: 20px;
-        left: 20px;
-        z-index: 10;
-    }
-    
-    .video-details-btn {
-        display: inline-block;
-        background: linear-gradient(135deg, #ff416c, #ff4b2b);
-        color: white;
-        border: none;
-        border-radius: 30px;
-        padding: 8px 20px;
-        font-size: 14px;
-        font-weight: bold;
-        cursor: pointer;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-        transition: all 0.3s ease;
-        border: 1px solid rgba(255, 255, 255, 0.3);
-        letter-spacing: 0.5px;
-        text-decoration: none;
-    }
-    
-    .video-details-btn:hover {
-        transform: scale(1.05);
-        background: linear-gradient(135deg, #ff4b2b, #ff416c);
-        box-shadow: 0 8px 18px rgba(0, 0, 0, 0.4);
-        border-color: rgba(255, 255, 255, 0.6);
-        color: white;
-    }
-    
-    /* Адаптация для мобильных */
-    @media (max-width: 768px) {
-        .promo-video-block {
-            margin: 0 auto 20px;
-            padding: 0 12px;
-        }
-        .promo-video-container {
-            border-radius: 12px;
-        }
-        .video-overlay {
-            bottom: 15px;
-            left: 15px;
-        }
-        .video-details-btn {
-            padding: 6px 16px;
-            font-size: 12px;
-        }
-    }
-    
-    @media (max-width: 480px) {
-        .promo-video-block {
-            margin: 0 auto 15px;
-            padding: 0 10px;
-        }
-        .promo-video-container {
-            border-radius: 8px;
-        }
-        .video-overlay {
-            bottom: 10px;
-            left: 10px;
-        }
-        .video-details-btn {
-            padding: 5px 14px;
-            font-size: 11px;
-        }
-    }
-</style>
 
-<section class="promo-video-block">
-    <div class="promo-video-container">
-        <video class="promo-video" autoplay muted loop playsinline poster="img/video-poster.jpg">
-            <source src="video/Тариф УБМ-1700.mp4" type="video/mp4">
-            <source src="video/Тариф УБМ-1700.mp4" type="video/webm">
-            <!-- Если видео не загрузится - покажем картинку -->
-            <img src="img/Умный-1700 застака для видео.PNG" alt="Рекламный постер" class="promo-fallback">
-        </video>
-        
-        <!-- Кнопка подробнее (слева, уменьшенная) -->
-        <div class="video-overlay">
-            <a href="https://www.vip-sim.ru/tariffs" class="video-details-btn">🔍 ПОДРОБНЕЕ</a>
-        </div>
-    </div>
-</section>
+<!--Банер УБМ -->
 
-<style>
-/* СТИЛИ ДЛЯ РЕКЛАМНОГО ВИДЕОБЛОКА */
-.promo-video-block {
-  width: 100%;
-  max-width: 1200px;
-  margin: 40px auto;
-  padding: 0 20px;
-  box-sizing: border-box;
-}
 
-.promo-video-container {
-  position: relative;
-  width: 100%;
-  border-radius: 20px;
-  overflow: hidden;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
-  aspect-ratio: 16 / 9; /* Соотношение сторон 16:9 */
-  background: #000; /* Фон пока грузится видео */
-}
+<a href="https://www.vip-sim.ru/tariffs"
+   style="display:block; width:100%; cursor:pointer;">
 
-.promo-video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* Видео покрывает всю область */
-  display: block;
-  pointer-events: none; /* Запрещаем клики по видео (как постер) */
-}
+  <picture>
+    <!-- Квадратная картинка для мобильных -->
+    <source
+      media="(max-width: 600px)"
+      srcset="img/tarifUBM.png"
+    >
 
-/* Запасной вариант, если видео не загрузилось */
-.promo-fallback {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
+    <!-- Горизонтальный баннер для компьютеров -->
+    <img
+      src="img/mts-banner.png"
+      alt="МТС УБ-М — 500 рублей в месяц"
+      style="display:block; width:100%; height:auto; border:0;"
+    >
+  </picture>
 
-/* Кнопка включения звука */
-.video-sound-btn {
-  position: absolute;
-  bottom: 20px;
-  right: 20px;
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background: rgba(0, 0, 0, 0.6);
-  border: 2px solid rgba(255, 255, 255, 0.3);
-  color: white;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 10px;
-  transition: all 0.3s ease;
-  z-index: 10;
-  backdrop-filter: blur(5px);
-  opacity: 0.7;
-  border: none;
-}
+</a>
 
-.video-sound-btn:hover {
-  opacity: 1;
-  background: rgba(227, 6, 19, 0.8);
-  transform: scale(1.1);
-}
 
-.sound-icon {
-  width: 24px;
-  height: 24px;
-  fill: currentColor;
-}
 
-/* Анимация появления */
-.promo-video-block {
-  animation: fadeIn 1s ease;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Мобильная версия */
-@media (max-width: 768px) {
-  .promo-video-block {
-    margin: 30px auto;
-    padding: 0 15px;
-  }
-  
-  .video-sound-btn {
-    width: 40px;
-    height: 40px;
-    bottom: 15px;
-    right: 15px;
-  }
-  
-  .sound-icon {
-    width: 20px;
-    height: 20px;
-  }
-}
-
-@media (max-width: 480px) {
-  .promo-video-block {
-    margin: 20px auto;
-    padding: 0 10px;
-  }
-  
-  .video-sound-btn {
-    width: 36px;
-    height: 36px;
-    bottom: 10px;
-    right: 10px;
-  }
-}
-</style>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  const videoBlock = document.querySelector('.promo-video-block');
-  if (!videoBlock) return;
-  
-  const video = videoBlock.querySelector('.promo-video');
-  const soundBtn = videoBlock.querySelector('.video-sound-btn');
-  const soundOffIcon = videoBlock.querySelector('.sound-off');
-  const soundOnIcon = videoBlock.querySelector('.sound-on');
-  
-  // Если видео есть и кнопка звука существует
-  if (video && soundBtn) {
-    // По умолчанию звук выключен
-    video.muted = true;
-    
-    // Кнопка включения/выключения звука
-    soundBtn.addEventListener('click', function(e) {
-      e.stopPropagation();
-      
-      if (video.muted) {
-        video.muted = false;
-        soundOffIcon.style.display = 'none';
-        soundOnIcon.style.display = 'block';
-        
-        // Можно добавить событие в аналитику
-        console.log('Звук включен');
-        // ym(104821156,'reachGoal','video_sound_on');
-      } else {
-        video.muted = true;
-        soundOffIcon.style.display = 'block';
-        soundOnIcon.style.display = 'none';
-        
-        console.log('Звук выключен');
-        // ym(104821156,'reachGoal','video_sound_off');
-      }
-    });
-  }
-  
-  // Дополнительно: видео начинает проигрываться автоматически
-  // Если вдруг автоиграй не сработал
-  if (video) {
-    const playPromise = video.play();
-    
-    if (playPromise !== undefined) {
-      playPromise.catch(error => {
-        // Автовоспроизведение заблокировано браузером
-        console.log('Автовоспроизведение заблокировано');
-        // Можно показать кнопку "Play"
-      });
-    }
-  }
-  
-  // Эффект параллакса при скролле (опционально)
-  window.addEventListener('scroll', function() {
-    const rect = videoBlock.getBoundingClientRect();
-    const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
-    
-    if (isVisible && video) {
-      // Можно добавить легкий эффект при скролле
-      const scrollPercent = (window.scrollY - rect.top) / rect.height;
-      // Не делаем ничего, но можно было бы добавить трансформацию
-    }
-  });
-});
-</script>
 
       <!-- ХИТЫ ПРОДАЖ -->
       <section class="hits-wrapper">
@@ -1159,7 +878,7 @@ body.popup-open-megasimka {
 
       
       <!-- КАРТОЧКИ С ИЗОБРАЖЕНИЯМИ -->
-           <section class="image-card-section">
+      <section class="image-card-section">
         <div class="cards-container">
           <div class="card-large">
             <a href="https://www.vip-sim.ru/contacts.html" class="full-width-image-link">
@@ -1438,7 +1157,6 @@ body.popup-open-megasimka {
         pointer-events: none;
     }
 </style>
-
 <!-- ===== СЛАЙДЕР НОВОСТЕЙ НА ГЛАВНОЙ (5 / 3 / 2, на мобильном только картинки) ===== -->
 <style>
   .vs7-slider::-webkit-scrollbar { height: 6px; }
@@ -1556,7 +1274,7 @@ body.popup-open-megasimka {
 })();
 </script>
 <!-- ===== /СЛАЙДЕР НОВОСТЕЙ ===== -->
-      
+
 <div class="compact-voting-100">
     <div class="compact-title-100">
         📊 Кого больше? — голосуй за своего оператора
