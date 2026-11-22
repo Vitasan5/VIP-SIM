@@ -1,0 +1,1634 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Сервис клиентов</title>
+
+    <style>
+      :root {
+        --bg: #f4f6fa;
+        --surface: #ffffff;
+        --surface-soft: #f8fafc;
+        --border: #e5e7eb;
+        --text: #111827;
+        --muted: #6b7280;
+        --primary: #2563eb;
+        --primary-dark: #1d4ed8;
+        --danger: #dc2626;
+        --danger-dark: #b91c1c;
+        --success: #16a34a;
+        --shadow: 0 10px 30px rgba(15, 23, 42, 0.07);
+        --radius: 18px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family:
+          Inter,
+          ui-sans-serif,
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+        background: var(--bg);
+        color: var(--text);
+      }
+
+      button,
+      input,
+      select,
+      textarea {
+        font: inherit;
+      }
+
+      button {
+        border: 0;
+        cursor: pointer;
+      }
+
+      .app {
+        width: min(1180px, calc(100% - 32px));
+        margin: 0 auto;
+        padding: 28px 0 48px;
+      }
+
+      .login-card {
+        width: min(420px, 100%);
+        margin: 10vh auto 0;
+        padding: 32px;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 24px;
+        box-shadow: var(--shadow);
+      }
+
+      .brand {
+        margin-bottom: 24px;
+      }
+
+      .brand h1 {
+        margin: 0 0 8px;
+        font-size: 30px;
+        letter-spacing: -0.03em;
+      }
+
+      .brand p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.5;
+      }
+
+      .field {
+        margin-bottom: 14px;
+      }
+
+      .field label {
+        display: block;
+        margin: 0 0 7px;
+        font-size: 13px;
+        font-weight: 650;
+        color: #374151;
+      }
+
+      input,
+      select,
+      textarea {
+        width: 100%;
+        padding: 12px 14px;
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        background: #fff;
+        color: var(--text);
+        outline: none;
+        transition:
+          border-color 0.15s,
+          box-shadow 0.15s;
+      }
+
+      input:focus,
+      select:focus,
+      textarea:focus {
+        border-color: #93c5fd;
+        box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+      }
+
+      textarea {
+        min-height: 96px;
+        resize: vertical;
+      }
+
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 7px;
+        min-height: 42px;
+        padding: 10px 15px;
+        border-radius: 11px;
+        background: var(--primary);
+        color: #fff;
+        font-weight: 650;
+        transition:
+          background 0.15s,
+          transform 0.05s;
+      }
+
+      .button:hover {
+        background: var(--primary-dark);
+      }
+      .button:active {
+        transform: translateY(1px);
+      }
+
+      .button.secondary {
+        background: #eef2f7;
+        color: #374151;
+      }
+
+      .button.secondary:hover {
+        background: #e5e7eb;
+      }
+
+      .button.danger {
+        background: var(--danger);
+      }
+
+      .button.danger:hover {
+        background: var(--danger-dark);
+      }
+
+      .button.ghost {
+        background: transparent;
+        color: #4b5563;
+      }
+
+      .button.ghost:hover {
+        background: #f3f4f6;
+      }
+
+      .button.small {
+        min-height: 36px;
+        padding: 8px 11px;
+        font-size: 13px;
+      }
+
+      .button.full {
+        width: 100%;
+      }
+
+      .error {
+        margin-top: 12px;
+        color: var(--danger);
+        font-size: 14px;
+      }
+
+      .topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        margin-bottom: 22px;
+      }
+
+      .topbar-title {
+        cursor: pointer;
+      }
+
+      .topbar-title h1 {
+        margin: 0;
+        font-size: 28px;
+        letter-spacing: -0.03em;
+      }
+
+      .topbar-title p {
+        margin: 4px 0 0;
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      .topbar-actions {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+      }
+
+      .toolbar {
+        display: grid;
+        grid-template-columns: minmax(220px, 1.5fr) repeat(
+            3,
+            minmax(150px, 1fr)
+          );
+        gap: 10px;
+        margin-bottom: 18px;
+      }
+
+      .toolbar input,
+      .toolbar select {
+        background: var(--surface);
+      }
+
+      .panel {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        padding: 20px;
+        margin-bottom: 18px;
+      }
+
+      .panel-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 16px;
+      }
+
+      .panel-head h2,
+      .panel-head h3 {
+        margin: 0;
+        letter-spacing: -0.02em;
+      }
+
+      .panel-head p {
+        margin: 4px 0 0;
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      .cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 16px;
+      }
+
+      .client-card {
+        display: flex;
+        flex-direction: column;
+        min-height: 270px;
+        padding: 20px;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        box-shadow: 0 6px 20px rgba(15, 23, 42, 0.045);
+      }
+
+      .client-card h2 {
+        margin: 0 0 14px;
+        font-size: 20px;
+        letter-spacing: -0.02em;
+      }
+
+      .info {
+        margin: 0 0 12px;
+      }
+
+      .label {
+        margin-bottom: 3px;
+        color: var(--muted);
+        font-size: 12px;
+        font-weight: 600;
+      }
+
+      .value {
+        line-height: 1.45;
+        overflow-wrap: anywhere;
+      }
+
+      .client-card .button {
+        margin-top: auto;
+        width: 100%;
+      }
+
+      .empty {
+        padding: 42px 20px;
+        text-align: center;
+        color: var(--muted);
+        background: var(--surface);
+        border: 1px dashed var(--border);
+        border-radius: var(--radius);
+      }
+
+      .form-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      .form-grid .full-width {
+        grid-column: 1 / -1;
+      }
+
+      .form-actions {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin-top: 4px;
+      }
+
+      .detail-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        padding: 24px;
+      }
+
+      .back-button {
+        margin-bottom: 18px;
+      }
+
+      .detail-header {
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        align-items: flex-start;
+        margin-bottom: 20px;
+      }
+
+      .detail-header h2 {
+        margin: 0 0 7px;
+        font-size: 28px;
+        letter-spacing: -0.03em;
+      }
+
+      .detail-header p {
+        margin: 0;
+        color: var(--muted);
+      }
+
+      .detail-actions {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+      }
+
+      .subsection {
+        margin-top: 28px;
+        padding-top: 24px;
+        border-top: 1px solid var(--border);
+      }
+
+      .interaction {
+        padding: 18px;
+        margin-top: 12px;
+        background: var(--surface-soft);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+      }
+
+      .interaction-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 12px;
+      }
+
+      .interaction-title {
+        font-weight: 700;
+      }
+
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        padding: 5px 9px;
+        border-radius: 999px;
+        background: #eff6ff;
+        color: #1d4ed8;
+        font-size: 12px;
+        font-weight: 700;
+      }
+
+      .link-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 12px;
+      }
+
+      .settings-nav {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin-bottom: 18px;
+      }
+
+      .settings-tab {
+        min-height: 40px;
+        padding: 9px 13px;
+        border-radius: 10px;
+        background: #eef2f7;
+        color: #4b5563;
+        font-weight: 650;
+      }
+
+      .settings-tab.active {
+        background: #dbeafe;
+        color: #1d4ed8;
+      }
+
+      .setting-list {
+        display: grid;
+        gap: 9px;
+      }
+
+      .setting-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 12px 14px;
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        background: #fff;
+      }
+
+      .setting-name {
+        font-weight: 600;
+        overflow-wrap: anywhere;
+      }
+
+      .setting-actions {
+        display: flex;
+        gap: 6px;
+        flex-shrink: 0;
+      }
+
+      .muted {
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      .hidden {
+        display: none !important;
+      }
+
+      @media (max-width: 820px) {
+        .toolbar {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+
+      @media (max-width: 600px) {
+        .app {
+          width: min(100% - 20px, 1180px);
+          padding: 16px 0 30px;
+        }
+
+        .login-card {
+          margin-top: 5vh;
+          padding: 22px;
+          border-radius: 18px;
+        }
+
+        .topbar {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+
+        .topbar-actions {
+          width: 100%;
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+        }
+
+        .topbar-actions .button {
+          width: 100%;
+        }
+
+        .toolbar {
+          grid-template-columns: 1fr;
+        }
+
+        .cards {
+          grid-template-columns: 1fr;
+        }
+
+        .form-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .form-grid .full-width {
+          grid-column: auto;
+        }
+
+        .detail-card,
+        .panel {
+          padding: 16px;
+        }
+
+        .detail-header {
+          flex-direction: column;
+        }
+
+        .detail-actions {
+          width: 100%;
+        }
+
+        .detail-actions .button {
+          width: 100%;
+        }
+
+        .setting-item {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+
+        .setting-actions {
+          width: 100%;
+        }
+
+        .setting-actions .button {
+          flex: 1;
+        }
+
+        .form-actions .button {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="app">
+      <!-- LOGIN -->
+      <div id="login" class="login-card">
+        <div class="brand">
+          <h1>Сервис клиентов</h1>
+          <p>Ваше рабочее пространство для клиентов и обращений.</p>
+        </div>
+
+        <div class="field">
+          <label for="email">Email</label>
+          <input
+            id="email"
+            type="email"
+            placeholder="you@example.com"
+            autocomplete="email"
+          />
+        </div>
+
+        <div class="field">
+          <label for="password">Пароль</label>
+          <input
+            id="password"
+            type="password"
+            placeholder="Введите пароль"
+            autocomplete="current-password"
+          />
+        </div>
+
+        <button id="loginButton" class="button full">Войти</button>
+        <div id="loginError" class="error"></div>
+      </div>
+
+      <!-- APP -->
+      <div id="app" class="hidden">
+        <header class="topbar">
+          <div class="topbar-title" onclick="showClientsList()">
+            <h1>Клиенты</h1>
+            <p>Клиентская база и история обращений</p>
+          </div>
+
+          <div class="topbar-actions">
+            <button class="button secondary" onclick="showSettings()">
+              ⚙ Настройки
+            </button>
+            <button class="button secondary" onclick="logout()">Выйти</button>
+          </div>
+        </header>
+
+        <!-- CLIENT LIST -->
+        <div id="clientsPage">
+          <div class="panel">
+            <div class="panel-head">
+              <div>
+                <h2>Клиенты</h2>
+                <p>Ищите клиентов и фильтруйте обращения.</p>
+              </div>
+              <button class="button" onclick="showAddClientForm()">
+                + Добавить клиента
+              </button>
+            </div>
+
+            <div id="addClientForm" class="hidden">
+              <div class="form-grid">
+                <div class="field">
+                  <label for="newClientName">Имя</label>
+                  <input id="newClientName" placeholder="Имя клиента" />
+                </div>
+
+                <div class="field">
+                  <label for="newClientPhone">Телефон</label>
+                  <input id="newClientPhone" placeholder="+7 ..." />
+                </div>
+
+                <div class="field">
+                  <label for="newClientEmail">Email</label>
+                  <input
+                    id="newClientEmail"
+                    type="email"
+                    placeholder="email@example.com"
+                  />
+                </div>
+
+                <div class="field full-width">
+                  <label for="newClientComment">Комментарий</label>
+                  <textarea
+                    id="newClientComment"
+                    placeholder="Короткая заметка о клиенте"
+                  ></textarea>
+                </div>
+              </div>
+
+              <div class="form-actions">
+                <button class="button" onclick="addClient()">
+                  Сохранить клиента
+                </button>
+                <button class="button secondary" onclick="hideAddClientForm()">
+                  Отмена
+                </button>
+              </div>
+            </div>
+
+            <div class="toolbar">
+              <input
+                id="search"
+                placeholder="Поиск по имени, телефону или email"
+              />
+
+              <select id="sourceFilter">
+                <option value="">Все источники</option>
+              </select>
+
+              <select id="topicFilter">
+                <option value="">Все темы</option>
+              </select>
+
+              <select id="resultFilter">
+                <option value="">Все результаты</option>
+              </select>
+            </div>
+          </div>
+
+          <div id="cards" class="cards">
+            <div class="empty">Загрузка клиентов...</div>
+          </div>
+        </div>
+
+        <!-- CLIENT DETAILS -->
+        <div id="clientDetails" class="hidden"></div>
+
+        <!-- SETTINGS -->
+        <div id="settings" class="hidden">
+          <div class="panel">
+            <div class="panel-head">
+              <div>
+                <h2>Настройки</h2>
+                <p>Настройте свои источники, темы и результаты обращений.</p>
+              </div>
+              <button class="button secondary" onclick="showClientsList()">
+                ← К клиентам
+              </button>
+            </div>
+
+            <div class="settings-nav">
+              <button
+                id="settingsTabSources"
+                class="settings-tab active"
+                onclick="showSettingsTab('sources')"
+              >
+                Источники
+              </button>
+              <button
+                id="settingsTabTopics"
+                class="settings-tab"
+                onclick="showSettingsTab('topics')"
+              >
+                Темы
+              </button>
+              <button
+                id="settingsTabResults"
+                class="settings-tab"
+                onclick="showSettingsTab('results')"
+              >
+                Результаты
+              </button>
+            </div>
+
+            <div id="settingsSources"></div>
+            <div id="settingsTopics" class="hidden"></div>
+            <div id="settingsResults" class="hidden"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script>
+      const SUPABASE_URL = "https://cgmafprlztqagnzffzgs.supabase.co";
+      const SUPABASE_KEY = "sb_publishable_2Swng6qIYXp57nTSqjYVdA_wb16gSE5";
+
+      const supabaseClient = window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY,
+      );
+
+      const cards = document.getElementById("cards");
+      const search = document.getElementById("search");
+
+      let clients = [];
+      let settingsData = {
+        sources: [],
+        topics: [],
+        results: [],
+      };
+
+      async function loadClients() {
+        cards.innerHTML = '<div class="empty">Загружаем клиентов...</div>';
+
+        const { data, error } = await supabaseClient
+          .from("clients")
+          .select(
+            `
+          *,
+          interactions (
+            source,
+            topic,
+            result,
+            comment,
+            created_at
+          )
+        `,
+          )
+          .order("created_at", { ascending: false });
+
+        if (error) {
+          console.error("Ошибка Supabase:", error);
+          cards.innerHTML =
+            '<div class="empty">Не удалось загрузить клиентов.</div>';
+          return;
+        }
+
+        clients = data || [];
+        renderClients(clients);
+      }
+
+      function renderClients(list) {
+        if (!list.length) {
+          cards.innerHTML = '<div class="empty">Клиенты не найдены.</div>';
+          return;
+        }
+
+        cards.innerHTML = list
+          .map((client) => {
+            const firstInteraction =
+              client.interactions && client.interactions.length
+                ? client.interactions[0]
+                : null;
+
+            return `
+          <article class="client-card">
+            <h2>${escapeHtml(client.name || "Без имени")}</h2>
+
+            <div class="info">
+              <div class="label">Телефон</div>
+              <div class="value">${escapeHtml(client.phone || "—")}</div>
+            </div>
+
+            <div class="info">
+              <div class="label">Email</div>
+              <div class="value">${escapeHtml(client.email || "—")}</div>
+            </div>
+
+            ${
+              firstInteraction
+                ? `
+              <div class="info">
+                <div class="label">Последнее обращение</div>
+                <div class="value">
+                  ${escapeHtml(firstInteraction.source || "—")}
+                  · ${escapeHtml(firstInteraction.topic || "—")}
+                </div>
+              </div>
+
+              <div class="info">
+                <div class="label">Результат</div>
+                <div class="value">${escapeHtml(firstInteraction.result || "—")}</div>
+              </div>
+            `
+                : ""
+            }
+
+            <div class="info">
+              <div class="label">Комментарий</div>
+              <div class="value">${escapeHtml(client.comment || "—")}</div>
+            </div>
+
+            <button class="button" onclick="openClient('${client.id}')">Открыть клиента</button>
+          </article>
+        `;
+          })
+          .join("");
+      }
+
+      function applyFilters() {
+        const query = search.value.trim().toLowerCase();
+        const source = document.getElementById("sourceFilter").value;
+        const topic = document.getElementById("topicFilter").value;
+        const result = document.getElementById("resultFilter").value;
+
+        const filtered = clients.filter((client) => {
+          const matchesSearch =
+            (client.name || "").toLowerCase().includes(query) ||
+            (client.phone || "").toLowerCase().includes(query) ||
+            (client.email || "").toLowerCase().includes(query);
+
+          const matchesSource =
+            !source ||
+            (client.interactions || []).some((i) => i.source === source);
+
+          const matchesTopic =
+            !topic ||
+            (client.interactions || []).some((i) => i.topic === topic);
+
+          const matchesResult =
+            !result ||
+            (client.interactions || []).some((i) => i.result === result);
+
+          return (
+            matchesSearch && matchesSource && matchesTopic && matchesResult
+          );
+        });
+
+        renderClients(filtered);
+      }
+
+      search.addEventListener("input", applyFilters);
+      document
+        .getElementById("sourceFilter")
+        .addEventListener("change", applyFilters);
+      document
+        .getElementById("topicFilter")
+        .addEventListener("change", applyFilters);
+      document
+        .getElementById("resultFilter")
+        .addEventListener("change", applyFilters);
+
+      const loginButton = document.getElementById("loginButton");
+      const loginError = document.getElementById("loginError");
+
+      loginButton.addEventListener("click", async function () {
+        const email = document.getElementById("email").value.trim();
+        const password = document.getElementById("password").value;
+
+        loginError.textContent = "";
+
+        const { error } = await supabaseClient.auth.signInWithPassword({
+          email,
+          password,
+        });
+
+        if (error) {
+          loginError.textContent = error.message;
+          return;
+        }
+
+        document.getElementById("login").classList.add("hidden");
+        document.getElementById("app").classList.remove("hidden");
+
+        await loadSettingsData();
+        await loadClients();
+      });
+
+      async function openClient(clientId) {
+        document.getElementById("clientsPage").classList.add("hidden");
+        document.getElementById("settings").classList.add("hidden");
+        const clientDetails = document.getElementById("clientDetails");
+        clientDetails.classList.remove("hidden");
+
+        clientDetails.innerHTML =
+          '<div class="detail-card">Загружаем информацию о клиенте...</div>';
+
+        const { data: client, error } = await supabaseClient
+          .from("clients")
+          .select(
+            `
+          *,
+          interactions (
+            id,
+            source,
+            topic,
+            result,
+            comment,
+            created_at
+          ),
+          contact_links (
+            service,
+            url,
+            interaction_id
+          )
+        `,
+          )
+          .eq("id", clientId)
+          .single();
+
+        if (error) {
+          console.error("Ошибка загрузки клиента:", error);
+          clientDetails.innerHTML =
+            '<div class="empty">Не удалось загрузить клиента.</div>';
+          return;
+        }
+
+        const interactions = client.interactions || [];
+
+        clientDetails.innerHTML = `
+        <div class="detail-card">
+          <button class="button secondary back-button" onclick="showClientsList()">← Назад к клиентам</button>
+
+          <div class="detail-header">
+            <div>
+              <h2>${escapeHtml(client.name || "Без имени")}</h2>
+              <p>Карточка клиента</p>
+            </div>
+
+            <div class="detail-actions">
+              <button class="button secondary" onclick="showEditClientForm('${client.id}')">✏️ Редактировать</button>
+              <button class="button danger" onclick="deleteClient('${client.id}')">🗑 Удалить</button>
+            </div>
+          </div>
+
+          <div id="editClientForm" class="panel hidden" style="margin: 0 0 20px;">
+            <div class="panel-head">
+              <div>
+                <h3>Редактирование клиента</h3>
+              </div>
+            </div>
+
+            <input type="hidden" id="editClientId" value="${client.id}" />
+
+            <div class="form-grid">
+              <div class="field">
+                <label for="editClientName">Имя</label>
+                <input id="editClientName" value="${escapeAttr(client.name || "")}" />
+              </div>
+
+              <div class="field">
+                <label for="editClientPhone">Телефон</label>
+                <input id="editClientPhone" value="${escapeAttr(client.phone || "")}" />
+              </div>
+
+              <div class="field">
+                <label for="editClientEmail">Email</label>
+                <input id="editClientEmail" value="${escapeAttr(client.email || "")}" />
+              </div>
+
+              <div class="field full-width">
+                <label for="editClientComment">Комментарий</label>
+                <textarea id="editClientComment">${escapeHtml(client.comment || "")}</textarea>
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <button class="button" onclick="saveClientChanges()">Сохранить изменения</button>
+            </div>
+          </div>
+
+          <div class="form-grid">
+            <div class="info">
+              <div class="label">Телефон</div>
+              <div class="value">${escapeHtml(client.phone || "—")}</div>
+            </div>
+
+            <div class="info">
+              <div class="label">Email</div>
+              <div class="value">${escapeHtml(client.email || "—")}</div>
+            </div>
+
+            <div class="info full-width">
+              <div class="label">Комментарий</div>
+              <div class="value">${escapeHtml(client.comment || "—")}</div>
+            </div>
+          </div>
+
+          <div class="subsection">
+            <div class="panel-head">
+              <div>
+                <h3>Обращения</h3>
+                <p>История взаимодействий с клиентом.</p>
+              </div>
+              <button class="button" onclick="showAddInteractionForm()">+ Добавить обращение</button>
+            </div>
+
+            <div id="addInteractionForm" class="panel hidden" style="margin: 0;">
+              <div class="form-grid">
+                <div class="field">
+                  <label for="interactionSource">Источник</label>
+                  <select id="interactionSource"></select>
+                </div>
+
+                <div class="field">
+                  <label for="interactionTopic">Тема</label>
+                  <select id="interactionTopic"></select>
+                </div>
+
+                <div class="field">
+                  <label for="interactionResult">Результат</label>
+                  <select id="interactionResult"></select>
+                </div>
+
+                <div class="field">
+                  <label for="interactionUrl">Ссылка на переписку</label>
+                  <input id="interactionUrl" type="url" placeholder="https://..." />
+                </div>
+
+                <div class="field full-width">
+                  <label for="interactionComment">Комментарий</label>
+                  <textarea id="interactionComment" placeholder="Что обсуждали, что договорились сделать и т.д."></textarea>
+                </div>
+              </div>
+
+              <div class="form-actions">
+                <button class="button" onclick="addInteraction('${client.id}')">Сохранить обращение</button>
+                <button class="button secondary" onclick="hideAddInteractionForm()">Отмена</button>
+              </div>
+            </div>
+
+            ${
+              interactions.length
+                ? interactions
+                    .map(
+                      (interaction, index) => `
+              <div class="interaction">
+                <div class="interaction-head">
+                  <div class="interaction-title">Обращение ${index + 1}</div>
+                  <span class="badge">${escapeHtml(interaction.result || "Без результата")}</span>
+                </div>
+
+                <div class="form-grid">
+                  <div class="info">
+                    <div class="label">Источник</div>
+                    <div class="value">${escapeHtml(interaction.source || "—")}</div>
+                  </div>
+
+                  <div class="info">
+                    <div class="label">Тема</div>
+                    <div class="value">${escapeHtml(interaction.topic || "—")}</div>
+                  </div>
+
+                  <div class="info full-width">
+                    <div class="label">Комментарий</div>
+                    <div class="value">${escapeHtml(interaction.comment || "—")}</div>
+                  </div>
+                </div>
+
+                <div class="form-actions">
+                  ${(client.contact_links || [])
+                    .filter((link) => link.interaction_id === interaction.id)
+                    .map(
+                      (link) => `
+                      <a class="button secondary small" href="${escapeAttr(link.url)}" target="_blank" rel="noopener noreferrer">
+                        Открыть ${escapeHtml(link.service)}
+                      </a>
+                    `,
+                    )
+                    .join("")}
+
+                  <button class="button danger small" onclick="deleteInteraction('${interaction.id}', '${client.id}')">
+                    🗑 Удалить обращение
+                  </button>
+                </div>
+              </div>
+            `,
+                    )
+                    .join("")
+                : '<div class="empty">Обращений пока нет.</div>'
+            }
+          </div>
+        </div>
+      `;
+
+        await populateInteractionSelects();
+      }
+
+      function closeClient() {
+        showClientsList();
+      }
+
+      function showAddInteractionForm() {
+        document
+          .getElementById("addInteractionForm")
+          .classList.remove("hidden");
+        populateInteractionSelects();
+      }
+
+      function hideAddInteractionForm() {
+        const form = document.getElementById("addInteractionForm");
+        if (form) form.classList.add("hidden");
+      }
+
+      function showEditClientForm() {
+        document.getElementById("editClientForm").classList.remove("hidden");
+      }
+
+      async function addInteraction(clientId) {
+        const source = document
+          .getElementById("interactionSource")
+          .value.trim();
+        const topic = document.getElementById("interactionTopic").value.trim();
+        const result = document
+          .getElementById("interactionResult")
+          .value.trim();
+        const comment = document
+          .getElementById("interactionComment")
+          .value.trim();
+        const url = document.getElementById("interactionUrl").value.trim();
+
+        if (!source || !topic || !result) {
+          alert("Заполни источник, тему и результат.");
+          return;
+        }
+
+        const { data: interaction, error } = await supabaseClient
+          .from("interactions")
+          .insert({
+            client_id: clientId,
+            source,
+            topic,
+            result,
+            comment,
+          })
+          .select()
+          .single();
+
+        if (error) {
+          console.error("Ошибка добавления обращения:", error);
+          alert("Не удалось добавить обращение.");
+          return;
+        }
+
+        if (url) {
+          const { error: linkError } = await supabaseClient
+            .from("contact_links")
+            .insert({
+              client_id: clientId,
+              interaction_id: interaction.id,
+              service: source,
+              url,
+            });
+
+          if (linkError) {
+            console.error("Ошибка добавления ссылки:", linkError);
+            alert("Обращение добавлено, но ссылку сохранить не удалось.");
+            await openClient(clientId);
+            return;
+          }
+        }
+
+        await openClient(clientId);
+      }
+
+      async function saveClientChanges() {
+        const clientId = document.getElementById("editClientId").value;
+        const name = document.getElementById("editClientName").value.trim();
+        const phone = document.getElementById("editClientPhone").value.trim();
+        const email = document.getElementById("editClientEmail").value.trim();
+        const comment = document
+          .getElementById("editClientComment")
+          .value.trim();
+
+        if (!name) {
+          alert("Имя клиента не может быть пустым.");
+          return;
+        }
+
+        const { error } = await supabaseClient
+          .from("clients")
+          .update({
+            name,
+            phone,
+            email,
+            comment,
+            updated_at: new Date().toISOString(),
+          })
+          .eq("id", clientId);
+
+        if (error) {
+          console.error("Ошибка сохранения клиента:", error);
+          alert("Не удалось сохранить изменения.");
+          return;
+        }
+
+        await openClient(clientId);
+      }
+
+      async function deleteInteraction(interactionId, clientId) {
+        if (
+          !confirm(
+            "Удалить это обращение? Ссылки на переписку тоже будут удалены.",
+          )
+        ) {
+          return;
+        }
+
+        const { error } = await supabaseClient
+          .from("interactions")
+          .delete()
+          .eq("id", interactionId);
+
+        if (error) {
+          console.error("Ошибка удаления обращения:", error);
+          alert("Не удалось удалить обращение.");
+          return;
+        }
+
+        await openClient(clientId);
+      }
+
+      async function deleteClient(clientId) {
+        if (
+          !confirm(
+            "Удалить клиента? Все его обращения и ссылки на переписки тоже будут удалены.",
+          )
+        ) {
+          return;
+        }
+
+        const { error } = await supabaseClient
+          .from("clients")
+          .delete()
+          .eq("id", clientId);
+
+        if (error) {
+          console.error("Ошибка удаления клиента:", error);
+          alert("Не удалось удалить клиента.");
+          return;
+        }
+
+        await loadClients();
+        showClientsList();
+      }
+
+      function showAddClientForm() {
+        document.getElementById("addClientForm").classList.remove("hidden");
+      }
+
+      function hideAddClientForm() {
+        document.getElementById("addClientForm").classList.add("hidden");
+      }
+
+      async function addClient() {
+        const name = document.getElementById("newClientName").value.trim();
+        const phone = document.getElementById("newClientPhone").value.trim();
+        const email = document.getElementById("newClientEmail").value.trim();
+        const comment = document
+          .getElementById("newClientComment")
+          .value.trim();
+
+        if (!name) {
+          alert("Имя клиента не может быть пустым.");
+          return;
+        }
+
+        const {
+          data: { user },
+        } = await supabaseClient.auth.getUser();
+
+        if (!user) {
+          alert("Необходимо войти в систему.");
+          return;
+        }
+
+        const { error } = await supabaseClient.from("clients").insert({
+          owner_id: user.id,
+          name,
+          phone,
+          email,
+          comment,
+        });
+
+        if (error) {
+          console.error("Ошибка добавления клиента:", error);
+          alert("Не удалось добавить клиента.");
+          return;
+        }
+
+        document.getElementById("newClientName").value = "";
+        document.getElementById("newClientPhone").value = "";
+        document.getElementById("newClientEmail").value = "";
+        document.getElementById("newClientComment").value = "";
+        hideAddClientForm();
+
+        await loadClients();
+      }
+
+      function showClientsList() {
+        document.getElementById("settings").classList.add("hidden");
+        document.getElementById("clientDetails").classList.add("hidden");
+        document.getElementById("clientsPage").classList.remove("hidden");
+
+        search.value = "";
+        document.getElementById("sourceFilter").value = "";
+        document.getElementById("topicFilter").value = "";
+        document.getElementById("resultFilter").value = "";
+
+        renderClients(clients);
+      }
+
+      async function showSettings() {
+        document.getElementById("clientsPage").classList.add("hidden");
+        document.getElementById("clientDetails").classList.add("hidden");
+        document.getElementById("settings").classList.remove("hidden");
+
+        await loadSettingsData();
+        showSettingsTab("sources");
+      }
+
+      function showSettingsTab(tab) {
+        const tabs = {
+          sources: ["settingsSources", "settingsTabSources"],
+          topics: ["settingsTopics", "settingsTabTopics"],
+          results: ["settingsResults", "settingsTabResults"],
+        };
+
+        Object.values(tabs).forEach(([contentId, tabId]) => {
+          document.getElementById(contentId).classList.add("hidden");
+          document.getElementById(tabId).classList.remove("active");
+        });
+
+        document.getElementById(tabs[tab][0]).classList.remove("hidden");
+        document.getElementById(tabs[tab][1]).classList.add("active");
+      }
+
+      async function loadSettingsData() {
+        const [sources, topics, results] = await Promise.all([
+          loadSettingTable("sources"),
+          loadSettingTable("topics"),
+          loadSettingTable("results"),
+        ]);
+
+        settingsData.sources = sources;
+        settingsData.topics = topics;
+        settingsData.results = results;
+
+        renderSettings("sources");
+        renderSettings("topics");
+        renderSettings("results");
+
+        populateFilterSelects();
+      }
+
+      async function loadSettingTable(tableName) {
+        const { data, error } = await supabaseClient
+          .from(tableName)
+          .select("*")
+          .order("created_at", { ascending: true });
+
+        if (error) {
+          console.error(`Ошибка загрузки ${tableName}:`, error);
+          return [];
+        }
+
+        return data || [];
+      }
+
+      function renderSettings(type) {
+        const config = {
+          sources: {
+            container: "settingsSources",
+            title: "Источники обращения",
+            description:
+              "Откуда пришёл клиент: Telegram, WhatsApp, сайт и т.д.",
+            inputId: "newSourceName",
+            placeholder: "Например, Telegram",
+          },
+          topics: {
+            container: "settingsTopics",
+            title: "Темы обращения",
+            description: "О чём обращается клиент.",
+            inputId: "newTopicName",
+            placeholder: "Например, Продажа тарифа",
+          },
+          results: {
+            container: "settingsResults",
+            title: "Результаты обращения",
+            description: "Чем закончилось обращение.",
+            inputId: "newResultName",
+            placeholder: "Например, В работе",
+          },
+        };
+
+        const c = config[type];
+        const items = settingsData[type] || [];
+
+        document.getElementById(c.container).innerHTML = `
+        <div class="panel-head">
+          <div>
+            <h3>${c.title}</h3>
+            <p>${c.description}</p>
+          </div>
+        </div>
+
+        <div class="form-actions" style="margin-bottom: 16px;">
+          <input id="${c.inputId}" placeholder="${c.placeholder}" style="flex: 1; min-width: 220px;" />
+          <button class="button" onclick="addSetting('${type}')">+ Добавить</button>
+        </div>
+
+        <div class="setting-list">
+          ${
+            items.length
+              ? items
+                  .map(
+                    (item) => `
+            <div class="setting-item">
+              <div class="setting-name">${escapeHtml(item.name)}</div>
+              <div class="setting-actions">
+                <button class="button secondary small" onclick="editSetting('${type}', '${item.id}')">Изменить</button>
+                <button class="button danger small" onclick="deleteSetting('${type}', '${item.id}')">Удалить</button>
+              </div>
+            </div>
+          `,
+                  )
+                  .join("")
+              : `
+            <div class="empty">
+              Пока ничего нет. Добавьте первый вариант.
+            </div>
+          `
+          }
+        </div>
+      `;
+      }
+
+      async function addSetting(type) {
+        const inputIds = {
+          sources: "newSourceName",
+          topics: "newTopicName",
+          results: "newResultName",
+        };
+
+        const name = document.getElementById(inputIds[type]).value.trim();
+
+        if (!name) {
+          alert("Введите название.");
+          return;
+        }
+
+        const {
+          data: { user },
+        } = await supabaseClient.auth.getUser();
+
+        if (!user) {
+          alert("Необходимо войти в систему.");
+          return;
+        }
+
+        const { error } = await supabaseClient.from(type).insert({
+          owner_id: user.id,
+          name,
+        });
+
+        if (error) {
+          console.error(`Ошибка добавления ${type}:`, error);
+          alert("Не удалось сохранить.");
+          return;
+        }
+
+        await loadSettingsData();
+      }
+
+      async function editSetting(type, id) {
+        const current = (settingsData[type] || []).find(
+          (item) => item.id === id,
+        );
+        if (!current) return;
+
+        const name = prompt("Новое название:", current.name);
+
+        if (name === null) return;
+
+        const cleanName = name.trim();
+        if (!cleanName) {
+          alert("Название не может быть пустым.");
+          return;
+        }
+
+        const { error } = await supabaseClient
+          .from(type)
+          .update({ name: cleanName })
+          .eq("id", id);
+
+        if (error) {
+          console.error(`Ошибка изменения ${type}:`, error);
+          alert("Не удалось изменить.");
+          return;
+        }
+
+        await loadSettingsData();
+      }
+
+      async function deleteSetting(type, id) {
+        const current = (settingsData[type] || []).find(
+          (item) => item.id === id,
+        );
+        if (!current) return;
+
+        if (!confirm(`Удалить «${current.name}»?`)) return;
+
+        const { error } = await supabaseClient.from(type).delete().eq("id", id);
+
+        if (error) {
+          console.error(`Ошибка удаления ${type}:`, error);
+          alert("Не удалось удалить.");
+          return;
+        }
+
+        await loadSettingsData();
+      }
+
+      function populateFilterSelects() {
+        fillSelect(
+          document.getElementById("sourceFilter"),
+          settingsData.sources,
+          "Все источники",
+        );
+
+        fillSelect(
+          document.getElementById("topicFilter"),
+          settingsData.topics,
+          "Все темы",
+        );
+
+        fillSelect(
+          document.getElementById("resultFilter"),
+          settingsData.results,
+          "Все результаты",
+        );
+      }
+
+      function populateInteractionSelects() {
+        const source = document.getElementById("interactionSource");
+        const topic = document.getElementById("interactionTopic");
+        const result = document.getElementById("interactionResult");
+
+        if (!source || !topic || !result) return;
+
+        fillSelect(source, settingsData.sources, "Выберите источник");
+        fillSelect(topic, settingsData.topics, "Выберите тему");
+        fillSelect(result, settingsData.results, "Выберите результат");
+      }
+
+      function fillSelect(select, items, placeholder) {
+        select.innerHTML = "";
+
+        const first = document.createElement("option");
+        first.value = "";
+        first.textContent = placeholder;
+        select.appendChild(first);
+
+        (items || []).forEach((item) => {
+          const option = document.createElement("option");
+          option.value = item.name;
+          option.textContent = item.name;
+          select.appendChild(option);
+        });
+      }
+
+      function escapeHtml(value) {
+        return String(value)
+          .replaceAll("&", "&amp;")
+          .replaceAll("<", "&lt;")
+          .replaceAll(">", "&gt;")
+          .replaceAll('"', "&quot;")
+          .replaceAll("'", "&#039;");
+      }
+
+      function escapeAttr(value) {
+        return escapeHtml(value);
+      }
+
+      async function logout() {
+        const { error } = await supabaseClient.auth.signOut();
+
+        if (error) {
+          console.error("Ошибка выхода:", error);
+          alert("Не удалось выйти.");
+          return;
+        }
+
+        document.getElementById("app").classList.add("hidden");
+        document.getElementById("login").classList.remove("hidden");
+      }
+    </script>
+  </body>
+</html>
