@@ -39,7 +39,7 @@
         --radius: 18px;
       }
 
-       * {
+      * {
         box-sizing: border-box;
       }
 
@@ -50,7 +50,7 @@
           Inter,
           ui-sans-serif,
           system-ui,
-           -apple-system ,
+          -apple-system,
           BlinkMacSystemFont,
           "Segoe UI",
           sans-serif;
@@ -405,7 +405,9 @@
 
       .client-list-row {
         display: grid;
-        grid-template-columns: minmax(180px, 1.2fr) minmax(140px, 1fr) minmax(140px, 1fr) minmax(260px, 1.6fr) auto;
+        grid-template-columns:
+          minmax(180px, 1.2fr) minmax(140px, 1fr) minmax(140px, 1fr)
+          minmax(260px, 1.6fr) auto;
         gap: 16px;
         align-items: center;
         width: 100%;
@@ -505,8 +507,8 @@
         margin-top: 10px;
         padding: 10px 12px;
         border-radius: 10px;
-        background: rgba(255,255,255,0.65);
-        border: 1px solid rgba(15,23,42,0.08);
+        background: rgba(255, 255, 255, 0.65);
+        border: 1px solid rgba(15, 23, 42, 0.08);
       }
 
       .reminder-overdue {
@@ -1071,11 +1073,27 @@
 
               <div class="topbar-actions">
                 <div class="view-toggle">
-                  <button id="cardsViewButton" class="button secondary small active" onclick="setClientsView('cards')">▦ Карточки</button>
-                  <button id="listViewButton" class="button secondary small" onclick="setClientsView('list')">☷ Список</button>
+                  <button
+                    id="cardsViewButton"
+                    class="button secondary small active"
+                    onclick="setClientsView('cards')"
+                  >
+                    ▦ Карточки
+                  </button>
+                  <button
+                    id="listViewButton"
+                    class="button secondary small"
+                    onclick="setClientsView('list')"
+                  >
+                    ☷ Список
+                  </button>
                 </div>
-                <button class="button secondary small" onclick="toggleStats()">📊 Статистика</button>
-                <button class="button" onclick="showAddClientForm()">+ Добавить клиента</button>
+                <button class="button secondary small" onclick="toggleStats()">
+                  📊 Статистика
+                </button>
+                <button class="button" onclick="showAddClientForm()">
+                  + Добавить клиента
+                </button>
               </div>
             </div>
 
@@ -1140,6 +1158,11 @@
 
               <select id="resultFilter">
                 <option value="">Все результаты</option>
+              </select>
+
+              <select id="reminderFilter">
+                <option value="">Все клиенты</option>
+                <option value="with-reminder">С напоминаниями</option>
               </select>
             </div>
 
@@ -1241,8 +1264,7 @@
 
       let settingsData = { sources: [], topics: [], results: [] };
       let clientsView = localStorage.getItem("clientsView") || "cards";
-      let reminders = JSON.parse(localStorage.getItem("clientReminders") || "{}");
-
+      let reminders = {};
 
       function normalizeText(value) {
         return String(value || "")
@@ -1403,14 +1425,43 @@
         renderClients(clients);
       }
 
+      async function loadReminders() {
+        const { data, error } = await supabaseClient
+          .from("reminders")
+          .select("id, client_id, remind_at, text, completed, created_at")
+          .eq("completed", false)
+          .order("remind_at", { ascending: true });
+
+        if (error) {
+          console.error("Ошибка загрузки напоминаний:", error);
+          reminders = {};
+          return;
+        }
+
+        reminders = {};
+        (data || []).forEach((item) => {
+          // Пока в интерфейсе показываем одно ближайшее активное напоминание на клиента.
+          if (!reminders[item.client_id]) {
+            reminders[item.client_id] = {
+              id: item.id,
+              date: item.remind_at,
+              text: item.text || "",
+              completed: item.completed,
+            };
+          }
+        });
+      }
+
       function getClientStatusClass(client) {
         const last = getLastInteraction(client);
         const result = normalizeText(last?.result);
 
         if (!result) return "status-neutral";
         if (result === "в работе") return "status-work";
-        if (result === "завершён успешно" || result === "завершен успешно") return "status-success";
-        if (result === "завершён неуспешно" || result === "завершен неуспешно") return "status-failed";
+        if (result === "завершён успешно" || result === "завершен успешно")
+          return "status-success";
+        if (result === "завершён неуспешно" || result === "завершен неуспешно")
+          return "status-failed";
 
         return "status-neutral";
       }
@@ -1439,7 +1490,11 @@
         if (Number.isNaN(when.getTime())) return "";
 
         const now = new Date();
-        const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+        const today = new Date(
+          now.getFullYear(),
+          now.getMonth(),
+          now.getDate(),
+        );
         const reminderDay = new Date(
           when.getFullYear(),
           when.getMonth(),
@@ -1474,13 +1529,14 @@
         const isList = clientsView === "list";
 
         if (isList) {
-          cards.innerHTML = list.map((client) => {
-            const last = getLastInteraction(client);
-            const count = (client.interactions || []).length;
-            const statusClass = getClientStatusClass(client);
-            const lastLink = getLastInteractionLink(client);
+          cards.innerHTML = list
+            .map((client) => {
+              const last = getLastInteraction(client);
+              const count = (client.interactions || []).length;
+              const statusClass = getClientStatusClass(client);
+              const lastLink = getLastInteractionLink(client);
 
-            return `
+              return `
               <article class="client-list-row ${statusClass}">
                 <div class="client-list-name">
                   <h2>${escapeHtml(client.name || "Без имени")}</h2>
@@ -1519,18 +1575,20 @@
                 </div>
               </article>
             `;
-          }).join("");
+            })
+            .join("");
 
           return;
         }
 
-        cards.innerHTML = list.map((client) => {
-          const last = getLastInteraction(client);
-          const count = (client.interactions || []).length;
-          const statusClass = getClientStatusClass(client);
-          const lastLink = getLastInteractionLink(client);
+        cards.innerHTML = list
+          .map((client) => {
+            const last = getLastInteraction(client);
+            const count = (client.interactions || []).length;
+            const statusClass = getClientStatusClass(client);
+            const lastLink = getLastInteractionLink(client);
 
-          return `
+            return `
             <article class="client-card ${statusClass}">
               <div class="client-card-main">
                 <div>
@@ -1568,11 +1626,8 @@
               ${renderReminder(client)}
             </article>
           `;
-        }).join("");
-      }
-
-      function saveReminders() {
-        localStorage.setItem("clientReminders", JSON.stringify(reminders));
+          })
+          .join("");
       }
 
       function getReminder(clientId) {
@@ -1664,7 +1719,7 @@
         `;
       }
 
-      function setReminder(clientId) {
+      async function setReminder(clientId) {
         const current = getReminder(clientId);
 
         const date = prompt(
@@ -1695,32 +1750,108 @@
           return;
         }
 
-        const reminderText = prompt(
-          "Что нужно сделать?",
-          current?.text || "",
-        );
+        const reminderText = prompt("Что нужно сделать?", current?.text || "");
 
         if (reminderText === null) return;
 
-        reminders[clientId] = {
-          date: parsed.toISOString(),
-          text: reminderText.trim(),
+        const text = reminderText.trim();
+
+        if (!text) {
+          alert("Напишите, что нужно сделать.");
+          return;
+        }
+
+        const {
+          data: { user },
+          error: userError,
+        } = await supabaseClient.auth.getUser();
+
+        if (userError || !user) {
+          alert("Необходимо войти в систему.");
+          return;
+        }
+
+        const reminderData = {
+          client_id: clientId,
+          remind_at: parsed.toISOString(),
+          text,
+          completed: false,
         };
 
-        saveReminders();
+        let error = null;
+        let savedReminder = null;
+
+        if (current?.id) {
+          const result = await supabaseClient
+            .from("reminders")
+            .update(reminderData)
+            .eq("id", current.id)
+            .select("id, client_id, remind_at, text, completed, created_at")
+            .single();
+
+          error = result.error;
+          savedReminder = result.data;
+        } else {
+          const result = await supabaseClient
+            .from("reminders")
+            .insert({
+              owner_id: user.id,
+              ...reminderData,
+            })
+            .select("id, client_id, remind_at, text, completed, created_at")
+            .single();
+
+          error = result.error;
+          savedReminder = result.data;
+        }
+
+        if (error) {
+          console.error("Ошибка сохранения напоминания:", error);
+          alert("Не удалось сохранить напоминание.");
+          return;
+        }
+
+        reminders[clientId] = {
+          id: savedReminder.id,
+          date: savedReminder.remind_at,
+          text: savedReminder.text,
+          completed: savedReminder.completed,
+        };
+
         renderClients(getFilteredClients());
 
-        if (!document.getElementById("clientDetails").classList.contains("hidden")) {
+        if (
+          !document.getElementById("clientDetails").classList.contains("hidden")
+        ) {
           openClient(clientId);
         }
       }
 
-      function deleteReminder(clientId) {
-        if (!getReminder(clientId)) return;
+      async function deleteReminder(clientId) {
+        const current = getReminder(clientId);
+        if (!current?.id) return;
+
+        if (!confirm("Удалить это напоминание?")) return;
+
+        const { error } = await supabaseClient
+          .from("reminders")
+          .delete()
+          .eq("id", current.id);
+
+        if (error) {
+          console.error("Ошибка удаления напоминания:", error);
+          alert("Не удалось удалить напоминание.");
+          return;
+        }
 
         delete reminders[clientId];
-        saveReminders();
         renderClients(getFilteredClients());
+
+        if (
+          !document.getElementById("clientDetails").classList.contains("hidden")
+        ) {
+          openClient(clientId);
+        }
       }
 
       function getFilteredClients() {
@@ -1731,6 +1862,8 @@
         const topic = document.getElementById("topicFilter").value;
 
         const result = document.getElementById("resultFilter").value;
+
+        const reminderFilter = document.getElementById("reminderFilter").value;
 
         return clients.filter((client) => {
           const matchesSearch =
@@ -1750,8 +1883,16 @@
             !result ||
             (client.interactions || []).some((i) => i.result === result);
 
+          const matchesReminder =
+            reminderFilter !== "with-reminder" ||
+            Boolean(getReminder(client.id));
+
           return (
-            matchesSearch && matchesSource && matchesTopic && matchesResult
+            matchesSearch &&
+            matchesSource &&
+            matchesTopic &&
+            matchesResult &&
+            matchesReminder
           );
         });
       }
@@ -1769,6 +1910,8 @@
 
         document.getElementById("resultFilter").value = "";
 
+        document.getElementById("reminderFilter").value = "";
+
         renderClients(clients);
       }
 
@@ -1784,6 +1927,10 @@
 
       document
         .getElementById("resultFilter")
+        .addEventListener("change", applyFilters);
+
+      document
+        .getElementById("reminderFilter")
         .addEventListener("change", applyFilters);
 
       const loginButton = document.getElementById("loginButton");
@@ -1813,6 +1960,7 @@
 
         await loadSettingsData();
 
+        await loadReminders();
         await loadClients();
       });
 
@@ -2021,7 +2169,7 @@
 
                       <div class="field"><label>Результат</label><select id="editResult-${interaction.id}">${(settingsData.results || []).map((item) => `<option value="${escapeAttr(item.name)}" ${item.name === interaction.result ? "selected" : ""}>${escapeHtml(item.name)}</option>`).join("")}</select></div>
 
-                      <div class="field"><label>Ссылка на переписку</label><input id="editUrl-${interaction.id}" value="${escapeAttr(((client.contact_links || []).find((link) => link.interaction_id === interaction.id)?.url) || "")}" placeholder="https://t.me/..." /></div>
+                      <div class="field"><label>Ссылка на переписку</label><input id="editUrl-${interaction.id}" value="${escapeAttr((client.contact_links || []).find((link) => link.interaction_id === interaction.id)?.url || "")}" placeholder="https://t.me/..." /></div>
 
                       <div class="field full-width"><label>Комментарий</label><textarea id="editComment-${interaction.id}">${escapeHtml(interaction.comment || "")}</textarea></div>
 
@@ -2321,17 +2469,29 @@
       }
 
       function toggleEditInteraction(interactionId) {
-        const form = document.getElementById(`editInteraction-${interactionId}`);
+        const form = document.getElementById(
+          `editInteraction-${interactionId}`,
+        );
         if (!form) return;
         form.classList.toggle("hidden");
       }
 
       async function saveInteractionChanges(interactionId, clientId) {
-        const source = document.getElementById(`editSource-${interactionId}`).value.trim();
-        const topic = document.getElementById(`editTopic-${interactionId}`).value.trim();
-        const result = document.getElementById(`editResult-${interactionId}`).value.trim();
-        const comment = document.getElementById(`editComment-${interactionId}`).value.trim();
-        const rawUrl = document.getElementById(`editUrl-${interactionId}`).value.trim();
+        const source = document
+          .getElementById(`editSource-${interactionId}`)
+          .value.trim();
+        const topic = document
+          .getElementById(`editTopic-${interactionId}`)
+          .value.trim();
+        const result = document
+          .getElementById(`editResult-${interactionId}`)
+          .value.trim();
+        const comment = document
+          .getElementById(`editComment-${interactionId}`)
+          .value.trim();
+        const rawUrl = document
+          .getElementById(`editUrl-${interactionId}`)
+          .value.trim();
 
         if (!source || !topic || !result) {
           alert("Заполни источник, тему и результат.");
@@ -2358,8 +2518,9 @@
           return;
         }
 
-        const links = (clients.find((item) => item.id === clientId)?.contact_links || [])
-          .filter((link) => link.interaction_id === interactionId);
+        const links = (
+          clients.find((item) => item.id === clientId)?.contact_links || []
+        ).filter((link) => link.interaction_id === interactionId);
 
         if (links.length) {
           const linkId = links[0].id;
