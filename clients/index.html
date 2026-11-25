@@ -378,6 +378,171 @@
         box-shadow: 0 6px 20px rgba(15, 23, 42, 0.045);
       }
 
+      .client-card.status-work {
+        background: #fef3c7;
+        border-color: #f59e0b;
+      }
+
+      .client-card.status-success {
+        background: #dcfce7;
+        border-color: #22c55e;
+      }
+
+      .client-card.status-failed {
+        background: #fee2e2;
+        border-color: #ef4444;
+      }
+
+      .client-card.status-neutral {
+        background: var(--surface);
+      }
+
+      .cards.list-mode {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .client-list-row {
+        display: grid;
+        grid-template-columns: minmax(180px, 1.2fr) minmax(140px, 1fr) minmax(140px, 1fr) minmax(260px, 1.6fr) auto;
+        gap: 16px;
+        align-items: center;
+        width: 100%;
+        padding: 13px 16px;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        box-shadow: 0 3px 10px rgba(15, 23, 42, 0.035);
+      }
+
+      .client-list-row.status-work {
+        background: #fef3c7;
+        border-color: #f59e0b;
+      }
+
+      .client-list-row.status-success {
+        background: #dcfce7;
+        border-color: #22c55e;
+      }
+
+      .client-list-row.status-failed {
+        background: #fee2e2;
+        border-color: #ef4444;
+      }
+
+      .client-list-name {
+        min-width: 0;
+      }
+
+      .client-list-name h2 {
+        margin: 0 0 4px;
+        font-size: 16px;
+      }
+
+      .client-list-cell {
+        min-width: 0;
+      }
+
+      .client-list-cell .label {
+        margin-bottom: 2px;
+      }
+
+      .client-list-cell .value {
+        font-size: 14px;
+      }
+
+      .client-list-actions {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 6px;
+        flex-wrap: wrap;
+      }
+
+      .client-list-actions .button {
+        width: auto !important;
+        margin: 0 !important;
+        white-space: nowrap;
+      }
+
+      .last-interaction-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        margin-top: 8px;
+        font-size: 13px;
+        font-weight: 700;
+        color: #1d4ed8;
+        text-decoration: none;
+      }
+
+      .last-interaction-link:hover {
+        text-decoration: underline;
+      }
+
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 12px;
+        margin-bottom: 18px;
+      }
+
+      .stat-card {
+        padding: 16px;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+      }
+
+      .stat-card .stat-number {
+        margin-top: 4px;
+        font-size: 24px;
+        font-weight: 800;
+      }
+
+      .reminder-box {
+        margin-top: 10px;
+        padding: 10px 12px;
+        border-radius: 10px;
+        background: rgba(255,255,255,0.65);
+        border: 1px solid rgba(15,23,42,0.08);
+      }
+
+      .reminder-overdue {
+        border-color: #ef4444;
+      }
+
+      .reminder-today {
+        border-color: #f59e0b;
+      }
+
+      .view-toggle {
+        display: flex;
+        gap: 6px;
+        flex-wrap: wrap;
+      }
+
+      .view-toggle .button.active {
+        background: #dbeafe;
+        color: #1d4ed8;
+      }
+
+      @media (max-width: 900px) {
+        .client-list-row {
+          grid-template-columns: 1fr 1fr;
+        }
+
+        .client-list-actions {
+          grid-column: 1 / -1;
+          justify-content: flex-start;
+        }
+
+        .stats-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+
       .client-card h2 {
         margin: 0 0 14px;
 
@@ -518,6 +683,14 @@
         border: 1px solid var(--border);
 
         border-radius: 14px;
+      }
+
+      .interaction-edit {
+        margin-top: 12px;
+        padding: 14px;
+        background: #fff;
+        border: 1px solid var(--border);
+        border-radius: 12px;
       }
 
       .interaction-head {
@@ -765,6 +938,23 @@
           grid-template-columns: 1fr;
         }
 
+        .client-list-row {
+          grid-template-columns: 1fr;
+        }
+
+        .client-list-actions {
+          grid-column: auto;
+          justify-content: stretch;
+        }
+
+        .client-list-actions .button {
+          flex: 1;
+        }
+
+        .stats-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+
         .form-grid {
           grid-template-columns: 1fr;
         }
@@ -879,9 +1069,14 @@
                 <p>Ищите клиентов и фильтруйте обращения.</p>
               </div>
 
-              <button class="button" onclick="showAddClientForm()">
-                + Добавить клиента
-              </button>
+              <div class="topbar-actions">
+                <div class="view-toggle">
+                  <button id="cardsViewButton" class="button secondary small active" onclick="setClientsView('cards')">▦ Карточки</button>
+                  <button id="listViewButton" class="button secondary small" onclick="setClientsView('list')">☷ Список</button>
+                </div>
+                <button class="button secondary small" onclick="toggleStats()">📊 Статистика</button>
+                <button class="button" onclick="showAddClientForm()">+ Добавить клиента</button>
+              </div>
             </div>
 
             <div id="addClientForm" class="hidden">
@@ -961,6 +1156,8 @@
               </button>
             </div>
           </div>
+
+          <div id="statsPanel" class="hidden"></div>
 
           <div id="cards" class="cards">
             <div class="empty">Загрузка клиентов...</div>
@@ -1043,6 +1240,9 @@
       let clients = [];
 
       let settingsData = { sources: [], topics: [], results: [] };
+      let clientsView = localStorage.getItem("clientsView") || "cards";
+      let reminders = JSON.parse(localStorage.getItem("clientReminders") || "{}");
+
 
       function normalizeText(value) {
         return String(value || "")
@@ -1180,7 +1380,7 @@
           .from("clients")
 
           .select(
-            `*, interactions (id, source, topic, result, comment, created_at)`,
+            `*, interactions (id, source, topic, result, comment, created_at), contact_links (id, service, url, interaction_id)`,
           )
 
           .order("created_at", { ascending: false });
@@ -1203,62 +1403,324 @@
         renderClients(clients);
       }
 
+      function getClientStatusClass(client) {
+        const last = getLastInteraction(client);
+        const result = normalizeText(last?.result);
+
+        if (!result) return "status-neutral";
+        if (result === "в работе") return "status-work";
+        if (result === "завершён успешно" || result === "завершен успешно") return "status-success";
+        if (result === "завершён неуспешно" || result === "завершен неуспешно") return "status-failed";
+
+        return "status-neutral";
+      }
+
+      function getLastInteractionLink(client) {
+        const last = getLastInteraction(client);
+        if (!last) return "";
+
+        const link = (client.contact_links || []).find(
+          (item) => item.interaction_id === last.id && normalizeUrl(item.url),
+        );
+
+        if (!link) return "";
+
+        const safeUrl = normalizeUrl(link.url);
+        if (!safeUrl) return "";
+
+        return `<a class="last-interaction-link" href="${escapeAttr(safeUrl)}" target="_blank" rel="noopener noreferrer">🔗 Открыть переписку</a>`;
+      }
+
+      function renderReminder(client) {
+        const reminder = getReminder(client.id);
+        if (!reminder?.date) return "";
+
+        const when = new Date(reminder.date);
+        if (Number.isNaN(when.getTime())) return "";
+
+        const now = new Date();
+        const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+        const reminderDay = new Date(
+          when.getFullYear(),
+          when.getMonth(),
+          when.getDate(),
+        );
+
+        const cls =
+          reminderDay < today
+            ? "reminder-overdue"
+            : reminderDay.getTime() === today.getTime()
+              ? "reminder-today"
+              : "";
+
+        const label =
+          reminderDay < today
+            ? "Просрочено"
+            : reminderDay.getTime() === today.getTime()
+              ? "Сегодня"
+              : "Напоминание";
+
+        return `<div class="reminder-box ${cls}"><strong>🔔 ${label}</strong><div style="margin-top:4px;">${escapeHtml(formatReminderDate(reminder.date))}</div><div style="margin-top:4px;">${escapeHtml(reminder.text || "Без описания")}</div></div>`;
+      }
+
       function renderClients(list) {
+        cards.classList.toggle("list-mode", clientsView === "list");
+
         if (!list.length) {
           cards.innerHTML = '<div class="empty">Клиенты не найдены.</div>';
+          return;
+        }
+
+        const isList = clientsView === "list";
+
+        if (isList) {
+          cards.innerHTML = list.map((client) => {
+            const last = getLastInteraction(client);
+            const count = (client.interactions || []).length;
+            const statusClass = getClientStatusClass(client);
+            const lastLink = getLastInteractionLink(client);
+
+            return `
+              <article class="client-list-row ${statusClass}">
+                <div class="client-list-name">
+                  <h2>${escapeHtml(client.name || "Без имени")}</h2>
+                  <div class="rating">${renderRating(count)}</div>
+                </div>
+
+                <div class="client-list-cell">
+                  <div class="label">Телефон</div>
+                  <div class="value">${escapeHtml(client.phone || "—")}</div>
+                </div>
+
+                <div class="client-list-cell">
+                  <div class="label">Email</div>
+                  <div class="value">${escapeHtml(client.email || "—")}</div>
+                </div>
+
+                <div class="client-list-cell">
+                  <div class="label">Последнее обращение</div>
+                  ${
+                    last
+                      ? `
+                        <div class="value">
+                          <span class="interaction-date">${formatDate(last.created_at)}</span>
+                          <div style="margin-top:3px;">${renderTopicTag(last.topic)}</div>
+                          <strong>${escapeHtml(last.result || "—")}</strong>
+                          ${lastLink}
+                        </div>
+                      `
+                      : '<div class="muted">Обращений пока нет.</div>'
+                  }
+                </div>
+
+                <div class="client-list-actions">
+                  <button class="button secondary small" onclick="setReminder('${client.id}')">🔔 Напоминание</button>
+                  <button class="button small" onclick="openClient('${client.id}')">Открыть клиента</button>
+                </div>
+              </article>
+            `;
+          }).join("");
 
           return;
         }
 
-        cards.innerHTML = list
-          .map((client) => {
-            const last = getLastInteraction(client);
+        cards.innerHTML = list.map((client) => {
+          const last = getLastInteraction(client);
+          const count = (client.interactions || []).length;
+          const statusClass = getClientStatusClass(client);
+          const lastLink = getLastInteractionLink(client);
 
-            const count = (client.interactions || []).length;
-
-            return `
-
-            <article class="client-card">
-
-              <h2>${escapeHtml(client.name || "Без имени")}</h2>
-
-              <div class="client-meta-row">${renderRating(count)}</div>
-
-              <div class="info"><div class="label">Телефон</div><div class="value">${escapeHtml(client.phone || "—")}</div></div>
-
-              <div class="info"><div class="label">Email</div><div class="value">${escapeHtml(client.email || "—")}</div></div>
-
-              ${
-                last
-                  ? `
-
-                <div class="info">
-
-                  <div class="label">Последнее обращение</div>
-
-                  <div class="value">
-
-                    ${escapeHtml(last.source || "—")} · ${renderTopicTag(last.topic)}
-
-                    <div class="interaction-date" style="margin-top:7px;">${formatDate(last.created_at)}</div>
-
-                  </div>
-
+          return `
+            <article class="client-card ${statusClass}">
+              <div class="client-card-main">
+                <div>
+                  <h2>${escapeHtml(client.name || "Без имени")}</h2>
+                  <div class="client-meta-row">${renderRating(count)}</div>
                 </div>
 
-                <div class="info"><div class="label">Результат</div><div class="value">${escapeHtml(last.result || "—")}</div></div>
+                <div class="info"><div class="label">Телефон</div><div class="value">${escapeHtml(client.phone || "—")}</div></div>
 
-              `
-                  : '<div class="muted">Обращений пока нет.</div>'
-              }
+                <div class="info"><div class="label">Email</div><div class="value">${escapeHtml(client.email || "—")}</div></div>
 
-              <div class="info"><div class="label">Комментарий</div><div class="value">${escapeHtml(client.comment || "—")}</div></div>
+                ${
+                  last
+                    ? `
+                    <div class="info">
+                      <div class="label">Последнее обращение</div>
+                      <div class="value">
+                        <div class="interaction-date">${formatDate(last.created_at)}</div>
+                        <div style="margin-top:5px;">${renderTopicTag(last.topic)}</div>
+                        <div style="margin-top:5px;"><strong>${escapeHtml(last.result || "—")}</strong></div>
+                        ${lastLink}
+                      </div>
+                    </div>
+                    `
+                    : '<div class="muted">Обращений пока нет.</div>'
+                }
 
-              <button class="button" onclick="openClient('${client.id}')">Открыть клиента</button>
+                <div class="client-card-actions">
+                  <button class="button secondary small" onclick="setReminder('${client.id}')">🔔 Напоминание</button>
+                  <button class="button" onclick="openClient('${client.id}')">Открыть клиента</button>
+                </div>
+              </div>
 
-            </article>`;
-          })
-          .join("");
+              <div class="info" style="margin-top:12px;"><div class="label">Комментарий</div><div class="value">${escapeHtml(client.comment || "—")}</div></div>
+              ${renderReminder(client)}
+            </article>
+          `;
+        }).join("");
+      }
+
+      function saveReminders() {
+        localStorage.setItem("clientReminders", JSON.stringify(reminders));
+      }
+
+      function getReminder(clientId) {
+        return reminders[clientId] || null;
+      }
+
+      function formatReminderDate(value) {
+        const date = new Date(value);
+        if (Number.isNaN(date.getTime())) return "—";
+
+        return date.toLocaleString("ru-RU", {
+          day: "2-digit",
+          month: "2-digit",
+          year: "numeric",
+          hour: "2-digit",
+          minute: "2-digit",
+        });
+      }
+
+      function setClientsView(view) {
+        clientsView = view === "list" ? "list" : "cards";
+        localStorage.setItem("clientsView", clientsView);
+
+        document
+          .getElementById("cardsViewButton")
+          ?.classList.toggle("active", clientsView === "cards");
+
+        document
+          .getElementById("listViewButton")
+          ?.classList.toggle("active", clientsView === "list");
+
+        renderClients(getFilteredClients());
+      }
+
+      function toggleStats() {
+        const panel = document.getElementById("statsPanel");
+        if (!panel) return;
+
+        const isHidden = panel.classList.contains("hidden");
+        panel.classList.toggle("hidden", !isHidden);
+
+        if (isHidden) renderStats();
+      }
+
+      function renderStats() {
+        const panel = document.getElementById("statsPanel");
+        if (!panel) return;
+
+        const totalClients = clients.length;
+        const totalInteractions = clients.reduce(
+          (sum, client) => sum + (client.interactions || []).length,
+          0,
+        );
+
+        const activeClients = clients.filter(
+          (client) => getClientStatusClass(client) === "status-work",
+        ).length;
+
+        const successfulClients = clients.filter(
+          (client) => getClientStatusClass(client) === "status-success",
+        ).length;
+
+        const failedClients = clients.filter(
+          (client) => getClientStatusClass(client) === "status-failed",
+        ).length;
+
+        panel.innerHTML = `
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="label">Клиентов</div>
+              <div class="stat-number">${totalClients}</div>
+            </div>
+            <div class="stat-card">
+              <div class="label">Всего обращений</div>
+              <div class="stat-number">${totalInteractions}</div>
+            </div>
+            <div class="stat-card">
+              <div class="label">В работе</div>
+              <div class="stat-number">${activeClients}</div>
+            </div>
+            <div class="stat-card">
+              <div class="label">Завершено успешно</div>
+              <div class="stat-number">${successfulClients}</div>
+            </div>
+          </div>
+          <div class="muted" style="margin-bottom:4px;">
+            По последнему обращению: ${activeClients} в работе · ${successfulClients} успешно · ${failedClients} неуспешно.
+          </div>
+        `;
+      }
+
+      function setReminder(clientId) {
+        const current = getReminder(clientId);
+
+        const date = prompt(
+          "Дата и время напоминания (например, 28.11.2026 14:00):",
+          current ? formatReminderDate(current.date) : "",
+        );
+
+        if (date === null) return;
+
+        const parts = date.trim().split(" ");
+        if (parts.length < 2) {
+          alert("Укажите дату и время, например: 28.11.2026 14:00");
+          return;
+        }
+
+        const dateParts = parts[0].split(".");
+        if (dateParts.length !== 3) {
+          alert("Укажите дату в формате ДД.ММ.ГГГГ.");
+          return;
+        }
+
+        const [day, month, year] = dateParts;
+        const iso = `${year}-${month}-${day}T${parts[1]}`;
+        const parsed = new Date(iso);
+
+        if (Number.isNaN(parsed.getTime())) {
+          alert("Не удалось распознать дату и время.");
+          return;
+        }
+
+        const reminderText = prompt(
+          "Что нужно сделать?",
+          current?.text || "",
+        );
+
+        if (reminderText === null) return;
+
+        reminders[clientId] = {
+          date: parsed.toISOString(),
+          text: reminderText.trim(),
+        };
+
+        saveReminders();
+        renderClients(getFilteredClients());
+
+        if (!document.getElementById("clientDetails").classList.contains("hidden")) {
+          openClient(clientId);
+        }
+      }
+
+      function deleteReminder(clientId) {
+        if (!getReminder(clientId)) return;
+
+        delete reminders[clientId];
+        saveReminders();
+        renderClients(getFilteredClients());
       }
 
       function getFilteredClients() {
@@ -1371,7 +1833,7 @@
           .from("clients")
 
           .select(
-            `*, interactions (id, source, topic, result, comment, created_at), contact_links (service, url, interaction_id)`,
+            `*, interactions (id, source, topic, result, comment, created_at), contact_links (id, service, url, interaction_id)`,
           )
 
           .eq("id", clientId)
@@ -1412,6 +1874,8 @@
               <div class="detail-actions">
 
                 <button class="button secondary" onclick="copyClientText('${client.id}')">📋 Скопировать</button>
+
+                <button class="button secondary" onclick="setReminder('${client.id}')">🔔 Напоминание</button>
 
                 <button class="button secondary" onclick="showEditClientForm()">✏️ Редактировать</button>
 
@@ -1460,6 +1924,20 @@
             </div>
 
 
+
+            ${
+              getReminder(client.id)
+                ? `<div class="reminder-box ${new Date(getReminder(client.id).date) < new Date() ? "reminder-overdue" : ""}">
+                    <strong>🔔 Напоминание</strong>
+                    <div style="margin-top:5px;">${escapeHtml(formatReminderDate(getReminder(client.id).date))}</div>
+                    <div style="margin-top:5px;">${escapeHtml(getReminder(client.id).text || "Без описания")}</div>
+                    <div class="form-actions" style="margin-top:8px;">
+                      <button class="button secondary small" onclick="setReminder('${client.id}')">Изменить</button>
+                      <button class="button danger small" onclick="deleteReminder('${client.id}'); openClient('${client.id}')">Удалить</button>
+                    </div>
+                  </div>`
+                : ""
+            }
 
             <div class="subsection">
 
@@ -1533,7 +2011,32 @@
 
                   </div>
 
+                  <div id="editInteraction-${interaction.id}" class="interaction-edit hidden">
+
+                    <div class="form-grid">
+
+                      <div class="field"><label>Источник</label><select id="editSource-${interaction.id}">${(settingsData.sources || []).map((item) => `<option value="${escapeAttr(item.name)}" ${item.name === interaction.source ? "selected" : ""}>${escapeHtml(item.name)}</option>`).join("")}</select></div>
+
+                      <div class="field"><label>Тема</label><select id="editTopic-${interaction.id}">${(settingsData.topics || []).map((item) => `<option value="${escapeAttr(item.name)}" ${item.name === interaction.topic ? "selected" : ""}>${escapeHtml(item.name)}</option>`).join("")}</select></div>
+
+                      <div class="field"><label>Результат</label><select id="editResult-${interaction.id}">${(settingsData.results || []).map((item) => `<option value="${escapeAttr(item.name)}" ${item.name === interaction.result ? "selected" : ""}>${escapeHtml(item.name)}</option>`).join("")}</select></div>
+
+                      <div class="field"><label>Ссылка на переписку</label><input id="editUrl-${interaction.id}" value="${escapeAttr(((client.contact_links || []).find((link) => link.interaction_id === interaction.id)?.url) || "")}" placeholder="https://t.me/..." /></div>
+
+                      <div class="field full-width"><label>Комментарий</label><textarea id="editComment-${interaction.id}">${escapeHtml(interaction.comment || "")}</textarea></div>
+
+                    </div>
+
+                    <div class="form-actions">
+                      <button class="button small" onclick="saveInteractionChanges('${interaction.id}', '${client.id}')">Сохранить изменения</button>
+                      <button class="button secondary small" onclick="toggleEditInteraction('${interaction.id}')">Отмена</button>
+                    </div>
+
+                  </div>
+
                   <div class="form-actions">
+
+                    <button class="button secondary small" onclick="toggleEditInteraction('${interaction.id}')">✏️ Редактировать</button>
 
                     ${(client.contact_links || [])
                       .filter((link) => link.interaction_id === interaction.id)
@@ -1815,6 +2318,94 @@
         await loadClients();
 
         showClientsList();
+      }
+
+      function toggleEditInteraction(interactionId) {
+        const form = document.getElementById(`editInteraction-${interactionId}`);
+        if (!form) return;
+        form.classList.toggle("hidden");
+      }
+
+      async function saveInteractionChanges(interactionId, clientId) {
+        const source = document.getElementById(`editSource-${interactionId}`).value.trim();
+        const topic = document.getElementById(`editTopic-${interactionId}`).value.trim();
+        const result = document.getElementById(`editResult-${interactionId}`).value.trim();
+        const comment = document.getElementById(`editComment-${interactionId}`).value.trim();
+        const rawUrl = document.getElementById(`editUrl-${interactionId}`).value.trim();
+
+        if (!source || !topic || !result) {
+          alert("Заполни источник, тему и результат.");
+          return;
+        }
+
+        let url = "";
+        if (rawUrl) {
+          url = normalizeUrl(rawUrl);
+          if (!url) {
+            alert("Проверь ссылку на переписку. Например: https://t.me/...");
+            return;
+          }
+        }
+
+        const { error } = await supabaseClient
+          .from("interactions")
+          .update({ source, topic, result, comment })
+          .eq("id", interactionId);
+
+        if (error) {
+          console.error("Ошибка изменения обращения:", error);
+          alert("Не удалось сохранить изменения обращения.");
+          return;
+        }
+
+        const links = (clients.find((item) => item.id === clientId)?.contact_links || [])
+          .filter((link) => link.interaction_id === interactionId);
+
+        if (links.length) {
+          const linkId = links[0].id;
+
+          if (url) {
+            const { error: linkError } = await supabaseClient
+              .from("contact_links")
+              .update({ service: source, url })
+              .eq("id", linkId);
+
+            if (linkError) {
+              console.error("Ошибка изменения ссылки:", linkError);
+              alert("Обращение изменено, но ссылку сохранить не удалось.");
+              return;
+            }
+          } else {
+            const { error: linkError } = await supabaseClient
+              .from("contact_links")
+              .delete()
+              .eq("id", linkId);
+
+            if (linkError) {
+              console.error("Ошибка удаления ссылки:", linkError);
+              alert("Обращение изменено, но старую ссылку удалить не удалось.");
+              return;
+            }
+          }
+        } else if (url) {
+          const { error: linkError } = await supabaseClient
+            .from("contact_links")
+            .insert({
+              client_id: clientId,
+              interaction_id: interactionId,
+              service: source,
+              url,
+            });
+
+          if (linkError) {
+            console.error("Ошибка добавления ссылки:", linkError);
+            alert("Обращение изменено, но новую ссылку сохранить не удалось.");
+            return;
+          }
+        }
+
+        await loadClients();
+        await openClient(clientId);
       }
 
       async function deleteInteraction(interactionId, clientId) {
