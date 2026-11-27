@@ -8,6 +8,14 @@
 
     <meta name="robots" content="noindex, nofollow, noarchive" />
 
+    <meta name="theme-color" content="#e10600" />
+
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='red'/%3E%3Cpath d='M16 20h32v24H29l-9 8v-8h-4z' fill='white'/%3E%3Ccircle cx='27' cy='32' r='3' fill='red'/%3E%3Ccircle cx='32' cy='32' r='3' fill='red'/%3E%3Ccircle cx='37' cy='32' r='3' fill='red'/%3E%3C/svg%3E"
+    />
+
     <title>Сервис клиентов</title>
 
     <style>
@@ -1254,6 +1262,13 @@
         SUPABASE_URL,
 
         SUPABASE_KEY,
+        {
+          auth: {
+            persistSession: true,
+            autoRefreshToken: true,
+            detectSessionInUrl: true,
+          },
+        },
       );
 
       const cards = document.getElementById("cards");
@@ -1569,6 +1584,11 @@
                   }
                 </div>
 
+                <div class="client-list-cell">
+                  <div class="label">Комментарий</div>
+                  <div class="value">${escapeHtml(client.comment || "—")}</div>
+                </div>
+
                 <div class="client-list-actions">
                   <button class="button secondary small" onclick="setReminder('${client.id}')">🔔 Напоминание</button>
                   <button class="button small" onclick="openClient('${client.id}')">Открыть клиента</button>
@@ -1616,14 +1636,15 @@
                     : '<div class="muted">Обращений пока нет.</div>'
                 }
 
-                <div class="client-card-actions">
-                  <button class="button secondary small" onclick="setReminder('${client.id}')">🔔 Напоминание</button>
-                  <button class="button" onclick="openClient('${client.id}')">Открыть клиента</button>
-                </div>
               </div>
 
               <div class="info" style="margin-top:12px;"><div class="label">Комментарий</div><div class="value">${escapeHtml(client.comment || "—")}</div></div>
               ${renderReminder(client)}
+
+              <div class="client-card-actions">
+                <button class="button secondary small" onclick="setReminder('${client.id}')">🔔 Напоминание</button>
+                <button class="button" onclick="openClient('${client.id}')">Открыть клиента</button>
+              </div>
             </article>
           `;
           })
@@ -1932,6 +1953,24 @@
       document
         .getElementById("reminderFilter")
         .addEventListener("change", applyFilters);
+
+      async function restoreSession() {
+        const { data, error } = await supabaseClient.auth.getSession();
+
+        if (error) {
+          console.error("Ошибка восстановления сессии:", error);
+          return;
+        }
+
+        if (!data.session) return;
+
+        document.getElementById("login").classList.add("hidden");
+        document.getElementById("app").classList.remove("hidden");
+
+        await loadSettingsData();
+        await loadReminders();
+        await loadClients();
+      }
 
       const loginButton = document.getElementById("loginButton");
 
@@ -3139,6 +3178,8 @@
 
         document.getElementById("login").classList.remove("hidden");
       }
+
+      restoreSession();
     </script>
   </body>
 </html>
